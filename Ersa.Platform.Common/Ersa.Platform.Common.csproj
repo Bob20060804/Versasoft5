@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{44ADB178-8105-4CA2-8931-DF01D7E94BAF}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.Common</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ersa.Global.Mvvm">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.Common.Bildverarbeitung\ENUM_VideoAufzeichnungEinstellung.cs" />
+    <Compile Include="Ersa.Platform.Common.Codetabellen\EDC_Codeeintrag.cs" />
+    <Compile Include="Ersa.Platform.Common.Codetabellen\EDC_Codetabelle.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Aoi\EDC_AoiErgebnisData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Aoi\EDC_AoiProgramData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Aoi\EDC_AoiSchrittData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Bauteile\EDC_BauteilData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Bauteile\EDC_BauteilExtension.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Bauteile\EDC_BauteilMakroData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Bauteile\ENUM_BauteilTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Benutzer\EDC_AktiverBenutzerData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Benutzer\EDC_BenutzerAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Benutzer\EDC_BenutzerData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Benutzer\EDC_BenutzerMappingData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Benutzer\EDC_BenutzerTrackData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Benutzer\EDC_ExternerBenutzer.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Benutzer\EDC_ParameterTrack.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\EDC_BetriebsmittelData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\EDC_Ruestkomponente.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\EDC_RuestkomponentenAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\EDC_RuestkomponentenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\EDC_Ruestwerkzeug.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\EDC_RuestwerkzeugeData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\ENUM_BetriebsmittelTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Betriebsmittel\ENUM_RuestkomponentenTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadAblaufSchrittData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadBewegungsGruppenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadBildData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadCncSchrittData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadEinstellungenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadRoutenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadRoutenSchrittData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\EDC_CadVerbotenerBereichData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_BahnTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_CadBildVerwendung.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_CadLeiterkartenAnsicht.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_CadMaschinenModule.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_CncSchrittTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_SchrittModus.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_SonderWerkzeug.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Cad\ENUM_SynchronisationsPosition.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.CodeCache\EDC_CodeCacheEintragData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.CodeCache\EDC_LinkCacheData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.CodeCache\ENUM_LinkVerwendung.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Codetabelle\EDC_CodetabelleData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Codetabelle\EDC_CodetabelleneintragData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenbetriebVorgabenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenbetriebWechselData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenbetriebWerteData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenGeometrieAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenGeometrienData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenGeometrieUndSollwerteAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_DuesenSollwerteData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Duesentabelle\EDC_Loetduese.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Konstanten\EDC_DataKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.LeseSchreibgeraete\EDC_CodeKonfigData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.LeseSchreibgeraete\EDC_CodeKonfigTrackData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.LeseSchreibgeraete\EDC_CodePipelineData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.LeseSchreibgeraete\EDC_CodePipelineTrackData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_FreigabeNotizen.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_FreigabeSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammBibliothekData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammBildData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammEcp3DatenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammInfoDataAbfrage.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammNutzenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammParameterData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammParameterDiffData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammSatzDatenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammVersionAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammVersionData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\EDC_LoetprogrammVersionValideData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\ENUM_BildVerwendung.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\ENUM_LoetprogrammFreigabeArt.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\ENUM_LoetprogrammFreigabeStatus.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\ENUM_LoetprogrammModus.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprogrammverwaltung\ENUM_LoetprogrammStatus.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprotokoll\EDC_LoetprotokollAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprotokoll\EDC_LoetprotokollAbfrageErgebnis.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprotokoll\EDC_LoetprotokollData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprotokoll\EDC_LoetprotokollKopfData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprotokoll\EDC_LoetprotokollParameterData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprotokoll\EDC_LoetprotokollSollIstVariable.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Loetprotokoll\EDC_LoetprotokollVariablenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenkonfiguration\EDC_MaschinenkonfigurationData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\EDC_MaschineData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\EDC_MaschinenBetriebsdatenAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\EDC_MaschinenBetriebsDatenKopfData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\EDC_MaschinenBetriebsDatenWerteData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\EDC_MaschinenEinstellungenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\EDC_MaschinenGruppeData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\EDC_MaschinenGruppenMitgliedData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\ENUM_BetriebsdatenTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Maschinenverwaltung\ENUM_EinstellungsTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\EDC_ExterneMeldungData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\EDC_MeldungContextData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\EDC_MeldungData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\EDC_MeldungenAbfrageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\EDC_ZyklischeMeldungData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\EDC_ZyklischeMeldungVorlageData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\EDC_ZyklischeMeldungVorlageGruppeData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\ENUM_MeldungAktionen.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\ENUM_MeldungBefehl.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\ENUM_MeldungProduzent.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\ENUM_MeldungsTypen.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Meldungen\ENUM_ProzessAktionen.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Nutzen\EDC_NutzenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Produktionssteuerung\EDC_ProduktionssteuerungData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Prozessschreiber\EDC_SchreiberData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Prozessschreiber\EDC_SchreiberVariablenData.cs" />
+    <Compile Include="Ersa.Platform.Common.Data.Sprachen\EDC_SprachenEintragData.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_KeineLoetprotokollTabellenException.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_KeinGeeigneterLoetProgrammInterpreterGefundenException.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_KeinGeeigneterSerialisiererGefundenException.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_KeinLoetParameterIstSollConverterRegistriert.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_KritischeKommunikationsException.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_LoetprogrammImportMeldungException.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_LoetprogrammKorruptException.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_MaschineInFalscherBetriebsartException.cs" />
+    <Compile Include="Ersa.Platform.Common.Exceptions\EDC_UnbekannterParameterException.cs" />
+    <Compile Include="Ersa.Platform.Common.Extensions\EDC_BenutzerDataExtensions.cs" />
+    <Compile Include="Ersa.Platform.Common.Extensions\EDC_DuesenbetriebsDatenExtensions.cs" />
+    <Compile Include="Ersa.Platform.Common.Extensions\EDC_MesInitialisierungsRueckgabeExtension.cs" />
+    <Compile Include="Ersa.Platform.Common.Extensions\EDC_MesKommunikationsRueckgabeExtension.cs" />
+    <Compile Include="Ersa.Platform.Common.Extensions\EDC_TypeExtensions.cs" />
+    <Compile Include="Ersa.Platform.Common.Helfer\EDC_RechteHelfer.cs" />
+    <Compile Include="Ersa.Platform.Common.IoT\EdgeRequestData.cs" />
+    <Compile Include="Ersa.Platform.Common.IoT\EdgeResponseData.cs" />
+    <Compile Include="Ersa.Platform.Common.IoT\IntelloClassification.cs" />
+    <Compile Include="Ersa.Platform.Common.IoT\IoTDeviceOperatingMode.cs" />
+    <Compile Include="Ersa.Platform.Common.IoT\IoTDeviceTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.IoT\IoTRequestType.cs" />
+    <Compile Include="Ersa.Platform.Common.IoT\TelemetryConstants.cs" />
+    <Compile Include="Ersa.Platform.Common.Konstanten\EDC_FilterKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Common.Konstanten\EDC_LoetprotokollSerialisiererNamen.cs" />
+    <Compile Include="Ersa.Platform.Common.Konstanten\ENUM_CodeBedeutung.cs" />
+    <Compile Include="Ersa.Platform.Common.Konstanten\ENUM_CodeVerwendung.cs" />
+    <Compile Include="Ersa.Platform.Common.Konstanten\ENUM_WartungsZeitraum.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete.Extensions\EDC_CodeMitVerwendungUndBedeutungExtensions.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete.Ruestkontrolle\EDC_RuestErgebnis.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete.Ruestkontrolle\ENUM_RuestWerkzeug.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\EDC_CodeLeseErgebnis.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\EDC_CodeMitVerwendungUndBedeutung.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\EDC_LeseErgebnis.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\EDC_NestDaten.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_CodeBehandlung.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_LeseFehler.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_LsgBetriebsart.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_LsgOrt.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_LsgSpur.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_LsgVerwendung.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_MessageState.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_PipelineElement.cs" />
+    <Compile Include="Ersa.Platform.Common.LeseSchreibGeraete\ENUM_SchnittstelleTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\EDC_BibliothekInfo.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\EDC_ProgrammAenderung.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\EDC_ProgrammInfo.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\EDC_ProgrammKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\EDC_ProjektEinstellungenBasis.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\EDC_VersionsInfo.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\ENUM_BearbeitungsSeite.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprogramm\ENUM_ImportFormat.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprotokoll\EDC_LoetprotokollDateiEinstellungen.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprotokoll\EDC_LoetprotokollDaten.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprotokoll\EDC_LoetprotokollElement.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprotokoll\EDC_LoetprotokollKopfElemente.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprotokoll\EDC_ProtokollParameterAttribute.cs" />
+    <Compile Include="Ersa.Platform.Common.Loetprotokoll\ENUM_ProtokollParameterTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Meldungen\EDC_Meldung.cs" />
+    <Compile Include="Ersa.Platform.Common.Meldungen\EDC_ZyklischeMeldungVorlage.cs" />
+    <Compile Include="Ersa.Platform.Common.Meldungen\ENUM_ZyklischeMeldungIntervall.cs" />
+    <Compile Include="Ersa.Platform.Common.Meldungen\INF_Meldung.cs" />
+    <Compile Include="Ersa.Platform.Common.Meldungen\INF_MeldungTexte.cs" />
+    <Compile Include="Ersa.Platform.Common.Meldungen\INF_ZyklischeMeldung.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesBasisRueckgabe.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesFunktionenAttribut.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesFunktionenErweiterung.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesInitialisierungsRueckgabe.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesKommunikationsRueckgabe.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesMaschinenDaten.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesMaschinenDatenArgumenteAttribut.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesMaschinenDatenArgumentErweiterung.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesRueckgabeArgumenteAttribut.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\EDC_MesRueckgabeArgumentErweiterung.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_EinlaufStatus.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_MesFunktionen.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_MesInitialisierungsStatus.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_MesKommunikationsStatus.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_MesMaschinenDatenArgumente.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_MesRueckgabeArgumente.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_MesTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_OeeZustand.cs" />
+    <Compile Include="Ersa.Platform.Common.Mes\ENUM_ZusatzprotokollTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Produktionssteuerung\EDC_ProduktionsEinstellungen.cs" />
+    <Compile Include="Ersa.Platform.Common.Produktionssteuerung\EDC_Produktionssteuerungsdaten.cs" />
+    <Compile Include="Ersa.Platform.Common.Produktionssteuerung\ENUM_CodeLeseFehlerBestaetingungsMoeglichkeit.cs" />
+    <Compile Include="Ersa.Platform.Common.Produktionssteuerung\ENUM_CodeNichtGefundenBestaetingungsMoeglichkeit.cs" />
+    <Compile Include="Ersa.Platform.Common.Produktionssteuerung\ENUM_Produktionsart.cs" />
+    <Compile Include="Ersa.Platform.Common.Routing\INF_RoutbaresObjekt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.Autorouting\EDC_CncSchrittConverter.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.Autorouting\EDC_CncZustand.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.Autorouting\EDC_SchrittNachAutorouting.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.Autorouting\EDC_SchrittNachAutoroutingConverter.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.Autorouting\ENUM_SyncpunktAttribut.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung.Fluxer\EDC_FluxerDosisSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung.Loeten\EDC_LoetwellenhoeheSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung.Loeten\EDC_VertikalBewegungSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung.Uebergeordnet\EDC_HorizontalBewegungSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung.Uebergeordnet\EDC_WartenSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung.Uebergeordnet\EDC_WeiterfahrenSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung\EDC_AbstractCncSchritt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung\EDC_AbstractCncSchrittJsonConverter.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung\EDC_BaseSpecifiedConcreteClassConverter.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4.CncSchritte.Implementierung\ENUM_AbstractCncSchrittTyp.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv.Cad4\EDC_LoetprogrammParameterKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv\EDC_DuesenBetriebWerte.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv\ENUM_FiducialOrt.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv\ENUM_SelektivTiegel.cs" />
+    <Compile Include="Ersa.Platform.Common.Selektiv\ENUM_TiegelNutzung.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_AufzeichnungAttribute.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_ElementVersion.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_Konstanten.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_LoetprogrammParameterAttribute.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_LokalisierungsKeyContainer.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_RangeParameterAttribute.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_RechteKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_RegionKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_VerzeichnisHelfer.cs" />
+    <Compile Include="Ersa.Platform.Common\EDC_WertKonvertierung.cs" />
+    <Compile Include="Ersa.Platform.Common\ENUM_MaschinenZustand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
