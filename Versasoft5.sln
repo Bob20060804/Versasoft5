@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Platform.Plc", "Ersa.Platform.Plc\Ersa.Platform.Plc.csproj", "{208A382A-840E-44E6-B6BE-C4889F09616F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Global.Common", "Ersa.Global.Common\Ersa.Global.Common.csproj", "{6314C658-D02E-4B6B-8165-803A325B2D1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{208A382A-840E-44E6-B6BE-C4889F09616F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{208A382A-840E-44E6-B6BE-C4889F09616F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{208A382A-840E-44E6-B6BE-C4889F09616F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6314C658-D02E-4B6B-8165-803A325B2D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6314C658-D02E-4B6B-8165-803A325B2D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6314C658-D02E-4B6B-8165-803A325B2D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6314C658-D02E-4B6B-8165-803A325B2D1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

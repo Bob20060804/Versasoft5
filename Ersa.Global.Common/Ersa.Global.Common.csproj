@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{6314C658-D02E-4B6B-8165-803A325B2D1B}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Global.Common</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ServiceProcess\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.ServiceProcess.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_AbfrageInformation.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_FilterInformationen.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_SpaltenInformation.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_TabellenInformation.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Cad\ENUM_Blickrichtung.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Filter\EDC_FilterErstellungsHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Filter\ENUM_FilterOperatoren.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Filter\ENUM_FilterSichtbarkeit.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Filter\ENUM_FilterVerknuepfung.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Filter\STRUCT_FilterBasisDefinition.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Filter\STRUCT_FilterKonkret.cs" />
+    <Compile Include="Ersa.Global.Common.Data.Model\EDC_DynamischeSpalte.cs" />
+    <Compile Include="Ersa.Global.Common.Extensions\EDC_CollectionExtensions.cs" />
+    <Compile Include="Ersa.Global.Common.Extensions\EDC_ExceptionExtensions.cs" />
+    <Compile Include="Ersa.Global.Common.Extensions\EDC_ObjectExtensions.cs" />
+    <Compile Include="Ersa.Global.Common.Extensions\EDC_PrimitiveTypesExtensions.cs" />
+    <Compile Include="Ersa.Global.Common.Extensions\EDC_StringExtensions.cs" />
+    <Compile Include="Ersa.Global.Common.FortsetzungsPolicy\EDC_FortsetzungsPolicy.cs" />
+    <Compile Include="Ersa.Global.Common.FortsetzungsPolicy\STRUCT_OperationsErgebnis.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_AssemblyHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_Base64Helfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_BildConverterHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_BuildDateHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_ByteArraySerialiserungsHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_DienstHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_EnumBasisHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_GeometrieHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_HashHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_HostHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_LaufwerkHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_PatternVergleichsHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_StartArgumentHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_TagesPasswortHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_TaskHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_UriHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_XmlValidierungsHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_XmlZuDataSetReader.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\EDC_ZahlenFormatHelfer.cs" />
+    <Compile Include="Ersa.Global.Common.Helper\ENUM_UriSchema.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager.Strategies\EDC_ExponentialBackoffStrategy.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager.Strategies\EDC_FixedIntervalStrategy.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager.Strategies\EDC_IncrementalStrategy.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager.Strategies\EDC_RetryStrategy.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager.Strategies\STRUCT_ShouldRetry.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager\EDC_RetryingEventArgs.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager\EDC_RetryPolicy.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager\EDC_TransientErrorCatchAllStrategy.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager\EDC_TransientErrorIgnoreStrategy.cs" />
+    <Compile Include="Ersa.Global.Common.RetryManager\INF_TransientErrorDetectionStrategy.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_BerechnungsKonstanten.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_BindableBase.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_Disposable.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_DisposableObject.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_Grouping.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_ListSequence.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_SmartObservableCollection.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_Utility.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_ViewModelBasis.cs" />
+    <Compile Include="Ersa.Global.Common\EDC_ZeitMessung.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
