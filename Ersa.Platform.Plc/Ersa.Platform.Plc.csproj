@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{208A382A-840E-44E6-B6BE-C4889F09616F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.Plc</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="BR.AN.PviServices">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\BR.AN.PviServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Logging">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="M1ComNET">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\M1ComNET.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common.Model">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.CapabilityContracts">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.CapabilityContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Infrastructure">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Mvvm">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.Plc.AnfoQuitt\EDC_AnfoQuittDienst.cs" />
+    <Compile Include="Ersa.Platform.Plc.AnfoQuitt\EDC_EnumAnfoQuittDienst.cs" />
+    <Compile Include="Ersa.Platform.Plc.Exceptions\EDC_AdressRegistrierungsException.cs" />
+    <Compile Include="Ersa.Platform.Plc.Exceptions\EDC_AnfoQuittException.cs" />
+    <Compile Include="Ersa.Platform.Plc.Exceptions\EDC_GruppeZugriffException.cs" />
+    <Compile Include="Ersa.Platform.Plc.Exceptions\EDC_SpsVerbindungsAufbauFehlgeschlagenException.cs" />
+    <Compile Include="Ersa.Platform.Plc.Interfaces\INF_AnfoQuittDienst.cs" />
+    <Compile Include="Ersa.Platform.Plc.Interfaces\INF_EnumAnfoQuittDienst.cs" />
+    <Compile Include="Ersa.Platform.Plc.Interfaces\INF_KommunikationsDienst.cs" />
+    <Compile Include="Ersa.Platform.Plc.Interfaces\INF_KommunikationsDienstWrapper.cs" />
+    <Compile Include="Ersa.Platform.Plc.Interfaces\INF_ParameterBehandlungsStrategie.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_AdressRegistrierungsStrategie.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_AdressTeile.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_AktionenFuerParameterTypen.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_EventHandlerRegistrierungsStrategie.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_KommunikationsDienst.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_KommunikationsDienstWrapper.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_KommunikationsHelfer.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_ParameterLeseStrategie.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_ParameterSchreibeStrategie.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_PlcKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\EDC_SpsProvider.cs" />
+    <Compile Include="Ersa.Platform.Plc.KommunikationsDienst\INF_SpsProvider.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\EDC_ParameterAufbauHelfer.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\EDC_SpsListenElement.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\EDC_ToggleButtonStruktur.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\ENUM_LotniveauMessmittel.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\ENUM_LotzufuhrArt.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\ENUM_MeldelampenZuweisung.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\ENUM_MeldeOrt1.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\ENUM_MeldeOrt2.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\ENUM_MeldeOrt3.cs" />
+    <Compile Include="Ersa.Platform.Plc.Model\ENUM_UserLevelErsasoft.cs" />
+    <Compile Include="Ersa.Platform.Plc\EDC_BrSps.cs" />
+    <Compile Include="Ersa.Platform.Plc\EDC_M1Sps.cs" />
+    <Compile Include="Ersa.Platform.Plc\EDC_PlcHelper.cs" />
+    <Compile Include="Ersa.Platform.Plc\EDC_SpsExportMetadaten.cs" />
+    <Compile Include="Ersa.Platform.Plc\EDC_SpsTreiberKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Plc\ENUM_SpsTyp.cs" />
+    <Compile Include="Ersa.Platform.Plc\INF_Sps.cs" />
+    <Compile Include="Ersa.Platform.Plc\INF_SpsMetadaten.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
