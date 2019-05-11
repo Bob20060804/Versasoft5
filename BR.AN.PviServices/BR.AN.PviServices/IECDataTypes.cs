@@ -1,0 +1,32 @@
+namespace BR.AN.PviServices
+{
+	public enum IECDataTypes
+	{
+		UNDEFINED,
+		BOOL,
+		SINT,
+		INT,
+		DINT,
+		USINT,
+		UINT,
+		UDINT,
+		REAL,
+		STRING,
+		ULINT,
+		DATE_AND_TIME,
+		TIME,
+		DATE,
+		LREAL,
+		TOD,
+		TIME_OF_DAY,
+		BYTE,
+		WORD,
+		DWORD,
+		LWORD,
+		WSTRING,
+		DT,
+		LINT,
+		STRUCT,
+		IECDATATYPES_COUNT
+	}
+}

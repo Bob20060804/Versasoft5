@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{889B52F1-5D5C-4803-B158-15CA0E89847D}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>BR.AN.PviServices</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BR.AN.EventDescriptionProviderNet" />
+    <Reference Include="System.Windows.Forms">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BR.AN.Logging\ComLogger.cs" />
+    <Compile Include="BR.AN.Logging\Dbg.cs" />
+    <Compile Include="BR.AN.Logging\DbgKey.cs" />
+    <Compile Include="BR.AN.Logging\DbgProblemCollection.cs" />
+    <Compile Include="BR.AN.Logging\IComLogger.cs" />
+    <Compile Include="BR.AN.Logging\Logger.cs" />
+    <Compile Include="BR.AN.Logging\LoggerSettings.cs" />
+    <Compile Include="BR.AN.Logging\LoggerSettingsProvider.cs" />
+    <Compile Include="BR.AN.Logging\LoggingLevels.cs" />
+    <Compile Include="BR.AN.Logging\LoggingOutputs.cs" />
+    <Compile Include="BR.AN.Logging\LoggingType.cs" />
+    <Compile Include="BR.AN.Logging\ProblemReason.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Aprol.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\AprolSetting.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Controller.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\CpuConfiguration.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\CpuInfo.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\CpuRedInfo.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\ErrorEntry.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\ErrorLogBook.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\EventDescriptionConsumer.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\EventDescriptionConsumerData.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\EventEntry.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\EventLogBook.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Group.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Hardware.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Host.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Interface.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\ITEM.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Language.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\LogBook.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\LogBookPackage.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\LogBookPackageExtensions.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\LogBookSnapshot.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\LogEntry.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\LoggerCollectionEventDescriptionProvider.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\NetworkDevices.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Node.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\OperationalValues.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\PlcInfos.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\PviServicesExtensions.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Severity.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\SoftwareVers.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\TechnologyGuarding.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\TechnologyPackage.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\TechnologyPackages.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\Text.cs" />
+    <Compile Include="BR.AN.PviServices.EventDescription\TOC.cs" />
+    <Compile Include="BR.AN.PviServices.ObjectList\DirInfo.cs" />
+    <Compile Include="BR.AN.PviServices.ObjectList\FileInfo.cs" />
+    <Compile Include="BR.AN.PviServices.ObjectList\FileSystemInfo.cs" />
+    <Compile Include="BR.AN.PviServices.ObjectList\ModInfo.cs" />
+    <Compile Include="BR.AN.PviServices.ObjectList\ObjectInfo.cs" />
+    <Compile Include="BR.AN.PviServices.ObjectList\ObjectListInfo.cs" />
+    <Compile Include="BR.AN.PviServices\Access.cs" />
+    <Compile Include="BR.AN.PviServices\AccessModes.cs" />
+    <Compile Include="BR.AN.PviServices\AccessTypes.cs" />
+    <Compile Include="BR.AN.PviServices\Action.cs" />
+    <Compile Include="BR.AN.PviServices\Actions.cs" />
+    <Compile Include="BR.AN.PviServices\ANSLTcp.cs" />
+    <Compile Include="BR.AN.PviServices\AnyRadix.cs" />
+    <Compile Include="BR.AN.PviServices\APIFCerrtyp.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_CPmemInfoRes.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_CpuDateTime.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_CpuInfoRes.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_DiagModulInfoRes.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_DiagModulInfoResConstants.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_ModulInfoRes.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_ModulInfoResConstants.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_PviSecure.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_RLogbookRes_entry.cs" />
+    <Compile Include="BR.AN.PviServices\APIFC_TkInfoRes.cs" />
+    <Compile Include="BR.AN.PviServices\APIF_GetLicenseStatusRes.cs" />
+    <Compile Include="BR.AN.PviServices\APIF_LicBlinkDongleReq.cs" />
+    <Compile Include="BR.AN.PviServices\AppInfo.cs" />
+    <Compile Include="BR.AN.PviServices\ApplicationInfoXmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\AR000.cs" />
+    <Compile Include="BR.AN.PviServices\ARLoggerEntry.cs" />
+    <Compile Include="BR.AN.PviServices\ARLogTime.cs" />
+    <Compile Include="BR.AN.PviServices\ARMExceptionProcessorInfo.cs" />
+    <Compile Include="BR.AN.PviServices\ARMExceptionTaskInfo.cs" />
+    <Compile Include="BR.AN.PviServices\ARMRegisters.cs" />
+    <Compile Include="BR.AN.PviServices\ArrayDerivation.cs" />
+    <Compile Include="BR.AN.PviServices\ArrayDimension.cs" />
+    <Compile Include="BR.AN.PviServices\ArrayDimensionArray.cs" />
+    <Compile Include="BR.AN.PviServices\Backtrace.cs" />
+    <Compile Include="BR.AN.PviServices\Base.cs" />
+    <Compile Include="BR.AN.PviServices\BaseCollection.cs" />
+    <Compile Include="BR.AN.PviServices\BatteryStates.cs" />
+    <Compile Include="BR.AN.PviServices\BondInformation.cs" />
+    <Compile Include="BR.AN.PviServices\BondInfoXmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\BootMode.cs" />
+    <Compile Include="BR.AN.PviServices\Callstack.cs" />
+    <Compile Include="BR.AN.PviServices\Can.cs" />
+    <Compile Include="BR.AN.PviServices\CastModes.cs" />
+    <Compile Include="BR.AN.PviServices\CollectionErrorEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\CollectionErrorEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\CollectionEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\CollectionEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\CollectionType.cs" />
+    <Compile Include="BR.AN.PviServices\CommentLanguages.cs" />
+    <Compile Include="BR.AN.PviServices\Comparer.cs" />
+    <Compile Include="BR.AN.PviServices\ConfigurationFlags.cs" />
+    <Compile Include="BR.AN.PviServices\Connection.cs" />
+    <Compile Include="BR.AN.PviServices\ConnectionStates.cs" />
+    <Compile Include="BR.AN.PviServices\ConnectionType.cs" />
+    <Compile Include="BR.AN.PviServices\ConversionModes.cs" />
+    <Compile Include="BR.AN.PviServices\Cpu.cs" />
+    <Compile Include="BR.AN.PviServices\CpuCollection.cs" />
+    <Compile Include="BR.AN.PviServices\CpuCollectionEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\CpuEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\CpuEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\CpuPhysicalMemReadEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\CpuPhysicalMemReadEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\CpuState.cs" />
+    <Compile Include="BR.AN.PviServices\CpuTTServiceEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\CpuTTServiceEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\CurrentCpuMode.cs" />
+    <Compile Include="BR.AN.PviServices\DataType.cs" />
+    <Compile Include="BR.AN.PviServices\DaylightSaving.cs" />
+    <Compile Include="BR.AN.PviServices\DerivationBase.cs" />
+    <Compile Include="BR.AN.PviServices\DeviceBase.cs" />
+    <Compile Include="BR.AN.PviServices\DeviceType.cs" />
+    <Compile Include="BR.AN.PviServices\Direction.cs" />
+    <Compile Include="BR.AN.PviServices\DirectoryObject.cs" />
+    <Compile Include="BR.AN.PviServices\DisposeEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\DisposeEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\DomainState.cs" />
+    <Compile Include="BR.AN.PviServices\Drive.cs" />
+    <Compile Include="BR.AN.PviServices\EnumArray.cs" />
+    <Compile Include="BR.AN.PviServices\EnumBase.cs" />
+    <Compile Include="BR.AN.PviServices\ErrorEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\ErrorEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\ErrorLogBook.cs" />
+    <Compile Include="BR.AN.PviServices\ErrorMode.cs" />
+    <Compile Include="BR.AN.PviServices\EventDataTypes.cs" />
+    <Compile Include="BR.AN.PviServices\EventMessageType.cs" />
+    <Compile Include="BR.AN.PviServices\EventTypes.cs" />
+    <Compile Include="BR.AN.PviServices\Exception.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionBRModuleCallstack.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionBRModuleFunction.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionBRModulePC.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionHeader.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionMemoryInfo.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionProcessorInfo.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionTaskInfo.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionTraceRecord.cs" />
+    <Compile Include="BR.AN.PviServices\ExceptionType.cs" />
+    <Compile Include="BR.AN.PviServices\ExcInfoFlag.cs" />
+    <Compile Include="BR.AN.PviServices\FileObject.cs" />
+    <Compile Include="BR.AN.PviServices\FileTransferRequest.cs" />
+    <Compile Include="BR.AN.PviServices\FlowControls.cs" />
+    <Compile Include="BR.AN.PviServices\Function.cs" />
+    <Compile Include="BR.AN.PviServices\FunctionInfo.cs" />
+    <Compile Include="BR.AN.PviServices\GlobalClass.cs" />
+    <Compile Include="BR.AN.PviServices\HardwareInfo.cs" />
+    <Compile Include="BR.AN.PviServices\HardwareInformation.cs" />
+    <Compile Include="BR.AN.PviServices\HardwareInformationNode.cs" />
+    <Compile Include="BR.AN.PviServices\HardwareItem.cs" />
+    <Compile Include="BR.AN.PviServices\HardwareXmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\HashtableArray.cs" />
+    <Compile Include="BR.AN.PviServices\HexConvert.cs" />
+    <Compile Include="BR.AN.PviServices\IConvert.cs" />
+    <Compile Include="BR.AN.PviServices\IECDataTypes.cs" />
+    <Compile Include="BR.AN.PviServices\InstallMode.cs" />
+    <Compile Include="BR.AN.PviServices\InstallOption.cs" />
+    <Compile Include="BR.AN.PviServices\Int32Enum.cs" />
+    <Compile Include="BR.AN.PviServices\Int32MinMaxDerivation.cs" />
+    <Compile Include="BR.AN.PviServices\InternAction.cs" />
+    <Compile Include="BR.AN.PviServices\IODataPoint.cs" />
+    <Compile Include="BR.AN.PviServices\IODataPointCollection.cs" />
+    <Compile Include="BR.AN.PviServices\IOVariable.cs" />
+    <Compile Include="BR.AN.PviServices\IOVariableTypes.cs" />
+    <Compile Include="BR.AN.PviServices\IpAdressConfiguration.cs" />
+    <Compile Include="BR.AN.PviServices\LevelType.cs" />
+    <Compile Include="BR.AN.PviServices\Library.cs" />
+    <Compile Include="BR.AN.PviServices\LibraryCollection.cs" />
+    <Compile Include="BR.AN.PviServices\LibraryType.cs" />
+    <Compile Include="BR.AN.PviServices\LicenceInfo.cs" />
+    <Compile Include="BR.AN.PviServices\LogBookEntry.cs" />
+    <Compile Include="BR.AN.PviServices\LogExportFormat.cs" />
+    <Compile Include="BR.AN.PviServices\Logger.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerARLTags.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerCollection.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerCollectionEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerEntry.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerEntryBase.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerEntryCollection.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerGSASaveTags.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerInfoXmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerV1000XmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerV1010XmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerV1020XmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerVersions.cs" />
+    <Compile Include="BR.AN.PviServices\LoggerXMLInterpreter.cs" />
+    <Compile Include="BR.AN.PviServices\LogicalCollection.cs" />
+    <Compile Include="BR.AN.PviServices\LogicalObjectsUsage.cs" />
+    <Compile Include="BR.AN.PviServices\LogSnapshotCpuInfos.cs" />
+    <Compile Include="BR.AN.PviServices\MemberCollection.cs" />
+    <Compile Include="BR.AN.PviServices\Memory.cs" />
+    <Compile Include="BR.AN.PviServices\MemoryCollection.cs" />
+    <Compile Include="BR.AN.PviServices\MemoryData.cs" />
+    <Compile Include="BR.AN.PviServices\MemoryInfo.cs" />
+    <Compile Include="BR.AN.PviServices\MemoryInformation.cs" />
+    <Compile Include="BR.AN.PviServices\MemoryType.cs" />
+    <Compile Include="BR.AN.PviServices\MemoryXmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\MethodType.cs" />
+    <Compile Include="BR.AN.PviServices\Modem.cs" />
+    <Compile Include="BR.AN.PviServices\ModemBase.cs" />
+    <Compile Include="BR.AN.PviServices\ModemNET2000.cs" />
+    <Compile Include="BR.AN.PviServices\Module.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleCollection.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleCollectionEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleCollectionEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleCollectionProgressEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleInfoDescription.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleListOptions.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleNotifivcations.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleObject.cs" />
+    <Compile Include="BR.AN.PviServices\ModuleType.cs" />
+    <Compile Include="BR.AN.PviServices\NetworkAdapter.cs" />
+    <Compile Include="BR.AN.PviServices\NetworkAdapterCollection.cs" />
+    <Compile Include="BR.AN.PviServices\ObjectType.cs" />
+    <Compile Include="BR.AN.PviServices\Parity.cs" />
+    <Compile Include="BR.AN.PviServices\PCInfo.cs" />
+    <Compile Include="BR.AN.PviServices\PInvokePvicom.cs" />
+    <Compile Include="BR.AN.PviServices\PlcFamily.cs" />
+    <Compile Include="BR.AN.PviServices\PlcMessageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BR.AN.PviServices\PlcObjectType.cs" />
+    <Compile Include="BR.AN.PviServices\ProcessorData.cs" />
+    <Compile Include="BR.AN.PviServices\Profiler.cs" />
+    <Compile Include="BR.AN.PviServices\ProfilerEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\ProfilerEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\ProfilerState.cs" />
+    <Compile Include="BR.AN.PviServices\ProfilingCommand.cs" />
+    <Compile Include="BR.AN.PviServices\ProgramState.cs" />
+    <Compile Include="BR.AN.PviServices\ProgressInfo.cs" />
+    <Compile Include="BR.AN.PviServices\Pvi.cs" />
+    <Compile Include="BR.AN.PviServices\PviCallback.cs" />
+    <Compile Include="BR.AN.PviServices\PviCBEvents.cs" />
+    <Compile Include="BR.AN.PviServices\PviCpuParameterAttribute.cs" />
+    <Compile Include="BR.AN.PviServices\PVIDataStates.cs" />
+    <Compile Include="BR.AN.PviServices\PviDEVICE.cs" />
+    <Compile Include="BR.AN.PviServices\PviEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\PviEventArgsXML.cs" />
+    <Compile Include="BR.AN.PviServices\PviEventArgsXMLApplicationInfo.cs" />
+    <Compile Include="BR.AN.PviServices\PviEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\PviEventHandlerXmlApplicationInfo.cs" />
+    <Compile Include="BR.AN.PviServices\PviEventHandlerXmlData.cs" />
+    <Compile Include="BR.AN.PviServices\PVIEventTypes.cs" />
+    <Compile Include="BR.AN.PviServices\PviException.cs" />
+    <Compile Include="BR.AN.PviServices\PviFunction.cs" />
+    <Compile Include="BR.AN.PviServices\PviKeyWordAttribute.cs" />
+    <Compile Include="BR.AN.PviServices\PviLINE.cs" />
+    <Compile Include="BR.AN.PviServices\PviMarshal.cs" />
+    <Compile Include="BR.AN.PviServices\PviMessageFunction.cs" />
+    <Compile Include="BR.AN.PviServices\PviObjectBrowser.cs" />
+    <Compile Include="BR.AN.PviServices\PVIObjectsAttachedEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\PviParse.cs" />
+    <Compile Include="BR.AN.PviServices\PviProgessEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\PviProgressHandler.cs" />
+    <Compile Include="BR.AN.PviServices\PVIReadAccessTypes.cs" />
+    <Compile Include="BR.AN.PviServices\PviReadResponseHandler.cs" />
+    <Compile Include="BR.AN.PviServices\PviResponseData.cs" />
+    <Compile Include="BR.AN.PviServices\PvisExtensions.cs" />
+    <Compile Include="BR.AN.PviServices\PviSTATION.cs" />
+    <Compile Include="BR.AN.PviServices\PviValueEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\PVIWriteAccessTypes.cs" />
+    <Compile Include="BR.AN.PviServices\PviWriteResponseHandler.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancyInformation.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancyLinkState.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancyPriority.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancyRRadMappingStates.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancyRRadStates.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancyState.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancySwitchPossibility.cs" />
+    <Compile Include="BR.AN.PviServices\RedundancyXmlTags.cs" />
+    <Compile Include="BR.AN.PviServices\RedundantCpuIpConfigurations.cs" />
+    <Compile Include="BR.AN.PviServices\ResponseInfo.cs" />
+    <Compile Include="BR.AN.PviServices\ReturnCodes.cs" />
+    <Compile Include="BR.AN.PviServices\RuntimeStates.cs" />
+    <Compile Include="BR.AN.PviServices\Scaling.cs" />
+    <Compile Include="BR.AN.PviServices\ScalingPoint.cs" />
+    <Compile Include="BR.AN.PviServices\ScalingPointCollection.cs" />
+    <Compile Include="BR.AN.PviServices\ScalingType.cs" />
+    <Compile Include="BR.AN.PviServices\Scope.cs" />
+    <Compile Include="BR.AN.PviServices\Serial.cs" />
+    <Compile Include="BR.AN.PviServices\SerializationExtensions.cs" />
+    <Compile Include="BR.AN.PviServices\Service.cs" />
+    <Compile Include="BR.AN.PviServices\ServiceCollection.cs" />
+    <Compile Include="BR.AN.PviServices\ServiceLoggerEntryCollection.cs" />
+    <Compile Include="BR.AN.PviServices\Shared.cs" />
+    <Compile Include="BR.AN.PviServices\SimpleNetworkManagementProtocol.cs" />
+    <Compile Include="BR.AN.PviServices\SNMPBase.cs" />
+    <Compile Include="BR.AN.PviServices\SNMPCollectionBase.cs" />
+    <Compile Include="BR.AN.PviServices\SNMPConnectionStates.cs" />
+    <Compile Include="BR.AN.PviServices\SNMPVariableCollection.cs" />
+    <Compile Include="BR.AN.PviServices\StringExtensions.cs" />
+    <Compile Include="BR.AN.PviServices\StringMarshal.cs" />
+    <Compile Include="BR.AN.PviServices\StructMemberCollection.cs" />
+    <Compile Include="BR.AN.PviServices\SynchronizableBaseCollection.cs" />
+    <Compile Include="BR.AN.PviServices\SyncReadData.cs" />
+    <Compile Include="BR.AN.PviServices\TargetObjectBase.cs" />
+    <Compile Include="BR.AN.PviServices\TargetObjectCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TargetObjectType.cs" />
+    <Compile Include="BR.AN.PviServices\Task.cs" />
+    <Compile Include="BR.AN.PviServices\TaskClass.cs" />
+    <Compile Include="BR.AN.PviServices\TaskClassCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TaskClassType.cs" />
+    <Compile Include="BR.AN.PviServices\TaskCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TaskCollectionEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\TaskData.cs" />
+    <Compile Include="BR.AN.PviServices\TaskObject.cs" />
+    <Compile Include="BR.AN.PviServices\TcpDestinationSettings.cs" />
+    <Compile Include="BR.AN.PviServices\TcpIp.cs" />
+    <Compile Include="BR.AN.PviServices\TcpIpMODBUS.cs" />
+    <Compile Include="BR.AN.PviServices\TCPModes.cs" />
+    <Compile Include="BR.AN.PviServices\TextWriterTraceListenerWithTime.cs" />
+    <Compile Include="BR.AN.PviServices\TPDataEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\TPDataEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\TPFormatEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\TPRegisterEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\TraceData.cs" />
+    <Compile Include="BR.AN.PviServices\TraceDataCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TraceDataEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\TraceDataEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\TracePoint.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointData.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointDataCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointDescription.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointDescriptionCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointFormat.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointFormatCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointsData.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointsDataCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TracePointVariable.cs" />
+    <Compile Include="BR.AN.PviServices\TraceVariableCollection.cs" />
+    <Compile Include="BR.AN.PviServices\TraceWriter.cs" />
+    <Compile Include="BR.AN.PviServices\TransferObject.cs" />
+    <Compile Include="BR.AN.PviServices\TransferRequest.cs" />
+    <Compile Include="BR.AN.PviServices\TransferRequestType.cs" />
+    <Compile Include="BR.AN.PviServices\TTResponse.cs" />
+    <Compile Include="BR.AN.PviServices\UploadDataFormat.cs" />
+    <Compile Include="BR.AN.PviServices\UploadHardwareModuleType.cs" />
+    <Compile Include="BR.AN.PviServices\UploadTag.cs" />
+    <Compile Include="BR.AN.PviServices\UploadUsage.cs" />
+    <Compile Include="BR.AN.PviServices\User32.cs" />
+    <Compile Include="BR.AN.PviServices\Utilities.cs" />
+    <Compile Include="BR.AN.PviServices\Value.cs" />
+    <Compile Include="BR.AN.PviServices\Variable.cs" />
+    <Compile Include="BR.AN.PviServices\VariableAttribute.cs" />
+    <Compile Include="BR.AN.PviServices\VariableCollection.cs" />
+    <Compile Include="BR.AN.PviServices\VariableCollectionEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\VariableEventArgs.cs" />
+    <Compile Include="BR.AN.PviServices\VariableEventHandler.cs" />
+    <Compile Include="BR.AN.PviServices\VWSection.cs" />
+    <Compile Include="BR.AN.PviServices\XmlSanitizerStream.cs" />
+    <Compile Include="BR.AN\BRLicenseInfo.cs" />
+    <Compile Include="BR.AN\BRSECComponentEntry.cs" />
+    <Compile Include="BR.AN\BuRIPCStates.cs" />
+    <Compile Include="BR.AN\CBFindBRIpc.cs" />
+    <Compile Include="BR.AN\CBFindKeys.cs" />
+    <Compile Include="BR.AN\CBFindModules.cs" />
+    <Compile Include="BR.AN\DisposeEventArgs.cs" />
+    <Compile Include="BR.AN\DisposeEventHandler.cs" />
+    <Compile Include="BR.AN\LCEventArgs.cs" />
+    <Compile Include="BR.AN\LCInfo.cs" />
+    <Compile Include="BR.AN\LCInfosEventHandler.cs" />
+    <Compile Include="BR.AN\LicComponets.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BR.AN.PviServices\Resources.de.PccLog.resx" />
+    <EmbeddedResource Include="BR.AN.PviServices\Resources.de.PviErrors.resx" />
+    <EmbeddedResource Include="BR.AN.PviServices\Resources.en.PccLog.resx" />
+    <EmbeddedResource Include="BR.AN.PviServices\Resources.en.PviErrors.resx" />
+    <EmbeddedResource Include="BR.AN.PviServices\Resources.fr.PccLog.resx" />
+    <EmbeddedResource Include="BR.AN.PviServices\Resources.fr.PviErrors.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
