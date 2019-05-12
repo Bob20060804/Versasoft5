@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.Platform.Mes.Views.EDV_MesKonfigurationView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:lex="clr-namespace:WPFLocalizeExtension.Extensions;assembly=WPFLocalizeExtension" xmlns:local="clr-namespace:Ersa.Platform.Mes.Views;assembly=Ersa.Platform.Mes,Version=10.5.0.0,Culture=neutral,PublicKeyToken=null" xmlns:markupExtensions="clr-namespace:Ersa.Platform.UI.Common.MarkupExtensions;assembly=Ersa.Platform.UI.Common" xmlns:mes="clr-namespace:Ersa.Platform.Common.Mes;assembly=Ersa.Platform.Common" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:breadCrumb="clr-namespace:Ersa.Platform.UI.BreadCrumb;assembly=Ersa.Platform.UI" xmlns:behaviors="clr-namespace:Ersa.Platform.UI.Behaviors;assembly=Ersa.Platform.UI" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common" xmlns:konfiguration="clr-namespace:Ersa.Platform.Mes.Konfiguration;assembly=Ersa.Platform.Mes,Version=10.5.0.0,Culture=neutral,PublicKeyToken=null" xmlns:viewModels="clr-namespace:Ersa.Platform.Mes.ViewModels;assembly=Ersa.Platform.Mes,Version=10.5.0.0,Culture=neutral,PublicKeyToken=null" xmlns:converters="clr-namespace:Ersa.Platform.UI.Common.Converters;assembly=Ersa.Platform.UI.Common">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_Border.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_ListBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_DataGrid.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <converters:EDC_EnumBeschreibungConverter x:Key="BeschreibungConverter" />
+      <DataTemplate x:Key="C_strDataTemplateFunktionsliste" DataType="viewModels:EDC_XamlListeFunktionsKonfiguration">
+        <DataGrid Style="{StaticResource C_strStyleDataGrid_Default}" ItemsSource="{Binding PRO_lstFunks}">
+          <DataGrid.Columns>
+            <DataGridTemplateColumn HeaderStyle="{StaticResource C_strStyleDataGridColumnHeader_Default}" CellStyle="{StaticResource C_strStyleDataGridCell_NumerischeEingabe}" Width="302" Header="{lex:Loc 10_909}">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="{x:Type konfiguration:EDC_MesFunktionenKonfiguration}">
+                  <DataTemplateKey.Key>{x:Type konfiguration:EDC_MesFunktionenKonfiguration}</DataTemplateKey.Key>
+                  <TextBlock Margin="{StaticResource C_strStdMarginNurLinks}" Text="{Binding PRO_enmFunktion, Converter={StaticResource C_strConverter_LokalisierteEnumBeschreibung}}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn HeaderStyle="{StaticResource C_strStyleDataGridColumnHeader_Zentriert}" CellStyle="{StaticResource C_strStyleDataGridCell_CheckBox}" Width="Auto" Header="{lex:Loc 1_150}">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="{x:Type konfiguration:EDC_MesFunktionenKonfiguration}">
+                  <DataTemplateKey.Key>{x:Type konfiguration:EDC_MesFunktionenKonfiguration}</DataTemplateKey.Key>
+                  <CheckBox Margin="{StaticResource C_strStdMarginNurLinks}" Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" IsChecked="{Binding PRO_blnIstAktiv, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <Interaction.Behaviors>
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdSpeichern}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdSpeichern}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdVerlassen}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdVerlassen}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdWertGeaendert}" CommandParameter="{Binding}" />
+      <behaviors:EDC_PhysischeAdresseBehavior />
+    </Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <breadCrumb:EDU_BreadCrumb Margin="{StaticResource C_strStdMarginNurUnten}">
+      <breadCrumb:EDU_BreadCrumb.PRO_lstBreadCrumbEintraege>
+        <Binding>PRO_lstBreadCrumbEintraege</Binding>
+      </breadCrumb:EDU_BreadCrumb.PRO_lstBreadCrumbEintraege>
+      <breadCrumb:EDU_BreadCrumb.PRO_cmdBreadCrumbEintragAusgewaehlt>
+        <Binding>PRO_cmdBreadCrumbEintragAusgewaehlt</Binding>
+      </breadCrumb:EDU_BreadCrumb.PRO_cmdBreadCrumbEintragAusgewaehlt>
+    </breadCrumb:EDU_BreadCrumb>
+    <Border Grid.Row="1" Style="{StaticResource FakeTabBorder}">
+      <controls:EDU_TouchScrollViewer Style="{StaticResource C_strStyleScrollViewer_Spaltenraster}">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <GroupBox Grid.Row="0" Grid.Column="0" Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{lex:Loc 18_134}">
+            <StackPanel>
+              <controls:EDU_CommandComboBox MinWidth="150" ItemsSource="{Binding PRO_enmVerfuegbareMesTypen}" SelectedValue="{Binding PRO_enmAusgewaehlteMesTyp}" PRO_cmdAuswahlGeandert="{Binding DataContext.PRO_cmdMesTypGewechselt, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EDV_MesKonfigurationView}}}">
+                <controls:EDU_CommandComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Style="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" Text="{Binding Converter={StaticResource C_strConverter_LokalisierteEnumBeschreibung}}" />
+                  </DataTemplate>
+                </controls:EDU_CommandComboBox.ItemTemplate>
+              </controls:EDU_CommandComboBox>
+              <GroupBox Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung}" Header="{lex:Loc 10_749}">
+                <ContentControl ContentTemplate="{StaticResource C_strDataTemplateFunktionsliste}" Content="{Binding PRO_lstAktuelleFunk}" />
+              </GroupBox>
+            </StackPanel>
+          </GroupBox>
+          <GroupBox Grid.Row="0" Grid.Column="1" Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{lex:Loc 13_674}">
+            <controls:EDU_CommandComboBox Grid.Column="1" HorizontalAlignment="Stretch" PRO_cmdAuswahlGeandert="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" SelectedValue="{Binding PRO_enmAusgewaehlterZusatzprotokollTyp}" ItemsSource="{Binding PRO_lstZusatzprotokollTyp}">
+              <controls:EDU_CommandComboBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Style="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" Text="{Binding Converter={StaticResource C_strConverter_LokalisierteEnumBeschreibung}}" />
+                </DataTemplate>
+              </controls:EDU_CommandComboBox.ItemTemplate>
+            </controls:EDU_CommandComboBox>
+          </GroupBox>
+        </Grid>
+      </controls:EDU_TouchScrollViewer>
+    </Border>
+    <ui:EDU_Footer Grid.Row="2" PRO_blnSpeichernSichtbar="True" PRO_blnVerlassenSichtbar="True" PRO_blnSpeichernErlaubt="{Binding PRO_blnHatAenderung}" />
+  </Grid>
+</UserControl>

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Common.Meldungen
 {
+    /// <summary>
+    /// report
+    /// </summary>
 	public interface INF_Meldung : IEquatable<INF_Meldung>
 	{
 		string PRO_strMeldungGuid
