@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Mes.Interfaces
 {
+    /// <summary>
+    /// MES communication service
+    /// </summary>
 	public interface INF_MesKommunikationsDienst
-	{
-		ENUM_MesTyp PRO_enmMesTyp
+    {
+        ENUM_MesTyp PRO_enmMesTyp
 		{
 			get;
 		}

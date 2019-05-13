@@ -4,6 +4,9 @@ namespace Ersa.Platform.Common.Mes
 {
 	public class EDC_MesFunktionenAttribut : Attribute
 	{
+        /// <summary>
+        /// identifiers
+        /// </summary>
 		public string PRO_strBezeichner
 		{
 			get;

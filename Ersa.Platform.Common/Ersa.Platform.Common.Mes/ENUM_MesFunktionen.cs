@@ -2,6 +2,9 @@ using System.ComponentModel;
 
 namespace Ersa.Platform.Common.Mes
 {
+    /// <summary>
+    /// Enum_MesFunction
+    /// </summary>
 	public enum ENUM_MesFunktionen
 	{
 		[Description("4_12129")]

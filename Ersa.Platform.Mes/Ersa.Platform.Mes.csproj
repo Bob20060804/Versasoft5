@@ -135,6 +135,10 @@
       <Project>{d2368bab-4826-4b8e-b67a-577958848676}</Project>
       <Name>Ersa.Platform.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Lokalisierung\Ersa.Platform.Lokalisierung.csproj">
+      <Project>{c20dfd66-778d-4288-827c-dedf438eb9c6}</Project>
+      <Name>Ersa.Platform.Lokalisierung</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ersa.Platform.Module\Ersa.Platform.Module.csproj">
       <Project>{537ac273-49a0-4850-8a1a-edd181220a31}</Project>
       <Name>Ersa.Platform.Module</Name>

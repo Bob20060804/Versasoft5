@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Mes.Konfiguration
 {
+    /// <summary>
+    /// MES configuration manager
+    /// </summary>
 	public interface INF_MesKonfigurationsManager
 	{
 		IEnumerable<INF_MesKommunikationsDienst> PRO_enuKommunikationsDienste

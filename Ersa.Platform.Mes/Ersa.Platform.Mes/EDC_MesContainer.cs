@@ -5,6 +5,9 @@ using System.ComponentModel.Composition;
 
 namespace Ersa.Platform.Mes
 {
+    /// <summary>
+    /// MESÈÝÆ÷
+    /// </summary>
 	[Export(typeof(INF_MesContainer))]
 	public class EDC_MesContainer : INF_MesContainer
 	{
@@ -26,7 +29,8 @@ namespace Ersa.Platform.Mes
 			m_dicObjects.Remove(typeof(T));
 		}
 
-		public T FUN_edcGetObject<T>() where T : class
+		public T FUN_edcGetObject<T>() 
+            where T : class
 		{
 			if (!m_dicObjects.TryGetValue(typeof(T), out object value))
 			{

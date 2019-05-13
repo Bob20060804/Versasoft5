@@ -44,7 +44,9 @@ namespace Ersa.Platform.Mes.Dienste
         /// json serialalization servcie
         /// </summary>
 		private readonly INF_JsonSerialisierungsDienst m_edcJsonSerialisierungsDienst;
-
+        /// <summary>
+        /// 
+        /// </summary>
 		public IEnumerable<INF_MesFunktion> PRO_enuFunktionen
 		{
 			get;

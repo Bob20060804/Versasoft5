@@ -32,12 +32,6 @@
     <Reference Include="System.ComponentModel.Composition">
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Global.Common">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Logging">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
     </Reference>
@@ -47,6 +41,16 @@
     <Compile Include="Ersa.Platform.Logging\ENUM_LogLevel.cs" />
     <Compile Include="Ersa.Platform.Logging\INF_Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ersa.Global.Common\Ersa.Global.Common.csproj">
+      <Project>{6314c658-d02e-4b6b-8165-803a325b2d1b}</Project>
+      <Name>Ersa.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ERSA.Logging\ERSA.Logging.csproj">
+      <Project>{bee401d4-14b3-4408-b533-9185b1fae4a9}</Project>
+      <Name>ERSA.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
