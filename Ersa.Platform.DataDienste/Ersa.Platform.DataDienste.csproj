@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{6EF12D72-5DDC-477E-8140-981667A358E8}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.DataDienste</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ersa.Platform.CapabilityContracts">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.CapabilityContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Infrastructure">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Dienste">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Dienste.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Data">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Logging">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.DataAdapter">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.DataAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.DataContracts">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Data.DataSetExtensions\v4.0_4.0.0.0__b77a5c561934e089\System.Data.DataSetExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.DataProvider">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.DataProvider.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.DataDienste.Benutzer.Interfaces\INF_BenutzerTrackingDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Benutzer\EDC_BenutzerTrackingDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.BetriebsmittelVerwaltung.Interfaces\INF_BetriebsmittelVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.BetriebsmittelVerwaltung.Interfaces\INF_RuestkomponentenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.BetriebsmittelVerwaltung\EDC_BetriebsmittelVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.BetriebsmittelVerwaltung\EDC_RuestkomponentenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.CodeBetrieb.Interfaces\INF_CodeBetriebEinstellungenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.CodeBetrieb\EDC_CodeBetriebEinstellungenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.CodeCache.Helfer\EDC_CodeCacheKonvertierungsHelfer.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.CodeCache.Interfaces\INF_CodesCache.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.CodeCache\EDC_CodesCache.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle.Interfaces\ENUM_CodeEintragProgrammValidierungsErgebnis.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle.Interfaces\ENUM_CodeMaskeValidierungsErgebnis.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle.Interfaces\INF_CodetabellenImportExportDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle.Interfaces\INF_CodetabellenValidierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle.Interfaces\INF_CodetabellenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle.Interfaces\INF_ProgrammAusCodetabelleAuswahlDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle\EDC_CodetabellenImportExportDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle\EDC_CodetabellenValidierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle\EDC_CodetabellenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Codetabelle\EDC_ProgrammAusCodetabelleAuswahlDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.DatenbankVerwaltungsDienst.Interfaces\INF_DatenbankVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.DatenbankVerwaltungsDienst\EDC_DatenbankVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Duesen.Implementierung\EDC_DuesenBetriebsdatenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Duesen.Interfaces\INF_DuesenBetriebsdatenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Exceptions\EDC_DatabaseConnectException.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Exceptions\EDC_BibliothekExistiertBereitsException.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Exceptions\EDC_BibliothekOhneGueltigenInhaltException.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Exceptions\EDC_KeinEindeutigesLoetprogrammException.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Exceptions\EDC_LoetprogrammBereitsInBibliothekEnthaltenException.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Exceptions\EDC_MehrereBildDateienGefundenException.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Helfer\EDC_LoetprogrammVersionsInfoKonvertierungsHelfer.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Helfer\EDC_ProgrammInfoKonvertierungsHelfer.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Interfaces\INF_LoetprogrammVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm.Interfaces\INF_ProgrammBildDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm\EDC_LoetprogrammVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Loetprogramm\EDC_ProgrammBildDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.MaschinenVerwaltung.Interfaces\INF_MaschinenEinstellungenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.MaschinenVerwaltung.Interfaces\INF_MaschinenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.MaschinenVerwaltung\EDC_MaschinenEinstellungenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.MaschinenVerwaltung\EDC_MaschinenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.MaschinenVerwaltung\ENUM_MaschinenDatenLadenStatus.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.MaschinenVerwaltung\STRUCT_MaschinenDatenLadenStatus.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Nutzen.Interfaces\INF_NutzenDatenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Nutzen\EDC_NutzenDatenVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Produktionssteuerung.Helfer\EDC_ProduktionssteuerungsKonvertierungsHelfer.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Produktionssteuerung.Interfaces\INF_ProduktionsEinstellungenImportExportDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Produktionssteuerung.Interfaces\INF_ProduktionssteuerungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Produktionssteuerung\EDC_ProduktionsEinstellungenImportExportDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Produktionssteuerung\EDC_ProduktionssteuerungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Ruestkontrolle\EDC_RuestkontrolleEinstellungenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Ruestkontrolle\INF_RuestkontrolleEinstellungenDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Wartung.Implementierung\EDC_DatenbankWartungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste.Wartung.Interfaces\INF_DatenbankWartungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste\EDC_DataDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste\EDC_DatenzugriffInitialisierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.DataDienste\INF_DatenzugriffInitialisierungsDienst.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

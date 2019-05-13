@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:globalConverters="clr-namespace:Ersa.Global.Controls.Converters;assembly=Ersa.Global.Controls" xmlns:converters="clr-namespace:Ersa.Platform.UI.Common.Converters;assembly=Ersa.Platform.UI.Common,Version=6.1.0.0,Culture=neutral,PublicKeyToken=null">
+  <converters:EDC_LokalisierungsConverter x:Key="C_strConverter_Lokalisierung" />
+  <globalConverters:EDC_ConverterGruppe x:Key="C_strConverter_LokalisierteEnumBeschreibung">
+    <converters:EDC_EnumBeschreibungConverter />
+    <converters:EDC_LokalisierungsConverter />
+  </globalConverters:EDC_ConverterGruppe>
+</ResourceDictionary>

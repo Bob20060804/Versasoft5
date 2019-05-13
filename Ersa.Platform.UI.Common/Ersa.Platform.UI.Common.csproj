@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{008E28BC-0F58-4CB3-890E-EFD48C21D5C8}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.UI.Common</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Lokalisierung">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Lokalisierung.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Infrastructure">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Mvvm">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Controls">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Logging">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common.Model">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.UI.Common.Converters\EDC_EnumBeschreibungConverter.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Converters\EDC_EnumBeschreibungToLokalisierungConverter.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Converters\EDC_IntegerToLokalisierungsKeyConverter.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Converters\EDC_LokalisierungsConverter.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Dialoge\EDU_BibOderPrgImportDialog.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Dialoge\EDU_NeuesProgrammDialog.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Helfer\EDC_EnumHelfer.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Helfer\EDC_EnumMember.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\EDC_BibliothekId.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\EDC_BibliothekUndProgrammEingabe.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\EDC_BibOderPrgImportAbfrageItem.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\ENUM_Eingabe.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_AktionsWiederholungsHelfer.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_AnwendungsBildschirmeDienst.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_BasisCommandSource.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_BildschirmVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_FortschrittsanzeigeViewModel.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_HauptmenuViewModel.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_InteractionController.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_IoDialogHelfer.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_ModulStatusViewModel.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_SpeichernCommandSource.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_SpeichernUndVerwerfenCommandSource.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_StartupAktionViewModel.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_VerlassenCommandSource.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.Interfaces\INF_VerwerfenCommandSource.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.MarkupExtensions\EDC_EnumExtension.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.TabItem\EDC_TabItem.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.TabItem\EDC_TabItemSpezifikation.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.ViewModels\EDC_BasisCommandsViewModel.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.ViewModels\EDC_BibOderPrgImportDialogViewModel.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.ViewModels\EDC_NavigationsViewModelBasis.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.ViewModels\EDC_NavigationsViewModelMitTabsBasis.cs" />
+    <Compile Include="Ersa.Platform.UI.Common.ViewModels\ENUM_BibOderPrgImportSchritt.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_AktionsWiederholungsHelfer.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_AnwendungsBildschirmeDienst.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_BasisCommands.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_Bildschirm.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_BildschirmVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_FarbeAttribute.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_HauptmenuEintrag.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_HauptmenuEintragSpezifikation.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_InteractionController.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_IoDialogHelfer.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_RegionItemsControl.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_RoutedCommandBehavior.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_StringFormatProxy.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDC_ToggleButtonHelfer.cs" />
+    <Compile Include="Ersa.Platform.UI.Common\EDU_Footer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI.Common\dialoge\edu_biboderprgimportdialog.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI.Common\dialoge\edu_neuesprogrammdialog.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI.Common\styles\eds_basisuiconverter.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI.Common\styles\eds_footer.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI.Common\styles\eds_iconbutton_common.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI.Common\styles\eds_tabitem.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI.Common\styles\eds_validierung.xaml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

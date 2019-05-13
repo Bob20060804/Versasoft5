@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{9C1A832F-73F8-4AE5-995B-25B252448A8A}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.CapabilityContracts</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ersa.Platform.Common.Model">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Mvvm">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.DataContracts">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataContracts.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.MeldeAmpel\EDC_AmpelEinstellungen.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.MeldeAmpel\INF_MeldeAmpelCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Produktionssteuerung\EDC_EinstellungsGruppe.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Produktionssteuerung\INF_ProduktionssteuerungCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Zeitschaltuhr\ENUM_Betriebsarten.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Zeitschaltuhr\ENUM_WochenuhrZeileZustaende.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Zeitschaltuhr\INF_WochenuhrZeile.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Zeitschaltuhr\INF_ZeitschaltuhrCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.BenutzerVerwaltung\INF_BenutzerVerwaltungCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Codebetrieb\INF_CodebetriebCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Dashboard\EDC_LoetgutZaehlerElement.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Dashboard\INF_BetriebsdatenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Dashboard\INF_BetriebsDatenWert.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Dashboard\INF_LoetprotokollCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Dashboard\INF_ProzessSchreiberCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Dashboard\INF_Zeit.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.IoT\INF_MaschinenTelemetrieDatenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.KommunikationsDienst\INF_AdressenZusammenSetzenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.LeseSchreibeGeraete\EDC_AuftragRuestkontrolle.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.LeseSchreibeGeraete\EDC_WerkzeugElement.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.LeseSchreibeGeraete\INF_LeseSchreibeGeraeteCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.LeseSchreibeGeraete\INF_LsgRuestenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.MaschinenDatenVerwaltung\EDC_ParameterDaten.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.MaschinenDatenVerwaltung\EDC_ParameterDatenKonfig.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.MaschinenDatenVerwaltung\INF_MaschinenBasisDatenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.MaschinenDatenVerwaltung\INF_MaschinenDatenLadenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.MaschinenDatenVerwaltung\INF_MaschinenDatenSichernCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Meldungen\INF_MeldungProduzentCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Meldungen\INF_ProzessAktionCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Meldungen\INF_ZyklischeMeldungenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Mes\INF_MesMaschinenDatenCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.ProgrammVerwaltung\EDC_MaschinenOperation.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.ProgrammVerwaltung\EDC_NeuesProgrammDaten.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.ProgrammVerwaltung\EDC_ProgrammImportOptionen.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.ProgrammVerwaltung\INF_BibOderPrgImportHandler.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.ProgrammVerwaltung\INF_ProgrammVerwaltungCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.ProgrammVerwaltung\INF_ProgrammVerwaltungNavigationsCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts.Ruestkontrolle\INF_RuestkontrolleCapability.cs" />
+    <Compile Include="Ersa.Platform.CapabilityContracts\INF_DiagnosticsCapability.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

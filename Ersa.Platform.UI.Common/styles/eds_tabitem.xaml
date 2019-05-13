@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:tabItem="clr-namespace:Ersa.Platform.UI.Common.TabItem;assembly=Ersa.Platform.UI.Common,Version=6.1.0.0,Culture=neutral,PublicKeyToken=null">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <DataTemplate x:Key="C_strTemplate_TabItem_MitSchloss" DataType="{x:Type tabItem:EDC_TabItem}">
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Name="txtHeader" Text="{Binding PRO_strNameKey, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+      <Grid Visibility="{Binding PRO_blnIstZugriffEingeschraenkt, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Locked_icon-button_24x24.png" Width="24" Height="24" Margin="5,0,0,0" Visibility="{Binding PRO_blnIstAktiv, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+        <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Locked_Tab_24x24.png" Width="24" Height="24" Margin="5,0,0,0" Visibility="{Binding PRO_blnIstAktiv, Converter={StaticResource C_strConverter_BoolNachVisibilityInvertiert}}" />
+      </Grid>
+    </StackPanel>
+    <DataTemplate.Triggers>
+      <DataTrigger Value="True" Binding="{Binding PRO_blnIstFehlerhaft}">
+        <Setter TargetName="txtHeader" Value="{StaticResource C_strBrush_Rot_V1}" Property="TextBlock.Foreground" />
+      </DataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+  <DataTemplate x:Key="C_strTemplate_TabItem_Inhalt" DataType="{x:Type tabItem:EDC_TabItem}">
+    <ContentControl Content="{Binding PRO_objInhalt}" />
+  </DataTemplate>
+</ResourceDictionary>

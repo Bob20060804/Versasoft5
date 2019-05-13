@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:validierung="clr-namespace:Ersa.Platform.Infrastructure.Validierung;assembly=Ersa.Platform.Infrastructure" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ComboBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DatePicker.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_WatermarkTextBox.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <DataTemplate x:Key="C_strTemplate_PropertyValidierungsFehler" DataType="{x:Type validierung:EDC_PropertyValidierungsFehler}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" SharedSizeGroup="colFehlerNameKey" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Column="0" Style="{StaticResource C_strStyleTextBlock_NurAbstandRechts}" Text="{Binding PRO_strNameKey, Converter={StaticResource C_strConverter_Lokalisierung}, StringFormat={}{0}:}" />
+      <TextBlock Grid.Column="1" Text="{Binding PRO_strFehlerKey, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+    </Grid>
+  </DataTemplate>
+  <DataTemplate x:Key="C_strTemplate_ValidierungsIcon" DataType="{x:Type validierung:EDC_NotificationObjectMitValidierung}">
+    <Image Name="imgFehler" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Fehler_24x24.png" Width="24" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding PRO_blnIstValide, Converter={StaticResource C_strConverter_BoolNachVisibilityInvertiert}}">
+      <Image.ToolTip>
+        <ItemsControl ItemTemplate="{StaticResource C_strTemplate_PropertyValidierungsFehler}" Grid.IsSharedSizeScope="True" ItemsSource="{Binding PRO_lstValidierungsFehler}" />
+      </Image.ToolTip>
+    </Image>
+  </DataTemplate>
+  <Style x:Key="C_strStyleTextBox_KommentarBox_LokalisierteValidierung" TargetType="{x:Type TextBox}" BasedOn="{StaticResource KommentarBox}">
+    <Setter Property="FrameworkElement.Width" Value="Auto" />
+    <Setter Property="FrameworkElement.Height" Value="Auto" />
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleTextBox_LokalisierteValidierung" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleWatermarkTextBox_LokalisierteValidierung" TargetType="{x:Type controls:EDU_WatermarkTextBox}" BasedOn="{StaticResource C_strStyleWatermarkTextBoxDefault}">
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleCommandComboBox_LokalisierteValidierung" TargetType="{x:Type controls:EDU_CommandComboBox}" BasedOn="{StaticResource {x:Type controls:EDU_CommandComboBox}}">
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleComboBox_LokalisierteValidierung" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleDatePicker_LokalisierteValidierung" TargetType="{x:Type DatePicker}" BasedOn="{StaticResource DatePickerStyle}">
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>

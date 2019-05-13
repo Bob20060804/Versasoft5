@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{16E4C6B9-86BD-4CE2-A093-2EEF341454AF}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.Infrastructure</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Logging">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Mvvm">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_BenutzerGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_BenutzerGeaendertEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_CodeLesenEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_CodeLesenEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_CodetabelleGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_CodetabelleGeaendertEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_DuesenSollwerteGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_DuesenSollwerteGeaendertEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_LoetprogrammModusGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_LoetprogrammModusGeaendertPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_LoetprogrammTransferFehlgeschlagenEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_LoetprogrammTransferFehlgeschlagenEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_MaschinenKonfigurationAenderungEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_MaschinenKonfigurationAenderungEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_MesStatusGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_MesStatusGeaendertPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_ProduktionssteuerungGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_ProduktionssteuerungGeaendertPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_ProgrammeGeandertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_ProgrammeGeandertEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_ProgrammeSuchbegriffAenderungsEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_ProgrammeSuchbegriffAenderungsEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_SoftwareFeatureGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_SoftwareFeatureGeaendertPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_SpracheGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_SpracheGeaendertPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_TelemetrieGeaendertEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_UnbehandelteExceptionAufgetretenEvent.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\EDC_UnbehandelteExceptionAufgetretenEventPayload.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\ENUM_CodeLesenZustand.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\ENUM_MaschinenKonfigurationAenderungArt.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\ENUM_SoftwareFeatures.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\ENUM_TelemetryZustand.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Events\ENUM_VerbindungsStatus.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Extensions\EDC_IServiceProviderExtensions.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Extensions\EDC_TaskExtensions.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Interfaces\INF_ApplikationsController.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Interfaces\INF_CapabilityProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Interfaces\INF_DataAccessProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Interfaces\INF_SettingsConsumer.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Interfaces\INF_WebServerKommunikationsDienstProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Interfaces\INF_WebServerVerwaltungsDienstProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.MethodenUeberwachung\EDC_MethodenUeberwachungAttribute.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.MethodenUeberwachung\EDC_ObjektKonvertierung.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Prism\EDC_FilteredCatalog.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Prism\EDC_ServiceLocator.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Prism\EDC_ServiceLocatorBase.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Sprache\EDC_Sprache.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Sprache\EDC_SpracheHelfer.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Validierung\EDC_NotificationObjectMitDataErrorInfo.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Validierung\EDC_NotificationObjectMitValidierung.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Validierung\EDC_PropertyValidierungsFehler.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Validierung\EDC_PropertyValidierungsRegel.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Validierung\EDC_PropertyValidierungsRegeln.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure.Validierung\EDC_StringPropertyNichtLeerRegel.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_CapabilityProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_DataAccessProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_Dispatch.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_GlobalSetting.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_KonsolenLogger.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_MefServiceProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_NotificationObjectMitSprachUmschaltung.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_SynchronerTaskScheduler.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_WebServerKommunikationsDienstProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\EDC_WebServerVerwaltungsDienstProvider.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\ENUM_AnmeldeStatus.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\ENUM_GlobalSettingBereich.cs" />
+    <Compile Include="Ersa.Platform.Infrastructure\ENUM_ModulStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -30,11 +30,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="Prism">
+      <HintPath>..\Prism.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition">
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Module">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Module.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
@@ -45,53 +45,14 @@
     <Reference Include="System">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Platform.UI">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.UI.Common">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.UI.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Common">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.CapabilityContracts">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.CapabilityContracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Common">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Infrastructure">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="Prism.Wpf">
       <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Prism.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Mvvm">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Xml.Linq\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Platform.DataDienste">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataDienste.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Dienste">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Dienste.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Lokalisierung">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Lokalisierung.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Dienste">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Dienste.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Controls">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Controls.dll</HintPath>
     </Reference>
     <Reference Include="System.Core">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
@@ -142,10 +103,45 @@
     <Page Include="C:\Users\bobzhang\Desktop\Ersa\Code\Versasoft5\Ersa.Platform.Mes\views\edv_meskonfigurationview.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ersa.Global.Common\Ersa.Global.Common.csproj">
+      <Project>{6314c658-d02e-4b6b-8165-803a325b2d1b}</Project>
+      <Name>Ersa.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Dienste\Ersa.Global.Dienste.csproj">
+      <Project>{fbca0d26-738a-412b-b7cb-31526e0bbba9}</Project>
+      <Name>Ersa.Global.Dienste</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Mvvm\Ersa.Global.Mvvm.csproj">
+      <Project>{1c914e58-40b4-4742-b010-fb5d0e8924f4}</Project>
+      <Name>Ersa.Global.Mvvm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.CapabilityContracts\Ersa.Platform.CapabilityContracts.csproj">
+      <Project>{9c1a832f-73f8-4ae5-995b-25b252448a8a}</Project>
+      <Name>Ersa.Platform.CapabilityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Common\Ersa.Platform.Common.csproj">
+      <Project>{44adb178-8105-4ca2-8931-df01d7e94baf}</Project>
+      <Name>Ersa.Platform.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.DataDienste\Ersa.Platform.DataDienste.csproj">
+      <Project>{6ef12d72-5ddc-477e-8140-981667a358e8}</Project>
+      <Name>Ersa.Platform.DataDienste</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Infrastructure\Ersa.Platform.Infrastructure.csproj">
+      <Project>{16e4c6b9-86bd-4ce2-a093-2eef341454af}</Project>
+      <Name>Ersa.Platform.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ersa.Platform.Logging\Ersa.Platform.Logging.csproj">
       <Project>{d2368bab-4826-4b8e-b67a-577958848676}</Project>
       <Name>Ersa.Platform.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Module\Ersa.Platform.Module.csproj">
+      <Project>{537ac273-49a0-4850-8a1a-edd181220a31}</Project>
+      <Name>Ersa.Platform.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Prism.Wpf.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
