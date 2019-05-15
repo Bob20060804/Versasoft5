@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:positionsanzeige="clr-namespace:Ersa.Platform.UI.Positionsanzeige;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type positionsanzeige:EDC_Zelle}}" DataType="{x:Type positionsanzeige:EDC_Zelle}">
+    <Grid>
+      <Button Name="btnElement" Command="{x:Static common:EDC_BasisCommands.ms_cmdPositionsAusgewaehlt}" CommandParameter="{Binding PRO_objContent}" Style="{Binding PRO_fdcElementStyle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type positionsanzeige:EDU_PositionsAnzeige}}}" />
+      <Border Name="brdSelektion" IsHitTestVisible="False" Background="#FFD89549" Visibility="Collapsed" Margin="8,4" />
+    </Grid>
+    <DataTemplate.Triggers>
+      <DataTrigger Value="{x:Static positionsanzeige:ENUM_ZellenStatus.enmNichtVorhanden}" Binding="{Binding PRO_enmStatus}">
+        <Setter TargetName="btnElement" Property="UIElement.Visibility" Value="Hidden" />
+      </DataTrigger>
+      <DataTrigger Value="True" Binding="{Binding PRO_blnIstAusgewaehlt}">
+        <Setter TargetName="brdSelektion" Property="UIElement.Visibility" Value="Visible" />
+      </DataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+  <SolidColorBrush x:Key="C_strColorPositionsAnzeigeElement_Background" Color="{StaticResource C_strColor_Weiß}" Opacity="0.25" />
+  <ControlTemplate x:Key="C_strTemplateButton_PositionAnzeigeElement" TargetType="{x:Type Button}">
+    <Border Background="#00FFFFFF" IsHitTestVisible="True">
+      <Rectangle Fill="{TemplateBinding Control.Background}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Margin="8,4" />
+    </Border>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleButton_PositionAnzeigeElement_Normal" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="{StaticResource C_str4FacheRasterBreite}" />
+    <Setter Property="FrameworkElement.Height" Value="12" />
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="Control.Background" Value="{StaticResource C_strColorPositionsAnzeigeElement_Background}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateButton_PositionAnzeigeElement}" />
+  </Style>
+  <Style x:Key="C_strStyleButton_PositionAnzeigeElement_Gross" TargetType="{x:Type Button}" BasedOn="{StaticResource C_strStyleButton_PositionAnzeigeElement_Normal}">
+    <Setter Property="FrameworkElement.Width" Value="{StaticResource C_str8FacheRasterBreite}" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_str4FacheRasterHoehe}" />
+  </Style>
+  <Style x:Key="{x:Type positionsanzeige:EDU_PositionsAnzeige}" TargetType="{x:Type positionsanzeige:EDU_PositionsAnzeige}">
+    <Setter Property="FrameworkElement.MinHeight" Value="{StaticResource C_str8FacheRasterHoehe}" />
+  </Style>
+</ResourceDictionary>
