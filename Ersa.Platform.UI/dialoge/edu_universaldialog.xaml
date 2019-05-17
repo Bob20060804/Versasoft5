@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dialoge1:EDU_Dialog x:Class="Ersa.Platform.UI.Dialoge.EDU_UniversalDialog" Title="EDU_LpDateiNichtAutorisiertDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dialoge1="clr-namespace:Ersa.Global.Controls.Dialoge;assembly=Ersa.Global.Controls" xmlns:helpers1="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:controls1="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:dialoge="clr-namespace:Ersa.Platform.UI.Dialoge;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null">
+  <dialoge1:EDU_Dialog.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers1:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+        <helpers1:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+        <helpers1:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers1:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DialogGroupBox.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </dialoge1:EDU_Dialog.Resources>
+  <Grid>
+    <Grid Background="{StaticResource C_strSolidColorBrush_Dialog_WindowBackground}" />
+    <controls1:EDU_DialogGroupBox Header="{Binding PRO_strTitel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+      <Grid>
+        <TextBlock Margin="{StaticResource C_strStdMarginRechtsUnten}" TextWrapping="Wrap" Text="{Binding PRO_strText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+      </Grid>
+      <controls1:EDU_DialogGroupBox.PRO_objFooter>
+        <ItemsControl HorizontalAlignment="Right" VerticalAlignment="Bottom" AlternationCount="1000" ItemsSource="{Binding PROa_edcTextIconPaar, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type dialoge:EDC_TextIconPaar}">
+              <controls1:EDU_IconButton Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strButtonText}" Command="{Binding PRO_cmdButtonGeklicktCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Converter={StaticResource C_strConverter_StringInhaltNachVisibility}}" PRO_strIconUri="{Binding PRO_strIconUri}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <UniformGrid Rows="1" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </controls1:EDU_DialogGroupBox.PRO_objFooter>
+    </controls1:EDU_DialogGroupBox>
+  </Grid>
+</dialoge1:EDU_Dialog>

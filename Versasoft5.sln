@@ -35,7 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Platform.CapabilityCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERSA.Logging", "ERSA.Logging\ERSA.Logging.csproj", "{BEE401D4-14B3-4408-B533-9185B1FAE4A9}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Global.Controls", "Ersa.Global.Controls\Ersa.Global.Controls.csproj", "{563156C5-BF95-4D71-8051-AAAFB1414541}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Platform.UI", "Ersa.Platform.UI\Ersa.Platform.UI.csproj", "{DB6521AD-295B-451C-8D3B-443F5D902F87}"
+>>>>>>> 7d28249cd3435fdabfb5c144f8f7577a715eeac3
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -160,6 +164,7 @@ Global
 		{BEE401D4-14B3-4408-B533-9185B1FAE4A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BEE401D4-14B3-4408-B533-9185B1FAE4A9}.Release|x86.ActiveCfg = Release|Any CPU
 		{BEE401D4-14B3-4408-B533-9185B1FAE4A9}.Release|x86.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{563156C5-BF95-4D71-8051-AAAFB1414541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{563156C5-BF95-4D71-8051-AAAFB1414541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{563156C5-BF95-4D71-8051-AAAFB1414541}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -168,6 +173,16 @@ Global
 		{563156C5-BF95-4D71-8051-AAAFB1414541}.Release|Any CPU.Build.0 = Release|Any CPU
 		{563156C5-BF95-4D71-8051-AAAFB1414541}.Release|x86.ActiveCfg = Release|Any CPU
 		{563156C5-BF95-4D71-8051-AAAFB1414541}.Release|x86.Build.0 = Release|Any CPU
+=======
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Debug|x86.Build.0 = Debug|Any CPU
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Release|x86.ActiveCfg = Release|Any CPU
+		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Release|x86.Build.0 = Release|Any CPU
+>>>>>>> 7d28249cd3435fdabfb5c144f8f7577a715eeac3
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

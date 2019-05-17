@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:converters="clr-namespace:Ersa.Global.Controls.Converters;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:uiProgramm="clr-namespace:Ersa.Platform.UI.Programm;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null" xmlns:behavior="clr-namespace:Ersa.Global.Controls.Behavior;assembly=Ersa.Global.Controls" xmlns:uiConverters="clr-namespace:Ersa.Platform.UI.Converters;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null" xmlns:viewModels="clr-namespace:Ersa.Platform.UI.Programm.ViewModels;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null" xmlns:behaviors="clr-namespace:Ersa.Platform.UI.Behaviors;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_IconButton.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ToolTip.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DataGrid.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Expander.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ContextMenu.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_BitmapImage.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_DataGrid_Programmverwaltung.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <converters:EDC_TextNachMarkierterTextConverter x:Key="C_strConverter_TextNachMarkierterText">
+    <converters:EDC_TextNachMarkierterTextConverter.PRO_objMarkierterTextStyle>
+      <Style TargetType="{x:Type Run}">
+        <Setter Property="TextElement.Background" Value="#7F2781BB" />
+      </Style>
+    </converters:EDC_TextNachMarkierterTextConverter.PRO_objMarkierterTextStyle>
+  </converters:EDC_TextNachMarkierterTextConverter>
+  <converters:EDC_VisibilityNachBoolConverter x:Key="C_strConverter_VisibilityNachBool" />
+  <converters:EDC_MultiBoolConverter x:Key="C_strConverter_MultiBoolNachVisibility" PRO_blnVisibilityStattBool="True" />
+  <uiConverters:EDC_ProgrammNachStatusIconConverter x:Key="C_strConverter_StatusIcon" PRO_strArbeitsversionIcon="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Tabelle_bearbeiten_Aktiv_24x24.png" PRO_strVersioniertIcon="/Ersa.Global.Controls;component/Bilder/Icons/Icon_locked_tab-navigation_Aktiv_24x24.png" PRO_strNichtFreigegebenIcon="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Fehler_24x24.png" PRO_strFreigegebenIcon="/Ersa.Global.Controls;component/Bilder/Icons/Icon_OK_24x24.png" PRO_strFreigegebenStufe1Icon="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Freigabe_4AugenPrinzip_Stufe1_24x24.png" PRO_strFreigegebenStufe2Icon="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Freigabe_4AugenPrinzip_Stufe2_24x24.png" PRO_strDefaultIcon="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Hilfe_24x24.png" />
+  <DataTemplate x:Key="C_strTemplate_ProgrammViewModel_ProgrammDataGrid" DataType="{x:Type viewModels:EDC_ProgrammViewModel}" />
+  <DataTemplate x:Key="C_strTemplate_ProgrammViewModel_VersionsDataGrid" DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+    <DataTemplate.Resources>
+      <ContextMenu x:Key="C_strContextMenu_Version" HorizontalOffset="-244" VerticalOffset="0" Style="{StaticResource C_strContextMenu_Programmverwaltung}" Visibility="{Binding PlacementTarget.Tag.PRO_blnBearbeitungErmoeglichen, RelativeSource={RelativeSource Self}, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <ContextMenu.Items>
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdVersionAnzeigen}" Header="{Loc 13_1133}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem.PRO_lstVersionen.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Modul_VersaEye_blau_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdVersionBearbeiten}" Header="{Loc 13_1132}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem.PRO_lstVersionen.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Tabelle_bearbeiten_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdVersionLoeschen}" Header="{Loc 1_1}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem.PRO_lstVersionen.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </ContextMenu.Items>
+      </ContextMenu>
+    </DataTemplate.Resources>
+    <controls:EDU_TaetigkeitsAnzeige Background="#00FFFFFF" PRO_blnIstBeschaeftigt="{Binding PRO_blnDatenWerdenGeladen}" PRO_strAnzeigeText="{Loc 4_10102}">
+      <DataGrid Name="lstVersionen" MaxHeight="600" Margin="{StaticResource C_strStdMarginSechsfachLinksUndUnten}" IsSynchronizedWithCurrentItem="True" Style="{StaticResource C_strStyleDataGrid_ListeInteraktiv_Programmverwaltung}" ItemsSource="{Binding PRO_lstVersionen}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}">
+        <DataGrid.Resources>
+          <controls:EDC_BindingProxy x:Key="C_strProxy_ProduktionsfreigabeAusblenden_Versionen" PRO_objData="{Binding PRO_blnProduktionsfreigabeAusblenden, RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}" />
+        </DataGrid.Resources>
+        <i:Interaction.Triggers>
+          <i:EventTrigger EventTrigger.EventName="MouseDoubleClick">
+            <i:InvokeCommandAction Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdVersionLaden}" CommandParameter="{Binding SelectedItem, ElementName=lstVersionen}" />
+          </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <i:Interaction.Behaviors>
+          <behavior:EDC_DataGridScrollBehavior />
+        </i:Interaction.Behaviors>
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="400" MinWidth="400" MaxWidth="400" SortMemberPath="PRO_strName" Header="{Loc 11_12}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_VersionViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_VersionViewModel}</DataTemplateKey.Key>
+                <DataTemplate.Resources>
+                  <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                        <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </DataTemplate.Resources>
+                <ContentControl>
+                  <ContentControl.Content>
+                    <MultiBinding Converter="{StaticResource C_strConverter_TextNachMarkierterText}">
+                      <Binding Path="PRO_strName" />
+                      <Binding Path="PRO_strFilterText" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}" />
+                    </MultiBinding>
+                  </ContentControl.Content>
+                </ContentControl>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="150" MinWidth="150" MaxWidth="150" IsReadOnly="True" SortMemberPath="PRO_strBenutzername" Header="{Loc 13_274}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_VersionViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_VersionViewModel}</DataTemplateKey.Key>
+                <TextBlock Text="{Binding PRO_strBenutzername}">
+                  <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                          <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </TextBlock.Style>
+                </TextBlock>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="150" MinWidth="150" MaxWidth="150" IsReadOnly="True" SortMemberPath="PRO_dtmDatum" SortDirection="Descending" HeaderStyle="{StaticResource C_strStyleDataGridColumnHeader_MitDetailRechtsbuendig}" Header="{Loc 13_201}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_VersionViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_VersionViewModel}</DataTemplateKey.Key>
+                <TextBlock HorizontalAlignment="Right" Text="{Binding PRO_dtmDatum, StringFormat={}{0:d}}">
+                  <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                          <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </TextBlock.Style>
+                </TextBlock>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="574" MinWidth="574" MaxWidth="574" IsReadOnly="True" SortMemberPath="PRO_strKommentar" Header="{Loc 13_1129}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_VersionViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_VersionViewModel}</DataTemplateKey.Key>
+                <TextBlock TextWrapping="Wrap" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxHeight="48" Padding="0,6" Text="{Binding PRO_strKommentar}">
+                  <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                          <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </TextBlock.Style>
+                </TextBlock>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="96" MinWidth="96" MaxWidth="96" IsReadOnly="True" Header="{Loc 10_449}" Visibility="{Binding PRO_objData, Source={StaticResource C_strProxy_ProduktionsfreigabeAusblenden_Versionen}, Converter={StaticResource C_strConverter_BoolNachVisibilityInvertiert}}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <Image Width="24" Height="24" Stretch="None" Source="{Binding Converter={StaticResource C_strConverter_StatusIcon}}" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="112" MinWidth="112" MaxWidth="112" IsReadOnly="True">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <Border HorizontalAlignment="Stretch" MinHeight="{StaticResource C_strBasisTouchHoehe}" Margin="-6,0">
+                  <Grid SnapsToDevicePixels="True">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="56" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1" SnapsToDevicePixels="True">
+                      <Grid.Visibility>
+                        <MultiBinding Converter="{StaticResource C_strConverter_MultiBoolNachVisibility}">
+                          <Binding Path="PRO_blnIstAusgewaehlt" />
+                          <Binding Path="PRO_blnBearbeitungErmoeglichen" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}" />
+                        </MultiBinding>
+                      </Grid.Visibility>
+                      <controls:EDU_IconButton HorizontalAlignment="Right" behaviors:EDC_MapLinksKlickAufRechtsKlickBehavior.IsLeftClickEnabled="True" Style="{StaticResource C_strStyleIconButton_DataGrid}" ContextMenuService.Placement="Bottom" Width="56" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Weitere_Funktionen_24x24.png" ContextMenu="{StaticResource C_strContextMenu_Version}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}" ToolTip="{Loc 13_499}" />
+                    </Grid>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </controls:EDU_TaetigkeitsAnzeige>
+  </DataTemplate>
+  <DataTemplate x:Key="C_strTemplate_BibliothekViewModel_ProgrammDataGrid" DataType="{x:Type viewModels:EDC_BibliothekViewModel}">
+    <DataTemplate.Resources>
+      <ContextMenu x:Key="C_strContextMenu_Programm" HorizontalOffset="-244" VerticalOffset="0" Style="{StaticResource C_strContextMenu_Programmverwaltung}" Visibility="{Binding PlacementTarget.Tag.PRO_blnBearbeitungErmoeglichen, RelativeSource={RelativeSource Self}, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <ContextMenu.Items>
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammLaden}" Header="{Loc 13_289}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Programm_oeffnen_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammVerschieben}" Header="{Loc 13_305}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Verschieben_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammUmbenennen}" Header="{Loc 4_11810}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Objekt_umbenennen_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammDuplizieren}" Header="{Loc 4_11809}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Kopieren_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammExportieren}" Header="{Loc 13_601}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Exportieren_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammLoeschen}" Header="{Loc 13_317}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+          <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammVersionenVergleichen}" Header="{Loc 13_1098}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem.PRO_lstProgramme.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+            <MenuItem.Icon>
+              <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Versionen_vergleichen_24x24.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </ContextMenu.Items>
+      </ContextMenu>
+    </DataTemplate.Resources>
+    <controls:EDU_TaetigkeitsAnzeige Background="#00FFFFFF" PRO_blnIstBeschaeftigt="{Binding PRO_blnDatenWerdenGeladen}" PRO_strAnzeigeText="{Loc 4_10102}">
+      <DataGrid Name="lstProgramme" MaxHeight="600" Margin="{StaticResource C_strStdMarginSechsfachLinksUndUnten}" IsSynchronizedWithCurrentItem="True" RowDetailsTemplate="{StaticResource C_strTemplate_ProgrammViewModel_ProgrammDataGrid}" Style="{StaticResource C_strStyleDataGrid_ListeInteraktiv_Programmverwaltung}" ItemsSource="{Binding PRO_lstProgramme}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}">
+        <DataGrid.RowStyle>
+          <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource C_strStyleDataGridRow_MitDetail}">
+            <Setter Property="DataGridRow.DetailsVisibility" Value="{Binding PRO_blnIstAusgeklappt, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+          </Style>
+        </DataGrid.RowStyle>
+        <DataGrid.Resources>
+          <controls:EDC_BindingProxy x:Key="C_strProxy_ProduktionsfreigabeAusblenden" PRO_objData="{Binding PRO_blnProduktionsfreigabeAusblenden, RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}" />
+        </DataGrid.Resources>
+        <i:Interaction.Triggers>
+          <controls:EDC_EventTriggerMitBedingung EventName="MouseDoubleClick" PRO_blnBedingung="{Binding PRO_blnVersionenAnzeigen, RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}, Converter={StaticResource C_strConverter_BoolNachBoolInvertiert}}">
+            <i:InvokeCommandAction Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammLaden}" CommandParameter="{Binding SelectedItem, ElementName=lstProgramme}" />
+          </controls:EDC_EventTriggerMitBedingung>
+        </i:Interaction.Triggers>
+        <i:Interaction.Behaviors>
+          <behavior:EDC_DataGridScrollBehavior />
+        </i:Interaction.Behaviors>
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="400" MinWidth="400" MaxWidth="400" SortMemberPath="PRO_strName" SortDirection="Ascending" Header="{Loc 1_2274}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <DataTemplate.Resources>
+                  <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                        <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </DataTemplate.Resources>
+                <ContentControl>
+                  <ContentControl.Content>
+                    <MultiBinding Converter="{StaticResource C_strConverter_TextNachMarkierterText}">
+                      <Binding Path="PRO_strName" />
+                      <Binding Path="PRO_strFilterText" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}" />
+                    </MultiBinding>
+                  </ContentControl.Content>
+                </ContentControl>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="150" MinWidth="150" MaxWidth="150" IsReadOnly="True" SortMemberPath="PRO_strBenutzername" Header="{Loc 13_274}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <TextBlock Text="{Binding PRO_strBenutzername}">
+                  <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                          <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </TextBlock.Style>
+                </TextBlock>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="150" MinWidth="150" MaxWidth="150" IsReadOnly="True" SortMemberPath="PRO_dtmDatum" HeaderStyle="{StaticResource C_strStyleDataGridColumnHeader_MitDetailRechtsbuendig}" Header="{Loc 13_201}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <TextBlock HorizontalAlignment="Right" Text="{Binding PRO_dtmDatum, StringFormat={}{0:d}}">
+                  <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                          <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </TextBlock.Style>
+                </TextBlock>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="574" MinWidth="574" MaxWidth="574" IsReadOnly="True" SortMemberPath="PRO_strKommentar" Header="{Loc 8_3436}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <TextBlock TextWrapping="Wrap" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxHeight="48" Padding="0,6" Text="{Binding PRO_strKommentar}">
+                  <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleDataGridCellTextBlock_ListeInteraktiv}">
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding PRO_blnIstFehlerhaft}" Value="True">
+                          <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Rot_V1}" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </TextBlock.Style>
+                </TextBlock>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="96" MinWidth="96" MaxWidth="96" IsReadOnly="True" Header="{Loc 13_956}" Visibility="{Binding PRO_objData, Source={StaticResource C_strProxy_ProduktionsfreigabeAusblenden}, Converter={StaticResource C_strConverter_BoolNachVisibilityInvertiert}}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <Image Width="24" Height="24" Stretch="None" Source="{Binding Converter={StaticResource C_strConverter_StatusIcon}}" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Width="112" MinWidth="112" MaxWidth="112" IsReadOnly="True">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProgrammViewModel}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProgrammViewModel}</DataTemplateKey.Key>
+                <Border HorizontalAlignment="Stretch" MinHeight="{StaticResource C_strBasisTouchHoehe}" Margin="-6,0">
+                  <Grid SnapsToDevicePixels="True">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="56" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl ContentTemplate="{StaticResource C_strBitmapImage_ProgrammAuswahl}" Content="{Binding PRO_i64Id}">
+                      <i:Interaction.Triggers>
+                        <i:EventTrigger EventTrigger.EventName="MouseUp">
+                          <i:InvokeCommandAction Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammInfo}" CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                      </i:Interaction.Triggers>
+                    </ContentControl>
+                    <Grid Grid.Column="1" SnapsToDevicePixels="True">
+                      <Grid.Visibility>
+                        <MultiBinding Converter="{StaticResource C_strConverter_MultiBoolNachVisibility}">
+                          <Binding Path="PRO_blnIstAusgewaehlt" />
+                          <Binding Path="PRO_blnBearbeitungErmoeglichen" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}" />
+                        </MultiBinding>
+                      </Grid.Visibility>
+                      <controls:EDU_IconButton HorizontalAlignment="Right" behaviors:EDC_MapLinksKlickAufRechtsKlickBehavior.IsLeftClickEnabled="True" Style="{StaticResource C_strStyleIconButton_DataGrid}" ContextMenuService.Placement="Bottom" Width="56" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Weitere_Funktionen_24x24.png" ContextMenu="{StaticResource C_strContextMenu_Programm}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}" ToolTip="{Loc 13_499}" />
+                    </Grid>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </controls:EDU_TaetigkeitsAnzeige>
+    <DataTemplate.Triggers>
+      <DataTrigger Value="True" Binding="{Binding PRO_blnVersionenAnzeigen, RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}">
+        <Setter TargetName="lstProgramme" Value="{StaticResource C_strStyleDataGrid_MitDetail}" Property="FrameworkElement.Style" />
+        <Setter TargetName="lstProgramme" Value="{StaticResource C_strTemplate_ProgrammViewModel_VersionsDataGrid}" Property="DataGrid.RowDetailsTemplate" />
+      </DataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+  <ControlTemplate x:Key="C_strControlTemplate_ProgrammAuswahl" TargetType="{x:Type uiProgramm:EDU_ProgrammAuswahl}">
+    <ControlTemplate.Resources>
+      <ContextMenu x:Key="C_strContextMenu_Bibliotheken" HorizontalOffset="-242" VerticalOffset="0" Style="{StaticResource C_strContextMenu_Programmverwaltung}" Visibility="{Binding PlacementTarget.Tag.PRO_blnBearbeitungErmoeglichen, RelativeSource={RelativeSource Self}, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdProgrammErstellen}" Header="{Loc 13_278}">
+          <MenuItem.Icon>
+            <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Programm_erstellen_24x24.png" />
+          </MenuItem.Icon>
+        </MenuItem>
+        <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+        <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdBibliothekUmbenennen}" Header="{Loc 4_11808}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+          <MenuItem.Icon>
+            <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Objekt_umbenennen_24x24.png" />
+          </MenuItem.Icon>
+        </MenuItem>
+        <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+        <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdBibliothekDuplizieren}" Header="{Loc 4_11807}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+          <MenuItem.Icon>
+            <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Kopieren_24x24.png" />
+          </MenuItem.Icon>
+        </MenuItem>
+        <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+        <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdBibliothekExportieren}" Header="{Loc 13_600}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+          <MenuItem.Icon>
+            <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Exportieren_24x24.png" />
+          </MenuItem.Icon>
+        </MenuItem>
+        <Separator Style="{StaticResource C_strStyleDataGridRow_Separator_ListeInteraktiv}" />
+        <MenuItem Style="{StaticResource C_strContextMenuItem_Programmverwaltung}" Command="{x:Static uiProgramm:EDC_ProgrammCommands.ms_cmdBibliothekLoeschen}" Header="{Loc 1_1}" CommandParameter="{Binding PlacementTarget.Tag.PRO_lstBibliotheken.CurrentItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
+          <MenuItem.Icon>
+            <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" />
+          </MenuItem.Icon>
+        </MenuItem>
+      </ContextMenu>
+    </ControlTemplate.Resources>
+    <DataGrid Name="lstBibliotheken" IsSynchronizedWithCurrentItem="True" Style="{StaticResource C_strStyleDataGrid_MitDetail}" RowDetailsTemplate="{StaticResource C_strTemplate_BibliothekViewModel_ProgrammDataGrid}" HeadersVisibility="Row" HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding PRO_lstBibliotheken, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}">
+      <DataGrid.RowStyle>
+        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource C_strStyleDataGridRow_MitDetail}">
+          <Setter Property="DataGridRow.DetailsVisibility" Value="{Binding PRO_blnIstAusgeklappt, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+        </Style>
+      </DataGrid.RowStyle>
+      <DataGrid.Columns>
+        <DataGridTextColumn MinWidth="500" Width="*" IsReadOnly="True" SortDirection="Ascending" Header="{Loc 1_25}" Binding="{Binding PRO_strName}" />
+        <DataGridTemplateColumn IsReadOnly="True" CanUserResize="False" MinWidth="327" Width="Auto" CellStyle="{StaticResource C_strStyleDataGridCell_IconButtons}" Header="{Loc 13_499}">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate DataType="{x:Type viewModels:EDC_BibliothekViewModel}">
+              <DataTemplateKey.Key>{x:Type viewModels:EDC_BibliothekViewModel}</DataTemplateKey.Key>
+              <Border Tag="{Binding PRO_strName}">
+                <Border.Visibility>
+                  <MultiBinding Converter="{StaticResource C_strConverter_MultiBoolNachVisibility}">
+                    <Binding Path="PRO_blnIstAusgewaehlt" />
+                    <Binding Path="PRO_blnBearbeitungErmoeglichen" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}" />
+                  </MultiBinding>
+                </Border.Visibility>
+                <Grid>
+                  <controls:EDU_IconButton ContextMenuService.Placement="Bottom" behaviors:EDC_MapLinksKlickAufRechtsKlickBehavior.IsLeftClickEnabled="True" Width="56" HorizontalAlignment="Right" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Weitere_Funktionen_24x24.png" ContextMenu="{StaticResource C_strContextMenu_Bibliotheken}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type uiProgramm:EDU_ProgrammAuswahl}}}" ToolTip="{Loc 13_499}" />
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+  </ControlTemplate>
+  <Style x:Key="{x:Type uiProgramm:EDU_ProgrammAuswahl}" TargetType="{x:Type uiProgramm:EDU_ProgrammAuswahl}">
+    <Setter Property="Control.Template" Value="{StaticResource C_strControlTemplate_ProgrammAuswahl}" />
+  </Style>
+</ResourceDictionary>
