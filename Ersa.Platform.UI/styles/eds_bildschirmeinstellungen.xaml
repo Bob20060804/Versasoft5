@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:parallelBedienung="clr-namespace:Ersa.Platform.UI.ParallelBedienung" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_CheckBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type parallelBedienung:EDC_BildschirmEinstellungen}}" DataType="{x:Type parallelBedienung:EDC_BildschirmEinstellungen}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <CheckBox Grid.Column="0" Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" IsChecked="{Binding PRO_blnIstAktiv}" IsEnabled="{Binding PRO_blnIstPrimaer, Converter={StaticResource C_strConverter_BoolNachBoolInvertiert}}">
+        <CheckBox.Content>
+          <TextBlock Style="{StaticResource TextBlockBase}">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="{}{0} {1}">
+                <BLoc Key="13_884" />
+                <Binding Path="PRO_i32Nummer" />
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+        </CheckBox.Content>
+      </CheckBox>
+      <TextBlock Grid.Column="1" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{LocText 13_885, Prefix=(, Suffix=)}" Visibility="{Binding PRO_blnIstPrimaer, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+    </Grid>
+  </DataTemplate>
+</ResourceDictionary>

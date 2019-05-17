@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:codeleser="clr-namespace:Ersa.Platform.UI.Codeleser;assembly=Ersa.Platform.UI,Version=14.0.4.0,Culture=neutral,PublicKeyToken=null">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ToggleButton.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type codeleser:EDC_Codeleser}}" DataType="{x:Type codeleser:EDC_Codeleser}">
+    <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{Binding PRO_strBezeichnung}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <controls:EDU_ToggleButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Aggregat_Codeleser_Aus_24x24.png" PRO_strIconAktivUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Aggregat_Codeleser_An_24x24.png" Command="{x:Static codeleser:EDC_CodeleserCommands.ms_cmdCodeLesen}" PRO_i32Sperrzeit="{x:Static controls:EDU_ToggleButton.mC_i32SperrzeitMittel}" PRO_blnIstAktiv="{Binding PRO_blnIstAktiv}" IsEnabled="{Binding PRO_blnDarfBedientWerden}" CommandParameter="{Binding}" />
+        <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding PRO_strGelesenerWert, Mode=OneWay}" />
+      </Grid>
+    </GroupBox>
+  </DataTemplate>
+  <DataTemplate x:Key="C_strTemplateCodeLeser_DetailGroupBox" DataType="{x:Type codeleser:EDC_Codeleser}">
+    <GroupBox Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung_1Spalte}" Header="{Binding PRO_strBezeichnung}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <controls:EDU_ToggleButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Aggregat_Codeleser_Aus_24x24.png" PRO_strIconAktivUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Aggregat_Codeleser_An_24x24.png" Command="{x:Static codeleser:EDC_CodeleserCommands.ms_cmdCodeLesen}" PRO_i32Sperrzeit="{x:Static controls:EDU_ToggleButton.mC_i32SperrzeitMittel}" PRO_blnIstAktiv="{Binding PRO_blnIstAktiv}" IsEnabled="{Binding PRO_blnDarfBedientWerden}" CommandParameter="{Binding}" />
+        <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding PRO_strGelesenerWert, Mode=OneWay}" />
+      </Grid>
+    </GroupBox>
+  </DataTemplate>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type codeleser:EDC_RuestkontrolleLeser}}" DataType="{x:Type codeleser:EDC_RuestkontrolleLeser}">
+    <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{Binding PRO_strBezeichnung}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <controls:EDU_ToggleButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Ruesten_Aus_24x24.png" PRO_strIconAktivUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Ruesten_An_24x24.png" Command="{x:Static codeleser:EDC_CodeleserCommands.ms_cmdRuestkontrolleLesen}" PRO_i32Sperrzeit="{x:Static controls:EDU_ToggleButton.mC_i32SperrzeitMittel}" PRO_blnIstAktiv="{Binding PRO_blnIstAktiv}" IsEnabled="{Binding PRO_blnDarfBedientWerden}" CommandParameter="{Binding}" />
+        <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding PRO_strGeleseneDaten, Mode=OneWay}" />
+      </Grid>
+    </GroupBox>
+  </DataTemplate>
+  <DataTemplate x:Key="C_strTemplateRuestkontrolleLeser_DetailGroupBox" DataType="{x:Type codeleser:EDC_RuestkontrolleLeser}">
+    <GroupBox Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung_1Spalte}" Header="{Binding PRO_strBezeichnung}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <controls:EDU_ToggleButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Ruesten_Aus_24x24.png" PRO_strIconAktivUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Ruesten_An_24x24.png" Command="{x:Static codeleser:EDC_CodeleserCommands.ms_cmdRuestkontrolleLesen}" PRO_i32Sperrzeit="{x:Static controls:EDU_ToggleButton.mC_i32SperrzeitMittel}" PRO_blnIstAktiv="{Binding PRO_blnIstAktiv}" IsEnabled="{Binding PRO_blnDarfBedientWerden}" CommandParameter="{Binding}" />
+        <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding PRO_strGeleseneDaten, Mode=OneWay}" />
+      </Grid>
+    </GroupBox>
+  </DataTemplate>
+</ResourceDictionary>

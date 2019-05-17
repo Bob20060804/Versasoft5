@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:eingabe="clr-namespace:Ersa.Global.Controls.Eingabe;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_NumerischeEingabe.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <common:EDC_StringFormatProxy x:Key="C_strAbbrechenProxy" PRO_strStringFormat="{}{0}" PRO_objWert1="{Loc 1_15}" />
+  <common:EDC_StringFormatProxy x:Key="C_strUebernehmenProxy" PRO_strStringFormat="{}{0}" PRO_objWert1="{Loc 9_2102}" />
+  <common:EDC_StringFormatProxy x:Key="C_strTextWennKeinFehlerProxy" PRO_strStringFormat="{}{0}" PRO_objWert1="{Loc 13_263}" />
+  <Style x:Key="C_strStyleNumerischeEingabe_Default_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollHidden_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_SollHidden}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollCollapsed_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_SollCollapsed}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstHidden_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_IstHidden}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstCollapsed_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_IstCollapsed}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollCollapsed_BeschriftungGross_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_SollCollapsed_BeschriftungGross}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstCollapsed_BeschriftungGross_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_IstCollapsed_BeschriftungGross}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollCollapsed_IstGross_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_SollCollapsed_IstGross}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstCollapsed_SollGross_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_IstCollapsed_SollGross}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSoll_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_NurSoll}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSollMitEinheit_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_NurSollMitEinheit}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSollGross_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_NurSollGross}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSollMitEinheitGross_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_NurSollMitEinheitGross}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurIst_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_NurIst}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurIstGross_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_NurIstGross}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="RadGridViewCellNumerischeEingabe_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource RadGridViewCellNumerischeEingabe}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+  <Style x:Key="DataGridCellNumerischeEingabe_Lokalisiert" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource DataGridCellNumerischeEingabe}">
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strAbbrechenText" Value="{Binding PRO_strResult, Source={StaticResource C_strAbbrechenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strUebernehmenText" Value="{Binding PRO_strResult, Source={StaticResource C_strUebernehmenProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_strTextWennKeinFehler" Value="{Binding PRO_strResult, Source={StaticResource C_strTextWennKeinFehlerProxy}}" />
+    <Setter Property="eingabe:EDU_Eingabe.PRO_fdcLokalisierungsConverter" Value="{StaticResource C_strConverter_Lokalisierung}" />
+  </Style>
+</ResourceDictionary>
