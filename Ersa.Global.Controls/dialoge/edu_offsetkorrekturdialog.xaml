@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dialoge:EDU_Dialog x:Class="Ersa.Global.Controls.Dialoge.EDU_OffsetKorrekturDialog" FocusManager.FocusedElement="{Binding ElementName=txtBoxOffsetOhneVirtKeyboard}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dialoge="clr-namespace:Ersa.Global.Controls.Dialoge" xmlns:controls="clr-namespace:Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:eingabe="clr-namespace:Ersa.Global.Controls.Eingabe">
+  <Grid>
+    <Grid.Resources>
+      <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+          <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+          <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_NumerischeEingabe.xaml" />
+          <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+          <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DialogGroupBox.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+    </Grid.Resources>
+    <Border Background="{StaticResource C_strSolidColorBrush_Dialog_WindowBackground}" />
+    <controls:EDU_DialogGroupBox Width="{StaticResource C_strDialogGroupBoxSpaltenBreite_1Spalte}" Header="{Binding PRO_strTitel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="{StaticResource C_strStdMarginRechtsUnten}" Text="{Binding PRO_strText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+        <CheckBox Grid.Row="1" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strOffsetAbsolutVerwendenText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" IsChecked="{Binding PRO_blnOffsetAbsolutVerwenden, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+        <eingabe:EDU_NumerischeEingabe Grid.Row="2" Style="{StaticResource C_strStyleNumerischeEingabe_IstCollapsed}" PRO_i32AnzahlNachkommastellen="1" PRO_dblWert="{Binding PRO_dblOffset, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PRO_strBeschriftung="{Binding PRO_strOffsetText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PRO_strAbbrechenText="{Binding PRO_strAbbrechenText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PRO_strUebernehmenText="{Binding PRO_strBestaetigenText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding PRO_blnOhneVirtKeyboard, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_BoolNachVisibilityInvertiert}}" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Visibility="{Binding PRO_blnOhneVirtKeyboard, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+          <TextBlock MinWidth="160" Margin="{StaticResource C_strStdMarginZentrisch}" Text="{Binding PRO_strOffsetText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+          <TextBox Name="txtBoxOffsetOhneVirtKeyboard" Width="80" TextAlignment="Right" Text="{Binding PRO_strOffset, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, NotifyOnSourceUpdated=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+      </Grid>
+      <controls:EDU_DialogGroupBox.PRO_objFooter>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <controls:EDU_IconButton IsCancel="True" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Abbrechen_24x24.png" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strAbbrechenText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+          <controls:EDU_IconButton Click="SUB_OkGeklickt" Grid.Column="1" IsDefault="True" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Status_Gruen_24x24.png" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strBestaetigenText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" IsEnabled="{Binding PRO_blnKeinFehler, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+        </Grid>
+      </controls:EDU_DialogGroupBox.PRO_objFooter>
+    </controls:EDU_DialogGroupBox>
+  </Grid>
+</dialoge:EDU_Dialog>

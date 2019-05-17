@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ContentControl.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
+    <GradientStop Color="#72000000" Offset="0" />
+    <GradientStop Color="#721A1A1A" Offset="1" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ProgressBarBorderBrush" EndPoint="0,1" StartPoint="0,0">
+    <GradientStop Color="#B2B2B2" Offset="0" />
+    <GradientStop Color="#8C8C8C" Offset="1" />
+  </LinearGradientBrush>
+  <ImageBrush x:Key="AnimationBrush" Viewport="0,0,16,8" ViewportUnits="Absolute" TileMode="Tile" Stretch="None" ImageSource="/Ersa.Global.Controls;component/Bilder/Animations/Waitingbar.png" />
+  <ControlTemplate x:Key="C_strTemplateProgressBar_Default" TargetType="{x:Type ProgressBar}">
+    <ControlTemplate.Resources>
+      <Storyboard x:Key="StoryboardAnimation">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Animation" RepeatBehavior="Forever">
+          <SplineDoubleKeyFrame KeyTime="0:0:1" Value="16" />
+        </DoubleAnimationUsingKeyFrames>
+      </Storyboard>
+    </ControlTemplate.Resources>
+    <Grid Name="TemplateRoot" SnapsToDevicePixels="True" Height="12">
+      <Border CornerRadius="2" Background="{TemplateBinding Control.Background}" Height="12">
+        <ContentControl Name="InnerShadow" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.15" />
+      </Border>
+      <Rectangle Name="PART_Track" />
+      <Decorator Name="PART_Indicator" HorizontalAlignment="Left">
+        <Grid Name="Foreground" ClipToBounds="True">
+          <Border Name="Indicator" Margin="2,0,2,0" Height="8" CornerRadius="2" Background="{TemplateBinding Control.Foreground}" />
+          <Border Margin="2,0,2,0" ClipToBounds="True">
+            <Rectangle Name="Animation" Fill="{StaticResource AnimationBrush}" RenderTransformOrigin="0.5,0.5" Margin="-16,0" Visibility="Hidden" Height="8">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform />
+                  <SkewTransform />
+                  <RotateTransform />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+            </Rectangle>
+          </Border>
+        </Grid>
+      </Decorator>
+      <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" CornerRadius="2" Height="12" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ProgressBar.Orientation" Value="Vertical">
+        <Setter TargetName="TemplateRoot" Property="FrameworkElement.LayoutTransform">
+          <Setter.Value>
+            <RotateTransform Angle="-90" />
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+      <Trigger Property="UIElement.IsVisible" Value="True">
+        <Setter TargetName="Animation" Property="UIElement.Visibility" Value="Visible" />
+        <Trigger.ExitActions>
+          <StopStoryboard BeginStoryboardName="StoryboardAnimation_BeginStoryboard" />
+        </Trigger.ExitActions>
+        <Trigger.EnterActions>
+          <BeginStoryboard Name="StoryboardAnimation_BeginStoryboard" Storyboard="{StaticResource StoryboardAnimation}" />
+        </Trigger.EnterActions>
+      </Trigger>
+      <Trigger Property="UIElement.IsVisible" Value="False">
+        <Setter TargetName="Animation" Property="UIElement.Visibility" Value="Hidden" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleProgressBar_Default" TargetType="{x:Type ProgressBar}">
+    <Setter Property="FrameworkElement.Height" Value="12" />
+    <Setter Property="FrameworkElement.Width" Value="400" />
+    <Setter Property="Control.Foreground" Value="#FF779FD0" />
+    <Setter Property="Control.Background" Value="{StaticResource ProgressBarBackground}" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource ProgressBarBorderBrush}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="ProgressBar.IsIndeterminate" Value="True" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateProgressBar_Default}" />
+  </Style>
+  <Style x:Key="{x:Type ProgressBar}" TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource C_strStyleProgressBar_Default}" />
+  <Style x:Key="C_strStyleProgressBar_Splash" TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource C_strStyleProgressBar_Default}">
+    <Setter Property="FrameworkElement.Width" Value="Auto" />
+  </Style>
+</ResourceDictionary>

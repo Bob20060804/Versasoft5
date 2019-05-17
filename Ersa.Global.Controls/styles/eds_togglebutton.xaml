@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ContentControl.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_CheckBox.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="C_strButtonBorderInhalt" Color="#FFADC5E3" />
+  <SolidColorBrush x:Key="C_strButtonBorder" Color="#FF012F50" />
+  <LinearGradientBrush x:Key="C_strButtonBg" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="White" Offset="0" />
+    <GradientStop Color="#FFE1E1E1" Offset="1" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="C_strButtonBgPressed" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="White" Offset="1" />
+    <GradientStop Color="#FFE1E1E1" Offset="0" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="C_strButtonBgPressed_DarkLayer" Color="#1A000000" />
+  <ControlTemplate x:Key="C_strTemplate_EDU_ToggleButton_Default" TargetType="{x:Type controls:EDU_ToggleButton}">
+    <Grid Name="MainGrid" Width="{TemplateBinding FrameworkElement.Width}">
+      <Border Name="BgNormal" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{TemplateBinding Control.Background}" />
+      <Border Name="BgPressed" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{StaticResource C_strButtonBgPressed}" Visibility="Hidden">
+        <Border Margin="-1" Background="{StaticResource C_strButtonBgPressed_DarkLayer}" />
+      </Border>
+      <Border Name="Border" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" SnapsToDevicePixels="True" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" />
+      <Border Name="brdFocus" BorderBrush="{StaticResource C_strBrush_Lichtblau_V1}" BorderThickness="4" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Visibility="Hidden" />
+      <Image Name="Icon" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding PRO_strIconUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+      <Image Name="IconChecked" Width="24" Height="24" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding PRO_strIconAktivUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+      <Image Name="IconInfoText" Width="12" Height="13" Margin="0,4,4,0" Visibility="Hidden" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Hilfe_zu_Control_14x15.png" VerticalAlignment="Top" HorizontalAlignment="Right" />
+      <ContentControl Name="BackgroundPressed" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="MouseOver" />
+          <VisualState x:Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MainGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="FocusStates">
+          <VisualState x:Name="Unfocused" />
+          <VisualState x:Name="Focused" />
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ValidationStates">
+          <VisualState x:Name="Valid" />
+          <VisualState x:Name="InvalidFocused" />
+          <VisualState x:Name="InvalidUnfocused" />
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnIstAktiv" Value="True">
+        <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="IconChecked" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="UIElement.IsFocused" Value="True">
+        <Setter TargetName="brdFocus" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnInfoTextAnzeigen" Value="True">
+        <Setter TargetName="IconInfoText" Property="UIElement.Visibility" Value="Visible" />
+        <Setter TargetName="brdFocus" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="Icon" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="IconChecked" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="BgNormal" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="Border" Property="UIElement.Opacity" Value="0.25" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleToggleButton_Default" TargetType="{x:Type controls:EDU_ToggleButton}">
+    <Setter Property="Control.Background" Value="{StaticResource C_strButtonBg}" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource C_strButtonBorderInhalt}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.Padding" Value="16,0" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="FrameworkElement.ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplate_EDU_ToggleButton_Default}" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="FrameworkElement.Width" Value="64" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="controls:EDU_IconButton.PRO_fdcEckRadien" Value="2" />
+    <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
+  </Style>
+  <Style x:Key="{x:Type controls:EDU_ToggleButton}" TargetType="{x:Type controls:EDU_ToggleButton}" BasedOn="{StaticResource C_strStyleToggleButton_Default}" />
+  <Style x:Key="C_strStyleToggleButton_Ohne_Fokus" TargetType="{x:Type controls:EDU_ToggleButton}" BasedOn="{StaticResource C_strStyleToggleButton_Default}">
+    <Setter Property="UIElement.Focusable" Value="False" />
+  </Style>
+  <SolidColorBrush x:Key="StartControlBarBorder" Color="#7F012F50" />
+  <SolidColorBrush x:Key="StartControlBarBorderAktiv" Color="#FF529900" />
+  <SolidColorBrush x:Key="StartControlBarBackground" Color="#19012F50" />
+  <SolidColorBrush x:Key="StartControlBarBackgroundAktiv" Color="#FF64BA00" />
+  <SolidColorBrush x:Key="EDU_IconButtonLightBorder" Color="#ADC5E3" />
+  <LinearGradientBrush x:Key="EDU_IconButtonBgPressed" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="#FFE1E1E1" Offset="0" />
+    <GradientStop Color="White" Offset="1" />
+  </LinearGradientBrush>
+  <ControlTemplate x:Key="StartControlButtonTemplate" TargetType="{x:Type controls:EDU_ToggleButton}">
+    <Grid>
+      <Border Name="BgNormal" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{TemplateBinding Control.Background}" />
+      <Border Name="BgPressed" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{StaticResource C_strButtonBgPressed}" Visibility="Hidden">
+        <Border Margin="-1" Background="{StaticResource C_strButtonBgPressed_DarkLayer}" />
+      </Border>
+      <Border Name="Border" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" SnapsToDevicePixels="True" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" />
+      <Grid Name="LayoutGrid" Margin="{TemplateBinding Control.Padding}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border Name="Bar" Height="40" Width="5" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Margin="3,0,0,0" HorizontalAlignment="Left" Background="{StaticResource StartControlBarBackground}" BorderBrush="{StaticResource StartControlBarBorder}" BorderThickness="1" />
+        <Image Name="Icon" Grid.Column="1" Width="24" Height="24" Margin="8,0" Source="{Binding PRO_strIconUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+        <Image Name="IconChecked" Grid.Column="1" Width="24" Height="24" Visibility="Hidden" Margin="8,0" Source="{Binding PRO_strIconAktivUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+        <ContentPresenter Name="ContentPresenter" Grid.Column="2" VerticalAlignment="Center">
+          <ContentPresenter.Resources>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource StartControlTextBlockStyle}" />
+          </ContentPresenter.Resources>
+        </ContentPresenter>
+      </Grid>
+      <ContentControl Name="BackgroundPressed" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+      <Image Name="IconInfoText" Width="12" Height="13" Margin="0,4,4,0" Visibility="Hidden" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Hilfe_zu_Control_14x15.png" VerticalAlignment="Top" HorizontalAlignment="Right" />
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="MouseOver" />
+          <VisualState x:Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.4" />
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Value="{x:Null}" Property="ContentControl.Content">
+        <Setter TargetName="ContentPresenter" Property="UIElement.Visibility" Value="Collapsed" />
+        <Setter TargetName="LayoutGrid" Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+        <Setter TargetName="Icon" Property="FrameworkElement.Margin" Value="16,0,0,0" />
+        <Setter TargetName="IconChecked" Property="FrameworkElement.Margin" Value="16,0,0,0" />
+      </Trigger>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnIstAktiv" Value="True">
+        <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="IconChecked" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnTeilablaufAktiv" Value="True">
+        <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="IconChecked" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnGesamtablaufAktiv" Value="True">
+        <Setter Value="{StaticResource StartControlBarBackgroundAktiv}" Property="Control.Foreground" />
+        <Setter TargetName="Bar" Value="{StaticResource StartControlBarBackgroundAktiv}" Property="Border.Background" />
+        <Setter TargetName="Bar" Value="{StaticResource StartControlBarBorderAktiv}" Property="Border.BorderBrush" />
+      </Trigger>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnInfoTextAnzeigen" Value="True">
+        <Setter TargetName="IconInfoText" Property="UIElement.Visibility" Value="Visible" />
+        <Setter TargetName="Icon" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="IconChecked" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="Bar" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="BgNormal" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="Border" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="ContentPresenter" Property="UIElement.Opacity" Value="0.25" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="StartControlButton" TargetType="{x:Type controls:EDU_ToggleButton}" BasedOn="{StaticResource C_strStyleToggleButton_Default}">
+    <Setter Property="Control.BorderBrush" Value="{StaticResource EDU_IconButtonLightBorder}" />
+    <Setter Property="Control.Padding" Value="0,0,16,0" />
+    <Setter Property="Control.Template" Value="{StaticResource StartControlButtonTemplate}" />
+  </Style>
+  <ControlTemplate x:Key="C_strTemplateToggleButton_MitText" TargetType="{x:Type controls:EDU_ToggleButton}">
+    <Grid Name="MainGrid">
+      <Border Name="BgNormal" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{TemplateBinding Control.Background}" />
+      <Border Name="BgPressed" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{StaticResource C_strButtonBgPressed}" Visibility="Hidden">
+        <Border Margin="-1" Background="{StaticResource C_strButtonBgPressed_DarkLayer}" />
+      </Border>
+      <Border Name="Border" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" SnapsToDevicePixels="True" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" />
+      <Grid Name="LayoutGrid" Margin="{TemplateBinding Control.Padding}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Image Name="Icon" Grid.Column="0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding PRO_strIconUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+        <Image Name="IconChecked" Grid.Column="0" Width="24" Height="24" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding PRO_strIconAktivUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+        <ContentPresenter Name="ContentPresenter" Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+          <ContentPresenter.Resources>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EDU_IconButtonTextBlockStyle}" />
+          </ContentPresenter.Resources>
+        </ContentPresenter>
+      </Grid>
+      <ContentControl Name="BackgroundPressed" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+      <Image Name="IconInfoText" Width="12" Height="13" Margin="0,4,4,0" Visibility="Hidden" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Hilfe_zu_Control_14x15.png" VerticalAlignment="Top" HorizontalAlignment="Right" />
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="MouseOver" />
+          <VisualState x:Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MainGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="FocusStates">
+          <VisualState x:Name="Unfocused" />
+          <VisualState x:Name="Focused" />
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ValidationStates">
+          <VisualState x:Name="Valid" />
+          <VisualState x:Name="InvalidFocused" />
+          <VisualState x:Name="InvalidUnfocused" />
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnIstAktiv" Value="True">
+        <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="IconChecked" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Value="{x:Null}" Property="ContentControl.Content">
+        <Setter TargetName="ContentPresenter" Property="UIElement.Visibility" Value="Collapsed" />
+        <Setter TargetName="LayoutGrid" Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+      </Trigger>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnInfoTextAnzeigen" Value="True">
+        <Setter TargetName="IconInfoText" Property="UIElement.Visibility" Value="Visible" />
+        <Setter TargetName="Icon" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="IconChecked" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="BgNormal" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="Border" Property="UIElement.Opacity" Value="0.25" />
+        <Setter TargetName="ContentPresenter" Property="UIElement.Opacity" Value="0.25" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleToggleButton_InhaltsbereichMitText" TargetType="{x:Type controls:EDU_ToggleButton}" BasedOn="{StaticResource C_strStyleToggleButton_Default}">
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateToggleButton_MitText}" />
+    <Setter Property="FrameworkElement.ToolTip" Value="{x:Null}" />
+  </Style>
+  <Style x:Key="C_strStyleToggleButton_MitText" TargetType="{x:Type controls:EDU_ToggleButton}" BasedOn="{StaticResource C_strStyleToggleButton_InhaltsbereichMitText}">
+    <Setter Property="Control.BorderBrush" Value="{StaticResource C_strButtonBorder}" />
+  </Style>
+  <Style x:Key="C_strStyleToggleButton_CheckBox" TargetType="{x:Type controls:EDU_ToggleButton}" BasedOn="{StaticResource C_strStyleToggleButton_Default}">
+    <Setter Property="FrameworkElement.Width" Value="Auto" />
+    <Setter Property="Control.Background" Value="{StaticResource C_strBrushCheckBox_BgNormal}" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource C_strBrushCheckBox_Border}" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Padding" Value="{StaticResource C_strStdMarginNurLinks}" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:EDU_ToggleButton}">
+          <Grid Name="MainGrid">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="{StaticResource C_str4FacheGridLengthRasterBreite}" />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border Name="BgClickArea" Grid.ColumnSpan="3" Background="#00FFFFFF" />
+            <Grid Name="grdBox" Grid.Column="0" Height="{StaticResource C_str4FacheRasterHoehe}" Width="{StaticResource C_str4FacheRasterBreite}">
+              <Border Name="BgNormal" Background="{StaticResource C_strBrushCheckBox_BgNormal}" CornerRadius="2" />
+              <Border Name="BgPressed" Background="{StaticResource C_strBrushCheckBox_BgPressed}" CornerRadius="2" Visibility="Collapsed" />
+              <Image Name="Icon" Height="{StaticResource C_str3FacheRasterHoehe}" Width="{StaticResource C_str3FacheRasterBreite}" Source="/Ersa.Global.Controls;component/Bilder/Icons/Haken_checkbox_24x24.png" Visibility="Collapsed" />
+              <ContentControl Name="BackgroundPressed" Opacity="0.3" Template="{StaticResource InnererSchattenEffekt}" Visibility="Collapsed" />
+              <Border Name="BorderNormal" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" CornerRadius="2" />
+              <Border Name="BorderInvalid" BorderBrush="{StaticResource C_strBrushCheckBox_BorderValid}" BorderThickness="2" CornerRadius="2" Visibility="Collapsed" />
+              <Image Name="IconInfoText" Width="12" Height="13" Margin="0,4,4,0" Visibility="Hidden" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Hilfe_zu_Control_14x15.png" VerticalAlignment="Top" HorizontalAlignment="Right" />
+            </Grid>
+            <ContentPresenter Grid.Column="1" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
+              <ContentPresenter.Resources>
+                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WrappingEmptyCollapsedTextBlockStyle}" />
+              </ContentPresenter.Resources>
+            </ContentPresenter>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="MouseOver" />
+                <VisualState Name="Pressed">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdBox">
+                      <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+                    </DoubleAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Unfocused" />
+                <VisualState x:Name="Focused" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="ValidationStates">
+                <VisualState x:Name="Valid" />
+                <VisualState x:Name="InvalidFocused">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="InvalidUnfocused">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="controls:EDU_ToggleButton.PRO_blnTeilablaufAktiv" Value="True">
+              <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="controls:EDU_ToggleButton.PRO_blnInfoTextAnzeigen" Value="True">
+              <Setter TargetName="IconInfoText" Property="UIElement.Visibility" Value="Visible" />
+              <Setter TargetName="Icon" Property="UIElement.Opacity" Value="0.25" />
+              <Setter TargetName="BgNormal" Property="UIElement.Opacity" Value="0.25" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

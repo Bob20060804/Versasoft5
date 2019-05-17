@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_CheckBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <Style x:Key="C_strStyleSelektierbareGroupBox_ZweiterOrdnung" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource C_strStyleGroupBox_ZweiterOrdnung_1Spalte}">
+    <Setter Property="Control.Background" Value="{StaticResource C_strBrushGroupBox_Background}" />
+    <Setter Property="FrameworkElement.Width" Value="Auto" />
+  </Style>
+  <ControlTemplate x:Key="EDU_SelektierbareGroupBoxTemplate" TargetType="{x:Type controls:EDU_SelektierbareGroupBox}">
+    <Grid SnapsToDevicePixels="True">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Border Name="Header" Height="{StaticResource C_strBasisTouchHoehe}">
+        <Grid Margin="{StaticResource C_strStdMarginNurLinks}">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{StaticResource C_str2FacheGridLengthRasterBreite}" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <Image Stretch="None" VerticalAlignment="Center" Source="{Binding Path=PRO_strIconUri, Converter={StaticResource C_strConverter_NullToUnsetValue}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:EDU_SelektierbareGroupBox}}}" />
+          <ContentPresenter Grid.Column="1" Grid.Row="0" ContentSource="Header" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="{StaticResource C_strStdMarginLinksUndRechts}">
+            <ContentPresenter.Resources>
+              <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ModulParameterGroupBoxHeaderStyle}" />
+            </ContentPresenter.Resources>
+          </ContentPresenter>
+          <CheckBox Grid.Column="2" Style="{StaticResource C_strStyleCheckBox_SelektierbareGroupBoxHeader}" Command="{Binding PRO_cmdSelektionGeaendert, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="{Binding PRO_objCommandParameter, RelativeSource={RelativeSource TemplatedParent}}" IsChecked="{Binding PRO_blnIstSelektiert, RelativeSource={RelativeSource TemplatedParent}}" IsEnabled="{Binding PRO_blnIstSelektionAenderbar, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding PRO_blnIstSelektionSichtbar, Converter={StaticResource C_strConverter_BoolNachVisibility}, RelativeSource={RelativeSource TemplatedParent}}" />
+        </Grid>
+      </Border>
+      <Border CornerRadius="4" Grid.Row="1" MinHeight="48" Background="{TemplateBinding Control.Background}">
+        <ContentPresenter Margin="{TemplateBinding Control.Padding}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" Content="{TemplateBinding ContentControl.Content}" ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+      </Border>
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="EDU_SelektierbareGroupBoxStyle" TargetType="{x:Type controls:EDU_SelektierbareGroupBox}">
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="Control.Padding" Value="{StaticResource C_strStdMarginLinksOben}" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Top" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Top" />
+    <Setter Property="Control.Template" Value="{StaticResource EDU_SelektierbareGroupBoxTemplate}" />
+    <Style.Resources>
+      <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource C_strStyleSelektierbareGroupBox_ZweiterOrdnung}" />
+    </Style.Resources>
+  </Style>
+  <Style x:Key="{x:Type controls:EDU_SelektierbareGroupBox}" TargetType="{x:Type controls:EDU_SelektierbareGroupBox}" BasedOn="{StaticResource EDU_SelektierbareGroupBoxStyle}" />
+</ResourceDictionary>

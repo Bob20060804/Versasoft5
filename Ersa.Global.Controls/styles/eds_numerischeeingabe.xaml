@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls,Version=4.33.0.0,Culture=neutral,PublicKeyToken=null" xmlns:eingabe="clr-namespace:Ersa.Global.Controls.Eingabe;assembly=Ersa.Global.Controls,Version=4.33.0.0,Culture=neutral,PublicKeyToken=null" xmlns:converters="clr-namespace:Ersa.Global.Controls.Converters;assembly=Ersa.Global.Controls,Version=4.33.0.0,Culture=neutral,PublicKeyToken=null">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <system:Double x:Key="C_strDoubleNumerischeEingabe_TextBox_Breite">72</system:Double>
+  <system:Double x:Key="C_strDoubleNumerischeEingabe_TextBox_BreiteGross">120</system:Double>
+  <system:Double x:Key="C_strDoubleNumerischeEingabe_Einheit_Breite">48</system:Double>
+  <GridLength x:Key="C_strGridLengthNumerischeEingabe_Beschriftung_Breite">128</GridLength>
+  <GridLength x:Key="C_strGridLengthNumerischeEingabe_TextBox_Breite">80</GridLength>
+  <GridLength x:Key="C_strGridLengthNumerischeEingabe_Einheit_Breite">56</GridLength>
+  <Style x:Key="C_strStyleNumerischeEingabe_TextBlock_Beschriftung" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WrappingEmptyCollapsedTextBlockStyle}">
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginNurRechts}" />
+    <Setter Property="TextBlock.FontWeight" Value="Normal" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.MaxHeight" Value="48" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_TextBlock_Einheit" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WrappingTextBlockStyle}">
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="TextBlock.FontWeight" Value="Normal" />
+    <Setter Property="FrameworkElement.MaxHeight" Value="48" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_TextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource C_strStyleTextBox}">
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginNurRechts}" />
+    <Setter Property="TextBox.TextAlignment" Value="Right" />
+    <Setter Property="FrameworkElement.Width" Value="{StaticResource C_strDoubleNumerischeEingabe_TextBox_Breite}" />
+    <Setter Property="Control.IsTabStop" Value="False" />
+    <Setter Property="UIElement.Focusable" Value="False" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_TextBox_Error" TargetType="{x:Type TextBox}" BasedOn="{StaticResource ErrorTextBoxStyle}">
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginNurRechts}" />
+    <Setter Property="TextBox.TextAlignment" Value="Right" />
+    <Setter Property="FrameworkElement.Width" Value="{StaticResource C_strDoubleNumerischeEingabe_TextBox_Breite}" />
+    <Setter Property="Control.IsTabStop" Value="False" />
+    <Setter Property="UIElement.Focusable" Value="False" />
+  </Style>
+  <ControlTemplate x:Key="C_strTemplateNumerischeEingabe_Default" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Name="ColumnBeschriftung" Width="{StaticResource C_strGridLengthNumerischeEingabe_Beschriftung_Breite}" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Name="ColumnEinheit" Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <Border Grid.Column="0" BorderBrush="{x:Null}" Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding PRO_enmBeschriftungSichtbarkeit, RelativeSource={RelativeSource TemplatedParent}}">
+        <TextBlock Name="TextBlockBeschriftung" Style="{StaticResource C_strStyleNumerischeEingabe_TextBlock_Beschriftung}" Text="{Binding PRO_strBeschriftung, RelativeSource={RelativeSource TemplatedParent}}" />
+      </Border>
+      <TextBox Name="TextBoxSoll" Grid.Column="1" Style="{StaticResource C_strStyleNumerischeEingabe_TextBox}" Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding PRO_enmSollWertSichtbarkeit, RelativeSource={RelativeSource TemplatedParent}}">
+        <TextBox.Text>
+          <MultiBinding Mode="OneWay" Converter="{StaticResource C_strConverter_DoubleNachText}">
+            <Binding Path="PRO_dblWert" NotifyOnValidationError="True" ValidatesOnDataErrors="True" RelativeSource="{RelativeSource TemplatedParent}" />
+            <Binding Path="PRO_i32AnzahlNachkommastellen" RelativeSource="{RelativeSource TemplatedParent}" />
+          </MultiBinding>
+        </TextBox.Text>
+      </TextBox>
+      <TextBox Name="TextBoxIst" Grid.Column="2" IsEnabled="False" Style="{StaticResource C_strStyleNumerischeEingabe_TextBox}" Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding PRO_enmIstWertSichtbarkeit, RelativeSource={RelativeSource TemplatedParent}}">
+        <TextBox.Text>
+          <MultiBinding Mode="OneWay" Converter="{StaticResource C_strConverter_DoubleNachText}">
+            <Binding Path="PRO_dblIstWert" NotifyOnValidationError="False" ValidatesOnDataErrors="True" RelativeSource="{RelativeSource TemplatedParent}" />
+            <Binding Path="PRO_i32AnzahlNachkommastellen" RelativeSource="{RelativeSource TemplatedParent}" />
+          </MultiBinding>
+        </TextBox.Text>
+      </TextBox>
+      <Border Grid.Column="3" BorderBrush="{x:Null}" Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding PRO_enmEinheitSichtbarkeit, RelativeSource={RelativeSource TemplatedParent}}">
+        <TextBlock Name="TextBlockEinheit" Style="{StaticResource C_strStyleNumerischeEingabe_TextBlock_Einheit}" Width="{StaticResource C_strDoubleNumerischeEingabe_Einheit_Breite}" Text="{Binding PRO_strEinheit, RelativeSource={RelativeSource TemplatedParent}}" />
+      </Border>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter TargetName="TextBoxSoll" Value="{StaticResource C_strStyleNumerischeEingabe_TextBox_Error}" Property="FrameworkElement.Style" />
+        <Setter TargetName="TextBoxIst" Value="{StaticResource C_strStyleNumerischeEingabe_TextBox_Error}" Property="FrameworkElement.Style" />
+        <Setter TargetName="TextBlockBeschriftung" Property="TextBlock.Foreground" Value="#FFCF505F" />
+        <Setter TargetName="TextBlockEinheit" Property="TextBlock.Foreground" Value="#FFCF505F" />
+      </Trigger>
+      <Trigger Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmBeschriftungBekommtPlatz">
+        <Setter TargetName="ColumnBeschriftung" Property="ColumnDefinition.Width" Value="*" />
+        <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+      </Trigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmEingabeBekommtPlatz" />
+          <Condition Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Collapsed" />
+          <Condition Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Visible" />
+        </MultiTrigger.Conditions>
+        <Setter TargetName="TextBoxIst" Value="{StaticResource C_strDoubleNumerischeEingabe_TextBox_BreiteGross}" Property="FrameworkElement.Width" />
+      </MultiTrigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmEingabeBekommtPlatz" />
+          <Condition Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Visible" />
+          <Condition Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+        </MultiTrigger.Conditions>
+        <Setter TargetName="TextBoxSoll" Value="{StaticResource C_strDoubleNumerischeEingabe_TextBox_BreiteGross}" Property="FrameworkElement.Width" />
+      </MultiTrigger>
+      <Trigger Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Collapsed">
+        <Setter TargetName="ColumnBeschriftung" Property="ColumnDefinition.Width" Value="0" />
+      </Trigger>
+      <Trigger Property="eingabe:EDU_NumerischeEingabe.PRO_enmEinheitSichtbarkeit" Value="Collapsed">
+        <Setter TargetName="ColumnEinheit" Property="ColumnDefinition.Width" Value="0" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <converters:EDC_ProxyMultiConverter x:Key="C_strConverter_Proxy" />
+  <Style x:Key="C_strStyleNumerischeEingabe_Default" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Visible" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Visible" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Visible" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmEinheitSichtbarkeit" Value="Visible" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmStandard" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Top" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateNumerischeEingabe_Default}" />
+    <Setter Property="Validation.ErrorTemplate">
+      <Setter.Value>
+        <ControlTemplate />
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip">
+          <Setter.Value>
+            <MultiBinding Converter="{StaticResource C_strConverter_Proxy}">
+              <Binding Path="(Validation.Errors).CurrentItem.ErrorContent" RelativeSource="{x:Static RelativeSource.Self}" />
+              <Binding Path="PRO_fdcLokalisierungsConverter" RelativeSource="{x:Static RelativeSource.Self}" />
+            </MultiBinding>
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollHidden" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Hidden" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollCollapsed" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Collapsed" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstHidden" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Hidden" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstCollapsed" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollCollapsed_BeschriftungGross" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmBeschriftungBekommtPlatz" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstCollapsed_BeschriftungGross" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmBeschriftungBekommtPlatz" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_SollCollapsed_IstGross" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmEingabeBekommtPlatz" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_IstCollapsed_SollGross" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmEingabeBekommtPlatz" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSoll" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmEinheitSichtbarkeit" Value="Collapsed" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSollMitEinheit" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Collapsed" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSollGross" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmEinheitSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmEingabeBekommtPlatz" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurSollMitEinheitGross" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmIstWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmEingabeBekommtPlatz" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurIst" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmEinheitSichtbarkeit" Value="Collapsed" />
+  </Style>
+  <Style x:Key="C_strStyleNumerischeEingabe_NurIstGross" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}">
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmSollWertSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmBeschriftungSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmEinheitSichtbarkeit" Value="Collapsed" />
+    <Setter Property="eingabe:EDU_NumerischeEingabe.PRO_enmLayoutVerhalten" Value="enmEingabeBekommtPlatz" />
+  </Style>
+  <Style x:Key="{x:Type eingabe:EDU_NumerischeEingabe}" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}" BasedOn="{StaticResource C_strStyleNumerischeEingabe_Default}" />
+  <ControlTemplate x:Key="RadGridViewCellNumerischeEingabeTemplate" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}">
+    <TextBox Name="TextBoxSoll" Style="{StaticResource C_strStyleTextBox_GridViewCell}" HorizontalAlignment="Stretch">
+      <TextBox.Text>
+        <MultiBinding Mode="OneWay" Converter="{StaticResource C_strConverter_DoubleNachText}">
+          <Binding Path="PRO_dblWert" NotifyOnValidationError="True" ValidatesOnDataErrors="True" RelativeSource="{RelativeSource TemplatedParent}" />
+          <Binding Path="PRO_i32AnzahlNachkommastellen" RelativeSource="{RelativeSource TemplatedParent}" />
+        </MultiBinding>
+      </TextBox.Text>
+    </TextBox>
+    <ControlTemplate.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter TargetName="TextBoxSoll" Value="{StaticResource C_strStyleNumerischeEingabe_TextBox_Error}" Property="FrameworkElement.Style" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="RadGridViewCellNumerischeEingabe" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="Control.Template" Value="{StaticResource RadGridViewCellNumerischeEingabeTemplate}" />
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <ControlTemplate x:Key="DataGridCellNumerischeEingabeTemplate" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}">
+    <TextBox Name="TextBoxSoll" Style="{StaticResource C_strStyleTextBox_GridViewCell}" Margin="0" HorizontalAlignment="Stretch">
+      <TextBox.Text>
+        <MultiBinding Mode="OneWay" Converter="{StaticResource C_strConverter_DoubleNachText}">
+          <Binding Path="PRO_dblWert" NotifyOnValidationError="True" ValidatesOnDataErrors="True" RelativeSource="{RelativeSource TemplatedParent}" />
+          <Binding Path="PRO_i32AnzahlNachkommastellen" RelativeSource="{RelativeSource TemplatedParent}" />
+        </MultiBinding>
+      </TextBox.Text>
+    </TextBox>
+    <ControlTemplate.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter TargetName="TextBoxSoll" Value="{StaticResource C_strStyleNumerischeEingabe_TextBox_Error}" Property="FrameworkElement.Style" />
+        <Setter TargetName="TextBoxSoll" Property="FrameworkElement.Margin" Value="2,0,0,0" />
+        <Setter TargetName="TextBoxSoll" Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+        <Setter TargetName="TextBoxSoll" Property="FrameworkElement.Width" Value="NaN" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="DataGridCellNumerischeEingabe" TargetType="{x:Type eingabe:EDU_NumerischeEingabe}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="FrameworkElement.Margin" Value="-1,0,0,-1" />
+    <Setter Property="Control.Template" Value="{StaticResource DataGridCellNumerischeEingabeTemplate}" />
+    <Setter Property="Validation.ErrorTemplate">
+      <Setter.Value>
+        <ControlTemplate />
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="FrameworkElement.ToolTip">
+          <Setter.Value>
+            <MultiBinding Converter="{StaticResource C_strConverter_Proxy}">
+              <Binding Path="(Validation.Errors).CurrentItem.ErrorContent" RelativeSource="{x:Static RelativeSource.Self}" />
+              <Binding Path="PRO_fdcLokalisierungsConverter" RelativeSource="{x:Static RelativeSource.Self}" />
+            </MultiBinding>
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>

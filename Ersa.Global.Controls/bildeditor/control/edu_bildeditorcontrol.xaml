@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.Global.Controls.BildEditor.Control.EDU_BildEditorControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:bildEditor="clr-namespace:Ersa.Global.Controls.BildEditor" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <DockPanel>
+    <ScrollViewer Name="scrollviewer" Visibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.PanningMode="Both" Style="{StaticResource C_strStyle_ScrollViewer_Default}">
+      <Grid>
+        <Grid.LayoutTransform>
+          <ScaleTransform ScaleX="{Binding PRO_dblSkalierung}" ScaleY="{Binding PRO_dblSkalierung}" />
+        </Grid.LayoutTransform>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="None" Source="{Binding Path=PRO_fdcBild}" />
+        <bildEditor:EDC_BildEditorCanvas x:Name="canvas" Background="#00000000" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{Binding Path=PRO_fdcBild.Width, Mode=OneWay}" Height="{Binding Path=PRO_fdcBild.Height, Mode=OneWay}" />
+      </Grid>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

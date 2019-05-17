@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls,Version=4.33.0.0,Culture=neutral,PublicKeyToken=null" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls,Version=4.33.0.0,Culture=neutral,PublicKeyToken=null">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="C_strSolidColorBrush_Dialog_WindowBackground" Color="#7E000000" />
+  <SolidColorBrush x:Key="DialogBorderBackground" Color="#CA3C608B" />
+  <SolidColorBrush x:Key="DialogBackground" Color="#FFDEE2E7" />
+  <LinearGradientBrush x:Key="DialogBorderBackgroundVerlauf" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="#CA3C608B" Offset="1" />
+    <GradientStop Color="#CA7799C6" />
+  </LinearGradientBrush>
+  <Style x:Key="DialogHeaderStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Weiß}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeButton}" />
+  </Style>
+  <ControlTemplate x:Key="DialogGroupBoxTemplate" TargetType="{x:Type controls:EDU_DialogGroupBox}">
+    <Grid SnapsToDevicePixels="True">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="56" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="{StaticResource C_strBrush_Dunkelblau}" Background="{StaticResource DialogBorderBackgroundVerlauf}" BorderThickness="1,1,1,0" CornerRadius="4,4,0,0" />
+        <Border Grid.Row="1" BorderBrush="{StaticResource C_strBrush_Dunkelblau}" Background="{StaticResource DialogBorderBackground}" BorderThickness="1,0,1,1" CornerRadius="0,0,4,4" />
+      </Grid>
+      <Grid Margin="{StaticResource C_strStdMarginNurLinks}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Name="Header" Grid.Row="0" Height="{StaticResource C_strBasisTouchHoehe}" Background="#00FFFFFF">
+          <ContentPresenter ContentTemplate="{TemplateBinding HeaderedContentControl.HeaderTemplate}" Content="{TemplateBinding HeaderedContentControl.Header}" ContentStringFormat="{TemplateBinding HeaderedContentControl.HeaderStringFormat}" ContentSource="Header" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="Center">
+            <ContentPresenter.Resources>
+              <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DialogHeaderStyle}" />
+            </ContentPresenter.Resources>
+          </ContentPresenter>
+        </Border>
+        <Border Grid.Row="1" Background="{StaticResource C_strBrush_StandardFensterInhaltHintergrund}" CornerRadius="2" Margin="{StaticResource C_strStdMarginRechtsUnten}">
+          <ContentPresenter ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" Content="{TemplateBinding ContentControl.Content}" ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" Margin="{TemplateBinding Control.Padding}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+        </Border>
+        <Border Name="Footer" Grid.Row="2">
+          <ContentPresenter Content="{TemplateBinding controls:EDU_DialogGroupBox.PRO_objFooter}" ContentSource="Footer" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+        </Border>
+      </Grid>
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="DialogGroupBoxStyle" TargetType="{x:Type controls:EDU_DialogGroupBox}">
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Weiß}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeUeberschrift1}" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.Background" Value="{StaticResource C_strBrush_StandardFensterInhaltHintergrund}" />
+    <Setter Property="Control.Template" Value="{StaticResource DialogGroupBoxTemplate}" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.MinHeight" Value="{StaticResource C_strDialogGroupBoxMindestHoehe}" />
+    <Setter Property="FrameworkElement.MaxHeight" Value="{StaticResource C_strDialogGroupBoxMaximalHoehe}" />
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="Control.Padding" Value="{StaticResource C_strStdMarginLinksOben}" />
+    <Setter Property="FrameworkElement.UseLayoutRounding" Value="True" />
+  </Style>
+  <Style x:Key="{x:Type controls:EDU_DialogGroupBox}" TargetType="{x:Type controls:EDU_DialogGroupBox}" BasedOn="{StaticResource DialogGroupBoxStyle}" />
+</ResourceDictionary>

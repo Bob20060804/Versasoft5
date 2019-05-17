@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+  <BrushCollection x:Key="DashboardPaletteBrushes">
+    <SolidColorBrush Color="Green" />
+    <SolidColorBrush Color="Yellow" />
+    <SolidColorBrush Color="Red" />
+  </BrushCollection>
+  <Style x:Key="DashboardSeriesItemLabelStyle" TargetType="{x:Type SeriesItemLabel}">
+    <Setter Property="Control.Foreground" Value="#FF000000" />
+    <Setter Property="SeriesItemLabel.Fill" Value="{x:Null}" />
+  </Style>
+  <Style x:Key="DashboardChartLegendeStyle" TargetType="{x:Type ChartLegend}">
+    <Setter Property="Control.Foreground" Value="#FF000000" />
+    <Setter Property="Control.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="1.96,0.5" StartPoint="-0.96,0.5">
+          <GradientStop Color="#FFB5B5B5" />
+          <GradientStop Color="#FFF0F0F0" Offset="0.5" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Control.Padding" Value="10,10,10,5" />
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="Control.BorderBrush" Value="#FF848484" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="ChartLegend.HeaderFontWeight" Value="Bold" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="ChartLegend.LegendItemMarkerShape" Value="SquareRounded" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ChartLegend}">
+          <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}">
+            <Grid Margin="{TemplateBinding Control.Padding}">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <ContentControl ContentTemplate="{TemplateBinding HeaderedItemsControl.HeaderTemplate}" Content="{TemplateBinding HeaderedItemsControl.Header}" Foreground="{TemplateBinding Control.Foreground}" FontWeight="{TemplateBinding ChartLegend.HeaderFontWeight}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+              <ItemsPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Grid.Row="1" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemsControl.ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <RadWrapPanel IsItemsHost="True" Orientation="{Binding ItemsPanelOrientation, FallbackValue=Vertical, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ChartLegend}}}" />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="HeaderedItemsControl.HeaderTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <Grid>
+            <TextBlock TextBlock.FontSize="12" Height="Auto" Padding="0,0,0,2" TextWrapping="Wrap" Width="Auto" Text="{Binding}">
+              <TextBlock.Visibility>
+                <Binding>
+                  <Binding.Converter>
+                    <TextToVisibilityConverter />
+                  </Binding.Converter>
+                </Binding>
+              </TextBlock.Visibility>
+            </TextBlock>
+          </Grid>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="DashboardChartTitleStyle" TargetType="{x:Type ChartTitle}">
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#FF5B5B5B" Offset="1" />
+          <GradientStop Color="#FF868686" />
+          <GradientStop Color="#FF4F4F4F" Offset="0.42" />
+          <GradientStop Color="#FF0E0E0E" Offset="0.43" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Control.BorderBrush" Value="#FFB5B5B5" />
+    <Setter Property="ChartTitle.OuterBorderBrush" Value="#FF000000" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="ChartTitle.OuterBorderThickness" Value="1" />
+    <Setter Property="Control.Padding" Value="7" />
+    <Setter Property="Control.Foreground" Value="#FFFFFFFF" />
+    <Setter Property="Control.FontSize" Value="11" />
+    <Setter Property="Control.FontWeight" Value="Bold" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ChartTitle}">
+          <Border BorderBrush="{TemplateBinding ChartTitle.OuterBorderBrush}" BorderThickness="{TemplateBinding ChartTitle.OuterBorderThickness}">
+            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" CornerRadius="{TemplateBinding ChartTitle.CornerRadius}">
+              <TextBlock Text="{TemplateBinding ContentControl.Content}" TextBlock.Foreground="{TemplateBinding Control.Foreground}" TextBlock.FontWeight="{TemplateBinding Control.FontWeight}" TextBlock.FontStyle="{TemplateBinding Control.FontStyle}" TextBlock.FontSize="{TemplateBinding Control.FontSize}" TextBlock.FontFamily="{TemplateBinding Control.FontFamily}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+            </Border>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="DashboardStripLineStyle" TargetType="{x:Type Rectangle}">
+    <Setter Property="Shape.Fill">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
+          <GradientStop Color="White" Offset="0" />
+          <GradientStop Color="LightGray" Offset="1" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="DashboardAlternatingStripLineStyle" TargetType="{x:Type Rectangle}">
+    <Setter Property="Shape.Fill">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
+          <GradientStop Color="LightGray" Offset="0" />
+          <GradientStop Color="White" Offset="1" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="DashboardChartStyle" TargetType="{x:Type RadChart}">
+    <Setter Property="RadChart.LegendStyle" Value="{StaticResource DashboardChartLegendeStyle}" />
+    <Setter Property="RadChart.TitleStyle" Value="{StaticResource DashboardChartTitleStyle}" />
+  </Style>
+  <Style x:Key="DashboardChartAreaStyle" TargetType="{x:Type ChartArea}">
+    <Setter Property="Control.Template" Value="{DynamicResource ChartAreaControlTemplate1}" />
+  </Style>
+  <ChartArea x:Key="DashboardChartArea" />
+</ResourceDictionary>

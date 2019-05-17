@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <Style x:Key="{x:Type controls:EDU_NavigationsKreuz}" TargetType="{x:Type controls:EDU_NavigationsKreuz}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:EDU_NavigationsKreuz}">
+          <Border Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}">
+            <Grid>
+              <controls:EDU_IconToggleButton x:Name="OeffnenButton" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Positionsanzeige_expand_24x24.png" PRO_strCheckedIconUri="/Ersa.Global.Controls;component/Bilder/Icon/Icon_Positionsanzeige_collaps_24x24.png" IsChecked="{Binding IsOpen, Mode=TwoWay, ElementName=Popup}" />
+              <Popup Name="Popup" Placement="Center" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" Width="210" Height="210" StaysOpen="False" PlacementTarget="{Binding ElementName=OeffnenButton}">
+                <Grid>
+                  <controls:EDU_IconButton x:Name="btnOben" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_up_24x24.png" IsHitTestVisible="False" Opacity="0" Width="{TemplateBinding FrameworkElement.Width}" Height="{TemplateBinding FrameworkElement.Height}" Command="{Binding PRO_cmdNavigationNachOben, RelativeSource={RelativeSource TemplatedParent}}">
+                    <controls:EDU_IconButton.RenderTransform>
+                      <TranslateTransform x:Name="btnObenTranslateTransform" />
+                    </controls:EDU_IconButton.RenderTransform>
+                  </controls:EDU_IconButton>
+                  <controls:EDU_IconButton x:Name="btnUnten" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_down_24x24.png" IsHitTestVisible="False" Opacity="0" Width="{TemplateBinding FrameworkElement.Width}" Height="{TemplateBinding FrameworkElement.Height}" Command="{Binding PRO_cmdNavigationNachUnten, RelativeSource={RelativeSource TemplatedParent}}">
+                    <controls:EDU_IconButton.RenderTransform>
+                      <TranslateTransform x:Name="btnUntenTranslateTransform" />
+                    </controls:EDU_IconButton.RenderTransform>
+                  </controls:EDU_IconButton>
+                  <controls:EDU_IconButton x:Name="btnLinks" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_left_24x24.png" IsHitTestVisible="False" Opacity="0" Width="{TemplateBinding FrameworkElement.Width}" Height="{TemplateBinding FrameworkElement.Height}" Command="{Binding PRO_cmdNavigationNachLinks, RelativeSource={RelativeSource TemplatedParent}}">
+                    <controls:EDU_IconButton.RenderTransform>
+                      <TranslateTransform x:Name="btnLinksTranslateTransform" />
+                    </controls:EDU_IconButton.RenderTransform>
+                  </controls:EDU_IconButton>
+                  <controls:EDU_IconButton x:Name="btnRechts" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_right_24x24.png" IsHitTestVisible="False" Opacity="0" Width="{TemplateBinding FrameworkElement.Width}" Height="{TemplateBinding FrameworkElement.Height}" Command="{Binding PRO_cmdNavigationNachRechts, RelativeSource={RelativeSource TemplatedParent}}">
+                    <controls:EDU_IconButton.RenderTransform>
+                      <TranslateTransform x:Name="btnRechtsTranslateTransform" />
+                    </controls:EDU_IconButton.RenderTransform>
+                  </controls:EDU_IconButton>
+                </Grid>
+              </Popup>
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger SourceName="OeffnenButton" Property="ToggleButton.IsChecked" Value="True">
+              <Trigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="btnOben" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnObenTranslateTransform" Storyboard.TargetProperty="Y" To="-70" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnUnten" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnUntenTranslateTransform" Storyboard.TargetProperty="Y" To="70" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnLinks" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnLinksTranslateTransform" Storyboard.TargetProperty="X" To="-70" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnRechts" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnRechtsTranslateTransform" Storyboard.TargetProperty="X" To="70" Duration="0:0:0.5" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="btnOben" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnObenTranslateTransform" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnUnten" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnUntenTranslateTransform" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnLinks" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnLinksTranslateTransform" Storyboard.TargetProperty="X" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnRechts" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5" />
+                    <DoubleAnimation Storyboard.TargetName="btnRechtsTranslateTransform" Storyboard.TargetProperty="X" To="0" Duration="0:0:0.5" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.ExitActions>
+              <Setter TargetName="btnOben" Property="UIElement.IsHitTestVisible" Value="True" />
+              <Setter TargetName="btnUnten" Property="UIElement.IsHitTestVisible" Value="True" />
+              <Setter TargetName="btnLinks" Property="UIElement.IsHitTestVisible" Value="True" />
+              <Setter TargetName="btnRechts" Property="UIElement.IsHitTestVisible" Value="True" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="NavigationsKreuzAlterStyle" TargetType="{x:Type controls:EDU_NavigationsKreuz}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:EDU_NavigationsKreuz}">
+          <Border Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}">
+            <Grid>
+              <controls:EDU_IconToggleButton x:Name="OeffnenButton" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Positionsanzeige_expand_24x24.png" PRO_strCheckedIconUri="/Ersa.Global.Controls;component/Bilder/Icon_Positionsanzeige_collaps_24x24.png" IsChecked="{Binding IsOpen, Mode=TwoWay, ElementName=Popup}" />
+              <Popup Name="Popup" Placement="Center" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" Width="200" Height="200" StaysOpen="False" PlacementTarget="{Binding ElementName=OeffnenButton}">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <controls:EDU_IconButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_up_24x24.png" Grid.Column="1" Height="48" MinWidth="48" OverridesDefaultStyle="True" Command="{Binding PRO_cmdNavigationNachOben, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <controls:EDU_IconButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_down_24x24.png" Grid.Row="2" Grid.Column="1" Height="48" MinWidth="48" OverridesDefaultStyle="True" Command="{Binding PRO_cmdNavigationNachUnten, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <controls:EDU_IconButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_left_24x24.png" Grid.Row="1" Height="48" MinWidth="48" OverridesDefaultStyle="True" Command="{Binding PRO_cmdNavigationNachLinks, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <controls:EDU_IconButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Position_right_24x24.png" Grid.Row="1" Grid.Column="2" Height="48" MinWidth="48" OverridesDefaultStyle="True" Command="{Binding PRO_cmdNavigationNachRechts, RelativeSource={RelativeSource TemplatedParent}}" />
+                  <controls:EDU_IconToggleButton Grid.Row="1" Grid.Column="1" Height="48" Width="48" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Positionsanzeige_expand_24x24.png" PRO_strCheckedIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Positionsanzeige_collaps_24x24.png" IsChecked="{Binding IsOpen, Mode=TwoWay, ElementName=Popup}" />
+                </Grid>
+              </Popup>
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger SourceName="Popup" Property="Popup.IsOpen" Value="True">
+              <Setter TargetName="OeffnenButton" Property="UIElement.IsEnabled" Value="False" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="100" />
+    <Setter Property="FrameworkElement.Height" Value="100" />
+  </Style>
+</ResourceDictionary>

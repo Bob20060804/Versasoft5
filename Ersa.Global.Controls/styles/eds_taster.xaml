@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Colors.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ContentControl.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="EDU_IconButtonLightBorder" Color="#ADC5E3" />
+  <LinearGradientBrush x:Key="EDU_IconButtonBgNormal" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="White" Offset="0" />
+    <GradientStop Color="#FFE1E1E1" Offset="1" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="TasterBarBorder" Color="#7F012F50" />
+  <SolidColorBrush x:Key="TasterBarBorderAktiv" Color="{StaticResource C_strColor_Dunkelblau}" />
+  <SolidColorBrush x:Key="TasterBarBackground" Color="#19012F50" />
+  <SolidColorBrush x:Key="TasterBarBackgroundAktiv" Color="#FF64BA00" />
+  <SolidColorBrush x:Key="TasterBorderAktiv" Color="#FF529900" />
+  <SolidColorBrush x:Key="EDU_IconButtonBgPressed_DarkLayer" Color="#07000000" />
+  <LinearGradientBrush x:Key="TasterBackgroundAktiv" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="#FFB1DC80" Offset="1" />
+    <GradientStop Color="#FF73C119" Offset="0" />
+  </LinearGradientBrush>
+  <ImageBrush x:Key="AnimationBrush" Viewport="0,0,1,0.25" ImageSource="/Ersa.Global.Controls;component/Bilder/Animations/Taster_Balken_normal.png" TileMode="Tile" Stretch="None" />
+  <ImageBrush x:Key="AnimationBrushAktiv" Viewport="0,0,1,0.25" ImageSource="/Ersa.Global.Controls;component/Bilder/Animations/Taster_Balken_aktiv.png" TileMode="Tile" Stretch="None" />
+  <ControlTemplate x:Key="C_strTemplateTaster" TargetType="{x:Type controls:EDU_Taster}">
+    <Grid>
+      <Border Name="BgNormal" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{StaticResource EDU_IconButtonBgNormal}" />
+      <Border Name="BgPressed" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" Background="{StaticResource TasterBackgroundAktiv}" BorderBrush="{StaticResource TasterBorderAktiv}" Visibility="Hidden">
+        <Border Margin="-1" Background="{StaticResource EDU_IconButtonBgPressed_DarkLayer}" />
+      </Border>
+      <Border Name="Border" CornerRadius="{TemplateBinding controls:EDU_IconButton.PRO_fdcEckRadien}" SnapsToDevicePixels="True" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" />
+      <Grid Name="LayoutGrid" Margin="{TemplateBinding Control.Padding}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Image Name="Icon" Grid.Column="0" Height="24" Width="24" Source="{Binding PRO_strIconUri, Converter={StaticResource C_strConverter_NullToUnsetValue}, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Image Name="IconAktiv" Grid.Column="0" Height="24" Width="24" Visibility="Hidden" Source="{Binding PRO_strIconAktivUri, Converter={StaticResource C_strConverter_NullToUnsetValue}, RelativeSource={RelativeSource TemplatedParent}}" />
+        <ContentPresenter Name="ContentPresenter" Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+          <ContentPresenter.Resources>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource StartControlTextBlockStyle}" />
+          </ContentPresenter.Resources>
+        </ContentPresenter>
+      </Grid>
+      <Grid Name="Foreground" ClipToBounds="True" Height="40" Width="5" HorizontalAlignment="Left" Margin="4,0,0,0">
+        <Border Name="Bar" Background="{StaticResource TasterBarBackground}" BorderBrush="{StaticResource TasterBarBorder}" BorderThickness="1" CornerRadius="1" Height="40" Width="5" HorizontalAlignment="Left" />
+        <Rectangle Name="Animation" Fill="{StaticResource AnimationBrush}" Height="60" Width="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-23" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+        </Rectangle>
+      </Grid>
+      <Image Name="IconInfoText" Width="12" Height="12" Margin="0,3,4,0" Visibility="Hidden" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Hilfe_24x24.png" VerticalAlignment="Top" HorizontalAlignment="Right" />
+      <ContentControl Name="BackgroundPressed" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+    </Grid>
+    <ControlTemplate.Resources>
+      <Storyboard x:Key="StoryboardAnimation">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Animation" RepeatBehavior="Forever">
+          <SplineDoubleKeyFrame KeyTime="0:0:1" Value="16" />
+        </DoubleAnimationUsingKeyFrames>
+      </Storyboard>
+    </ControlTemplate.Resources>
+    <ControlTemplate.Triggers>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnIstAktiv" Value="True">
+        <Trigger.ExitActions>
+          <StopStoryboard BeginStoryboardName="StoryboardAnimation_BeginStoryboard" />
+        </Trigger.ExitActions>
+        <Trigger.EnterActions>
+          <BeginStoryboard Name="StoryboardAnimation_BeginStoryboard" Storyboard="{StaticResource StoryboardAnimation}" />
+        </Trigger.EnterActions>
+        <Setter TargetName="Bar" Value="{StaticResource TasterBarBackgroundAktiv}" Property="Border.Background" />
+        <Setter TargetName="Bar" Value="{StaticResource TasterBarBorderAktiv}" Property="Border.BorderBrush" />
+        <Setter TargetName="Animation" Value="{StaticResource AnimationBrushAktiv}" Property="Shape.Fill" />
+        <Setter TargetName="BgPressed" Property="UIElement.Visibility" Value="Visible" />
+        <Setter TargetName="BackgroundPressed" Property="UIElement.Visibility" Value="Visible" />
+        <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Collapsed" />
+        <Setter TargetName="IconAktiv" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Value="{x:Null}" Property="ContentControl.Content">
+        <Setter TargetName="ContentPresenter" Property="UIElement.Visibility" Value="Collapsed" />
+        <Setter TargetName="LayoutGrid" Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+        <Setter TargetName="Icon" Property="FrameworkElement.Margin" Value="8,0,0,0" />
+        <Setter TargetName="IconAktiv" Property="FrameworkElement.Margin" Value="8,0,0,0" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="True">
+        <Setter TargetName="Animation" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.4" />
+      </Trigger>
+      <Trigger Property="controls:EDU_ToggleButton.PRO_blnInfoTextAnzeigen" Value="True">
+        <Setter TargetName="IconInfoText" Property="UIElement.Visibility" Value="Visible" />
+        <Setter TargetName="Icon" Property="UIElement.Opacity" Value="0.4" />
+        <Setter TargetName="IconAktiv" Property="UIElement.Opacity" Value="0.4" />
+        <Setter TargetName="BgNormal" Property="UIElement.Opacity" Value="0.4" />
+        <Setter TargetName="Border" Property="UIElement.Opacity" Value="0.4" />
+        <Setter TargetName="Animation" Property="UIElement.Opacity" Value="0.4" />
+        <Setter TargetName="Bar" Property="UIElement.Opacity" Value="0.4" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleTaster_Default" TargetType="{x:Type controls:EDU_Taster}">
+    <Setter Property="Control.BorderBrush" Value="{StaticResource EDU_IconButtonLightBorder}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.Padding" Value="16,0" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="FrameworkElement.ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateTaster}" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="controls:EDU_IconButton.PRO_fdcEckRadien" Value="2" />
+    <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
+  </Style>
+  <Style x:Key="{x:Type controls:EDU_Taster}" TargetType="{x:Type controls:EDU_Taster}" BasedOn="{StaticResource C_strStyleTaster_Default}" />
+</ResourceDictionary>

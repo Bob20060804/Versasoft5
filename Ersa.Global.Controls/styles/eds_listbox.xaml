@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_IconButton.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Separator.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <LinearGradientBrush x:Key="C_strBrush_Background" EndPoint="0.5,1" StartPoint="0.5,0">
+    <LinearGradientBrush.RelativeTransform>
+      <TransformGroup>
+        <ScaleTransform CenterY="0.5" CenterX="0.5" />
+        <SkewTransform CenterY="0.5" CenterX="0.5" />
+        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5" />
+        <TranslateTransform />
+      </TransformGroup>
+    </LinearGradientBrush.RelativeTransform>
+    <GradientStop Color="White" Offset="0" />
+    <GradientStop Color="White" Offset="1" />
+    <GradientStop Color="#FFE6EAEC" Offset="0.15" />
+    <GradientStop Color="#FFE6EAEC" Offset="0.85" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="C_strBrush_SelectedBackground" Color="{StaticResource C_strColor_Lichtblau_V1}" Opacity="0.3" />
+  <ControlTemplate x:Key="C_strTemplateScrollViewer_ListBox" TargetType="{x:Type ScrollViewer}">
+    <Grid>
+      <ScrollContentPresenter Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" Content="{TemplateBinding ContentControl.Content}" />
+      <ScrollBar Name="PART_VerticalScrollBar" HorizontalAlignment="Right" Maximum="{TemplateBinding ScrollViewer.ScrollableHeight}" ViewportSize="{TemplateBinding ScrollViewer.ViewportHeight}" Value="{TemplateBinding ScrollViewer.VerticalOffset}" Visibility="{TemplateBinding ScrollViewer.ComputedVerticalScrollBarVisibility}" Style="{StaticResource KommentarBoxVerticalScrollBarStyle}" />
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleListBoxItem" TargetType="{x:Type ListBoxItem}">
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+          <Grid Background="#00FFFFFF">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*" />
+              <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Border Name="SelectedBorder" Background="{StaticResource C_strBrush_SelectedBackground}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Collapsed" Margin="-1,0" />
+            <ContentPresenter Grid.Row="0" VerticalAlignment="Center" Height="48" Margin="{StaticResource C_strStdMarginLinksUndRechts}" IsHitTestVisible="True" />
+            <Separator Grid.Row="1" Height="1" Margin="{StaticResource C_strStdMarginLinksUndRechts}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Style="{StaticResource C_strSeparator_BenutzerVerwaltungStyle}" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ListBoxItem.IsSelected" Value="True">
+              <Setter TargetName="SelectedBorder" Property="UIElement.Visibility" Value="Visible" />
+            </Trigger>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="ListBoxItem.IsSelected" Value="True" />
+                <Condition Property="Selector.IsSelectionActive" Value="False" />
+              </MultiTrigger.Conditions>
+              <Setter TargetName="SelectedBorder" Property="UIElement.Visibility" Value="Visible" />
+            </MultiTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="C_strStyleListBoxItem_OhneOptik" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource C_strStyleListBoxItem}">
+    <Style.Resources>
+      <SolidColorBrush Color="Transparent" />
+      <SolidColorBrush Color="Transparent" />
+      <SolidColorBrush Color="{StaticResource C_strColor_Dunkelblau}" />
+    </Style.Resources>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+          <Grid Background="#00FFFFFF">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ContentPresenter Grid.Row="0" VerticalAlignment="Center" MinHeight="48" Margin="{StaticResource C_strStdMarginLinksUndRechts}" IsHitTestVisible="True" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <ControlTemplate x:Key="C_strTemplateListBox" TargetType="{x:Type ListBox}">
+    <Border Name="Bd" CornerRadius="2" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+      <ScrollViewer Template="{StaticResource C_strTemplateScrollViewer_ListBox}" Focusable="False">
+        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+      </ScrollViewer>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ItemsControl.IsGrouping" Value="True">
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleListBox" TargetType="{x:Type ListBox}">
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="Control.Background" Value="{StaticResource C_strBrush_Background}" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource C_strBrush_Hellblau_V1}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+    <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Top" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch" />
+    <Setter Property="FrameworkElement.Width" Value="{StaticResource C_strGroupBoxSpaltenBreite_1Spalte}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateListBox}" />
+    <Setter Property="ItemsControl.ItemContainerStyle" Value="{StaticResource C_strStyleListBoxItem}" />
+  </Style>
+  <Style x:Key="C_strStyleListBox_OhneOptik" TargetType="{x:Type ListBox}" BasedOn="{StaticResource C_strStyleListBox}">
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.BorderBrush" Value="#00FFFFFF" />
+    <Setter Property="Control.BorderThickness" Value="0" />
+    <Setter Property="ItemsControl.ItemContainerStyle" Value="{StaticResource C_strStyleListBoxItem_OhneOptik}" />
+  </Style>
+</ResourceDictionary>

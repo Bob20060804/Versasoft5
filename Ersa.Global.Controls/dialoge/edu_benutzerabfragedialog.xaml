@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dialoge:EDU_Dialog x:Class="Ersa.Global.Controls.Dialoge.EDU_BenutzerAbfrageDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dialoge="clr-namespace:Ersa.Global.Controls.Dialoge" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <dialoge:EDU_Dialog.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DialogGroupBox.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </dialoge:EDU_Dialog.Resources>
+  <Grid>
+    <Border Background="{StaticResource C_strSolidColorBrush_Dialog_WindowBackground}" />
+    <controls:EDU_DialogGroupBox Width="{StaticResource C_strDialogGroupBoxSpaltenBreite_2Spalten}" Header="{Binding PRO_strTitel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+      <TextBlock Margin="{StaticResource C_strStdMarginRechtsUnten}" TextWrapping="Wrap" Text="{Binding PRO_strText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+      <controls:EDU_DialogGroupBox.PRO_objFooter>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <controls:EDU_IconButton IsCancel="True" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Abbrechen_24x24.png" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strAbbrechenText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Visibility="{Binding PRO_blnIstAbbrechenSichtbar, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+          <controls:EDU_IconButton Click="SUB_NegativGeklickt" Grid.Column="1" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Abbrechen_24x24.png" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strBestaetigenNegativText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Visibility="{Binding PRO_blnIstNegativeAuswahlSichtbar, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+          <controls:EDU_IconButton Click="SUB_PositivGeklickt" Grid.Column="2" IsDefault="True" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Status_Gruen_24x24.png" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strBestaetigenPositivText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+        </Grid>
+      </controls:EDU_DialogGroupBox.PRO_objFooter>
+    </controls:EDU_DialogGroupBox>
+  </Grid>
+</dialoge:EDU_Dialog>

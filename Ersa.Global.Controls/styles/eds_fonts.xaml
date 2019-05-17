@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <FontFamily x:Key="FontFamilyNormal">Calibri</FontFamily>
+  <sys:Double x:Key="FontSizeNormal">16</sys:Double>
+  <sys:Double x:Key="FontSizeLogo">26</sys:Double>
+  <sys:Double x:Key="FontSizeUeberschrift1">18</sys:Double>
+  <sys:Double x:Key="FontSizeUeberschrift2">17</sys:Double>
+  <sys:Double x:Key="FontSizeTextBox">18</sys:Double>
+  <sys:Double x:Key="FontSizeButton">18</sys:Double>
+</ResourceDictionary>

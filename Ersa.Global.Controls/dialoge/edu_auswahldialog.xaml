@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dialoge:EDU_Dialog x:Class="Ersa.Global.Controls.Dialoge.EDU_AuswahlDialog" FocusManager.FocusedElement="{Binding ElementName=lstAuswahl}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dialoge="clr-namespace:Ersa.Global.Controls.Dialoge" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <dialoge:EDU_Dialog.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ListBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DialogGroupBox.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </dialoge:EDU_Dialog.Resources>
+  <Grid>
+    <Border Background="{StaticResource C_strSolidColorBrush_Dialog_WindowBackground}" />
+    <controls:EDU_DialogGroupBox Width="{StaticResource C_strDialogGroupBoxSpaltenBreite_2Spalten}" Header="{Binding PRO_strTitel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="{StaticResource C_strStdMarginRechtsUnten}" TextWrapping="Wrap" Text="{Binding PRO_strText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+        <Border Grid.Row="1" MinHeight="{StaticResource C_strBasisTouchHoehe}" Visibility="{Binding PRO_blnValidierungVorhanden, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+        <TextBlock Grid.Row="1" TextBlock.Foreground="{StaticResource C_strBrush_Rot_V1}" Margin="{StaticResource C_strStdMarginRechtsUnten}" TextWrapping="Wrap" Text="{Binding PRO_strValidierungsErgebnis, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding PRO_strValidierungsErgebnis, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_StringInhaltNachVisibility}}" />
+        <ListBox Name="lstAuswahl" Grid.Row="2" MaxHeight="480" Style="{StaticResource C_strStyleListBox}" Width="NaN" ItemsSource="{Binding PRO_lstAuswahlListe, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" SelectedItem="{Binding PRO_strAuswahl, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Mode=TwoWay}" />
+      </Grid>
+      <controls:EDU_DialogGroupBox.PRO_objFooter>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <controls:EDU_IconButton IsCancel="True" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Abbrechen_24x24.png" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strAbbrechenText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+          <controls:EDU_IconButton Click="SUB_BestaetigenGeklickt" Grid.Column="1" IsDefault="True" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Status_Gruen_24x24.png" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strBestaetigenText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" IsEnabled="{Binding PRO_blnBestaetigenMoeglich, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+        </Grid>
+      </controls:EDU_DialogGroupBox.PRO_objFooter>
+    </controls:EDU_DialogGroupBox>
+  </Grid>
+</dialoge:EDU_Dialog>

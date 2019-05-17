@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Separator.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ContentControl.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BenutzerComboBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ComboBox.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_PopupButton.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_IconToggleButton.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <Style x:Key="{x:Type controls:EDU_PopupToggleButton}" TargetType="{x:Type controls:EDU_PopupToggleButton}">
+    <Setter Property="ItemsControl.ItemContainerStyle" Value="{StaticResource C_strStyleComboBoxItem}" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:EDU_PopupToggleButton}">
+          <StackPanel Orientation="Horizontal">
+            <controls:EDU_IconButton x:Name="PART_ActionButton" Style="{StaticResource C_strStyleIconButton_InhaltsbereichOhneContent}" Margin="0 0 0 0" PRO_fdcEckRadien="2 0 0 2" PRO_strIconUri="{Binding PRO_strIconUri, RelativeSource={RelativeSource TemplatedParent}}" />
+            <controls:EDU_IconToggleButton Focusable="False" ClickMode="Press" Width="24" MinWidth="24" Padding="0" Style="{StaticResource InhaltsbereichIconToggleButtonStyle}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Pfeil_Statusbar-Button_24x24.png" PRO_strCheckedIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Pfeil_Statusbar-Button_24x24.png" PRO_fdcEckRadien="0 2 2 0" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+            <Popup Name="PART_Popup" MinWidth="128" StaysOpen="False" IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}" Placement="Bottom" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+              <Grid Name="DropDown" Margin="0,0,10,10" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" MinWidth="{TemplateBinding FrameworkElement.ActualWidth}">
+                <Border Name="DropDownBorder" Margin="0,0,0,10" Background="{StaticResource BenutzerComboBoxItemBackground}" CornerRadius="2" BorderThickness="1" BorderBrush="{StaticResource BenutzerComboBoxDropDownBorder}">
+                  <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="0" />
+                  </Border.Effect>
+                </Border>
+                <ScrollViewer Style="{StaticResource C_strStyle_ScrollViewer_Default}">
+                  <ItemsPresenter Margin="8,8,8,18" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                </ScrollViewer>
+              </Grid>
+            </Popup>
+          </StackPanel>
+          <ControlTemplate.Triggers>
+            <Trigger Property="controls:EDU_PopupToggleButton.PRO_blnIsChecked" Value="True">
+              <Setter TargetName="PART_ActionButton" Value="{Binding PRO_strCheckedIconUri, RelativeSource={RelativeSource TemplatedParent}}" Property="controls:EDU_IconButton.PRO_strIconUri" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

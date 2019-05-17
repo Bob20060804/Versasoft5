@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Colors.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ContentControl.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="C_strBrushCheckBox_Border" Color="{StaticResource C_strColor_Hellblau_V1}" />
+  <SolidColorBrush x:Key="C_strBrushCheckBox_BorderValid" Color="{StaticResource C_strColor_Rot_V1}" />
+  <SolidColorBrush x:Key="C_strBrushCheckBox_BgPressed" Color="{StaticResource C_strColor_MittleresGrau}" />
+  <SolidColorBrush x:Key="C_strBrushCheckBox_BgMaschinenkonfigurationNormal" Opacity="0.1" Color="{StaticResource C_strColor_Lichtblau_V1}" />
+  <LinearGradientBrush x:Key="C_strBrushCheckBox_BgNormal" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="{StaticResource C_strColor_Grau}" Offset="1" />
+    <GradientStop Color="{StaticResource C_strColor_Weiß}" Offset="0" />
+  </LinearGradientBrush>
+  <ControlTemplate x:Key="C_strTemplateCheckBox_Standard" TargetType="{x:Type CheckBox}">
+    <Grid Name="MainGrid">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="{StaticResource C_str4FacheGridLengthRasterBreite}" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <Border Name="BgClickArea" Grid.ColumnSpan="3" Background="#00FFFFFF" />
+      <Grid Name="grdBox" Grid.Column="0" Height="{StaticResource C_str4FacheRasterHoehe}" Width="{StaticResource C_str4FacheRasterBreite}">
+        <Border Name="BgNormal" Background="{StaticResource C_strBrushCheckBox_BgNormal}" CornerRadius="2" />
+        <Border Name="BgPressed" Background="{StaticResource C_strBrushCheckBox_BgPressed}" CornerRadius="2" Visibility="Collapsed" />
+        <Image Name="Icon" Height="{StaticResource C_str3FacheRasterHoehe}" Width="{StaticResource C_str3FacheRasterBreite}" Source="/Ersa.Global.Controls;component/Bilder/Icons/Haken_checkbox_24x24.png" Visibility="Collapsed" />
+        <ContentControl Name="BackgroundPressed" Opacity="0.3" Template="{StaticResource InnererSchattenEffekt}" Visibility="Collapsed" />
+        <Border Name="BorderNormal" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" CornerRadius="2" />
+        <Border Name="BorderInvalid" BorderBrush="{StaticResource C_strBrushCheckBox_BorderValid}" BorderThickness="2" CornerRadius="2" Visibility="Collapsed" />
+      </Grid>
+      <ContentPresenter Grid.Column="1" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
+        <ContentPresenter.Resources>
+          <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WrappingEmptyCollapsedTextBlockStyle}" />
+        </ContentPresenter.Resources>
+      </ContentPresenter>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="MouseOver" />
+          <VisualState Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdBox">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="CheckStates">
+          <VisualState x:Name="Unchecked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Checked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="FocusStates">
+          <VisualState x:Name="Unfocused" />
+          <VisualState x:Name="Focused" />
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ValidationStates">
+          <VisualState x:Name="Valid" />
+          <VisualState x:Name="InvalidFocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="InvalidUnfocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="C_strTemplateCheckBox_TextLinks" TargetType="{x:Type CheckBox}">
+    <Grid Name="MainGrid">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="{StaticResource C_str4FacheGridLengthRasterBreite}" />
+      </Grid.ColumnDefinitions>
+      <ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
+        <ContentPresenter.Resources>
+          <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CheckBoxLeftTextBlockStyle}" />
+        </ContentPresenter.Resources>
+      </ContentPresenter>
+      <Border Name="BgClickArea" Grid.Column="1" Background="#00FFFFFF" />
+      <Grid Grid.Column="1">
+        <Border Name="BgNormal" Background="{StaticResource C_strBrushCheckBox_BgNormal}" CornerRadius="2" />
+        <Border Name="BgPressed" Background="{StaticResource C_strBrushCheckBox_BgPressed}" CornerRadius="2" Visibility="Collapsed" />
+        <Image Name="Icon" Height="24" Width="24" Source="/Ersa.Global.Controls;component/Bilder/Icons/Haken_checkbox_24x24.png" Visibility="Collapsed" />
+        <ContentControl Name="BackgroundPressed" Opacity="0.3" Template="{StaticResource InnererSchattenEffekt}" Visibility="Collapsed" />
+        <Border Name="BorderNormal" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" CornerRadius="2" />
+        <Border Name="BorderInvalid" BorderBrush="{StaticResource C_strBrushCheckBox_BorderValid}" BorderThickness="2" CornerRadius="2" Visibility="Collapsed" />
+      </Grid>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="MouseOver" />
+          <VisualState Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MainGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="CheckStates">
+          <VisualState x:Name="Unchecked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Checked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="FocusStates">
+          <VisualState x:Name="Unfocused" />
+          <VisualState x:Name="Focused" />
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ValidationStates">
+          <VisualState x:Name="Valid" />
+          <VisualState x:Name="InvalidFocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="InvalidUnfocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="C_strTemplateCheckBox_Benutzerverwaltung" TargetType="{x:Type CheckBox}">
+    <Grid Name="MainGrid">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="48" />
+      </Grid.ColumnDefinitions>
+      <ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
+        <ContentPresenter.Resources>
+          <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ModulParameterUnterUeberschriftStyle}" />
+        </ContentPresenter.Resources>
+      </ContentPresenter>
+      <Border Name="BgClickArea" Grid.Column="1" Background="#00FFFFFF" />
+      <Grid Grid.Column="1" Margin="8">
+        <Border Name="BgNormal" Background="{StaticResource C_strBrushCheckBox_BgNormal}" CornerRadius="2" />
+        <Border Name="BgPressed" Background="{StaticResource C_strBrushCheckBox_BgPressed}" CornerRadius="2" Visibility="Collapsed" />
+        <Image Name="Icon" Height="24" Width="24" Source="/Ersa.Global.Controls;component/Bilder/Icons/Haken_checkbox_24x24.png" Visibility="Collapsed" />
+        <ContentControl Name="BackgroundPressed" Opacity="0.3" Template="{StaticResource InnererSchattenEffekt}" Visibility="Collapsed" />
+        <Border Name="BorderNormal" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" CornerRadius="2" />
+        <Border Name="BorderInvalid" BorderBrush="{StaticResource C_strBrushCheckBox_BorderValid}" BorderThickness="2" CornerRadius="2" Visibility="Collapsed" />
+      </Grid>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="MouseOver" />
+          <VisualState Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MainGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="CheckStates">
+          <VisualState x:Name="Unchecked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Checked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="FocusStates">
+          <VisualState x:Name="Unfocused" />
+          <VisualState x:Name="Focused" />
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ValidationStates">
+          <VisualState x:Name="Valid" />
+          <VisualState x:Name="InvalidFocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="InvalidUnfocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="C_strTemplateCheckBox_Maschinenkonfiguration" TargetType="{x:Type CheckBox}">
+    <Grid Name="MainGrid">
+      <Border Name="BgClickArea" Background="#00FFFFFF" />
+      <Border Name="MainBg" Background="#00FFFFFF" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,2,0,0" />
+      <Grid Margin="20,8">
+        <Border Name="BgNormal" Background="{StaticResource C_strBrushCheckBox_BgNormal}" CornerRadius="2" />
+        <Border Name="BgPressed" Background="{StaticResource C_strBrushCheckBox_BgPressed}" CornerRadius="2" Visibility="Collapsed" />
+        <Image Name="Icon" Height="24" Width="24" Source="/Ersa.Global.Controls;component/Bilder/Icons/Haken_checkbox_24x24.png" Visibility="Collapsed" />
+        <Border Name="BorderNormal" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" CornerRadius="2">
+          <ContentControl Name="BackgroundPressed" Opacity="0.3" Template="{StaticResource InnererSchattenEffekt}" Visibility="Collapsed" />
+        </Border>
+        <Border Name="BorderInvalid" BorderBrush="{StaticResource C_strBrushCheckBox_BorderValid}" BorderThickness="2" CornerRadius="2" Visibility="Collapsed" />
+      </Grid>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="MouseOver" />
+          <VisualState Name="Pressed">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MainGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="CheckStates">
+          <VisualState x:Name="Unchecked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Checked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="FocusStates">
+          <VisualState x:Name="Unfocused" />
+          <VisualState x:Name="Focused" />
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="ValidationStates">
+          <VisualState x:Name="Valid" />
+          <VisualState x:Name="InvalidFocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="InvalidUnfocused">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BorderInvalid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ToggleButton.IsChecked" Value="True">
+        <Setter TargetName="MainBg" Value="{StaticResource C_strBrushCheckBox_BgMaschinenkonfigurationNormal}" Property="Border.Background" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleCheckBox_Default" TargetType="{x:Type CheckBox}">
+    <Setter Property="Control.Background" Value="{StaticResource C_strBrushCheckBox_BgNormal}" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource C_strBrushCheckBox_Border}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="Control.Padding" Value="{StaticResource C_strStdMarginNurLinks}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateCheckBox_Standard}" />
+  </Style>
+  <Style x:Key="{x:Type CheckBox}" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource C_strStyleCheckBox_Default}" />
+  <Style x:Key="C_strStyleCheckBox_TextLinks" TargetType="{x:Type CheckBox}">
+    <Setter Property="Control.Background" Value="{StaticResource C_strBrushCheckBox_BgNormal}" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource C_strBrushCheckBox_Border}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateCheckBox_TextLinks}" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+  </Style>
+  <Style x:Key="C_strStyleCheckBox_Maschinenkonfiguration" TargetType="{x:Type CheckBox}">
+    <Setter Property="Control.BorderBrush" Value="{StaticResource C_strBrushCheckBox_Border}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="FrameworkElement.Height" Value="48" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateCheckBox_Maschinenkonfiguration}" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Width" Value="72" />
+  </Style>
+  <Style x:Key="C_strStyleCheckBox_Benutzerverwaltung" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource C_strStyleCheckBox_TextLinks}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Lichtblau_V1}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateCheckBox_Benutzerverwaltung}" />
+  </Style>
+  <Style x:Key="C_strStyleCheckBox_SelektierbareGroupBoxHeader" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource C_strStyleCheckBox_Default}">
+    <Setter Property="Control.Padding" Value="0" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right" />
+  </Style>
+  <Style x:Key="C_strStyleCheckBox_DataGrid" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource C_strStyleCheckBox_Default}">
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginLinksUndRechts}" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+  </Style>
+</ResourceDictionary>

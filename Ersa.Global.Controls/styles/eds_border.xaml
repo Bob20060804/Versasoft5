@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <ImageBrush x:Key="EDS_HintergrundKachel" ImageSource="/Ersa.Global.Controls;component/Bilder/HG-Muster-Kachel.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,6,6" Stretch="None" />
+  <Style x:Key="HintergrundHauptfensterKacheln" TargetType="{x:Type Border}">
+    <Setter Property="Border.Background" Value="{StaticResource EDS_HintergrundKachel}" />
+  </Style>
+  <Style x:Key="HintergrundHauptfensterVerlauf" TargetType="{x:Type Border}">
+    <Setter Property="Border.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#FF2C475C" Offset="0" />
+          <GradientStop Color="#FF001E33" Offset="1" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="UIElement.Opacity" Value="0.5" />
+  </Style>
+  <Style x:Key="HintergrundHauptfensterVerlaufSekundaerModus" TargetType="{x:Type Border}">
+    <Setter Property="Border.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#FFA1A1A1" Offset="0" />
+          <GradientStop Color="#FF818181" Offset="1" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="UIElement.Opacity" Value="0.5" />
+  </Style>
+  <ImageBrush x:Key="KommentarBoxTrenner" ImageSource="/Ersa.Global.Controls;component/Bilder/Zeile_Trenner_Kommentarbox.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,368,24" Stretch="UniformToFill" />
+  <ImageBrush x:Key="KommentarBoxDialogTrenner" ImageSource="/Ersa.Global.Controls;component/Bilder/Zeile_Trenner_Kommentarbox_klein.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,332,24" Stretch="UniformToFill" />
+  <ImageBrush x:Key="ListBoxTrenner" ImageSource="/Ersa.Global.Controls;component/Bilder/Zeile_Trenner_Liste_Benutzerverwaltung.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,350,48" Stretch="UniformToFill" />
+  <Style x:Key="KommentarBoxZeilenTrennerHintergrund" TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.Height" Value="350" />
+    <Setter Property="FrameworkElement.Width" Value="372" />
+    <Setter Property="Border.Background" Value="{StaticResource KommentarBoxTrenner}" />
+  </Style>
+  <SolidColorBrush x:Key="FakeTabBorderBrush" Color="#FF012F50" />
+  <SolidColorBrush x:Key="FakeTabBackground" Color="#FFE4E7EC" />
+  <Style x:Key="FakeTabBorder" TargetType="{x:Type Border}">
+    <Setter Property="Border.BorderThickness" Value="1" />
+    <Setter Property="Border.BorderBrush" Value="{StaticResource FakeTabBorderBrush}" />
+    <Setter Property="Border.CornerRadius" Value="2" />
+    <Setter Property="Border.Background" Value="{StaticResource FakeTabBackground}" />
+    <Setter Property="Border.Padding" Value="16" />
+  </Style>
+  <Style x:Key="C_strStyleBorder_DatenColumn" TargetType="{x:Type Border}">
+    <Setter Property="Border.Background" Value="{StaticResource C_strBrush_Weiß_85}" />
+    <Setter Property="Border.BorderBrush" Value="{StaticResource C_strBrush_Hellblau_V2}" />
+    <Setter Property="Border.BorderThickness" Value="1" />
+    <Setter Property="FrameworkElement.Margin" Value="0,0,-1,-1" />
+    <Setter Property="FrameworkElement.Height" Value="48" />
+    <Setter Property="Border.Padding" Value="{StaticResource C_strStdMarginLinksUndRechts}" />
+  </Style>
+  <Style x:Key="C_strStyleBorder_DatenHeader" TargetType="{x:Type Border}" BasedOn="{StaticResource C_strStyleBorder_DatenColumn}">
+    <Setter Property="Border.Background" Value="{StaticResource C_strBrush_StandardHintergrundVerlauf}" />
+  </Style>
+  <Style x:Key="C_strStyleBorder_Widget" TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.Height" Value="96" />
+    <Setter Property="Border.BorderThickness" Value="1" />
+    <Setter Property="Border.BorderBrush" Value="#4CFFFFFF" />
+    <Setter Property="Border.Background" Value="#3FFDFDFF" />
+    <Setter Property="Border.Padding" Value="8" />
+    <Setter Property="Border.CornerRadius" Value="2" />
+  </Style>
+</ResourceDictionary>
