@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls" xmlns:system="clr-namespace:System;assembly=mscorlib">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_IconRepeatButton.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Separator.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <DataTemplate x:Key="EDU_NavigationsListeItemsContainerTemplate">
+    <Border>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Separator Name="separator" Style="{StaticResource GroupBoxBlauerBalkenSeparatorStyle}" />
+        <ContentPresenter Grid.Column="1" Content="{TemplateBinding ContentPresenter.Content}" />
+      </Grid>
+    </Border>
+    <DataTemplate.Triggers>
+      <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+        <Setter TargetName="separator" Property="UIElement.Visibility" Value="Collapsed" />
+      </DataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+  <Style x:Key="EDU_NavigationsListeItemsContainerStyle" TargetType="{x:Type ContentPresenter}">
+    <Setter Property="ContentPresenter.ContentTemplate" Value="{StaticResource EDU_NavigationsListeItemsContainerTemplate}" />
+  </Style>
+  <ControlTemplate x:Key="EDU_NavigationsListeTemplate" TargetType="{x:Type controls:EDU_NavigationsListe}">
+    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Padding="{TemplateBinding Control.Padding}" SnapsToDevicePixels="True">
+      <Grid>
+        <controls:EDU_TouchScrollViewer x:Name="ScrollViewer" Style="{StaticResource C_strStyleScrollViewer_SpaltenrasterNavigationsliste}">
+          <StackPanel IsItemsHost="True" Orientation="Horizontal" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Margin="0,0,48,0" IsEnabled="{Binding PRO_blnInhaltAktivert, RelativeSource={RelativeSource TemplatedParent}}" />
+        </controls:EDU_TouchScrollViewer>
+        <controls:EDU_IconRepeatButton x:Name="LinksButton" Command="{x:Static ScrollBar.LineLeftCommand}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="{StaticResource C_str4FacheRasterBreite}" Height="{x:Static system:Double.NaN}" Margin="{StaticResource C_strStdMarginDoppeltNegativNurLinks}" Style="{StaticResource C_strStyleIconRepeatButtonNavigationsListe}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Scrollen_links_32x32.png" PRO_strPressedIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Scrollen_links_Aktiv_32x32.png" CommandTarget="{Binding ElementName=ScrollViewer}" Visibility="{Binding ElementName=ScrollViewer, Path=ComputedHorizontalScrollBarVisibility}" />
+        <controls:EDU_IconRepeatButton x:Name="RechtsButton" Command="{x:Static ScrollBar.LineRightCommand}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="{StaticResource C_str4FacheRasterBreite}" Height="{x:Static system:Double.NaN}" Margin="{StaticResource C_strStdMarginDoppeltNegativNurRechts}" Style="{StaticResource C_strStyleIconRepeatButtonNavigationsListe}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Scrollen_rechts_32x32.png" PRO_strPressedIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Scrollen_rechts_Aktiv_32x32.png" CommandTarget="{Binding ElementName=ScrollViewer}" Visibility="{Binding ElementName=ScrollViewer, Path=ComputedHorizontalScrollBarVisibility}" />
+      </Grid>
+    </Border>
+  </ControlTemplate>
+  <Style x:Key="EDU_NavigationsListeStyle" TargetType="{x:Type controls:EDU_NavigationsListe}">
+    <Setter Property="Control.Template" Value="{StaticResource EDU_NavigationsListeTemplate}" />
+    <Setter Property="FrameworkElement.UseLayoutRounding" Value="False" />
+    <Setter Property="ItemsControl.ItemContainerStyle" Value="{StaticResource EDU_NavigationsListeItemsContainerStyle}" />
+  </Style>
+  <Style x:Key="{x:Type controls:EDU_NavigationsListe}" TargetType="{x:Type controls:EDU_NavigationsListe}" BasedOn="{StaticResource EDU_NavigationsListeStyle}" />
+</ResourceDictionary>

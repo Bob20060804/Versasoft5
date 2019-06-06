@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Border.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <ControlTemplate x:Key="HintergrundHauptfensterContainer" TargetType="{x:Type ContentControl}">
+    <Grid SnapsToDevicePixels="True">
+      <Border Style="{StaticResource HintergrundHauptfensterKacheln}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+      <Border Style="{StaticResource HintergrundHauptfensterVerlauf}" />
+      <Canvas Width="320" Height="240" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{StaticResource Ersa_Logo_320x240}" />
+      <ContentPresenter />
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="HintergrundHauptfensterContainerSekundaerModus" TargetType="{x:Type ContentControl}">
+    <Grid SnapsToDevicePixels="True">
+      <Border Style="{StaticResource HintergrundHauptfensterKacheln}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+      <Border Style="{StaticResource HintergrundHauptfensterVerlaufSekundaerModus}" />
+      <Canvas Width="320" Height="240" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{StaticResource Ersa_Logo_320x240}" />
+      <ContentPresenter />
+    </Grid>
+  </ControlTemplate>
+  <SolidColorBrush x:Key="AktivesHauptmenueContainerBackground" Color="#FF3C608C" />
+  <SolidColorBrush x:Key="AktivesHauptmenueContainerBorder" Color="#FF2781BB" />
+  <LinearGradientBrush x:Key="AktivesHauptmenueContainerBackgroundVerlauf" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="#FF779AC7" Offset="0" />
+    <GradientStop Color="#FF3C608C" Offset="1" />
+  </LinearGradientBrush>
+  <ControlTemplate x:Key="AktivesHauptmenueContainer" TargetType="{x:Type ContentControl}">
+    <Border Margin="8,0,0,8" SnapsToDevicePixels="True">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="120" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Opacity="0.6" BorderThickness="1,1,0,0" CornerRadius="4,0,0,0" Background="{StaticResource AktivesHauptmenueContainerBackgroundVerlauf}" BorderBrush="{StaticResource AktivesHauptmenueContainerBorder}" />
+        <Border Opacity="0.6" BorderThickness="1,0,0,1" CornerRadius="0,0,0,4" Grid.Row="1" Background="{StaticResource AktivesHauptmenueContainerBackground}" BorderBrush="{StaticResource AktivesHauptmenueContainerBorder}" />
+        <ContentPresenter Grid.RowSpan="2" Margin="8,8,0,8" />
+      </Grid>
+    </Border>
+  </ControlTemplate>
+  <ControlTemplate x:Key="MenuContainer" TargetType="{x:Type ContentControl}">
+    <Grid SnapsToDevicePixels="True" Margin="0,0,8,8">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="120" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Border Opacity="0.6" BorderThickness="0,1,1,0" CornerRadius="0,4,0,0" Width="8" HorizontalAlignment="Left" Background="{StaticResource AktivesHauptmenueContainerBackgroundVerlauf}" BorderBrush="{StaticResource AktivesHauptmenueContainerBorder}" />
+      <ContentPresenter Grid.Row="1" />
+      <Border Opacity="0.6" BorderThickness="0,0,1,1" CornerRadius="0,0,4,0" Width="8" HorizontalAlignment="Left" Grid.Row="2" Background="{StaticResource AktivesHauptmenueContainerBackground}" BorderBrush="{StaticResource AktivesHauptmenueContainerBorder}" />
+    </Grid>
+  </ControlTemplate>
+  <ImageBrush x:Key="InnererSchattenBrush_01" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_01.png" TileMode="None" />
+  <ImageBrush x:Key="InnererSchattenBrush_02" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_02.png" TileMode="None" />
+  <ImageBrush x:Key="InnererSchattenBrush_03" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_03.png" TileMode="None" />
+  <ImageBrush x:Key="InnererSchattenBrush_04" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_04.png" TileMode="None" />
+  <ImageBrush x:Key="InnererSchattenBrush_06" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_06.png" TileMode="None" />
+  <ImageBrush x:Key="InnererSchattenBrush_07" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_07.png" TileMode="None" />
+  <ImageBrush x:Key="InnererSchattenBrush_08" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_08.png" TileMode="None" />
+  <ImageBrush x:Key="InnererSchattenBrush_09" ImageSource="/Ersa.Global.Controls;component/Bilder/Effekte/innershadow_09.png" TileMode="None" />
+  <ControlTemplate x:Key="InnererSchattenEffekt" TargetType="{x:Type ContentControl}">
+    <Border UseLayoutRounding="True">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="6" />
+          <RowDefinition Height="*" />
+          <RowDefinition Height="6" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="6" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="6" />
+        </Grid.ColumnDefinitions>
+        <Border Name="Content" Grid.Row="1" Grid.Column="1" />
+        <Border Name="ISTopLeft" Grid.Row="0" Grid.Column="0" Background="{DynamicResource InnererSchattenBrush_01}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <Border Name="ISTopMiddle" Grid.Row="0" Grid.Column="1" Background="{DynamicResource InnererSchattenBrush_02}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <Border Name="ISTopRight" Grid.Row="0" Grid.Column="2" Background="{DynamicResource InnererSchattenBrush_03}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <Border Name="ISMiddleLeft" Grid.Row="1" Grid.Column="0" Background="{DynamicResource InnererSchattenBrush_04}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <Border Name="ISMiddleRight" Grid.Row="1" Grid.Column="2" Background="{DynamicResource InnererSchattenBrush_06}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <Border Name="ISBottomLeft" Grid.Row="2" Grid.Column="0" Background="{DynamicResource InnererSchattenBrush_07}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <Border Name="ISBottomMiddle" Grid.Row="2" Grid.Column="1" Background="{DynamicResource InnererSchattenBrush_08}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <Border Name="ISBottomRight" Grid.Row="2" Grid.Column="2" Background="{DynamicResource InnererSchattenBrush_09}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <ContentPresenter Grid.Column="1" Grid.Row="1" />
+      </Grid>
+    </Border>
+  </ControlTemplate>
+  <ControlTemplate x:Key="KommentarBoxZeilenHintergrund" TargetType="{x:Type ContentControl}">
+    <Grid SnapsToDevicePixels="True">
+      <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" AcceptsReturn="True" FontWeight="Normal" Height="368" Width="368" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Style="{StaticResource KommentarBox}" Text="{Binding PRO_edcLoetprogramm.PRO_edcPrgInfo.PRO_strKommentar}" />
+      <Border Style="{StaticResource KommentarBoxZeilenTrennerHintergrund}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+      <Border Style="{StaticResource KommentarBoxZeilenTrennerHintergrund}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+      <Canvas Width="320" Height="240" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{StaticResource Ersa_Logo_320x240}" />
+      <ContentPresenter />
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="C_strTemplateContentControl_Default" TargetType="{x:Type ContentControl}">
+    <ContentPresenter Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentControl.ContentTemplateSelector}" Cursor="{TemplateBinding FrameworkElement.Cursor}" Margin="{TemplateBinding Control.Padding}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+  </ControlTemplate>
+  <Style x:Key="C_strStyleContentControl_Default" TargetType="{x:Type ContentControl}">
+    <Style.Setters>
+      <Setter Property="Control.Template" Value="{StaticResource C_strTemplateContentControl_Default}" />
+      <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Control.VerticalContentAlignment" Value="Stretch" />
+    </Style.Setters>
+  </Style>
+  <Style x:Key="{x:Type ContentControl}" TargetType="{x:Type ContentControl}" BasedOn="{StaticResource C_strStyleContentControl_Default}" />
+</ResourceDictionary>

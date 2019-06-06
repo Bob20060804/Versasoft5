@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <ControlTemplate x:Key="C_strTemplateLoetgut" TargetType="{x:Type controls:EDU_Loetgut}">
+    <Grid Background="#00FFFFFF" IsHitTestVisible="{Binding IsHitTestVisible, RelativeSource={RelativeSource TemplatedParent}}">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Grid Margin="0,0,0,2">
+        <Ellipse Name="fdcTextRahmen" Width="24" Height="24" HorizontalAlignment="Center" Stretch="Uniform" Stroke="{StaticResource C_strBrush_Dunkelblau}" Visibility="Hidden" />
+        <TextBlock Name="txtKennZahl" HorizontalAlignment="Center" Text="{Binding PRO_i32Kennzahl, RelativeSource={RelativeSource TemplatedParent}}" />
+      </Grid>
+      <Border Name="brdLoetgut" Grid.Row="1" HorizontalAlignment="Stretch" Height="6" Background="{StaticResource C_strBrush_Grün_V1}" Margin="{Binding Padding, RelativeSource={RelativeSource TemplatedParent}}" />
+      <Border Name="brdLoetgutSelektion" Grid.Row="1" HorizontalAlignment="Stretch" Height="6" BorderBrush="{StaticResource C_strBrush_Dunkelblau}" BorderThickness="1" Margin="{Binding Padding, RelativeSource={RelativeSource TemplatedParent}}" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="controls:EDU_Loetgut.PRO_blnFehler" Value="True">
+        <Setter TargetName="brdLoetgut" Value="{StaticResource C_strBrush_Rot_V1}" Property="Border.Background" />
+      </Trigger>
+      <Trigger Property="controls:EDU_Loetgut.PRO_i32Kennzahl" Value="0">
+        <Setter Property="UIElement.Visibility" Value="Hidden" />
+      </Trigger>
+      <Trigger Property="controls:EDU_Loetgut.PRO_blnSelektiert" Value="True">
+        <Setter TargetName="brdLoetgutSelektion" Property="UIElement.Visibility" Value="Visible" />
+        <Setter TargetName="fdcTextRahmen" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleLoetgut" TargetType="{x:Type controls:EDU_Loetgut}">
+    <Setter Property="FrameworkElement.Width" Value="48" />
+    <Setter Property="FrameworkElement.Height" Value="Auto" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="Control.Padding" Value="4,0" />
+    <Setter Property="UIElement.IsHitTestVisible" Value="False" />
+    <Setter Property="Control.FontSize" Value="8" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateLoetgut}" />
+  </Style>
+</ResourceDictionary>

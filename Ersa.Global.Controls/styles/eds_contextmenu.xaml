@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Border.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_IconButton.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="ContextMenuBorder" Color="#FF012F50" />
+  <SolidColorBrush x:Key="EDU_IconButtonLightBorder" Color="#ADC5E3" />
+  <LinearGradientBrush x:Key="ContextMenuButtonBgNormal" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="White" Offset="0" />
+    <GradientStop Color="#FFE1E1E1" Offset="1" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ContextMenuButtonBgPressed" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="#FFE1E1E1" Offset="0" />
+    <GradientStop Color="White" Offset="1" />
+  </LinearGradientBrush>
+  <Style x:Key="C_strStyleContextMenu_Default" TargetType="{x:Type ContextMenu}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="Grid.IsSharedSizeScope" Value="True" />
+    <Setter Property="ContextMenu.HasDropShadow" Value="True" />
+    <Setter Property="ContextMenu.VerticalOffset" Value="-15" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContextMenu}">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="15" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Name="Border" Grid.Column="1" Background="#FFFFFFFF" BorderBrush="{StaticResource ContextMenuBorder}" BorderThickness="1">
+              <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ContextMenu.HasDropShadow" Value="True">
+              <Setter TargetName="Border" Property="Border.Padding" Value="0,8,0,8" />
+              <Setter TargetName="Border" Property="Border.CornerRadius" Value="4" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="C_strContextMenu_Programmverwaltung" TargetType="{x:Type ContextMenu}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="Grid.IsSharedSizeScope" Value="True" />
+    <Setter Property="ContextMenu.HasDropShadow" Value="True" />
+    <Setter Property="ContextMenu.VerticalOffset" Value="-15" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContextMenu}">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="15" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Name="Border" Grid.Column="1" Background="{StaticResource C_strBrush_MittleresGrau}" BorderBrush="{StaticResource EDU_IconButtonLightBorder}" BorderThickness="1">
+              <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ContextMenu.HasDropShadow" Value="True">
+              <Setter TargetName="Border" Property="Border.CornerRadius" Value="4" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="{x:Type ContextMenu}" TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource C_strStyleContextMenu_Default}" />
+  <ControlTemplate x:Key="MenuItemTemplate" TargetType="{x:Type MenuItem}">
+    <Grid SnapsToDevicePixels="True">
+      <Grid>
+        <Border Name="Border" CornerRadius="2" SnapsToDevicePixels="True" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}">
+          <Grid>
+            <Border Name="BgNormal" CornerRadius="2" Background="{StaticResource ContextMenuButtonBgNormal}" />
+            <Border Name="BgPressed" CornerRadius="2" Background="{StaticResource ContextMenuButtonBgPressed}" Visibility="Hidden">
+              <Border Margin="-1" Background="#07000000" />
+            </Border>
+            <Grid Name="LayoutGrid" Margin="{TemplateBinding Control.Padding}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <ContentPresenter Name="Icon" ContentSource="Icon" Width="24" Height="24" Margin="0,0,12,0" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="Center" />
+              <ContentPresenter Grid.Column="1" VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}">
+                <ContentPresenter.Resources>
+                  <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EDU_IconButtonTextBlockStyle}" />
+                </ContentPresenter.Resources>
+              </ContentPresenter>
+            </Grid>
+            <ContentControl Name="BackgroundPressed" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+          </Grid>
+        </Border>
+        <VisualStateManager.VisualStateGroups>
+          <VisualStateGroup x:Name="CommonStates">
+            <VisualState x:Name="Normal" />
+            <VisualState x:Name="MouseOver" />
+            <VisualState x:Name="Pressed">
+              <Storyboard>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                  <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                  <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+              </Storyboard>
+            </VisualState>
+            <VisualState x:Name="Disabled">
+              <Storyboard>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Border">
+                  <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+                </DoubleAnimationUsingKeyFrames>
+              </Storyboard>
+            </VisualState>
+          </VisualStateGroup>
+          <VisualStateGroup x:Name="FocusStates">
+            <VisualState x:Name="Unfocused" />
+            <VisualState x:Name="Focused" />
+          </VisualStateGroup>
+          <VisualStateGroup x:Name="ValidationStates">
+            <VisualState x:Name="Valid" />
+            <VisualState x:Name="InvalidFocused" />
+            <VisualState x:Name="InvalidUnfocused" />
+          </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+      </Grid>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Value="{x:Null}" Property="MenuItem.Icon">
+        <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Collapsed" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.4" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="MenuItemTemplateProgrammVerwaltung" TargetType="{x:Type MenuItem}">
+    <Grid SnapsToDevicePixels="True">
+      <Grid>
+        <Grid>
+          <Border Name="BgNormal" CornerRadius="2" />
+          <Border Name="BgPressed" CornerRadius="2" Background="{StaticResource ContextMenuButtonBgPressed}" Visibility="Hidden">
+            <Border Margin="-1" Background="#07000000" />
+          </Border>
+          <Grid Name="LayoutGrid" Margin="{TemplateBinding Control.Padding}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ContentPresenter Name="Icon" ContentSource="Icon" Width="24" Height="24" Margin="0,0,12,0" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="Center" />
+            <ContentPresenter Grid.Column="1" VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="False" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}">
+              <ContentPresenter.Resources>
+                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EDU_IconButtonTextBlockStyle}">
+                  <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                </Style>
+              </ContentPresenter.Resources>
+            </ContentPresenter>
+          </Grid>
+          <ContentControl Name="BackgroundPressed" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+        </Grid>
+        <VisualStateManager.VisualStateGroups>
+          <VisualStateGroup x:Name="CommonStates">
+            <VisualState x:Name="Normal" />
+            <VisualState x:Name="MouseOver" />
+            <VisualState x:Name="Pressed">
+              <Storyboard>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                  <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                  <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+              </Storyboard>
+            </VisualState>
+            <VisualState x:Name="Disabled">
+              <Storyboard>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Border">
+                  <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+                </DoubleAnimationUsingKeyFrames>
+              </Storyboard>
+            </VisualState>
+          </VisualStateGroup>
+          <VisualStateGroup x:Name="FocusStates">
+            <VisualState x:Name="Unfocused" />
+            <VisualState x:Name="Focused" />
+          </VisualStateGroup>
+          <VisualStateGroup x:Name="ValidationStates">
+            <VisualState x:Name="Valid" />
+            <VisualState x:Name="InvalidFocused" />
+            <VisualState x:Name="InvalidUnfocused" />
+          </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+      </Grid>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Value="{x:Null}" Property="MenuItem.Icon">
+        <Setter TargetName="Icon" Property="UIElement.Visibility" Value="Collapsed" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.4" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleMenuItem_Default" TargetType="{x:Type MenuItem}">
+    <Setter Property="Control.BorderBrush" Value="{StaticResource EDU_IconButtonLightBorder}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.Padding" Value="16,0" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+    <Setter Property="Control.VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+    <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+    <Setter Property="Control.Template" Value="{StaticResource MenuItemTemplate}" />
+    <Setter Property="FrameworkElement.Margin" Value="16,8,16,8" />
+    <Setter Property="FrameworkElement.Height" Value="48" />
+    <Setter Property="FrameworkElement.Width" Value="224" />
+  </Style>
+  <Style x:Key="C_strContextMenuItem_Programmverwaltung" TargetType="{x:Type MenuItem}">
+    <Setter Property="Control.BorderBrush" Value="{StaticResource EDU_IconButtonLightBorder}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.Padding" Value="16,0" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+    <Setter Property="Control.VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+    <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+    <Setter Property="Control.Template" Value="{StaticResource MenuItemTemplateProgrammVerwaltung}" />
+    <Setter Property="FrameworkElement.Height" Value="48" />
+    <Setter Property="FrameworkElement.Width" Value="280" />
+  </Style>
+  <Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource C_strStyleMenuItem_Default}" />
+</ResourceDictionary>

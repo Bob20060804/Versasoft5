@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls,Version=4.33.0.0,Culture=neutral,PublicKeyToken=null">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="ToolTipBorder" Color="#FF012F50" />
+  <LinearGradientBrush x:Key="C_strBrushToolTipBackground" StartPoint="0,0" EndPoint="0,1">
+    <LinearGradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="White" Offset="0.0" />
+        <GradientStop Color="#EEE" Offset="1.0" />
+      </GradientStopCollection>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+  <ControlTemplate x:Key="C_strTemplateToolTipDefault" TargetType="{x:Type ContentControl}">
+    <Grid>
+      <Grid.Effect>
+        <DropShadowEffect Opacity="0.4" BlurRadius="6" ShadowDepth="2" />
+      </Grid.Effect>
+      <Border Name="Border" BorderBrush="{StaticResource ToolTipBorder}" BorderThickness="1" CornerRadius="2" Background="#FFFFFFFF">
+        <ContentPresenter Margin="8" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <ContentPresenter.Resources>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WrappingTextBlockStyle}" />
+          </ContentPresenter.Resources>
+        </ContentPresenter>
+      </Border>
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleToolTipDefault" TargetType="{x:Type ContentControl}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="Grid.IsSharedSizeScope" Value="True" />
+    <Setter Property="FrameworkElement.MaxWidth" Value="300" />
+    <Setter Property="Control.BorderBrush" Value="#FF888888" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="FrameworkElement.Margin" Value="6" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateToolTipDefault}" />
+    <Setter Property="Control.Background" Value="{StaticResource C_strBrushToolTipBackground}" />
+  </Style>
+  <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}" BasedOn="{StaticResource C_strStyleToolTipDefault}">
+    <Setter Property="ToolTip.Placement" Value="Top" />
+    <Setter Property="ToolTip.HorizontalOffset" Value="0" />
+    <Setter Property="ToolTip.VerticalOffset" Value="-3" />
+  </Style>
+  <Style x:Key="C_strStyleTooltip_ProgrammBild" TargetType="{x:Type ToolTip}" BasedOn="{StaticResource C_strStyleToolTipDefault}">
+    <Setter Property="FrameworkElement.MaxWidth" Value="{x:Static system:Double.PositiveInfinity}" />
+  </Style>
+</ResourceDictionary>

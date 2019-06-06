@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Separator.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="BackgroundDates" Color="{StaticResource C_strColor_Dunkelblau}" Opacity="0.15" />
+  <SolidColorBrush x:Key="InactivDayButton" Color="{StaticResource C_strColor_Dunkelblau}" Opacity="0.4" />
+  <ControlTemplate x:Key="C_strTemplateCalenderDayButton_Default" TargetType="{x:Type CalendarDayButton}">
+    <Grid Name="Root">
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Inactive">
+            <Storyboard>
+              <DoubleAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="Opacity" To="0.4" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Active">
+            <Storyboard>
+              <DoubleAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="Opacity" To="1" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Today">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.FontWeight)" Storyboard.TargetName="NormalText">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                  <DiscreteObjectKeyFrame.Value>
+                    <FontWeight>Bold</FontWeight>
+                  </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+        <VisualStateGroup x:Name="SelectionStates">
+          <VisualState x:Name="Selected">
+            <Storyboard>
+              <DoubleAnimation Duration="0" Storyboard.TargetName="SelectedBackground" Storyboard.TargetProperty="Opacity" To="0.3" />
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Unselected">
+            <Storyboard>
+              <DoubleAnimation Duration="0" Storyboard.TargetName="SelectedBackground" Storyboard.TargetProperty="Opacity" To="0" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+      <Border Name="SelectedBackground" Opacity="0" Background="{StaticResource C_strBrush_Lichtblau_V1}" />
+      <Border Name="Background" BorderBrush="{StaticResource C_strBrush_Weiß}" BorderThickness="1,1,0,0" Background="{StaticResource BackgroundDates}" />
+      <ContentPresenter Name="NormalText" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" Margin="5,1,5,1">
+        <TextElement.Foreground>
+          <SolidColorBrush x:Name="selectedText" Color="{StaticResource C_strColor_Dunkelblau}" />
+        </TextElement.Foreground>
+        <ContentPresenter.Resources>
+          <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="TextBlock.FontSize" Value="18" />
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+          </Style>
+        </ContentPresenter.Resources>
+      </ContentPresenter>
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleCalenderDayButton_Default" TargetType="{x:Type CalendarDayButton}">
+    <Setter Property="FrameworkElement.Height" Value="48" />
+    <Setter Property="FrameworkElement.Width" Value="48" />
+    <Setter Property="Control.FontSize" Value="18" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateCalenderDayButton_Default}" />
+  </Style>
+  <ControlTemplate x:Key="C_strTemplateCalenderItemHeaderPreviousButton_Default" TargetType="{x:Type Button}">
+    <Grid Cursor="Hand" IsHitTestVisible="True">
+      <Image Name="Icon" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Schritt_links_24x24.png" Stretch="None" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ButtonBase.IsPressed" Value="True">
+        <Setter TargetName="Icon" Property="Image.Source" Value="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Schritt_links_aktiv_24x24.png" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="C_strTemplateCalenderItemHeaderNextButton_Default" TargetType="{x:Type Button}">
+    <Grid Cursor="Hand" IsHitTestVisible="True">
+      <Image Name="Icon" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Schritt_rechts_24x24.png" Stretch="None" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ButtonBase.IsPressed" Value="True">
+        <Setter TargetName="Icon" Property="Image.Source" Value="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Schritt_rechts_aktiv_24x24.png" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="C_strTemplateCalenderItemHeaderButton_Default" TargetType="{x:Type Button}">
+    <Grid Cursor="Hand" IsHitTestVisible="False">
+      <ContentPresenter Name="buttonContent" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" Content="{TemplateBinding ContentControl.Content}">
+        <ContentPresenter.Resources>
+          <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ModulParameterGroupBoxHeaderStyle}">
+            <Setter Property="TextBlock.FontSize" Value="18" />
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+          </Style>
+        </ContentPresenter.Resources>
+      </ContentPresenter>
+    </Grid>
+  </ControlTemplate>
+  <ControlTemplate x:Key="C_strTemplateCalenderItem_Default" TargetType="{x:Type CalendarItem}">
+    <ControlTemplate.Resources>
+      <DataTemplate>
+        <TextBlock TextBlock.Foreground="{StaticResource C_strBrush_Dunkelblau}" TextBlock.FontWeight="Bold" TextBlock.FontSize="18" HorizontalAlignment="Center" Margin="0,6,0,6" VerticalAlignment="Center" Text="{Binding}" />
+      </DataTemplate>
+    </ControlTemplate.Resources>
+    <Grid Name="PART_Root">
+      <Grid.Resources>
+        <SolidColorBrush x:Key="DisabledColor" Color="#A5FFFFFF" />
+      </Grid.Resources>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="Disabled">
+            <Storyboard>
+              <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_DisabledVisual" />
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+      <Border Grid.Row="1" BorderBrush="{StaticResource C_strBrush_Dunkelblau}" Background="{StaticResource C_strBrush_Weiß}" BorderThickness="1" CornerRadius="2">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Button Name="PART_PreviousButton" Focusable="False" HorizontalAlignment="Left" Margin="8,0,0,0" Template="{StaticResource C_strTemplateCalenderItemHeaderPreviousButton_Default}" />
+          <Button Name="PART_HeaderButton" Grid.Column="1" HorizontalAlignment="Center" Template="{StaticResource C_strTemplateCalenderItemHeaderButton_Default}" VerticalAlignment="Center" />
+          <Button Name="PART_NextButton" Grid.Column="2" Focusable="False" HorizontalAlignment="Right" Margin="0,0,8,0" Template="{StaticResource C_strTemplateCalenderItemHeaderNextButton_Default}" />
+          <Separator Grid.ColumnSpan="3" Height="1" Margin="5,-4,5,4" Opacity="0.4" Style="{StaticResource SeparatorUebergeordneteParameterStyle}" VerticalAlignment="Bottom" />
+          <Grid Name="PART_MonthView" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="6,-1,6,6" Grid.Row="1" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+          </Grid>
+          <Grid Name="PART_YearView" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="6,-3,7,6" Grid.Row="1" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+          </Grid>
+        </Grid>
+      </Border>
+      <Rectangle Name="PART_DisabledVisual" Fill="{StaticResource DisabledColor}" Opacity="0" RadiusY="2" RadiusX="2" Stretch="Fill" Stroke="{StaticResource DisabledColor}" StrokeThickness="1" Visibility="Collapsed" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter TargetName="PART_DisabledVisual" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <DataTrigger Value="Year" Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
+        <Setter TargetName="PART_MonthView" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="PART_YearView" Property="UIElement.Visibility" Value="Visible" />
+      </DataTrigger>
+      <DataTrigger Value="Decade" Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
+        <Setter TargetName="PART_MonthView" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="PART_YearView" Property="UIElement.Visibility" Value="Visible" />
+      </DataTrigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleCalenderItem_Default" TargetType="{x:Type CalendarItem}">
+    <Setter Property="FrameworkElement.Margin" Value="0,3,0,3" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateCalenderItem_Default}" />
+  </Style>
+  <ControlTemplate x:Key="C_strTemplateCalender_Default" TargetType="{x:Type Calendar}">
+    <StackPanel Name="PART_Root" HorizontalAlignment="Center">
+      <CalendarItem Name="PART_CalendarItem" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Style="{TemplateBinding Calendar.CalendarItemStyle}" />
+    </StackPanel>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleCalender_Default" TargetType="{x:Type Calendar}">
+    <Setter Property="Control.Foreground" Value="#FF333333" />
+    <Setter Property="Control.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#FFE4EAF0" Offset="0" />
+          <GradientStop Color="#FFECF0F4" Offset="0.16" />
+          <GradientStop Color="#FFFCFCFD" Offset="0.16" />
+          <GradientStop Color="#FFFFFFFF" Offset="1" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Control.BorderBrush">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#FFA3AEB9" Offset="0" />
+          <GradientStop Color="#FF8399A9" Offset="0.375" />
+          <GradientStop Color="#FF718597" Offset="0.375" />
+          <GradientStop Color="#FF617584" Offset="1" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Calendar.CalendarItemStyle" Value="{StaticResource C_strStyleCalenderItem_Default}" />
+    <Setter Property="Calendar.CalendarDayButtonStyle" Value="{StaticResource C_strStyleCalenderDayButton_Default}" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateCalender_Default}" />
+  </Style>
+  <Style x:Key="DatePickerCalendar" BasedOn="{StaticResource C_strStyleCalender_Default}" TargetType="{x:Type Calendar}" />
+  <Style x:Key="{x:Type Calendar}" TargetType="{x:Type Calendar}" BasedOn="{StaticResource DatePickerCalendar}" />
+</ResourceDictionary>

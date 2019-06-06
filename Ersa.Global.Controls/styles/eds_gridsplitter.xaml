@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <Style x:Key="C_strGridSplitter_Resizer" TargetType="{x:Type GridSplitter}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type GridSplitter}">
+          <Border Background="{StaticResource C_strBrush_StandardFensterInhaltHintergrund}">
+            <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Gridsplitter_24x16.png" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="C_strGridSplitter_ResizerHorizontal" TargetType="{x:Type GridSplitter}" BasedOn="{StaticResource C_strGridSplitter_Resizer}">
+    <Setter Property="FrameworkElement.Height" Value="16" />
+    <Setter Property="GridSplitter.ShowsPreview" Value="True" />
+    <Setter Property="GridSplitter.ResizeDirection" Value="Rows" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+  </Style>
+  <Style x:Key="C_strGridSplitter_ResizerVertikal" TargetType="{x:Type GridSplitter}">
+    <Setter Property="FrameworkElement.Width" Value="16" />
+    <Setter Property="GridSplitter.ShowsPreview" Value="True" />
+    <Setter Property="GridSplitter.ResizeDirection" Value="Columns" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type GridSplitter}">
+          <Border Background="{StaticResource C_strBrush_StandardFensterInhaltHintergrund}">
+            <Image Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Gridsplitter_24x16.png">
+              <Image.LayoutTransform>
+                <RotateTransform Angle="90" />
+              </Image.LayoutTransform>
+            </Image>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

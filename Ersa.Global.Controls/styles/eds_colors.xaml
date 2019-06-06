@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Color x:Key="C_strColor_Weiß">#FFFFFF</Color>
+  <Color x:Key="C_strColor_MittleresGrau">#f7f7f7</Color>
+  <Color x:Key="C_strColor_Grau">#e1e1e1</Color>
+  <Color x:Key="C_strColor_HG-Reiter-Blau-1">#779ac7</Color>
+  <Color x:Key="C_strColor_HG-Reiter-Blau-2">#3c608c</Color>
+  <Color x:Key="C_strColor_Lichtgrau">#c4caca</Color>
+  <Color x:Key="C_strColor_Lichtblau_V1">#2781bb</Color>
+  <Color x:Key="C_strColor_Lichtblau_V2">#529ac9</Color>
+  <Color x:Key="C_strColor_Hellblau_V1">#779fd0</Color>
+  <Color x:Key="C_strColor_Hellblau_V2">#adc5e3</Color>
+  <Color x:Key="C_strColor_Dunkelblau">#012f50</Color>
+  <Color x:Key="C_strColor_Orange">#ce7a1b</Color>
+  <Color x:Key="C_strColor_Grün_V1">#90ba5f</Color>
+  <Color x:Key="C_strColor_Grün_V2">#c7dcaf</Color>
+  <Color x:Key="C_strColor_Gelb_V1">#e8cd46</Color>
+  <Color x:Key="C_strColor_Gelb_V2">#f5e8ac</Color>
+  <Color x:Key="C_strColor_Rot_V1">#cf505f</Color>
+  <Color x:Key="C_strColor_Rot_V2">#d9737f</Color>
+</ResourceDictionary>

@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ErrorTemplate.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Separator.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ContentControl.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBox.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="ComboBoxBorder" Color="#FFADC5E3" />
+  <SolidColorBrush x:Key="ComboBoxHighlighted" Color="#7F2781BB" />
+  <LinearGradientBrush x:Key="ComboBoxBgNormal" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="#FFE1E1E1" Offset="1" />
+    <GradientStop Color="White" Offset="0" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="ComboBoxBgPressed" EndPoint="0.5,1" StartPoint="0.5,0">
+    <GradientStop Color="#FFE1E1E1" Offset="0" />
+    <GradientStop Color="White" Offset="1" />
+  </LinearGradientBrush>
+  <ControlTemplate x:Key="ComboBoxToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
+    <Grid>
+      <Border Name="BgPressed" CornerRadius="2" Background="{StaticResource ComboBoxBgPressed}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" Visibility="Hidden">
+        <Border Background="#07000000" Margin="-1" />
+      </Border>
+      <Border Name="BgNormal" CornerRadius="2" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" Background="{StaticResource ComboBoxBgNormal}" SnapsToDevicePixels="True" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="24" />
+          <ColumnDefinition Width="8" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+          <Image Height="24" Width="24" Source="/Ersa.Global.Controls;component/Bilder/Icons/Pfeil_combobox_24x24.png" />
+        </Grid>
+      </Grid>
+      <ContentControl Name="BackgroundPressed" Margin="1" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CheckedStates">
+          <VisualState x:Name="Checked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgNormal">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Unchecked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgNormal">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="ComboBoxToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="Control.IsTabStop" Value="False" />
+    <Setter Property="UIElement.Focusable" Value="False" />
+    <Setter Property="ButtonBase.ClickMode" Value="Press" />
+    <Setter Property="Control.FontSize" Value="18" />
+    <Setter Property="Control.Template" Value="{StaticResource ComboBoxToggleButtonTemplate}" />
+  </Style>
+  <ControlTemplate x:Key="ComboBoxToggleButtonOhneRundeEckenTemplate" TargetType="{x:Type ToggleButton}">
+    <Grid>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CheckedStates">
+          <VisualState x:Name="Checked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgNormal">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="Unchecked">
+            <Storyboard>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackgroundPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgPressed">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+              </ObjectAnimationUsingKeyFrames>
+              <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BgNormal">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+              </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+      <Border Name="BgPressed" CornerRadius="0" Background="{StaticResource ComboBoxBgPressed}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" Visibility="Hidden">
+        <Border Margin="-1" Background="#07000000" />
+      </Border>
+      <Border Name="BgNormal" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" Background="{StaticResource ComboBoxBgNormal}" CornerRadius="0" SnapsToDevicePixels="True" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="24" />
+          <ColumnDefinition Width="8" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+          <Image Height="24" Width="24" Source="/Ersa.Global.Controls;component/Bilder/Icons/Pfeil_combobox_24x24.png" />
+        </Grid>
+      </Grid>
+      <ContentControl Name="BackgroundPressed" Margin="1" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Template="{StaticResource InnererSchattenEffekt}" Opacity="0.3" Visibility="Hidden" />
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="ComboBoxToggleButtonOhneRundeEckenStyle" TargetType="{x:Type ToggleButton}">
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="Control.IsTabStop" Value="False" />
+    <Setter Property="UIElement.Focusable" Value="False" />
+    <Setter Property="ButtonBase.ClickMode" Value="Press" />
+    <Setter Property="Control.FontSize" Value="18" />
+    <Setter Property="Control.Template" Value="{StaticResource ComboBoxToggleButtonOhneRundeEckenTemplate}" />
+  </Style>
+  <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}" />
+  <ItemsPanelTemplate x:Key="ComboBoxItemsPanelTemplate">
+    <StackPanel IsItemsHost="True" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+  </ItemsPanelTemplate>
+  <ControlTemplate x:Key="C_strStyleComboBoxItemTemplate" TargetType="{x:Type ComboBoxItem}">
+    <Grid HorizontalAlignment="{TemplateBinding FrameworkElement.HorizontalAlignment}" Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}">
+      <Grid.RowDefinitions>
+        <RowDefinition MinHeight="46" />
+        <RowDefinition Height="2" />
+      </Grid.RowDefinitions>
+      <Border Name="Bd" Grid.RowSpan="2" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True" />
+      <Border Name="BgMouseOver" Background="{StaticResource ComboBoxHighlighted}" Margin="0,-1" Visibility="Hidden" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="40" />
+        </Grid.ColumnDefinitions>
+        <ContentPresenter IsHitTestVisible="False" Margin="{StaticResource C_strStdMarginZentrisch}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="Center" />
+        <Image Name="ImageSelected" Grid.Column="1" IsHitTestVisible="False" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Ersa.Global.Controls;component/Bilder/Icons/Haken_checkbox_24x24.png" Visibility="Hidden" />
+      </Grid>
+      <Separator Name="Separator" Grid.Row="1" Style="{StaticResource ComboBoxHorizontalSeparatorStyle}" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ComboBoxItem.IsHighlighted" Value="True">
+        <Setter TargetName="BgMouseOver" Property="UIElement.Visibility" Value="Visible" />
+        <Setter Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" Property="Control.Foreground" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Property="Control.Foreground" />
+      </Trigger>
+      <Trigger Property="ListBoxItem.IsSelected" Value="True">
+        <Setter TargetName="ImageSelected" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeTextBox}" />
+    <Setter Property="Control.FontWeight" Value="Bold" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="Control.Padding" Value="0" />
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strStyleComboBoxItemTemplate}" />
+  </Style>
+  <Style x:Key="C_strStyleComboBoxItem_RightContent" TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource C_strStyleComboBoxItem}">
+    <Setter Property="Control.HorizontalContentAlignment" Value="Right" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+  </Style>
+  <ControlTemplate x:Key="ComboBoxNonEditableTemplate" TargetType="{x:Type ComboBox}">
+    <Grid Name="MainContainer" SnapsToDevicePixels="True">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Name="ItemWidth" Width="*" />
+        <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="40" />
+      </Grid.ColumnDefinitions>
+      <Popup Name="PART_Popup" Grid.ColumnSpan="2" AllowsTransparency="True" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom" Width="{Binding ActualWidth, ElementName=MainContainer}" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
+        <Grid>
+          <Border Name="DropDownBorder" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" Background="#FFFFFFFF" CornerRadius="2" Width="{Binding ActualWidth, ElementName=MainContainer}" />
+          <ScrollViewer Name="DropDownScrollViewer" MaxHeight="{StaticResource C_strComboBoxMaxHoeheExpanded}" Background="#00FFFFFF" Margin="0,0,0,-2" Template="{StaticResource ComboBoxScrollViewerTemplate}">
+            <Grid RenderOptions.ClearTypeHint="Enabled" Background="#00FFFFFF">
+              <Canvas HorizontalAlignment="Left" Height="0" Width="0" VerticalAlignment="Top" Background="#00FFFFFF">
+                <Rectangle Name="OpaqueRect" Height="{Binding ActualHeight, ElementName=DropDownBorder}" Width="{Binding ActualWidth, ElementName=DropDownBorder}" />
+              </Canvas>
+              <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Width="{Binding ActualWidth, ElementName=MainContainer}" />
+            </Grid>
+          </ScrollViewer>
+        </Grid>
+      </Popup>
+      <ToggleButton Name="Arrow" Grid.ColumnSpan="2" Grid.Column="0" BorderBrush="{StaticResource ComboBoxBorder}" Style="{StaticResource ComboBoxToggleButtonStyle}" Background="{StaticResource ComboBoxBgNormal}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+      <ContentPresenter Name="Content" Grid.Column="0" Width="Auto" Margin="{StaticResource C_strStdMarginLinksUndRechts}" IsHitTestVisible="False" Content="{TemplateBinding ComboBox.SelectionBoxItem}" ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}" ContentStringFormat="{TemplateBinding ComboBox.SelectionBoxItemStringFormat}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" TextBlock.FontSize="18">
+        <ContentPresenter.Resources>
+          <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" />
+        </ContentPresenter.Resources>
+      </ContentPresenter>
+      <Separator Name="Separator" Grid.ColumnSpan="2" Grid.Column="0" Style="{StaticResource ComboBoxVerticalSeparatorStyle}" HorizontalAlignment="Right" Margin="0,2,39,2" />
+      <Border Name="ContentReadOnly" Grid.ColumnSpan="2" Grid.Column="0" Visibility="Hidden" Background="#00FFFFFF" CornerRadius="2" BorderBrush="#FFADC5E3" BorderThickness="1" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ComboBox.IsReadOnly" Value="True">
+        <Setter TargetName="PART_Popup" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="Separator" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="Arrow" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="ContentReadOnly" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="ItemsControl.HasItems" Value="False">
+        <Setter TargetName="DropDownBorder" Property="FrameworkElement.Height" Value="95" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.5" />
+      </Trigger>
+      <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="False">
+        <Setter TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" Property="Canvas.Top" />
+        <Setter TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" Property="Canvas.Left" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="ComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
+    <Grid Name="MainContainer" SnapsToDevicePixels="True">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Name="ItemWidth" Width="*" />
+        <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="40" />
+      </Grid.ColumnDefinitions>
+      <Popup Name="PART_Popup" Grid.ColumnSpan="2" AllowsTransparency="True" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom" Width="{Binding ActualWidth, ElementName=MainContainer}" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
+        <Grid>
+          <Border Name="DropDownBorder" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" Background="#FFFFFFFF" CornerRadius="2" Width="{Binding ActualWidth, ElementName=MainContainer}" />
+          <ScrollViewer Name="DropDownScrollViewer" MaxHeight="{StaticResource C_strComboBoxMaxHoeheExpanded}" Background="#00FFFFFF" Margin="0,0,0,-2" Template="{StaticResource ComboBoxScrollViewerTemplate}">
+            <Grid RenderOptions.ClearTypeHint="Enabled" Background="#00FFFFFF">
+              <Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0" Background="#00FFFFFF">
+                <Rectangle Name="OpaqueRect" Height="{Binding ActualHeight, ElementName=DropDownBorder}" Width="{Binding ActualWidth, ElementName=DropDownBorder}" />
+              </Canvas>
+              <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Width="{Binding ActualWidth, ElementName=MainContainer}" />
+            </Grid>
+          </ScrollViewer>
+        </Grid>
+      </Popup>
+      <Border Grid.ColumnSpan="2" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" CornerRadius="2" />
+      <Grid Grid.Column="1" ClipToBounds="True">
+        <ToggleButton BorderBrush="{StaticResource ComboBoxBorder}" Style="{StaticResource ComboBoxToggleButtonStyle}" Background="{StaticResource ComboBoxBgNormal}" Margin="-4,0,0,0" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+      </Grid>
+      <TextBox Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding Control.VerticalContentAlignment}" IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ComboBox.IsReadOnly" Value="True" />
+      <Trigger Property="ItemsControl.HasItems" Value="False">
+        <Setter TargetName="DropDownBorder" Property="FrameworkElement.Height" Value="95" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.5" />
+      </Trigger>
+      <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="False">
+        <Setter TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" Property="Canvas.Top" />
+        <Setter TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" Property="Canvas.Left" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="ComboBoxNonEditableNonCornerRadiusTemplate" TargetType="{x:Type ComboBox}">
+    <Grid Name="MainContainer" SnapsToDevicePixels="True">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Name="ItemWidth" Width="*" />
+        <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="40" />
+      </Grid.ColumnDefinitions>
+      <Popup Name="PART_Popup" Grid.ColumnSpan="2" AllowsTransparency="True" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom" Width="{Binding ActualWidth, ElementName=MainContainer}" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
+        <Grid>
+          <Border Name="DropDownBorder" BorderBrush="{StaticResource ComboBoxBorder}" BorderThickness="1" Background="#FFFFFFFF" CornerRadius="2" Width="{Binding ActualWidth, ElementName=MainContainer}" />
+          <ScrollViewer Name="DropDownScrollViewer" MaxHeight="{StaticResource C_strComboBoxMaxHoeheExpanded}" Background="#00FFFFFF" Margin="0,0,0,-2" Template="{StaticResource ComboBoxScrollViewerTemplate}">
+            <Grid RenderOptions.ClearTypeHint="Enabled" Background="#00FFFFFF">
+              <Canvas HorizontalAlignment="Left" Height="0" Width="0" VerticalAlignment="Top" Background="#00FFFFFF">
+                <Rectangle Name="OpaqueRect" Height="{Binding ActualHeight, ElementName=DropDownBorder}" Width="{Binding ActualWidth, ElementName=DropDownBorder}" />
+              </Canvas>
+              <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Width="{Binding ActualWidth, ElementName=MainContainer}" />
+            </Grid>
+          </ScrollViewer>
+        </Grid>
+      </Popup>
+      <ToggleButton Name="Arrow" Grid.ColumnSpan="2" BorderBrush="{StaticResource ComboBoxBorder}" Style="{StaticResource ComboBoxToggleButtonOhneRundeEckenStyle}" Background="{StaticResource ComboBoxBgNormal}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+      <ContentPresenter Name="Content" Width="Auto" Margin="{StaticResource C_strStdMarginLinksUndRechts}" IsHitTestVisible="False" Content="{TemplateBinding ComboBox.SelectionBoxItem}" ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}" ContentStringFormat="{TemplateBinding ComboBox.SelectionBoxItemStringFormat}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
+        <ContentPresenter.Resources>
+          <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" />
+        </ContentPresenter.Resources>
+      </ContentPresenter>
+      <Separator Name="Separator" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxVerticalSeparatorStyle}" HorizontalAlignment="Right" Margin="0,2,39,2" />
+      <Border Name="ContentReadOnly" Grid.ColumnSpan="2" Visibility="Hidden" Background="#00FFFFFF" CornerRadius="2" BorderBrush="#FFADC5E3" BorderThickness="1" />
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ComboBox.IsReadOnly" Value="True">
+        <Setter TargetName="PART_Popup" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="Separator" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="Arrow" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="ContentReadOnly" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="ItemsControl.HasItems" Value="False">
+        <Setter TargetName="DropDownBorder" Property="FrameworkElement.Height" Value="95" />
+      </Trigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.5" />
+      </Trigger>
+      <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="False">
+        <Setter TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" Property="Canvas.Top" />
+        <Setter TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" Property="Canvas.Left" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="ComboBoxValidationErrorTamplate">
+    <Border Background="#32BF0017" BorderBrush="#FFBF0017" BorderThickness="2" CornerRadius="2" IsHitTestVisible="False">
+      <AdornedElementPlaceholder />
+    </Border>
+  </ControlTemplate>
+  <Style x:Key="ComboBoxDefaultStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource C_strControlMitErrorTemplate}">
+    <Setter Property="Control.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="Control.FontSize" Value="{StaticResource FontSizeTextBox}" />
+    <Setter Property="Control.FontWeight" Value="Bold" />
+    <Setter Property="Control.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Top" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+    <Setter Property="Control.Padding" Value="0" />
+    <Setter Property="ItemsControl.ItemsPanel" Value="{StaticResource ComboBoxItemsPanelTemplate}" />
+    <Setter Property="ItemsControl.ItemContainerStyle" Value="{StaticResource C_strStyleComboBoxItem}" />
+    <Setter Property="FrameworkElement.Height" Value="{StaticResource C_strBasisTouchHoehe}" />
+    <Setter Property="Control.Template" Value="{StaticResource ComboBoxNonEditableTemplate}" />
+    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ComboBoxValidationErrorTamplate}" />
+    <Style.Triggers>
+      <Trigger Property="ComboBox.IsEditable" Value="True">
+        <Setter Property="Control.Template" Value="{StaticResource ComboBoxEditableTemplate}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleComboBox_Grid" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxDefaultStyle}">
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+  </Style>
+  <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxDefaultStyle}" />
+  <Style x:Key="C_strStyleCommandComboBox_Default" TargetType="{x:Type controls:EDU_CommandComboBox}" BasedOn="{StaticResource ComboBoxDefaultStyle}" />
+  <Style x:Key="C_strCommandComboBox_Grid" TargetType="{x:Type controls:EDU_CommandComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="Control.Template" Value="{StaticResource ComboBoxNonEditableNonCornerRadiusTemplate}" />
+  </Style>
+  <Style x:Key="{x:Type controls:EDU_CommandComboBox}" TargetType="{x:Type controls:EDU_CommandComboBox}" BasedOn="{StaticResource C_strStyleCommandComboBox_Default}" />
+</ResourceDictionary>

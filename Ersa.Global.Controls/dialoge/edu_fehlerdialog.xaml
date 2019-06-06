@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dialoge:EDU_Dialog x:Class="Ersa.Global.Controls.Dialoge.EDU_FehlerDialog" Title="EDU_FehlerDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dialoge="clr-namespace:Ersa.Global.Controls.Dialoge" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls" xmlns:converters="clr-namespace:Ersa.Global.Controls.Converters">
+  <dialoge:EDU_Dialog.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DialogGroupBox.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <converters:EDC_BooleanNachVisibilityConverter x:Key="C_strConverter_BoolNachVisibilityCollapsed" PRO_objFalseWert="Collapsed" />
+    </ResourceDictionary>
+  </dialoge:EDU_Dialog.Resources>
+  <Grid>
+    <Border Background="{StaticResource C_strSolidColorBrush_Dialog_WindowBackground}" />
+    <controls:EDU_DialogGroupBox Width="{StaticResource C_strDialogGroupBoxSpaltenBreite_Exception}" Header="{Binding PRO_strTitel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="{StaticResource C_strStdMarginRechtsUnten}" VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding PRO_strText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+        <controls:EDU_ExceptionAnzeige Grid.Row="1" Margin="{StaticResource C_strStdMarginRechtsUnten}" PRO_fdcException="{Binding PRO_fdcException, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+      </Grid>
+      <controls:EDU_DialogGroupBox.PRO_objFooter>
+        <UniformGrid Rows="1">
+          <controls:EDU_IconButton Click="SUB_BeendenGeklickt" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strAnwendungBeendenText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+          <controls:EDU_IconButton Click="SUB_InZwischenablageKopieren" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strInZwischenablageKopierenText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+          <controls:EDU_IconButton Click="SUB_ServicefallErstellen" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strServicefallAnlegenText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" IsEnabled="{Binding PRO_blnIstServicefallAnlegenEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Visibility="{Binding PRO_blnIstServicefallAnlegenSichtbar, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_BoolNachVisibilityCollapsed}}" />
+          <controls:EDU_IconButton Click="SUB_WeiterAusfuehrenGeklickt" Margin="{StaticResource C_strStdMarginRechtsUnten}" Content="{Binding PRO_strAnwendungWeiterAusfuehrenText, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+        </UniformGrid>
+      </controls:EDU_DialogGroupBox.PRO_objFooter>
+    </controls:EDU_DialogGroupBox>
+  </Grid>
+</dialoge:EDU_Dialog>

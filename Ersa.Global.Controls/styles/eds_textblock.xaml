@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls,Version=4.33.0.0,Culture=neutral,PublicKeyToken=null">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <Style x:Key="C_strStyleTextBlock_BaseOhneDisabled" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+  </Style>
+  <Style x:Key="TextBase" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleTextBlock_BaseOhneDisabled}">
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.5" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBase}" />
+  <Style x:Key="TextBlockBase" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBase}">
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.5" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strStyleTextBlock_BaseBold" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBase}">
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter Property="UIElement.Opacity" Value="0.5" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="C_strTextBlockLogo" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeLogo}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Hellblau_V1}" />
+  </Style>
+  <Style x:Key="TextBlockUeberschrift" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeUeberschrift1}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginNurRechts}" />
+  </Style>
+  <Style x:Key="TextBlockUeberschrift1" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeUeberschrift1}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Hellblau_V1}" />
+  </Style>
+  <Style x:Key="TextBlockUeberschrift2" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Weiß}" />
+  </Style>
+  <Style x:Key="TextBlockFontWeightNormal" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeUeberschrift1}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+  </Style>
+  <Style x:Key="ModulParameterGroupBoxHeaderStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Lichtblau_V1}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.FontSize" Value="16" />
+  </Style>
+  <Style x:Key="ModulParameterUnterUeberschriftStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Lichtblau_V1}" />
+    <Setter Property="TextBlock.FontWeight" Value="Normal" />
+    <Setter Property="TextBlock.FontSize" Value="16" />
+  </Style>
+  <Style x:Key="AggregatUeberschriftStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Lichtblau_V1}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.FontSize" Value="16" />
+  </Style>
+  <Style x:Key="AggregatKonfigurationGroupBoxHeaderStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}" />
+  <Style x:Key="GroupBoxHeaderStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}" />
+  <Style x:Key="DialogStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeButton}" />
+  </Style>
+  <Style x:Key="SuchTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Grau}" />
+  </Style>
+  <Style x:Key="BreadCrumbTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Weiß}" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeButton}" />
+  </Style>
+  <Style x:Key="BreadCrumbTextBlockStyleDunkel" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+  </Style>
+  <Style x:Key="ToolTipPopupTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+  </Style>
+  <Style x:Key="TextBlockAlterateImageStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeNormal}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Hellblau_V1}" />
+  </Style>
+  <Style x:Key="WrappingTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+  </Style>
+  <Style x:Key="WrappingEmptyCollapsedTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WrappingTextBlockStyle}">
+    <Style.Triggers>
+      <Trigger Property="TextBlock.Text" Value="">
+        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+      </Trigger>
+      <Trigger Property="TextBlock.Text" Value="{x:Null}">
+        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+      </Trigger>
+      <Trigger Property="TextBlock.Text" Value="{x:Static system:String.Empty}">
+        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="CheckBoxLeftTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WrappingEmptyCollapsedTextBlockStyle}">
+    <Setter Property="FrameworkElement.Margin" Value="0,0,8,0" />
+  </Style>
+  <Style x:Key="EDU_IconButtonTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeButton}" />
+  </Style>
+  <Style x:Key="EDU_ButtonTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeButton}" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+  </Style>
+  <Style x:Key="EDU_TabItemTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+    <Setter Property="TextBlock.FontSize" Value="18" />
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+  </Style>
+  <Style x:Key="EDU_HauptNavigationsButtonTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeButton}" />
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+  </Style>
+  <Style x:Key="EDU_EDS_ComboBoxNonEditableTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeTextBox}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+  </Style>
+  <SolidColorBrush x:Key="AggregatAnzeigeForeground" Color="#FF919EA8" />
+  <Style x:Key="AggregatAnzeigeTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="18" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource AggregatAnzeigeForeground}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+  </Style>
+  <Style x:Key="AggregatAnzeigeTextBlockStyleKlein" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="12" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource AggregatAnzeigeForeground}" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+  </Style>
+  <Style x:Key="Uhrzeit" TargetType="{x:Type TextBlock}">
+    <Setter Property="FrameworkElement.Height" Value="64" />
+    <Setter Property="FrameworkElement.Width" Value="176" />
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="24" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Hellblau_V1}" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right" />
+  </Style>
+  <Style x:Key="StartControlTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeTextBox}" />
+  </Style>
+  <Style x:Key="C_strStyleTextBlock_WidgetNormal" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.FontFamily" Value="{StaticResource FontFamilyNormal}" />
+    <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeUeberschrift1}" />
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource C_strBrush_Dunkelblau}" />
+  </Style>
+  <Style x:Key="C_strStyleTextBlock_WidgetFett" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource C_strStyleTextBlock_WidgetNormal}">
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+  </Style>
+  <Style x:Key="C_strStyleTextBlock_NurAbstandRechts" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginNurRechts}" />
+  </Style>
+  <Style x:Key="C_strStyleTextBlock_AbstandRechtsUndUnten" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+    <Setter Property="FrameworkElement.Margin" Value="{StaticResource C_strStdMarginRechtsUnten}" />
+  </Style>
+</ResourceDictionary>

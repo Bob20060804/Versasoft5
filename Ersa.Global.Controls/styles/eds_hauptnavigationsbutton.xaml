@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers" xmlns:controls="clr-namespace:Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BeschraenkterIconButton.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="HauptNavigationsButtonBackground" Color="#FF3C608C" />
+  <SolidColorBrush x:Key="HauptNavigationsButtonShineBackground" Color="#CD791A" />
+  <SolidColorBrush x:Key="HauptNavigationsButtonBorder" Color="#FF2781BB" />
+  <SolidColorBrush x:Key="HauptNavigationsButtonForeground" Color="#FFC4CACA" />
+  <SolidColorBrush x:Key="HauptNavigationsButtonSelectedForeground" Color="#FFCE7A1B" />
+  <DropShadowEffect x:Key="TextShadowNormal" BlurRadius="0" Direction="90" ShadowDepth="2" Opacity="0.85" />
+  <DropShadowEffect x:Key="TextShadowSelected" BlurRadius="0" Direction="90" ShadowDepth="2" Opacity="0.4" />
+  <ControlTemplate x:Key="C_strTemplateHauptNavigationsButton_Default" TargetType="{x:Type controls:EDU_HauptNavigationsButton}">
+    <Grid SnapsToDevicePixels="True" Height="{TemplateBinding FrameworkElement.Height}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="8" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Border Name="ContainerBorder" Opacity="0.6" Background="{StaticResource HauptNavigationsButtonBackground}" BorderBrush="{StaticResource HauptNavigationsButtonBorder}" BorderThickness="0,0,1,0" />
+      <Border Name="ClickArea" Background="#00FFFFFF" Grid.Column="1" />
+      <Grid Name="BgPRO_blnIstAusgewaehlt" Grid.Column="1" Margin="-1,0,0,0" Opacity="0.6" Visibility="Collapsed">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="4" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="4" />
+          <RowDefinition Height="*" />
+          <RowDefinition Height="4" />
+        </Grid.RowDefinitions>
+        <Border Background="{StaticResource HauptNavigationsButtonBackground}" Grid.RowSpan="3" Margin="1,3,2,3" />
+        <Border Background="{StaticResource HauptNavigationsButtonBackground}" Margin="2,0,0,0" Grid.Row="1" />
+        <Border BorderBrush="{StaticResource HauptNavigationsButtonBorder}" BorderThickness="1,0,0,1" Margin="0,0,0,-1" CornerRadius="0,0,0,4" />
+        <Border Background="{StaticResource HauptNavigationsButtonBackground}" BorderBrush="{StaticResource HauptNavigationsButtonBorder}" BorderThickness="0,1,1,1" Grid.Row="1" Grid.Column="1" CornerRadius="0,4,4,0" />
+        <Border BorderBrush="{StaticResource HauptNavigationsButtonBorder}" BorderThickness="1,1,0,0" Grid.Row="2" Margin="0,-1,0,0" CornerRadius="4,0,0,0" />
+      </Grid>
+      <Grid Name="ShineContainer" Grid.Column="1" Opacity="0">
+        <Border Background="{StaticResource HauptNavigationsButtonShineBackground}" Margin="12" CornerRadius="25">
+          <Border.Effect>
+            <BlurEffect Radius="30" />
+          </Border.Effect>
+        </Border>
+      </Grid>
+      <Grid Name="ContentContainer" Grid.Column="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Image Margin="24,0,16,0" MaxWidth="48" MaxHeight="48" Source="{Binding Path=PRO_strIconUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+        <ContentPresenter Name="ContentPresenterName" Effect="{StaticResource TextShadowNormal}" Grid.Column="1" VerticalAlignment="Center">
+          <ContentPresenter.Resources>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EDU_HauptNavigationsButtonTextBlockStyle}" />
+          </ContentPresenter.Resources>
+        </ContentPresenter>
+        <Grid Grid.Column="2" Margin="8,0,8,0" Visibility="{Binding PRO_blnZugriffEingeschraenkt, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+          <Image Name="imgSchloss" Width="24" Height="24" Source="{Binding PRO_strBeschraenkungsIconUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+          <Image Name="imgSchlossAktiv" Width="24" Height="24" Visibility="Hidden" Source="{Binding PRO_strBeschraenkungsIconAusgewaehltUri, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource C_strConverter_NullToUnsetValue}}" />
+        </Grid>
+      </Grid>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter TargetName="ContentContainer" Property="UIElement.Opacity" Value="0.5" />
+      </Trigger>
+      <Trigger Property="controls:EDU_HauptNavigationsButton.PRO_blnIstAusgewaehlt" Value="True">
+        <Setter TargetName="ContainerBorder" Property="Border.BorderThickness" Value="0" />
+        <Setter TargetName="BgPRO_blnIstAusgewaehlt" Property="UIElement.Visibility" Value="Visible" />
+        <Setter Value="{StaticResource HauptNavigationsButtonSelectedForeground}" Property="Control.Foreground" />
+        <Setter Property="Control.FontWeight" Value="Bold" />
+        <Setter TargetName="ContentPresenterName" Value="{StaticResource TextShadowSelected}" Property="UIElement.Effect" />
+        <Setter TargetName="imgSchloss" Property="UIElement.Visibility" Value="Hidden" />
+        <Setter TargetName="imgSchlossAktiv" Property="UIElement.Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="controls:EDU_HauptNavigationsButton.PRO_blnIstHervorgehoben" Value="True">
+        <Trigger.EnterActions>
+          <BeginStoryboard>
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="ShineContainer" Storyboard.TargetProperty="Opacity" To="0.35" Duration="0:0:.3" />
+            </Storyboard>
+          </BeginStoryboard>
+        </Trigger.EnterActions>
+        <Trigger.ExitActions>
+          <BeginStoryboard>
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetName="ShineContainer" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:.3" />
+            </Storyboard>
+          </BeginStoryboard>
+        </Trigger.ExitActions>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="C_strStyleHauptNavigationsButton_Default" TargetType="{x:Type controls:EDU_HauptNavigationsButton}" BasedOn="{StaticResource C_strStyleIconButtonBeschraenkt}">
+    <Setter Property="FrameworkElement.Height" Value="104" />
+    <Setter Property="Control.Foreground" Value="{StaticResource HauptNavigationsButtonForeground}" />
+    <Setter Property="controls:EDU_BeschraenkterIconButton.PRO_strBeschraenkungsIconUri" Value="/Ersa.Global.Controls;component/Bilder/Icons/Icon_locked_tab-navigation_24x24.png" />
+    <Setter Property="controls:EDU_HauptNavigationsButton.PRO_strBeschraenkungsIconAusgewaehltUri" Value="/Ersa.Global.Controls;component/Bilder/Icons/Icon_locked_tab-navigation_Aktiv_24x24.png" />
+    <Setter Property="Control.Template" Value="{StaticResource C_strTemplateHauptNavigationsButton_Default}" />
+  </Style>
+  <Style x:Key="{x:Type controls:EDU_HauptNavigationsButton}" TargetType="{x:Type controls:EDU_HauptNavigationsButton}" BasedOn="{StaticResource C_strStyleHauptNavigationsButton_Default}" />
+</ResourceDictionary>

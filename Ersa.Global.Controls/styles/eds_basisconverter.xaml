@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:converters="clr-namespace:Ersa.Global.Controls.Converters">
+  <converters:EDC_BooleanNachVisibilityConverter x:Key="C_strConverter_BoolNachVisibility" />
+  <converters:EDC_BooleanNachVisibilityConverter x:Key="C_strConverter_BoolNachVisibilityInvertiert" PRO_blnIstInvertiert="True" />
+  <converters:EDC_BooleanNachVisibilityConverter x:Key="C_strConverter_BoolNachVisibilityHiddenInvertiert" PRO_blnIstInvertiert="True" PRO_objFalseWert="Hidden" />
+  <converters:EDC_BooleanNachBooleanConverter x:Key="C_strConverter_BoolNachBoolInvertiert" PRO_blnIstInvertiert="True" />
+  <converters:EDC_ObjectNachIstObjectNullVisibilityConverter x:Key="C_strConverter_NullNachVisibility" />
+  <converters:EDC_ObjectNachIstObjectNullVisibilityConverter x:Key="C_strConverter_NichtNullNachVisibility" PRO_blnIstInvertiert="True" />
+  <converters:EDC_ObjectNachIstObjectNullConverter x:Key="C_strConverter_NullNachBool" />
+  <converters:EDC_ObjectNachIstObjectNullConverter x:Key="C_strConverter_NichtNullNachBool" PRO_blnIstInvertiert="True" />
+  <converters:EDC_StringInhaltNachVisibilityConverter x:Key="C_strConverter_StringInhaltNachVisibility" />
+  <converters:EDC_StringInhaltNachVisibilityConverter x:Key="C_strConverter_StringInhaltNachVisibilityInvertiert" PRO_blnIstInvertiert="True" />
+  <converters:EDC_StringInhaltNachVisibilityConverter x:Key="C_strConverter_StringInhaltNachVisibilityHidden" PRO_objFalseWert="Hidden" />
+  <converters:EDC_StringNichtLeerConverter x:Key="C_strConverter_StringNichtLeer" />
+  <converters:EDC_StringNichtLeerConverter x:Key="C_strConverter_StringLeer" PRO_blnIstInvertiert="True" />
+  <converters:EDC_DoubleNachTextConverter x:Key="C_strConverter_DoubleNachText" />
+  <converters:EDC_NullToUnsetValueConverter x:Key="C_strConverter_NullToUnsetValue" />
+  <converters:EDC_IntegerNachBoolConverter x:Key="C_strConverter_IntegerNachBool" />
+</ResourceDictionary>
