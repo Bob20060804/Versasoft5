@@ -123,6 +123,11 @@ namespace Ersa.Platform.Logging
 			m_edcErsaLogger.SUB_LoggingBeenden();
 		}
 
+        /// <summary>
+        /// Convert loglevel
+        /// </summary>
+        /// <param name="i_enmLogLevel"></param>
+        /// <returns></returns>
 		private ENUM_LoggingLevels FUN_enmLogLevelKonvertieren(ENUM_LogLevel i_enmLogLevel)
 		{
 			if (!m_dicLogLevelDllEnums.TryGetValue(i_enmLogLevel, out ENUM_LoggingLevels value))
@@ -132,6 +137,11 @@ namespace Ersa.Platform.Logging
 			return value;
 		}
 
+        /// <summary>
+        /// Convert Log level
+        /// </summary>
+        /// <param name="i_enmLogLevel"></param>
+        /// <returns></returns>
 		[DebuggerStepThrough]
 		private ENUM_LogLevel FUN_enmLogLevelKonvertieren(ENUM_LoggingLevels i_enmLogLevel)
 		{

@@ -136,6 +136,7 @@ namespace Ersa.Platform.Mes.Dienste
 			return await PRO_enuFunktionen.FirstOrDefault((INF_MesFunktion i_edcFunktion) => i_edcFunktion.PRO_enuMesFunktion.Equals(i_enuFunktion)).FUN_fdcAusfuehrenAsync(i_edcEinstellung, i_edcMaschinenDaten).ConfigureAwait(continueOnCapturedContext: false);
 		}
 
+        // –¥»Î»’÷æ
 		protected void SUB_LogEintragSchreiben(string i_strEintrag, [CallerMemberName] string i_strMethodenName = "")
 		{
 			if ((m_edcLogger.PRO_enmLoggingLevel & ENUM_LogLevel.Traceability) != ENUM_LogLevel.Kein)

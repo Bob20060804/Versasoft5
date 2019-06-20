@@ -18,7 +18,7 @@ namespace Ersa.Platform.Mes.Interfaces
 		}
 
         /// <summary>
-        /// Mes communication return
+        /// Return Mes communication 
         /// </summary>
         /// <param name="i_edcEinstellung"></param>
         /// <param name="i_edcMaschinenDaten"></param>

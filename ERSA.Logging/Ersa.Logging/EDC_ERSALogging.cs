@@ -117,6 +117,7 @@ namespace Ersa.Logging
 					m_enmLoggingLevelAktuell = (value & ENUM_LoggingLevels.AlleBasis);
 				}
 				SUB_LoggingEintragInStringFeldUebernehmen(Strings.LSet("DLL", m_i32LaengeLoggingLevelBeschreibung) + ": " + MethodBase.GetCurrentMethod().DeclaringType.Namespace + ": " + MethodBase.GetCurrentMethod().DeclaringType.Name + " - " + MethodBase.GetCurrentMethod().Name + "(" + Conversions.ToString((ulong)m_enmLoggingLevelAktuell) + ")");
+
 				if (value == ENUM_LoggingLevels.Kein)
 				{
 					SUB_LoggingBeenden();
@@ -519,6 +520,9 @@ namespace Ersa.Logging
 			}
 		}
 
+        /// <summary>
+        /// backup
+        /// </summary>
 		public void SUB_LoggingBeenden()
 		{
 			try
