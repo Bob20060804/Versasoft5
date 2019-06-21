@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.AllgemeineEinstellungen.Views.EDV_AllgemeineEinstellungenView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:navigationsTabControl="clr-namespace:Ersa.Global.Controls.NavigationsTabControl;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TabControl.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI.Common;component/Styles/EDS_TabItem.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <navigationsTabControl:EDU_NavigationsTabControl Style="{StaticResource C_strStyleTabControl_MitButtonLeiste}" ItemContainerStyle="{StaticResource HauptTabItemStyle}" ItemTemplate="{StaticResource C_strTemplate_TabItem_MitSchloss}" ContentTemplate="{StaticResource C_strTemplate_TabItem_Inhalt}" PRO_cmdTabItemGeaendertCommand="{Binding PRO_cmdEinstellungsTabGeandert}" ItemsSource="{Binding PRO_lstTabItems}" />
+  </Grid>
+</UserControl>

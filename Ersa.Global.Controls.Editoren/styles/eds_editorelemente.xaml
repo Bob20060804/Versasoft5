@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:converters="clr-namespace:Ersa.Global.Controls.Converters;assembly=Ersa.Global.Controls" xmlns:grafikElemente="clr-namespace:Ersa.Global.Controls.Editoren.EditorElemente;assembly=Ersa.Global.Controls.Editoren,Version=4.11.1.0,Culture=neutral,PublicKeyToken=null" xmlns:system="clr-namespace:System;assembly=mscorlib">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <converters:EDC_PointCollectionConverter x:Key="C_strConverter_PointCollection" />
+  <DataTemplate x:Key="C_strTemplate_Point_Anfasser" DataType="{x:Type Point}">
+    <Rectangle Name="punktAnfasserElement" Stroke="{StaticResource C_strBrush_Dunkelblau}" Fill="#00FFFFFF" Cursor="Hand" Opacity="0.5" StrokeThickness="{Binding DataContext.PRO_edcAnfasserDefinition.PRO_dblRahmenBreite, ElementName=editorElement}" Width="{Binding DataContext.PRO_edcAnfasserDefinition.PRO_dblGroesse, ElementName=editorElement}" Height="{Binding DataContext.PRO_edcAnfasserDefinition.PRO_dblGroesse, ElementName=editorElement}">
+      <Rectangle.RenderTransform>
+        <TransformGroup>
+          <TranslateTransform X="{Binding X, TargetNullValue=0, FallbackValue=0}" Y="{Binding Y, TargetNullValue=0, FallbackValue=0}" />
+          <TranslateTransform X="{Binding DataContext.PRO_edcAnfasserDefinition.PRO_dblOffset, ElementName=editorElement}" Y="{Binding DataContext.PRO_edcAnfasserDefinition.PRO_dblOffset, ElementName=editorElement}" />
+        </TransformGroup>
+      </Rectangle.RenderTransform>
+    </Rectangle>
+  </DataTemplate>
+  <DataTemplate x:Key="C_strTemplate_Richtungspfeil" DataType="{x:Type grafikElemente:EDC_RichtungspfeilDefinition}">
+    <Polyline Points="-1,-1 0,0 1,-1" Stroke="{Binding PRO_fdcFarbe}" StrokeThickness="{Binding PRO_dblDicke}">
+      <Polyline.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform ScaleX="{Binding PRO_dblBreite, TargetNullValue=1, FallbackValue=1}" ScaleY="{Binding PRO_dblBreite, TargetNullValue=1, FallbackValue=1}" />
+          <RotateTransform Angle="{Binding PRO_dblDrehung, TargetNullValue=0, FallbackValue=0}" />
+          <TranslateTransform X="{Binding PRO_dblX, TargetNullValue=0, FallbackValue=0}" Y="{Binding PRO_dblY, TargetNullValue=0, FallbackValue=0}" />
+        </TransformGroup>
+      </Polyline.RenderTransform>
+    </Polyline>
+  </DataTemplate>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type grafikElemente:EDC_MehrfachLinienElement}}" DataType="{x:Type grafikElemente:EDC_MehrfachLinienElement}">
+    <ItemsControl ItemsSource="{Binding PRO_lstLinienElemente}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="{x:Type grafikElemente:EDC_MehrfachLinienDefinition}">
+          <DataTemplateKey.Key>{x:Type grafikElemente:EDC_MehrfachLinienDefinition}</DataTemplateKey.Key>
+          <ContentControl ContentTemplate="{DynamicResource C_strTemplateLinienElement}" Content="{Binding PRO_edcLinienElement}">
+            <ContentControl.RenderTransform>
+              <TranslateTransform X="{Binding PRO_sttVerschiebung.X, Mode=OneTime}" Y="{Binding PRO_sttVerschiebung.Y, Mode=OneTime}" />
+            </ContentControl.RenderTransform>
+          </ContentControl>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <Canvas />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+    </ItemsControl>
+  </DataTemplate>
+  <DataTemplate x:Key="C_strTemplateLinienElement" DataType="{x:Type grafikElemente:EDC_LinienElement}">
+    <Grid Name="editorElement" Tag="{Binding}">
+      <Polyline Name="linieAussen" StrokeStartLineCap="Round" StrokeLineJoin="Round" StrokeEndLineCap="Round">
+        <Polyline.Points>
+          <Binding>PRO_enuNormalisiertePunkte</Binding>
+        </Polyline.Points>
+        <Polyline.Stroke>
+          <Binding>PRO_fdcFarbe</Binding>
+        </Polyline.Stroke>
+        <Polyline.StrokeThickness>
+          <Binding>PRO_dblAussenBreite</Binding>
+        </Polyline.StrokeThickness>
+        <Polyline.StrokeDashArray>
+          <Binding>PRO_lstAussenStruktur</Binding>
+        </Polyline.StrokeDashArray>
+        <Polyline.Visibility>
+          <Binding>PRO_blnIstEinzelpunkt</Binding>
+        </Polyline.Visibility>
+      </Polyline>
+      <Polyline Name="linieInnen" StrokeStartLineCap="Round" StrokeLineJoin="Round" StrokeEndLineCap="Round">
+        <Polyline.Points>
+          <Binding>PRO_enuNormalisiertePunkte</Binding>
+        </Polyline.Points>
+        <Polyline.Stroke>
+          <Binding>PRO_fdcInnenFarbe</Binding>
+        </Polyline.Stroke>
+        <Polyline.StrokeThickness>
+          <Binding>PRO_dblInnenBreite</Binding>
+        </Polyline.StrokeThickness>
+        <Polyline.Visibility>
+          <Binding>PRO_blnIstEinzelpunkt</Binding>
+        </Polyline.Visibility>
+      </Polyline>
+      <Ellipse Name="punktAussen" Fill="{Binding PRO_fdcFarbe}" Width="{Binding PRO_dblAussenBreite}" Height="{Binding PRO_dblAussenBreite}" Visibility="{Binding PRO_blnIstEinzelpunkt, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <Ellipse.RenderTransform>
+          <TransformGroup>
+            <TranslateTransform X="{Binding PRO_dblEinzelpunktOffset}" Y="{Binding PRO_dblEinzelpunktOffset}" />
+          </TransformGroup>
+        </Ellipse.RenderTransform>
+      </Ellipse>
+      <Ellipse Name="punktInnen" Fill="{Binding PRO_fdcInnenFarbe}" Width="{Binding PRO_dblInnenBreite}" Height="{Binding PRO_dblInnenBreite}" Visibility="{Binding PRO_blnIstEinzelpunkt, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <Ellipse.RenderTransform>
+          <TransformGroup>
+            <TranslateTransform X="{Binding PRO_dblEinzelpunktOffset}" Y="{Binding PRO_dblEinzelpunktOffset}" />
+          </TransformGroup>
+        </Ellipse.RenderTransform>
+      </Ellipse>
+      <ContentControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsHitTestVisible="False" Content="{Binding PRO_objContent}" ContentTemplate="{Binding PRO_fdcContentTemplate}" Width="{Binding Width, ElementName=editorElement}" Height="{Binding Height, ElementName=editorElement}" Visibility="{Binding PRO_blnIstEinzelpunkt, Converter={StaticResource C_strConverter_BoolNachVisibilityInvertiert}}">
+        <ContentControl.Resources>
+          <DataTemplate DataType="{x:Type system:String}">
+            <Viewbox Stretch="Uniform">
+              <TextBlock Margin="4" TextBlock.TextAlignment="Center" Text="{Binding}" />
+            </Viewbox>
+          </DataTemplate>
+        </ContentControl.Resources>
+        <ContentControl.LayoutTransform>
+          <ScaleTransform ScaleX="1" ScaleY="-1" />
+        </ContentControl.LayoutTransform>
+      </ContentControl>
+      <ItemsControl ItemsSource="{Binding PRO_enuPunktContentDefinitionen}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Canvas />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate DataType="{x:Type grafikElemente:EDC_PunktContentDefinition}">
+            <DataTemplateKey.Key>{x:Type grafikElemente:EDC_PunktContentDefinition}</DataTemplateKey.Key>
+            <ContentControl Content="{Binding PRO_objContent}">
+              <ContentControl.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleX="1" ScaleY="-1" />
+                  <TranslateTransform X="{Binding PRO_dblX}" Y="{Binding PRO_dblY}" />
+                </TransformGroup>
+              </ContentControl.RenderTransform>
+            </ContentControl>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+      <ItemsControl ItemTemplate="{StaticResource C_strTemplate_Richtungspfeil}" ItemsSource="{Binding PRO_enuRichtungsPfeile}" Visibility="{Binding PRO_blnRichtungspfeileAnzeigen, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Canvas />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+      </ItemsControl>
+      <ItemsControl ItemTemplate="{StaticResource C_strTemplate_Point_Anfasser}" ItemsSource="{Binding PRO_enuNormalisiertePunkte}" Visibility="{Binding PRO_blnPunkteAnzeigen, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Canvas />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+      </ItemsControl>
+    </Grid>
+    <DataTemplate.Triggers>
+      <DataTrigger Value="True" Binding="{Binding PRO_blnAusgewaehlt}">
+        <Setter TargetName="linieAussen" Value="{Binding PRO_fdcAuswahlFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="linieInnen" Value="{Binding PRO_fdcAuswahlInnenFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="linieAussen" Property="FrameworkElement.Cursor" Value="SizeAll" />
+        <Setter TargetName="linieInnen" Property="FrameworkElement.Cursor" Value="SizeAll" />
+        <Setter TargetName="punktAussen" Value="{Binding PRO_fdcAuswahlFarbe}" Property="Shape.Fill" />
+        <Setter TargetName="punktInnen" Value="{Binding PRO_fdcAuswahlInnenFarbe}" Property="Shape.Fill" />
+      </DataTrigger>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding PRO_blnIstFehlerhaft}" Value="True" />
+          <Condition Binding="{Binding PRO_blnAusgewaehlt}" Value="False" />
+        </MultiDataTrigger.Conditions>
+        <Setter TargetName="linieAussen" Value="{Binding PRO_fdcFehlerFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="linieInnen" Value="{Binding PRO_fdcFehlerInnenFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="punktAussen" Value="{Binding PRO_fdcFehlerFarbe}" Property="Shape.Fill" />
+        <Setter TargetName="punktInnen" Value="{Binding PRO_fdcFehlerInnenFarbe}" Property="Shape.Fill" />
+      </MultiDataTrigger>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding PRO_blnIstFehlerhaft}" Value="True" />
+          <Condition Binding="{Binding PRO_blnAusgewaehlt}" Value="True" />
+        </MultiDataTrigger.Conditions>
+        <Setter TargetName="linieAussen" Value="{Binding PRO_fdcFehlerAuswahlFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="linieInnen" Value="{Binding PRO_fdcFehlerAuswahlInnenFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="punktAussen" Value="{Binding PRO_fdcFehlerAuswahlFarbe}" Property="Shape.Fill" />
+        <Setter TargetName="punktInnen" Value="{Binding PRO_fdcFehlerAuswahlInnenFarbe}" Property="Shape.Stroke" />
+      </MultiDataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type grafikElemente:EDC_LinienElement}}" DataType="{x:Type grafikElemente:EDC_LinienElement}">
+    <ContentPresenter ContentTemplate="{StaticResource C_strTemplateLinienElement}" />
+  </DataTemplate>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type grafikElemente:EDC_RechteckElement}}" DataType="{x:Type grafikElemente:EDC_RechteckElement}">
+    <Grid Name="editorElement" Tag="{Binding}">
+      <Rectangle Name="rechteck" Width="{Binding PRO_dblBreite}" Height="{Binding PRO_dblHoehe}" Stroke="{Binding PRO_fdcFarbe}" StrokeThickness="{Binding PRO_dblRahmenBreite}">
+        <Rectangle.StrokeDashArray>
+          <Binding>PRO_lstRahmenStruktur</Binding>
+        </Rectangle.StrokeDashArray>
+        <Rectangle.Fill>
+          <Binding>PRO_fdcInnenFarbe</Binding>
+        </Rectangle.Fill>
+      </Rectangle>
+      <ContentControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsHitTestVisible="False" Content="{Binding PRO_objContent}" ContentTemplate="{Binding PRO_fdcContentTemplate}" Width="{Binding PRO_dblBreite}" Height="{Binding PRO_dblHoehe}">
+        <ContentControl.Resources>
+          <DataTemplate DataType="{x:Type system:String}">
+            <Viewbox Stretch="Uniform">
+              <TextBlock Margin="4" TextBlock.TextAlignment="Center" Text="{Binding}" />
+            </Viewbox>
+          </DataTemplate>
+        </ContentControl.Resources>
+        <ContentControl.LayoutTransform>
+          <ScaleTransform ScaleX="1" ScaleY="-1" />
+        </ContentControl.LayoutTransform>
+      </ContentControl>
+      <ItemsControl ItemTemplate="{StaticResource C_strTemplate_Richtungspfeil}" ItemsSource="{Binding PRO_enuRichtungsPfeile}" Visibility="{Binding PRO_blnRichtungspfeileAnzeigen, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Canvas />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+      </ItemsControl>
+      <ItemsControl ItemTemplate="{StaticResource C_strTemplate_Point_Anfasser}" ItemsSource="{Binding PRO_enuNormalisiertePunkte}" Visibility="{Binding PRO_blnPunkteAnzeigen, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Canvas />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+      </ItemsControl>
+    </Grid>
+    <DataTemplate.Triggers>
+      <DataTrigger Value="True" Binding="{Binding PRO_blnAusgewaehlt}">
+        <Setter TargetName="rechteck" Value="{Binding PRO_fdcAuswahlFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="rechteck" Value="{Binding PRO_fdcAuswahlInnenFarbe}" Property="Shape.Fill" />
+        <Setter TargetName="rechteck" Property="FrameworkElement.Cursor" Value="SizeAll" />
+      </DataTrigger>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding PRO_blnIstFehlerhaft}" Value="True" />
+          <Condition Binding="{Binding PRO_blnAusgewaehlt}" Value="False" />
+        </MultiDataTrigger.Conditions>
+        <Setter TargetName="rechteck" Value="{Binding PRO_fdcFehlerFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="rechteck" Value="{Binding PRO_fdcFehlerInnenFarbe}" Property="Shape.Fill" />
+      </MultiDataTrigger>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding PRO_blnIstFehlerhaft}" Value="True" />
+          <Condition Binding="{Binding PRO_blnAusgewaehlt}" Value="True" />
+        </MultiDataTrigger.Conditions>
+        <Setter TargetName="rechteck" Value="{Binding PRO_fdcFehlerAuswahlFarbe}" Property="Shape.Stroke" />
+        <Setter TargetName="rechteck" Value="{Binding PRO_fdcFehlerAuswahlInnenFarbe}" Property="Shape.Fill" />
+      </MultiDataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type grafikElemente:EDC_GeometrieElement}}" DataType="{x:Type grafikElemente:EDC_GeometrieElement}">
+    <Grid Name="editorElement" Tag="{Binding}">
+      <Path Name="pfad" Fill="#00FFFFFF" Stroke="{Binding PRO_fdcFarbe}" StrokeThickness="{Binding PRO_dblLinienBreite}">
+        <Path.Data>
+          <GeometryGroup>
+            <GeometryGroup.Children>
+              <Binding>PRO_lstGeometrien</Binding>
+            </GeometryGroup.Children>
+            <GeometryGroup.Transform>
+              <TransformGroup>
+                <TranslateTransform X="-0.5" Y="-0.5" />
+                <ScaleTransform ScaleX="{Binding PRO_dblGesamtGroesse, Mode=OneWay}" ScaleY="{Binding PRO_dblGesamtGroesse, Mode=OneWay}" />
+              </TransformGroup>
+            </GeometryGroup.Transform>
+          </GeometryGroup>
+        </Path.Data>
+      </Path>
+    </Grid>
+    <DataTemplate.Triggers>
+      <DataTrigger Value="True" Binding="{Binding PRO_blnAusgewaehlt}">
+        <Setter TargetName="pfad" Value="{Binding PRO_fdcAuswahlFarbe}" Property="Shape.Stroke" />
+      </DataTrigger>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding PRO_blnIstFehlerhaft}" Value="True" />
+          <Condition Binding="{Binding PRO_blnAusgewaehlt}" Value="False" />
+        </MultiDataTrigger.Conditions>
+        <Setter TargetName="pfad" Value="{Binding PRO_fdcFehlerFarbe}" Property="Shape.Stroke" />
+      </MultiDataTrigger>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding PRO_blnIstFehlerhaft}" Value="True" />
+          <Condition Binding="{Binding PRO_blnAusgewaehlt}" Value="True" />
+        </MultiDataTrigger.Conditions>
+        <Setter TargetName="pfad" Value="{Binding PRO_fdcFehlerAuswahlFarbe}" Property="Shape.Stroke" />
+      </MultiDataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+</ResourceDictionary>

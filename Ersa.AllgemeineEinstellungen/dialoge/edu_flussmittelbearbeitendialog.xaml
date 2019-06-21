@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dialoge:EDU_Dialog x:Class="Ersa.AllgemeineEinstellungen.Dialoge.EDU_FlussmittelBearbeitenDialog" Height="300" Width="300" FocusManager.FocusedElement="{Binding ElementName=txtName}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dialoge="clr-namespace:Ersa.Global.Controls.Dialoge;assembly=Ersa.Global.Controls" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls">
+  <dialoge:EDU_Dialog.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_IconButton_Common.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DialogGroupBox.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </dialoge:EDU_Dialog.Resources>
+  <Grid>
+    <Grid Background="{StaticResource C_strSolidColorBrush_Dialog_WindowBackground}" />
+    <controls:EDU_DialogGroupBox Width="{StaticResource C_strDialogGroupBoxSpaltenBreite_2Spalten}" Header="{Binding PRO_strTitel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+      <Grid Margin="{StaticResource C_strStdMarginLinksOben}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" MinHeight="{StaticResource C_strBasisTouchHoehe}" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.ColumnSpan="2" TextBlock.Foreground="{StaticResource C_strBrush_Rot_V1}" Margin="{StaticResource C_strStdMarginRechtsUnten}" TextWrapping="Wrap" Text="{Binding PRO_strValidierungsErgebnis, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding PRO_strValidierungsErgebnis, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_StringInhaltNachVisibilityHidden}}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 1_25}" />
+        <TextBox Name="txtName" Grid.Row="1" Grid.Column="1" Text="{Binding PRO_strName, RelativeSource={RelativeSource AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 13_1069}" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PRO_strSpezifikation, RelativeSource={RelativeSource AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" />
+      </Grid>
+      <controls:EDU_DialogGroupBox.PRO_objFooter>
+        <DockPanel Grid.Row="1" LastChildFill="False">
+          <controls:EDU_IconButton Style="{StaticResource C_strStyle_IconButton_Abbrechen}" Margin="{StaticResource C_strStdMarginRechtsUnten}" Click="SUB_AbbrechenGeklickt" />
+          <controls:EDU_IconButton Style="{StaticResource C_strStyle_IconButton_Uebernehmen}" DockPanel.Dock="Right" IsDefault="True" Margin="{StaticResource C_strStdMarginRechtsUnten}" IsEnabled="{Binding PRO_strValidierungsErgebnis, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource C_strConverter_StringLeer}}" Click="SUB_UebernehmenGeklickt" />
+        </DockPanel>
+      </controls:EDU_DialogGroupBox.PRO_objFooter>
+    </controls:EDU_DialogGroupBox>
+  </Grid>
+</dialoge:EDU_Dialog>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.AllgemeineEinstellungen.Views.EDV_GruppenVerwaltungView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:gruppenVerwaltung="clr-namespace:Ersa.AllgemeineEinstellungen.GruppenVerwaltung;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:allgemeineEinstellungen="clr-namespace:Ersa.AllgemeineEinstellungen;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:views="clr-namespace:Ersa.AllgemeineEinstellungen.Views;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_CheckBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ComboBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DataGrid.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.AllgemeineEinstellungen;component/Styles/EDS_DataGrid.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <DataTemplate x:Key="C_strTemplate_MaschinenGruppe_Aktionen" DataType="{x:Type gruppenVerwaltung:EDC_Gruppe}">
+        <Border HorizontalAlignment="Right" IsEnabled="{Binding DataContext.PRO_blnDarfEinstellungenEditieren, RelativeSource={RelativeSource AncestorType={x:Type views:EDV_GruppenVerwaltungView}}}">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" MaxWidth="56" />
+            </Grid.ColumnDefinitions>
+            <Grid Visibility="{Binding PRO_blnIstAusgewaehlt, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="56" />
+                <ColumnDefinition Width="Auto" MaxWidth="56" />
+              </Grid.ColumnDefinitions>
+              <controls:EDU_IconButton Grid.Column="0" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdMaschinenGruppeUmbenennen}" Width="56" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Objekt_umbenennen_24x24.png" CommandParameter="{Binding}" ToolTip="{Loc 1_231}" />
+              <controls:EDU_IconButton Grid.Column="1" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdMaschinenGruppeAktivSetzen}" Width="56" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Status_Gruen_24x24.png" CommandParameter="{Binding}" ToolTip="{Loc 11_199}" Visibility="{Binding PRO_blnIstAktiv, Converter={StaticResource C_strConverter_BoolNachVisibilityInvertiert}}" />
+            </Grid>
+            <Image Grid.Column="1" Source="/Ersa.Global.Controls;component/Bilder/Icons/Icon_OK_24x24.png" Width="24" Margin="{StaticResource C_strStdMarginDoppeltLinksUndRechts}" Visibility="{Binding PRO_blnIstAktiv, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+          </Grid>
+        </Border>
+      </DataTemplate>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <Interaction.Behaviors>
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdSpeichern}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdSpeichern}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdWertGeaendert}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdVerwerfen}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdVerwerfen}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdMaschinenGruppeAktivSetzen}" Command="{Binding PRO_cmdGruppeAktivSetzen}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdMaschinenGruppeUmbenennen}" Command="{Binding PRO_cmdGruppeUmbenennen}" />
+    </Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <controls:EDU_TouchScrollViewer Style="{StaticResource C_strStyleScrollViewer_Spaltenraster}">
+      <GroupBox Grid.Column="1" Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_2Spalten}" Header="{Loc 13_846}">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <TextBlock Grid.Row="0" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 13_848}" />
+          <TextBlock Grid.Row="1" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="{}{0}: {1}">
+                <BLoc Key="8_3434" />
+                <Binding Path="PRO_strMaschinenTypKey" Converter="{StaticResource C_strConverter_Lokalisierung}" />
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+          <DataGrid Grid.Row="2" MaxHeight="696" IsSynchronizedWithCurrentItem="True" Style="{StaticResource C_strStyleDataGrid_ListeInteraktiv}" RowStyle="{StaticResource C_strStyleDataGridRow_Gruppen}" Margin="{StaticResource C_strStdMarginNegativLinksOben}" ItemsSource="{Binding PRO_lstGruppen}">
+            <DataGrid.Columns>
+              <DataGridTextColumn MinWidth="500" Width="*" IsReadOnly="True" SortDirection="Ascending" Header="{Loc 1_25}" Binding="{Binding PRO_strName}" />
+              <DataGridTemplateColumn IsReadOnly="True" CanUserSort="False" Width="150" CellTemplate="{StaticResource C_strTemplate_MaschinenGruppe_Aktionen}" Header="{Loc 13_499}" />
+            </DataGrid.Columns>
+          </DataGrid>
+        </Grid>
+      </GroupBox>
+    </controls:EDU_TouchScrollViewer>
+    <ui:EDU_Footer Grid.Row="1" PRO_blnSpeichernSichtbar="True" PRO_blnVerwerfenSichtbar="True" Margin="{StaticResource C_strStdMarginDoppeltNegativRechtsUndLinks}" PRO_blnSpeichernErlaubt="{Binding PRO_blnHatAenderung}" PRO_blnVerwerfenErlaubt="{Binding PRO_blnHatAenderung}">
+      <controls:EDU_IconButton Style="{StaticResource C_strStyleIconButton_OpenDialog}" PRO_strIconUri="pack://application:,,,/Ersa.Global.Controls;component/Bilder/Icons/Icon_Bibliothek_erstellen_24x24.png" Content="{Loc 13_353}" Command="{Binding PRO_cmdGruppeHinzufuegen}" />
+    </ui:EDU_Footer>
+  </Grid>
+</UserControl>

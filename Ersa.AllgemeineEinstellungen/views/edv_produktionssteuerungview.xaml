@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.AllgemeineEinstellungen.Views.EDV_ProduktionssteuerungView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI" xmlns:produktionssteuerung="clr-namespace:Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Produktionssteuerung;assembly=Ersa.Platform.CapabilityContracts" xmlns:model="clr-namespace:Ersa.Platform.Common.Model;assembly=Ersa.Platform.Common.Model" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewModels="clr-namespace:Ersa.AllgemeineEinstellungen.ViewModels;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:konstanten="clr-namespace:Ersa.AllgemeineEinstellungen.Konstanten;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:converters="clr-namespace:Ersa.AllgemeineEinstellungen.Converters;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common" xmlns:behaviors="clr-namespace:Ersa.Platform.UI.Behaviors;assembly=Ersa.Platform.UI" xmlns:views="clr-namespace:Ersa.AllgemeineEinstellungen.Views;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:converters1="clr-namespace:Ersa.Global.Controls.Converters;assembly=Ersa.Global.Controls" xmlns:system="clr-namespace:System;assembly=mscorlib">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ExpanderGroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_IconButton.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_IconButton_Common.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_Validierung.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <converters:EDC_ListeNichtLeerNachVisibilityConverter x:Key="C_strConverter_ListeNichtLeerNachVisibility" />
+      <converters1:EDC_ConverterGruppe x:Key="C_strConverter_ZahlIstNullNachBoolInvertiert">
+        <converters1:EDC_EqualityToBoolConverter>
+          <converters1:EDC_EqualityToBoolConverter.PRO_objObjectToCompareTo>
+            <system:Int64>0</system:Int64>
+          </converters1:EDC_EqualityToBoolConverter.PRO_objObjectToCompareTo>
+        </converters1:EDC_EqualityToBoolConverter>
+        <converters1:EDC_BooleanNachBooleanConverter PRO_blnIstInvertiert="True" />
+      </converters1:EDC_ConverterGruppe>
+      <DataTemplate x:Key="{DataTemplateKey {x:Type model:EDC_BooleanParameter}}" DataType="{x:Type model:EDC_BooleanParameter}">
+        <CheckBox Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Binding PRO_strNameKey, Converter={StaticResource C_strConverter_Lokalisierung}}" IsChecked="{Binding PRO_blnAnzeigeWert}" />
+      </DataTemplate>
+      <DataTemplate x:Key="{DataTemplateKey {x:Type produktionssteuerung:EDC_EinstellungsGruppe}}" DataType="{x:Type produktionssteuerung:EDC_EinstellungsGruppe}">
+        <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{Binding PRO_strNameKey, Converter={StaticResource C_strConverter_Lokalisierung}}">
+          <ItemsControl ItemsSource="{Binding PRO_edcEinstellungen}" />
+        </GroupBox>
+      </DataTemplate>
+      <DataTemplate x:Key="{DataTemplateKey {x:Type viewModels:EDC_ProduktionsArten}}" DataType="{x:Type viewModels:EDC_ProduktionsArten}">
+        <Grid IsEnabled="{Binding PRO_blnBedienbar}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <CheckBox Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" IsChecked="{Binding PRO_blnAktiv}" />
+          <controls:EDU_CommandComboBox Grid.Row="1" PRO_cmdAuswahlGeandert="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Margin="38,0,8,8" ItemsSource="{Binding PRO_enuUnterarten}" SelectedItem="{Binding PRO_edcAktiveUnterart}" IsEnabled="{Binding PRO_blnAktiv}" Visibility="{Binding PRO_enuUnterarten, Converter={StaticResource C_strConverter_ListeNichtLeerNachVisibility}}">
+            <controls:EDU_CommandComboBox.ItemTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProduktionsUnterart}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProduktionsUnterart}</DataTemplateKey.Key>
+                <TextBlock Style="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" Text="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+              </DataTemplate>
+            </controls:EDU_CommandComboBox.ItemTemplate>
+          </controls:EDU_CommandComboBox>
+        </Grid>
+      </DataTemplate>
+      <DataTemplate x:Key="{DataTemplateKey {x:Type viewModels:EDC_ProduktionsArtMitPrgId}}" DataType="{x:Type viewModels:EDC_ProduktionsArtMitPrgId}">
+        <Grid IsEnabled="{Binding PRO_blnBedienbar}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <CheckBox Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" IsChecked="{Binding PRO_blnAktiv}" />
+          <controls:EDU_CommandComboBox Grid.Row="1" PRO_cmdAuswahlGeandert="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Margin="38,0,8,8" ItemsSource="{Binding PRO_enuUnterarten}" SelectedItem="{Binding PRO_edcAktiveUnterart}" IsEnabled="{Binding PRO_blnAktiv}" Visibility="{Binding PRO_enuUnterarten, Converter={StaticResource C_strConverter_ListeNichtLeerNachVisibility}}">
+            <controls:EDU_CommandComboBox.ItemTemplate>
+              <DataTemplate DataType="{x:Type viewModels:EDC_ProduktionsUnterart}">
+                <DataTemplateKey.Key>{x:Type viewModels:EDC_ProduktionsUnterart}</DataTemplateKey.Key>
+                <TextBlock Style="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" Text="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+              </DataTemplate>
+            </controls:EDU_CommandComboBox.ItemTemplate>
+          </controls:EDU_CommandComboBox>
+          <StackPanel Grid.Row="2" Orientation="Horizontal" IsEnabled="{Binding PRO_blnAktiv}">
+            <TextBlock Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 13_1031}" />
+            <TextBox Width="300" IsReadOnly="True" Text="{Binding DataContext.PRO_strDefaultLoetprogrammString, RelativeSource={RelativeSource AncestorType={x:Type views:EDV_ProduktionssteuerungView}}, Mode=OneWay}" />
+            <controls:EDU_IconButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" Style="{StaticResource InhaltsbereichIconButtonStyle}" Command="{Binding DataContext.PRO_cmdDefaultLoetprogrammAuswahlVerwerfen, RelativeSource={RelativeSource AncestorType={x:Type views:EDV_ProduktionssteuerungView}}}" CommandParameter="{Binding}" />
+            <controls:EDU_IconButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Auswahl_Defaultprogramm_24x24.png" Style="{StaticResource C_strStyleIconButton_OpenDialogInhaltsbereich}" Command="{Binding DataContext.PRO_cmdDefaultLoetprogrammAuswahlOeffnen, RelativeSource={RelativeSource AncestorType={x:Type views:EDV_ProduktionssteuerungView}}}" CommandParameter="{Binding}" />
+          </StackPanel>
+        </Grid>
+      </DataTemplate>
+      <DataTemplate x:Key="{DataTemplateKey {x:Type viewModels:EDC_ProduktionsArtGruppe}}" DataType="{x:Type viewModels:EDC_ProduktionsArtGruppe}">
+        <GroupBox Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung}" Header="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" IsEnabled="{Binding PRO_blnBedienbar}">
+          <ItemsControl ItemsSource="{Binding PRO_enuProduktionsArten}" />
+        </GroupBox>
+      </DataTemplate>
+      <DataTemplate x:Key="{DataTemplateKey {x:Type viewModels:EDC_CodeLeseFehlerBestaetigungsMoeglichkeiten}}" DataType="{x:Type viewModels:EDC_CodeLeseFehlerBestaetigungsMoeglichkeiten}">
+        <CheckBox Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" IsChecked="{Binding PRO_blnAktiv}" />
+      </DataTemplate>
+      <DataTemplate x:Key="{DataTemplateKey {x:Type viewModels:EDC_CodeNichtGefundenBestaetingungsMoeglichkeiten}}" DataType="{x:Type viewModels:EDC_CodeNichtGefundenBestaetingungsMoeglichkeiten}">
+        <CheckBox Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" IsChecked="{Binding PRO_blnAktiv}" />
+      </DataTemplate>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <Interaction.Behaviors>
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdSpeichern}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdSpeichern}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdWertGeaendert}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdVerwerfen}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdVerwerfen}" CommandParameter="{Binding}" />
+    </Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <controls:EDU_TouchScrollViewer Style="{StaticResource C_strStyleScrollViewer_Spaltenraster}" EDC_HilfeKeyExtension.PRO_strHilfeKey="{x:Static konstanten:EDC_OnlineHilfeKonstanten.mC_strAllgemeineEinstellungen_Produktionssteuerung}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Interaction.Behaviors>
+          <behaviors:EDC_PhysischeAdresseBehavior />
+        </Interaction.Behaviors>
+        <StackPanel Grid.Row="0">
+          <ItemsControl ItemsSource="{Binding PRO_lstEinstellungsGruppen}" IsEnabled="{Binding PRO_blnDarfEditieren}" />
+          <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{Loc 13_720}" IsEnabled="{Binding PRO_blnDarfEditieren}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <CheckBox Grid.Row="0" Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Loc 11_1657}" IsChecked="{Binding PRO_blnIstMesAktiv}" IsEnabled="{Binding PRO_blnDarfEditieren}" Visibility="{Binding PRO_blnIstMesVorhanden, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+              <CheckBox Grid.Row="1" Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Loc 13_721}" IsChecked="{Binding PRO_blnIstLoetprotokollAktiv}" IsEnabled="{Binding PRO_blnDarfEditieren}" />
+            </Grid>
+          </GroupBox>
+          <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{Loc 13_1141}" IsEnabled="{Binding PRO_blnDarfEditieren}">
+            <CheckBox Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Loc 13_1142}" IsChecked="{Binding PRO_blnVierAugenFreigabeAktiv}" IsEnabled="{Binding PRO_blnDarfEditieren}" />
+          </GroupBox>
+        </StackPanel>
+        <controls:EDU_ExpanderGroupBox Grid.Column="1" Style="{StaticResource C_strStyleExpanderGroupBox_1Spalte1Spalte}" PRO_dblBreiteNormaleAnsicht="{StaticResource C_strGroupBoxSpaltenBreite_2Spalten}" Header="{Loc 13_722}">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ItemsControl ItemsSource="{Binding PRO_lstStartAssistentOptionen}" IsEnabled="{Binding PRO_blnDarfEditieren}" />
+            <TextBlock Grid.Row="1" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" TextBlock.Foreground="#FFCF505F" TextBlock.FontWeight="Bold" Text="{Loc 8_2904}" Visibility="{Binding PRO_blnCodetabellenHinweisAnzeigen, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+            <TextBlock Grid.Row="2" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" TextBlock.Foreground="#FFCF505F" TextBlock.FontWeight="Bold" Text="{Loc 13_952}" Visibility="{Binding PRO_blnFehlerbehebungsartenUngueltig, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+            <TextBlock Grid.Row="3" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" TextBlock.Foreground="#FFCF505F" TextBlock.FontWeight="Bold" Text="{Loc 17_364}" Visibility="{Binding PRO_blnProgrammGueltigHinweisAnzeigen, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+            <TextBlock Grid.Row="4" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" TextBlock.Foreground="#FFCF505F" TextBlock.FontWeight="Bold" Text="{Loc 13_1030}" Visibility="{Binding PRO_blnProgrammFreigabeHinweisAnzeigen, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+          </Grid>
+          <controls:EDU_ExpanderGroupBox.PRO_objExpanderInhalt>
+            <StackPanel>
+              <GroupBox Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung_1Spalte}" Header="{Loc 13_723}" IsEnabled="{Binding PRO_blnDarfEditieren}" Visibility="{Binding PRO_blnIstCodelesenVorhanden, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <GroupBox Grid.Row="0" Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung_1Spalte}" Header="{Loc 13_724}" IsEnabled="{Binding PRO_blnDarfEditieren}">
+                    <ItemsControl ItemsSource="{Binding PRO_lstCodeLeseFehlerBestaetigungen}" IsEnabled="{Binding PRO_blnDarfEditieren}" />
+                  </GroupBox>
+                  <GroupBox Grid.Row="1" Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung_1Spalte}" Header="{Loc 13_725}" IsEnabled="{Binding PRO_blnDarfEditieren}">
+                    <ItemsControl ItemsSource="{Binding PRO_lstCodeNichtGefundenBestaetigungen}" IsEnabled="{Binding PRO_blnDarfEditieren}" />
+                  </GroupBox>
+                </Grid>
+              </GroupBox>
+              <GroupBox Style="{StaticResource C_strStyleGroupBox_ZweiterOrdnung_1Spalte}" Header="{Loc 10_81}" IsEnabled="{Binding PRO_blnDarfEditieren}">
+                <CheckBox Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Content="{Loc 13_1137}" IsChecked="{Binding PRO_blnIstTestBoardErlaubt}" IsEnabled="{Binding PRO_blnDarfEditieren}" />
+              </GroupBox>
+            </StackPanel>
+          </controls:EDU_ExpanderGroupBox.PRO_objExpanderInhalt>
+        </controls:EDU_ExpanderGroupBox>
+      </Grid>
+    </controls:EDU_TouchScrollViewer>
+    <ui:EDU_Footer Grid.Row="1" PRO_blnSpeichernSichtbar="True" PRO_blnVerwerfenSichtbar="True" Margin="{StaticResource C_strStdMarginDoppeltNegativRechtsUndLinks}" IsEnabled="{Binding PRO_blnDarfEditieren}" PRO_blnSpeichernErlaubt="{Binding PRO_blnHatAenderung}" PRO_blnVerwerfenErlaubt="{Binding PRO_blnHatAenderung}">
+      <StackPanel Orientation="Horizontal">
+        <controls:EDU_IconButton Style="{StaticResource C_strStyleIconButton_OpenDialog}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Daten_importieren_24x24.png" Content="{Loc 10_744}" Command="{Binding PRO_cmdEinstellungenImportieren}" />
+        <controls:EDU_IconButton Style="{StaticResource C_strStyleIconButton_OpenDialog}" Margin="0" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Exportieren_24x24.png" Content="{Loc 10_760}" Command="{Binding PRO_cmdEinstellungenExportieren}" />
+      </StackPanel>
+    </ui:EDU_Footer>
+  </Grid>
+</UserControl>

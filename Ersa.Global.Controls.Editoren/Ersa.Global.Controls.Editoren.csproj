@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{C6918B0A-D28C-4493-86A3-F32D222F73A7}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Global.Controls.Editoren</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Mvvm">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="GongSolutions.WPF.DragDrop">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\GongSolutions.WPF.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Controls">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Global.Controls.Editor.Properties\Resources.cs" />
+    <Compile Include="Ersa.Global.Controls.Editor.Properties\Settings.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.BildEditor\EDU_BildEditor.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_EditorElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_EditorElementMitInhalt.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_EditorElementMitPunkten.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_GeometrieElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_LinienElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_MehrfachLinienDefinition.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_MehrfachLinienElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_PunktContentDefinition.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_RechteckElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_RechteckElementMitText.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.EditorElemente\EDC_RichtungspfeilDefinition.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Helfer\EDC_LinienAbschnittHelfer.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces.Intern\EDC_PunktVerschiebungsDaten.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces.Intern\INF_EditorKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces.Intern\INF_PunktVerschiebungsKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces\INF_AuswahlKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces\INF_CopyPasteKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces\INF_LinieErstellenKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces\INF_PositionsKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces\INF_PunktBearbeitungsKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces\INF_RechteckErstellenKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Interfaces\INF_WerkzeugKontext.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.DragAndDrop\EDC_DefaultAblaufListeDragHandler.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.DragAndDrop\EDC_DefaultAblaufListeDropHandler.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.DragAndDrop\EDC_DefaultVorlageListeDropHandler.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente\EDC_AuswahlElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente\EDC_AuswahlVorlagenParameter.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente\EDC_DoubleVorlageParameter.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente\EDC_PositionElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente\EDC_VorlageElement.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente\EDC_VorlageParameter.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente\ENUM_Positionstyp.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor\EDC_AblaufSchrittAenderung.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor\EDC_AblaufSchritte.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor\EDU_VorlagenEditor.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.VorlagenEditor\ENUM_AenderungsArt.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_AuswahlTool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_BauteilAuswahlTool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_LinienTool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_PasteTool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_PositionAuswahlTool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_RechteckTool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_Tool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\EDC_ZoomTool.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\ENUM_Bewegungsaktion.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren.Werkzeuge\ENUM_BewegungsRichtung.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren\EDC_EditorKonstanten.cs" />
+    <Compile Include="Ersa.Global.Controls.Editoren\EDC_RoutedCommands.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ersa.global.controls.editoren.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Global.Controls.Editoren\bildeditor\edu_bildeditor.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Global.Controls.Editoren\styles\eds_bildeditorscrollview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Global.Controls.Editoren\styles\eds_editorelemente.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Global.Controls.Editoren\vorlageneditor\edu_vorlageneditor.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Global.Controls.Editoren\vorlageneditor\styles\eds_vorlageelemente_elemente.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Global.Controls.Editoren\vorlageneditor\styles\eds_vorlageelemente_vorlagen.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Global.Controls.Editoren\vorlageneditor\styles\eds_vorlageneditor.xaml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

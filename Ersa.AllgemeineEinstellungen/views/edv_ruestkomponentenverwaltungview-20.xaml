@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.AllgemeineEinstellungen.Views.EDV_RuestkomponentenVerwaltungView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:allgemeineEinstellungen="clr-namespace:Ersa.AllgemeineEinstellungen;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:behavior="clr-namespace:Ersa.Global.Controls.Behavior;assembly=Ersa.Global.Controls" xmlns:viewModels="clr-namespace:Ersa.AllgemeineEinstellungen.ViewModels;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_CheckBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ComboBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DataGrid.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_Validierung.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.AllgemeineEinstellungen;component/Styles/EDS_DataGrid.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <Interaction.Behaviors>
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdSpeichern}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdSpeichern}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdWertGeaendert}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdVerwerfen}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdVerwerfen}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhaltergruppeHinzufuegen}" Command="{Binding PRO_cmdNiederhaltergruppeHinzufuegen}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhaltergruppeUmbenennen}" Command="{Binding PRO_cmdNiederhaltergruppeUmbenennen}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhaltergruppeLoeschen}" Command="{Binding PRO_cmdNiederhaltergruppeLoeschen}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhalterHinzufuegen}" Command="{Binding PRO_cmdNiederhalterHinzufuegen}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhalterBearbeiten}" Command="{Binding PRO_cmdNiederhalterBearbeiten}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhalterLoeschen}" Command="{Binding PRO_cmdNiederhalterLoeschen}" />
+    </Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <controls:EDU_TouchScrollViewer Style="{StaticResource C_strStyleScrollViewer_Spaltenraster}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_2Spalten}" Grid.Column="0" Header="{Loc 4_309}">
+          <Grid IsEnabled="{Binding PRO_blnDarfEinstellungenEditieren}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <DataGrid MaxHeight="680" IsSynchronizedWithCurrentItem="True" Style="{StaticResource C_strStyleDataGrid_MitDetail}" Margin="{StaticResource C_strStdMarginDoppeltNurUnten}" HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding PRO_lstNiederhaltergruppen}">
+              <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource C_strStyleDataGridRow_MitDetail}">
+                  <Setter Property="DataGridRow.DetailsVisibility" Value="{Binding PRO_blnIstAusgeklappt, Converter={StaticResource C_strConverter_BoolNachVisibility}}" />
+                </Style>
+              </DataGrid.RowStyle>
+              <DataGrid.Columns>
+                <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="PRO_strName" SortDirection="Ascending" MinWidth="400" Width="*" Header="{Loc 1_25}">
+                  <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:EDC_NiederhaltergruppeViewModel}">
+                      <TextBlock Text="{Binding PRO_strName}" />
+                    </DataTemplate>
+                  </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="PRO_i32AnzahlEintraege" Header="{Loc 10_1533}">
+                  <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:EDC_NiederhaltergruppeViewModel}">
+                      <Border Background="#FFE6EAEC" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Padding="2,0" BorderThickness="1" BorderBrush="#FFCDD2D2" CornerRadius="2" MinWidth="40">
+                        <TextBlock TextBlock.FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding PRO_i32AnzahlEintraege}" />
+                      </Border>
+                    </DataTemplate>
+                  </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn IsReadOnly="True" CanUserSort="False" Width="200" Header="{Loc 13_499}">
+                  <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:EDC_NiederhaltergruppeViewModel}">
+                      <Border HorizontalAlignment="Right" Tag="{Binding PRO_strName}">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" MaxWidth="56" />
+                          </Grid.ColumnDefinitions>
+                          <Grid Visibility="{Binding PRO_blnIstAusgewaehlt, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+                            <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="56" />
+                              <ColumnDefinition Width="56" />
+                              <ColumnDefinition Width="56" />
+                              <ColumnDefinition Width="56" />
+                              <ColumnDefinition Width="Auto" MaxWidth="56" />
+                            </Grid.ColumnDefinitions>
+                            <controls:EDU_IconButton Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhalterHinzufuegen}" Width="56" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Duplizieren_24x24.png" ToolTip="{Loc 13_1108}" />
+                            <controls:EDU_IconButton Grid.Column="1" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhaltergruppeUmbenennen}" Width="56" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Objekt_umbenennen_24x24.png" ToolTip="{Loc 13_1105}" />
+                            <controls:EDU_IconButton Grid.Column="2" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhaltergruppeLoeschen}" Width="56" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" ToolTip="{Loc 13_1106}" />
+                          </Grid>
+                        </Grid>
+                      </Border>
+                    </DataTemplate>
+                  </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+              </DataGrid.Columns>
+              <DataGrid.RowDetailsTemplate>
+                <DataTemplate DataType="{x:Type viewModels:EDC_NiederhaltergruppeViewModel}">
+                  <Grid Background="#00FFFFFF">
+                    <DataGrid Name="lstEintraege" Margin="{StaticResource C_strStdMarginSechsfachLinksRechtsUnten}" IsSynchronizedWithCurrentItem="True" Style="{StaticResource C_strStyleDataGrid_ListeInteraktiv}" ItemsSource="{Binding PRO_lstEintraege}">
+                      <Interaction.Triggers>
+                        <EventTrigger EventName="MouseDoubleClick">
+                          <InvokeCommandAction Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhalterBearbeiten}" CommandParameter="{Binding SelectedItem, ElementName=lstEintraege}" />
+                        </EventTrigger>
+                      </Interaction.Triggers>
+                      <Interaction.Behaviors>
+                        <behavior:EDC_DataGridScrollBehavior />
+                      </Interaction.Behaviors>
+                      <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="382" SortMemberPath="PRO_strIdentifikation" SortDirection="Ascending" Header="{Loc 13_202}">
+                          <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type viewModels:EDC_NiederhalterViewModel}">
+                              <TextBlock Text="{Binding PRO_strIdentifikation}" />
+                            </DataTemplate>
+                          </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="234" Header="{Loc 13_499}">
+                          <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type viewModels:EDC_NiederhalterViewModel}">
+                              <Border HorizontalAlignment="Right" MinHeight="{StaticResource C_strBasisTouchHoehe}" Visibility="{Binding PRO_blnIstAusgewaehlt, Converter={StaticResource C_strConverter_BoolNachVisibility}}">
+                                <Grid SnapsToDevicePixels="True" Margin="{StaticResource C_strStdMarginNurRechts}">
+                                  <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="56" />
+                                    <ColumnDefinition Width="56" />
+                                  </Grid.ColumnDefinitions>
+                                  <controls:EDU_IconButton Grid.Column="0" Width="56" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhalterBearbeiten}" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Objekt_umbenennen_24x24.png" CommandParameter="{Binding}" ToolTip="{Loc 13_1109}" />
+                                  <controls:EDU_IconButton Grid.Column="1" Width="56" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhalterLoeschen}" Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" CommandParameter="{Binding}" ToolTip="{Loc 13_1110}" />
+                                </Grid>
+                              </Border>
+                            </DataTemplate>
+                          </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                      </DataGrid.Columns>
+                    </DataGrid>
+                  </Grid>
+                </DataTemplate>
+              </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+            <controls:EDU_IconButton Grid.Row="1" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Duplizieren_24x24.png" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdNiederhaltergruppeHinzufuegen}" HorizontalAlignment="Right" MinWidth="{StaticResource C_strBasisTouchHoehe}" Margin="{StaticResource C_strStdMarginObenRechtsUnten}" Style="{StaticResource C_strStyleIconButton_OpenDialogInhaltsbereich}" ToolTip="{Loc 13_1104}" />
+          </Grid>
+        </GroupBox>
+      </Grid>
+    </controls:EDU_TouchScrollViewer>
+    <ui:EDU_Footer Grid.Row="1" PRO_blnSpeichernSichtbar="True" PRO_blnVerwerfenSichtbar="True" Margin="{StaticResource C_strStdMarginDoppeltNegativRechtsUndLinks}" PRO_blnSpeichernErlaubt="{Binding PRO_blnKannSpeichern}" PRO_blnVerwerfenErlaubt="{Binding PRO_blnHatAenderung}" />
+  </Grid>
+</UserControl>

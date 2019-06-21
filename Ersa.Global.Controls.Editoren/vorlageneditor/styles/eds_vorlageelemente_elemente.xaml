@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:vorlageElemente="clr-namespace:Ersa.Global.Controls.Editoren.VorlagenEditor.VorlageElemente;assembly=Ersa.Global.Controls.Editoren,Version=4.11.1.0,Culture=neutral,PublicKeyToken=null" xmlns:editoren="clr-namespace:Ersa.Global.Controls.Editoren;assembly=Ersa.Global.Controls.Editoren,Version=4.11.1.0,Culture=neutral,PublicKeyToken=null" xmlns:eingabe="clr-namespace:Ersa.Global.Controls.Eingabe;assembly=Ersa.Global.Controls" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+    <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_NumerischeEingabe.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type vorlageElemente:EDC_DoubleVorlageParameter}}" DataType="{x:Type vorlageElemente:EDC_DoubleVorlageParameter}">
+    <eingabe:EDU_NumerischeEingabe Style="{StaticResource C_strStyleNumerischeEingabe_NurSollMitEinheit}" Height="24" PRO_cmdWertGeandert="{x:Static editoren:EDC_RoutedCommands.ms_cmdAblaufschrittElementWertGeaendert}" PRO_dblWert="{Binding PRO_dblWert}" PRO_strBeschriftung="{Binding PRO_strBeschriftung}" PRO_i32AnzahlNachkommastellen="{Binding PRO_i32Nachkommastellen}" PRO_strEinheit="{Binding PRO_strEinheit}" PRO_dblMin="{Binding PRO_dblMinWert}" PRO_dblMax="{Binding PRO_dblMaxWert}" PRO_objCommandParameter="{Binding}" PRO_strUebernehmenText="{Binding PRO_strOkText}" PRO_strAbbrechenText="{Binding PRO_strAbbrechenText}" />
+  </DataTemplate>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type vorlageElemente:EDC_AuswahlVorlagenParameter}}" DataType="{x:Type vorlageElemente:EDC_AuswahlVorlagenParameter}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="{StaticResource C_strGridLengthNumerischeEingabe_Beschriftung_Breite}" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Column="0" Height="24" Text="{Binding PRO_strBeschriftung}" />
+      <controls:EDU_CommandComboBox Grid.Column="1" Height="24" Width="180" HorizontalAlignment="Stretch" SelectedValuePath="PRO_objWert" PRO_blnInitialeAenderungIgnorieren="True" PRO_cmdAuswahlGeandert="{x:Static editoren:EDC_RoutedCommands.ms_cmdAblaufschrittElementAuswahlWertGeaendert}" ItemsSource="{Binding PRO_lstAuswahlliste}" SelectedValue="{Binding PRO_objWert}">
+        <controls:EDU_CommandComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding PRO_strTitel}" />
+          </DataTemplate>
+        </controls:EDU_CommandComboBox.ItemTemplate>
+      </controls:EDU_CommandComboBox>
+    </Grid>
+  </DataTemplate>
+  <DataTemplate x:Key="{DataTemplateKey {x:Type vorlageElemente:EDC_VorlageElement}}" DataType="{x:Type vorlageElemente:EDC_VorlageElement}">
+    <ItemsControl ItemsSource="{Binding PRO_enuParameter}" IsEnabled="{Binding PRO_blnIstAktiv}" />
+  </DataTemplate>
+</ResourceDictionary>

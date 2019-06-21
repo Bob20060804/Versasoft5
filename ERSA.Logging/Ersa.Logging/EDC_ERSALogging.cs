@@ -544,6 +544,13 @@ namespace Ersa.Logging
 			}
 		}
 
+        /// <summary>
+        /// Check log level
+        /// </summary>
+        /// <param name="i_enmLoggingLevelAngefragt"></param>
+        /// <param name="i_enmLoggingLevelAktuell"></param>
+        /// <param name="r_intCheckStateErgebnis"></param>
+        /// <returns></returns>
 		public static bool FUN_blnLoggingLevelUeberpruefen(ENUM_LoggingLevels i_enmLoggingLevelAngefragt, ENUM_LoggingLevels i_enmLoggingLevelAktuell, ref CheckState r_intCheckStateErgebnis)
 		{
 			bool result = default(bool);
@@ -578,6 +585,10 @@ namespace Ersa.Logging
 			}
 		}
 
+        /// <summary>
+        /// Datetime format
+        /// </summary>
+        /// <returns></returns>
 		public static string FUN_strDatumZeitFormatiert()
 		{
 			try
@@ -595,6 +606,17 @@ namespace Ersa.Logging
 			}
 		}
 
+        /// <summary>
+        /// error log
+        /// </summary>
+        /// <param name="r_objErrorProvider"></param>
+        /// <param name="r_ctlContolBeliebig"></param>
+        /// <param name="i_blnMessageBoxAnzeigen"></param>
+        /// <param name="i_strLoggingNachricht"></param>
+        /// <param name="r_objLogging"></param>
+        /// <param name="r_enmLoggingLevel"></param>
+        /// <param name="i_strNameNamespaceKlasse"></param>
+        /// <param name="i_strNameMethode"></param>
 		public static void SUB_LoggingMitErrorProvider(ref ErrorProvider r_objErrorProvider, ref Control r_ctlContolBeliebig, bool i_blnMessageBoxAnzeigen = false, string i_strLoggingNachricht = null, ref EDC_ERSALogging r_objLogging = default(ref EDC_ERSALogging), ref ENUM_LoggingLevels r_enmLoggingLevel = 0uL, string i_strNameNamespaceKlasse = null, string i_strNameMethode = null)
 		{
 			try

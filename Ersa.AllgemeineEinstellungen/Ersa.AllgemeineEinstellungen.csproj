@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.AllgemeineEinstellungen</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Module">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Module.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.UI.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.UI.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Infrastructure">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Lokalisierung">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Lokalisierung.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.UI">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Mef.Wpf">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.Mef.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Dienste">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Dienste.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Mvvm">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Controls">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.DataDienste">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataDienste.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.CapabilityContracts">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.CapabilityContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Mes">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Mes.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Dienste">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Dienste.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common.Model">
+      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.AllgemeineEinstellungen.BetriebsmittelVerwaltung\EDC_Flussmittel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.BetriebsmittelVerwaltung\EDC_RuestkomponentenUtils.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Converters\EDC_ListeNichtLeerNachVisibilityConverter.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Converters\EDC_WochenuhrZeileZustandNachBoolConverter.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Dialoge\EDU_FlussmittelBearbeitenDialog.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.GruppenVerwaltung\EDC_Gruppe.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Konstanten\EDC_OnlineHilfeKonstanten.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_AllgemeineEinstellungenViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_BetriebsmittelVerwaltungViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_CodeLeseFehlerBestaetigungsMoeglichkeiten.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_CodeNichtGefundenBestaetingungsMoeglichkeiten.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_GruppenVerwaltungViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_MaschinenIdentifikationViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_MeldeAmpelViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_NiederhaltergruppeViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_NiederhalterViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_PfadeViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_ProduktionsArtElement.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_ProduktionsArten.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_ProduktionsArtGruppe.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_ProduktionsArtMitPrgId.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_ProduktionssteuerungViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_ProduktionsUnterart.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_RuestkomponentenVerwaltungViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.ViewModels\EDC_ZeitschaltuhrViewModel.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_AllgemeineEinstellungenView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_BetriebsmittelVerwaltungView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_GruppenVerwaltungView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_MaschinenIdentifikationView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_MeldeAmpelView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_PfadeView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_ProduktionssteuerungView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_RuestkomponentenVerwaltungView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Views\EDV_ZeitschaltuhrView.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen.Zeitschaltuhr\EDC_Wochentag.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen\EDC_AllgemeineEinstellungenController.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen\EDC_AllgemeineEinstellungenModule.cs" />
+    <Compile Include="Ersa.AllgemeineEinstellungen\EDC_RoutedCommands.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\dialoge\edu_flussmittelbearbeitendialog.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\styles\eds_datagrid.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_allgemeineeinstellungenview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_betriebsmittelverwaltungview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_gruppenverwaltungview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_maschinenidentifikationview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_meldeampelview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_pfadeview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_produktionssteuerungview.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_ruestkomponentenverwaltungview-20.xaml" />
+    <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\Ersa.AllgemeineEinstellungen\views\edv_zeitschaltuhrview.xaml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

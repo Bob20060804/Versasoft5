@@ -37,6 +37,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERSA.Logging", "ERSA.Loggin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Platform.UI", "Ersa.Platform.UI\Ersa.Platform.UI.csproj", "{DB6521AD-295B-451C-8D3B-443F5D902F87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.AllgemeineEinstellungen", "Ersa.AllgemeineEinstellungen\Ersa.AllgemeineEinstellungen.csproj", "{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Global.Controls", "Ersa.Global.Controls\Ersa.Global.Controls.csproj", "{563156C5-BF95-4D71-8051-AAAFB1414541}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ersa.Global.Controls.Editoren", "Ersa.Global.Controls.Editoren\Ersa.Global.Controls.Editoren.csproj", "{C6918B0A-D28C-4493-86A3-F32D222F73A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -168,6 +174,30 @@ Global
 		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Release|x86.ActiveCfg = Release|Any CPU
 		{DB6521AD-295B-451C-8D3B-443F5D902F87}.Release|x86.Build.0 = Release|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Debug|x86.Build.0 = Debug|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Release|x86.ActiveCfg = Release|Any CPU
+		{774ECF3E-DFE6-4BB8-B122-4AC1F67CFF72}.Release|x86.Build.0 = Release|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Debug|x86.Build.0 = Debug|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Release|x86.ActiveCfg = Release|Any CPU
+		{563156C5-BF95-4D71-8051-AAAFB1414541}.Release|x86.Build.0 = Release|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Debug|x86.Build.0 = Debug|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6918B0A-D28C-4493-86A3-F32D222F73A7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

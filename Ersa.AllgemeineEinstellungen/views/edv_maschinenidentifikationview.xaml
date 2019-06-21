@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.AllgemeineEinstellungen.Views.EDV_MaschinenIdentifikationView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:views="clr-namespace:Ersa.AllgemeineEinstellungen.Views;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <Interaction.Behaviors>
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdSpeichern}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdSpeichern}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdWertGeaendert}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdVerwerfen}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdVerwerfen}" CommandParameter="{Binding}" />
+    </Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <controls:EDU_TouchScrollViewer Style="{StaticResource C_strStyleScrollViewer_Spaltenraster}">
+      <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_2Spalten}" Header="{Loc 8_3400}">
+        <Grid IsEnabled="{Binding DataContext.PRO_blnDarfEinstellungenEditieren, RelativeSource={RelativeSource AncestorType={x:Type views:EDV_MaschinenIdentifikationView}}}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 1_1000}" />
+          <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding PRO_strMaschinennummer, Mode=OneWay}" />
+          <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 8_3436}" />
+          <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PRO_strMaschinenbezeichnung, UpdateSourceTrigger=PropertyChanged}">
+            <Interaction.Triggers>
+              <EventTrigger EventName="TextChanged">
+                <InvokeCommandAction Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" />
+              </EventTrigger>
+            </Interaction.Triggers>
+          </TextBox>
+          <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 10_780}" />
+          <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PRO_strMaschinenstandort, UpdateSourceTrigger=PropertyChanged}">
+            <Interaction.Triggers>
+              <EventTrigger EventName="TextChanged">
+                <InvokeCommandAction Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" />
+              </EventTrigger>
+            </Interaction.Triggers>
+          </TextBox>
+          <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource C_strStyleTextBlock_AbstandRechtsUndUnten}" Text="{Loc 13_840}" />
+          <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PRO_strMaschinenlinie, UpdateSourceTrigger=PropertyChanged}">
+            <Interaction.Triggers>
+              <EventTrigger EventName="TextChanged">
+                <InvokeCommandAction Command="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" />
+              </EventTrigger>
+            </Interaction.Triggers>
+          </TextBox>
+        </Grid>
+      </GroupBox>
+    </controls:EDU_TouchScrollViewer>
+    <ui:EDU_Footer Grid.Row="1" PRO_blnSpeichernSichtbar="True" PRO_blnVerwerfenSichtbar="True" Margin="{StaticResource C_strStdMarginDoppeltNegativRechtsUndLinks}" PRO_blnSpeichernErlaubt="{Binding PRO_blnHatAenderung}" PRO_blnVerwerfenErlaubt="{Binding PRO_blnHatAenderung}" />
+  </Grid>
+</UserControl>

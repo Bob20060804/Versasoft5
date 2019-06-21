@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.Global.Controls.Editoren.BildEditor.EDU_BildEditor" UseLayoutRounding="False" SizeChanged="SUB_GroesseGeaendert" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Ersa.Global.Controls.Editoren.BildEditor" xmlns:converters="clr-namespace:Ersa.Global.Controls.Converters;assembly=Ersa.Global.Controls" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:system="clr-namespace:System;assembly=mscorlib">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Brushes.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Tooltip.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls.Editoren;component/Styles/EDS_BildEditorScrollView.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls.Editoren;component/Styles/EDS_EditorElemente.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <converters:EDC_CompositeCollectionConverter x:Key="C_strConverter_CompositeCollection" />
+      <converters:EDC_DivisionsMultiConverter x:Key="C_strConverter_Division" />
+      <converters:EDC_EqualityMultiConverter x:Key="EqualityToVisibilityHiddenConverter" PRO_blnVisibilityStattBool="True" PRO_blnHiddenStattCollapsed="True" PRO_blnNullIgnorieren="True" />
+      <system:Int32 x:Key="C_strFixerWertEins">1</system:Int32>
+      <Style x:Key="C_strStyle_ContentPresenter_EditorElement" TargetType="{x:Type ContentPresenter}">
+        <Setter Property="Canvas.Left" Value="{Binding PRO_sttPosition.X}" />
+        <Setter Property="Canvas.Top" Value="{Binding PRO_sttPosition.Y}" />
+        <Setter Property="Panel.ZIndex" Value="{Binding PRO_i32ZIndex}" />
+        <Setter Property="UIElement.IsHitTestVisible" Value="{Binding PRO_blnAuswaehlbar}" />
+        <Setter Property="FrameworkElement.ToolTip" Value="{Binding PRO_strToolTip}" />
+        <Setter Property="UIElement.Visibility">
+          <Setter.Value>
+            <MultiBinding Converter="{StaticResource EqualityToVisibilityHiddenConverter}">
+              <Binding Path="PRO_enmBlickrichtung" />
+              <Binding Path="PRO_enmBlickrichtung" RelativeSource="{RelativeSource AncestorType={x:Type local:EDU_BildEditor}}" />
+            </MultiBinding>
+          </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding PRO_blnSichtbar}" Value="False">
+            <DataTrigger.Setters>
+              <Setter Property="UIElement.Visibility" Value="Hidden" />
+            </DataTrigger.Setters>
+          </DataTrigger>
+          <DataTrigger Binding="{Binding PRO_blnUebergehtSkalierung}" Value="True">
+            <DataTrigger.Setters>
+              <Setter Property="UIElement.RenderTransform">
+                <Setter.Value>
+                  <ScaleTransform>
+                    <ScaleTransform.ScaleX>
+                      <MultiBinding Converter="{StaticResource C_strConverter_Division}" Mode="OneWay">
+                        <Binding Source="{StaticResource C_strFixerWertEins}" Mode="OneWay" />
+                        <Binding Path="PRO_dblSkalierung" Mode="OneWay" RelativeSource="{RelativeSource AncestorType={x:Type local:EDU_BildEditor}}" />
+                      </MultiBinding>
+                    </ScaleTransform.ScaleX>
+                    <ScaleTransform.ScaleY>
+                      <MultiBinding Converter="{StaticResource C_strConverter_Division}" Mode="OneWay">
+                        <Binding Path="PRO_dblSpiegelungsFaktorYFuerElement" Mode="OneWay" RelativeSource="{RelativeSource AncestorType={x:Type local:EDU_BildEditor}}" />
+                        <Binding Path="PRO_dblSkalierung" Mode="OneWay" RelativeSource="{RelativeSource AncestorType={x:Type local:EDU_BildEditor}}" />
+                      </MultiBinding>
+                    </ScaleTransform.ScaleY>
+                  </ScaleTransform>
+                </Setter.Value>
+              </Setter>
+            </DataTrigger.Setters>
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <UserControl.CommandBindings>
+    <CommandBinding Command="Zoom" CanExecute="SUB_ZoomCanExecute" Executed="SUB_ZoomExecuted" />
+  </UserControl.CommandBindings>
+  <Grid>
+    <ScrollViewer Name="scrollviewer" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.PanningMode="Both" Style="{StaticResource C_strStyle_ScrollViewer_Bildeditor}" PreviewKeyDown="SUB_PreviewKeyDown">
+      <Grid Name="grid">
+        <Grid Background="#00FFFFFF" MouseWheel="SUB_MouseWheel" MouseDown="SUB_MouseDown" MouseMove="SUB_MouseMove" MouseUp="SUB_MouseUp" MouseEnter="SUB_MouseEnter" MouseLeave="SUB_MouseLeave">
+          <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding PRO_dblSkalierung, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" ScaleY="{Binding PRO_dblSkalierung, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" />
+          </Grid.LayoutTransform>
+          <Canvas Name="canvas" Background="#00FFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, Mode=OneWay, ElementName=canvas}" Height="{Binding Path=ActualHeight, Mode=OneWay, ElementName=canvas}">
+            <Canvas.RenderTransform>
+              <TranslateTransform X="{Binding PRO_dblCanvasTranslateX, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" Y="{Binding PRO_dblCanvasTranslateY, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" />
+            </Canvas.RenderTransform>
+          </Canvas>
+          <ItemsControl ItemContainerStyle="{StaticResource C_strStyle_ContentPresenter_EditorElement}">
+            <ItemsControl.ItemsSource>
+              <MultiBinding Converter="{StaticResource C_strConverter_CompositeCollection}">
+                <Binding Path="PRO_enuGrafikElemente" RelativeSource="{RelativeSource AncestorType={x:Type local:EDU_BildEditor}}" />
+                <Binding Path="PRO_enuTemporaereGrafikElemente" RelativeSource="{RelativeSource AncestorType={x:Type local:EDU_BildEditor}}" />
+              </MultiBinding>
+            </ItemsControl.ItemsSource>
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <Canvas Background="#00FFFFFF" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleX="{Binding PRO_dblSpiegelungsFaktorX, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" ScaleY="{Binding PRO_dblSpiegelungsFaktorY, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" />
+                <TranslateTransform X="{Binding PRO_dblNullpunktX, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" Y="{Binding PRO_dblNullpunktY, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" />
+                <TranslateTransform X="{Binding PRO_dblCanvasTranslateX, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" Y="{Binding PRO_dblCanvasTranslateY, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" />
+              </TransformGroup>
+            </ItemsControl.RenderTransform>
+          </ItemsControl>
+        </Grid>
+        <Popup Name="popup" AllowsTransparency="True" Placement="Relative" PlacementTarget="{Binding ElementName=grid}">
+          <ContentControl Style="{StaticResource C_strStyleToolTipDefault}" Content="{Binding PRO_objTooltip, RelativeSource={RelativeSource AncestorType={x:Type local:EDU_BildEditor}}}" />
+        </Popup>
+      </Grid>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

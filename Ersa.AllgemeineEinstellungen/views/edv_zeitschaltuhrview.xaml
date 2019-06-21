@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.AllgemeineEinstellungen.Views.EDV_ZeitschaltuhrView" Name="edcZeitschaltuhrControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:lexEng="clr-namespace:WPFLocalizeExtension.Engine;assembly=WPFLocalizeExtension" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView" xmlns:zeitschaltuhr="clr-namespace:Ersa.AllgemeineEinstellungen.Zeitschaltuhr;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:allgemeineEinstellungenConverters="clr-namespace:Ersa.AllgemeineEinstellungen.Converters;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:eingabe="clr-namespace:Ersa.Global.Controls.Eingabe;assembly=Ersa.Global.Controls" xmlns:konstanten="clr-namespace:Ersa.AllgemeineEinstellungen.Konstanten;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:zeitschaltuhrContracts="clr-namespace:Ersa.Platform.CapabilityContracts.AllgemeineEinstellungen.Zeitschaltuhr;assembly=Ersa.Platform.CapabilityContracts" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_Validierung.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TabControl.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_Fonts.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ComboBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DatePicker.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_IconButton.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_RadGridView.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_ZeitEingabe.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_IconButton_Common.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <allgemeineEinstellungenConverters:EDC_WochenuhrZeileZustandNachBoolConverter x:Key="C_strWochenUhrZustandConverter" />
+      <DataTemplate x:Key="C_strDatumUndZeit" DataType="{x:Type sys:DateTime}">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <TextBlock Text="{Loc 13_201}" />
+          <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" HorizontalAlignment="Stretch" Text="{Binding ., StringFormat={}{0:dddd, dd.MM.yyyy}, ConverterCulture={x:Static lexEng:LocalizeDictionary.CurrentCulture}}" />
+          <TextBlock Grid.Column="0" Grid.Row="1" Text="{Loc 1_447}" />
+          <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" HorizontalAlignment="Stretch" Text="{Binding ., StringFormat={}{0:HH:mm:ss}, ConverterCulture={x:Static lexEng:LocalizeDictionary.CurrentCulture}}" />
+        </Grid>
+      </DataTemplate>
+      <DataTemplate x:Key="C_strWochentageVon" DataType="{x:Type zeitschaltuhrContracts:INF_WochenuhrZeile}">
+        <controls:EDU_CommandComboBox HorizontalAlignment="Stretch" SelectedValuePath="PRO_enmWochentag" Style="{StaticResource C_strCommandComboBox_Grid}" Width="200" SelectedValue="{Binding PRO_enmWochentagEin, Mode=TwoWay}" ItemsSource="{Binding DataContext.PRO_enuWochentage, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+          <controls:EDU_CommandComboBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type zeitschaltuhr:EDC_Wochentag}">
+              <DataTemplateKey.Key>{x:Type zeitschaltuhr:EDC_Wochentag}</DataTemplateKey.Key>
+              <TextBlock Style="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" Text="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+            </DataTemplate>
+          </controls:EDU_CommandComboBox.ItemTemplate>
+        </controls:EDU_CommandComboBox>
+      </DataTemplate>
+      <DataTemplate x:Key="C_strWochentageBis" DataType="{x:Type zeitschaltuhrContracts:INF_WochenuhrZeile}">
+        <controls:EDU_CommandComboBox HorizontalAlignment="Stretch" SelectedValuePath="PRO_enmWochentag" Style="{StaticResource C_strCommandComboBox_Grid}" Width="200" SelectedValue="{Binding PRO_enmWochentagAus, Mode=TwoWay}" ItemsSource="{Binding DataContext.PRO_enuWochentage, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+          <controls:EDU_CommandComboBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type zeitschaltuhr:EDC_Wochentag}">
+              <DataTemplateKey.Key>{x:Type zeitschaltuhr:EDC_Wochentag}</DataTemplateKey.Key>
+              <TextBlock Style="{StaticResource EDU_EDS_ComboBoxNonEditableTextBlockStyle}" Text="{Binding PRO_strLocKey, Converter={StaticResource C_strConverter_Lokalisierung}}" />
+            </DataTemplate>
+          </controls:EDU_CommandComboBox.ItemTemplate>
+        </controls:EDU_CommandComboBox>
+      </DataTemplate>
+      <DataTemplate x:Key="C_strZeitVon" DataType="{x:Type zeitschaltuhrContracts:INF_WochenuhrZeile}">
+        <eingabe:EDU_ZeitEingabe Style="{StaticResource C_strStyle_ZeitEingabe_OhneBeschriftung_Grid_Lokalisiert}" PRO_sttZeit="{Binding PRO_sttVon}" PRO_strBeschriftung="{Loc 1_157}" PRO_strEinheit="{Loc 13_476}" />
+      </DataTemplate>
+      <DataTemplate x:Key="C_strZeitBis" DataType="{x:Type zeitschaltuhrContracts:INF_WochenuhrZeile}">
+        <eingabe:EDU_ZeitEingabe Style="{StaticResource C_strStyle_ZeitEingabe_OhneBeschriftung_Grid_Lokalisiert}" PRO_sttZeit="{Binding PRO_sttBis}" PRO_strBeschriftung="{Loc 1_156}" PRO_strEinheit="{Loc 13_476}" />
+      </DataTemplate>
+      <DataTemplate x:Key="C_strAktiveWochenZeile" DataType="{x:Type zeitschaltuhrContracts:INF_WochenuhrZeile}">
+        <CheckBox HorizontalAlignment="Center" IsChecked="{Binding PRO_enmZustand, Converter={StaticResource C_strWochenUhrZustandConverter}}" />
+      </DataTemplate>
+      <DataTemplate x:Key="C_strOperationen">
+        <Grid>
+          <controls:EDU_IconButton Style="{StaticResource C_strStyleIconButton_DataGrid}" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" Command="{Binding DataContext.PRO_cmdWochenuhrZeileLoeschen, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
+        </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <Interaction.Behaviors>
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdSpeichern}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdSpeichern}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdVerwerfen}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdVerwerfen}" CommandParameter="{Binding}" />
+    </Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <controls:EDU_TouchScrollViewer Style="{StaticResource C_strStyleScrollViewer_Spaltenraster}" EDC_HilfeKeyExtension.PRO_strHilfeKey="{x:Static konstanten:EDC_OnlineHilfeKonstanten.mC_strAllgemeineEinstellungen_Wochenzeitschaltuhr}">
+      <Grid IsEnabled="{Binding PRO_blnDarfZeitschaltuhrEditieren}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_3Spalten}" Header="{Loc 1_158}">
+          <telerik:RadGridView GridViewDataControl.EnableColumnVirtualization="True" GridViewDataControl.EnableRowVirtualization="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.IsVirtualizing="True" FrameworkElement.Style="{StaticResource C_strStyleRadGridView_Zeitschaltuhr}" FrameworkElement.Height="772" DataControl.ItemsSource="{Binding PRO_colNichtGeloeschteWochenuhrZeilen}">
+            <GridViewDataControl.ColumnGroups>
+              <telerik:GridViewColumnGroup Name="C_strVon" HeaderStyle="{StaticResource C_strStyleRadGridView_CommonColumnHeader_First}" Header="{Loc 11_3}" />
+              <telerik:GridViewColumnGroup Name="C_strBis" HeaderStyle="{StaticResource C_strStyleRadGridView_CommonColumnHeader_Base}" Header="{Loc 8_3432}" />
+            </GridViewDataControl.ColumnGroups>
+            <GridViewDataControl.Columns>
+              <telerik:GridViewDataColumn GridViewColumn.ColumnGroupName="C_strVon" GridViewColumn.Width="200" GridViewColumn.HeaderCellStyle="{StaticResource C_strStyleRadGridView_GridViewHeaderCell_First}" GridViewColumn.IsReadOnly="True" GridViewColumn.CellStyle="{StaticResource C_strStyleRadGridView_GridViewCell_Base}" GridViewColumn.CellTemplate="{StaticResource C_strWochentageVon}" GridViewBoundColumnBase.Header="{Loc 11_190}" />
+              <telerik:GridViewDataColumn GridViewColumn.ColumnGroupName="C_strVon" GridViewColumn.HeaderCellStyle="{StaticResource C_strStyleRadGridView_GridViewHeaderCell_Base}" GridViewColumn.IsReadOnly="True" GridViewColumn.CellStyle="{StaticResource C_strStyleRadGridView_GridViewCell_Base}" GridViewColumn.CellTemplate="{StaticResource C_strZeitVon}" GridViewBoundColumnBase.Header="{Loc 1_447}" />
+              <telerik:GridViewDataColumn GridViewColumn.ColumnGroupName="C_strBis" GridViewColumn.Width="200" GridViewColumn.HeaderCellStyle="{StaticResource C_strStyleRadGridView_GridViewHeaderCell_Base}" GridViewColumn.IsReadOnly="True" GridViewColumn.CellStyle="{StaticResource C_strStyleRadGridView_GridViewCell_Base}" GridViewColumn.CellTemplate="{StaticResource C_strWochentageBis}" GridViewBoundColumnBase.Header="{Loc 11_190}" />
+              <telerik:GridViewDataColumn GridViewColumn.ColumnGroupName="C_strBis" GridViewColumn.HeaderCellStyle="{StaticResource C_strStyleRadGridView_GridViewHeaderCell_Base}" GridViewColumn.IsReadOnly="True" GridViewColumn.CellStyle="{StaticResource C_strStyleRadGridView_GridViewCell_Base}" GridViewColumn.CellTemplate="{StaticResource C_strZeitBis}" GridViewBoundColumnBase.Header="{Loc 1_447}" />
+              <telerik:GridViewDataColumn GridViewColumn.ColumnGroupName="C_strBis" GridViewColumn.HeaderCellStyle="{StaticResource C_strStyleRadGridView_GridViewHeaderCell_Base}" GridViewColumn.IsReadOnly="True" GridViewColumn.CellStyle="{StaticResource C_strStyleRadGridView_GridViewCell_Base}" GridViewColumn.CellTemplate="{StaticResource C_strAktiveWochenZeile}" GridViewBoundColumnBase.Header="{Loc 1_150}" />
+              <telerik:GridViewDataColumn GridViewColumn.ColumnGroupName="C_strBis" GridViewColumn.HeaderCellStyle="{StaticResource C_strStyleRadGridView_GridViewHeaderCell_Base}" GridViewColumn.IsReadOnly="True" GridViewColumn.CellStyle="{StaticResource C_strStyleRadGridView_GridViewCell_Base}" GridViewColumn.CellTemplate="{StaticResource C_strOperationen}" GridViewBoundColumnBase.Header="{Loc 13_499}" />
+            </GridViewDataControl.Columns>
+          </telerik:RadGridView>
+        </GroupBox>
+        <Grid Grid.Column="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{Loc 13_272}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <GroupBox Header="{Loc 13_200}">
+                <ContentControl ContentTemplate="{StaticResource C_strDatumUndZeit}" Content="{Binding PRO_sttAktuelleZeit}" />
+              </GroupBox>
+              <controls:EDU_IconButton Grid.Row="1" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Uebernehmen_24x24.png" HorizontalAlignment="Left" Style="{StaticResource InhaltsbereichIconButtonStyle}" Content="{Loc 9_2102}" Command="{Binding PRO_cmdPcZeitInSpsUebernehmen}" />
+              <GroupBox Grid.Row="2" Header="{Loc 11_194}">
+                <ContentControl ContentTemplate="{StaticResource C_strDatumUndZeit}" Content="{Binding PRO_edcZeitschaltuhrCapability.PRO_sttSpsZeit}" />
+              </GroupBox>
+            </Grid>
+          </GroupBox>
+          <GroupBox Grid.Row="1" Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1Spalte}" Header="{Loc 11_1066}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <CheckBox Name="chkNdaAktiv" Grid.ColumnSpan="2" HorizontalAlignment="Left" Content="{Loc 8_2701}" IsChecked="{Binding PRO_edcZeitschaltuhrCapability.PRO_blnBetriebsurlaubAktiviert}" />
+              <TextBlock Grid.Column="0" Grid.Row="1" Text="{Loc 11_3}" />
+              <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,0,8" VerticalAlignment="Center" HorizontalAlignment="Stretch" Style="{StaticResource C_strStyleDatePicker_OhneJahr}" IsEnabled="{Binding IsChecked, ElementName=chkNdaAktiv}" Text="{Binding PRO_strUrlaubStart, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+              <TextBlock Grid.Column="0" Grid.Row="2" Text="{Loc 8_3432}" />
+              <DatePicker Grid.Row="2" Grid.Column="1" Margin="0,0,0,8" VerticalAlignment="Center" HorizontalAlignment="Stretch" Style="{StaticResource C_strStyleDatePicker_OhneJahr}" IsEnabled="{Binding IsChecked, ElementName=chkNdaAktiv}" Text="{Binding PRO_strUrlaubEnde, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            </Grid>
+          </GroupBox>
+        </Grid>
+      </Grid>
+    </controls:EDU_TouchScrollViewer>
+    <ui:EDU_Footer Grid.Row="1" PRO_blnSpeichernSichtbar="True" PRO_blnVerwerfenSichtbar="True" Margin="{StaticResource C_strStdMarginDoppeltNegativRechtsUndLinks}" IsEnabled="{Binding PRO_blnDarfZeitschaltuhrEditieren}" PRO_blnSpeichernErlaubt="{Binding PRO_blnHatAenderung}" PRO_blnVerwerfenErlaubt="{Binding PRO_blnHatAenderung}">
+      <controls:EDU_IconButton PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Zeitschaltung_hinzufuegen_24x24.png" DockPanel.Dock="Left" Content="{Loc 10_758}" Command="{Binding PRO_cmdWochenuhrZeileHinzufuegen}" />
+    </ui:EDU_Footer>
+  </Grid>
+</UserControl>

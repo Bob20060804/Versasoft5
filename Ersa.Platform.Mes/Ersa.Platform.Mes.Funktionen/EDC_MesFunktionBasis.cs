@@ -12,7 +12,7 @@ namespace Ersa.Platform.Mes.Funktionen
 	public class EDC_MesFunktionBasis
 	{
         /// <summary>
-        /// namespace name
+        /// Namespace name
         /// </summary>
 		private readonly string m_strNamespaceName;
         /// <summary>

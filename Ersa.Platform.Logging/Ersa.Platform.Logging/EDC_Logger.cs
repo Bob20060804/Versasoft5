@@ -20,6 +20,9 @@ namespace Ersa.Platform.Logging
 
 		private bool m_blnIstLoggerInitialisiert;
 
+        /// <summary>
+        /// Active
+        /// </summary>
 		public bool PRO_blnIstLoggerAktiv
 		{
 			[DebuggerStepThrough]
@@ -33,6 +36,9 @@ namespace Ersa.Platform.Logging
 			}
 		}
 
+        /// <summary>
+        /// Initialize
+        /// </summary>
 		public bool PRO_blnIstInitialisiert
 		{
 			[DebuggerStepThrough]

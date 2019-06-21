@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Ersa.AllgemeineEinstellungen.Views.EDV_BetriebsmittelVerwaltungView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:helpers="clr-namespace:Ersa.Global.Controls.Helpers;assembly=Ersa.Global.Controls" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:common="clr-namespace:Ersa.Platform.UI.Common;assembly=Ersa.Platform.UI.Common" xmlns:ui="clr-namespace:Ersa.Platform.UI;assembly=Ersa.Platform.UI" xmlns:controls="clr-namespace:Ersa.Global.Controls;assembly=Ersa.Global.Controls" xmlns:lex="http://wpflocalizeextension.codeplex.com" xmlns:allgemeineEinstellungen="clr-namespace:Ersa.AllgemeineEinstellungen;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null" xmlns:ruestmaterialVerwaltung="clr-namespace:Ersa.AllgemeineEinstellungen.BetriebsmittelVerwaltung;assembly=Ersa.AllgemeineEinstellungen,Version=13.3.0.0,Culture=neutral,PublicKeyToken=null">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <helpers:EDC_SharedResourceDictionary Source="pack://application:,,,/Ersa.Platform.UI.Common;component/Styles/EDS_BasisUiConverter.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_BasisGroessen.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_CheckBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ComboBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_DataGrid.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_GroupBox.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_ScrollViewer.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Global.Controls;component/Styles/EDS_TextBlock.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.Platform.UI;component/Styles/EDS_Validierung.xaml" />
+        <helpers:EDC_SharedResourceDictionary Source="/Ersa.AllgemeineEinstellungen;component/Styles/EDS_DataGrid.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <Interaction.Behaviors>
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdSpeichern}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdSpeichern}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdWertGeaendert}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdWertGeaendert}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static common:EDC_BasisCommands.ms_cmdVerwerfen}" Command="{Binding PRO_edcBasisCommandsViewModel.PRO_cmdVerwerfen}" CommandParameter="{Binding}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdFlussmittelHinzufuegen}" Command="{Binding PRO_cmdFlussmittelHinzufuegen}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdFlussmittelLoeschen}" Command="{Binding PRO_cmdFlussmittelLoeschen}" />
+      <common:EDC_RoutedCommandBehavior PRO_cmdRoutedCommand="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdFlussmittelAendern}" Command="{Binding PRO_cmdFlussmittelAendern}" />
+    </Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <controls:EDU_TouchScrollViewer Style="{StaticResource C_strStyleScrollViewer_Spaltenraster}">
+      <GroupBox Style="{StaticResource C_strStyleGroupBox_DetailAnsicht_1_5Spalten}" Header="{Loc 10_1490}">
+        <Grid IsEnabled="{Binding PRO_blnDarfEinstellungenEditieren}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <DataGrid Grid.Row="0" MaxHeight="700" Style="{StaticResource C_strStyleDataGrid_Default}" Margin="{StaticResource C_strStdMarginNurRechts}" ItemsSource="{Binding PRO_lstAktiveFlussmittel}">
+            <DataGrid.Columns>
+              <DataGridTemplateColumn Width="*" Header="{Loc 1_25}">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate DataType="{x:Type ruestmaterialVerwaltung:EDC_Flussmittel}">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding PRO_strName}" />
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+              <DataGridTemplateColumn Width="*" Header="{Loc 13_1069}">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate DataType="{x:Type ruestmaterialVerwaltung:EDC_Flussmittel}">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding PRO_strSpezifikation}" />
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+              <DataGridTemplateColumn Width="128">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate DataType="{x:Type ruestmaterialVerwaltung:EDC_Flussmittel}">
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="56" />
+                        <ColumnDefinition Width="56" />
+                      </Grid.ColumnDefinitions>
+                      <controls:EDU_IconButton Grid.Column="0" Width="56" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Loeschen_24x24.png" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdFlussmittelLoeschen}" Style="{StaticResource C_strStyleIconButton_DataGrid}" CommandParameter="{Binding}" ToolTip="{Loc 13_798}" />
+                      <controls:EDU_IconButton Grid.Column="1" Width="56" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Tabelle_bearbeiten_24x24.png" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdFlussmittelAendern}" Style="{StaticResource C_strStyleIconButton_DataGrid}" CommandParameter="{Binding}" ToolTip="{Loc 11_198}" />
+                    </Grid>
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+            </DataGrid.Columns>
+          </DataGrid>
+          <controls:EDU_IconButton Grid.Row="1" PRO_strIconUri="/Ersa.Global.Controls;component/Bilder/Icons/Icon_Duplizieren_24x24.png" Command="{x:Static allgemeineEinstellungen:EDC_RoutedCommands.ms_cmdFlussmittelHinzufuegen}" HorizontalAlignment="Right" MinWidth="{StaticResource C_strBasisTouchHoehe}" Margin="{StaticResource C_strStdMarginObenRechtsUnten}" Style="{StaticResource C_strStyleIconButton_OpenDialogInhaltsbereich}" />
+        </Grid>
+      </GroupBox>
+    </controls:EDU_TouchScrollViewer>
+    <ui:EDU_Footer Grid.Row="1" PRO_blnSpeichernSichtbar="True" PRO_blnVerwerfenSichtbar="True" Margin="{StaticResource C_strStdMarginDoppeltNegativRechtsUndLinks}" PRO_blnSpeichernErlaubt="{Binding PRO_blnKannSpeichern}" PRO_blnVerwerfenErlaubt="{Binding PRO_blnHatAenderung}" />
+  </Grid>
+</UserControl>

@@ -1,0 +1,210 @@
+# Change Log
+Alle nennenswerten Änderungen dieses Projekts werden in dieser Datei dokumentiert.
+Das Projekt verwendet [Semantic Versioning](http://semver.org/).
+Der Aufbau des Changelogs folgt den Vorgaben von [Keep a Changelog](http://keepachangelog.com/).
+
+## [Unreleased]
+
+## [4.11.1] - 2018-09-04
+### Fixed
+- Größenanpassung von Text-Content der Editorelemente korrigiert, so dass Text immer sichtbar ist
+
+## [4.11.0] - 2018-08-21
+### Added
+- DoubleVorlageParameter um Beschriftung für Dialogbuttons erweitert
+
+## [4.10.1] - 2018-07-30
+### Refactored
+- internes Refactoring EditorElement
+
+## [4.10.0] - 2018-07-23
+### Added
+- Blickrichtung für EditorElemente
+- Bildeditor um Blickrichtung erweitert
+### Refactored
+- Optik Koordinatenursprung überarbeitet
+### Fixed
+- Spiegelung von EditorElementen, die Skalierung übergehen, korrigiert
+
+## [4.9.2] - 2018-07-10
+### Fixed
+- Elemente wurden bei PasteTool unter bestimmten Umständen mit falscher Rotation eingefügt
+
+## [4.9.1] - 2018-07-06
+### Refactored
+- Unsings angepasst
+
+## [4.9.0] - 2018-06-29
+### Added
+- EDC_Tool bekommt bei Aktivierung die letzte Mausposition im Editor übergeben
+
+### Fixed
+- EDC_PasteTool zeigt erst dann die einzufügenden Elemente an, wenn Maus bewegt wurde
+- EDC_PasteTool fügt in bestimmten Fällen Elemente an falscher Position ein
+
+## [4.8.0] - 2018-06-28
+### Added
+- PasteTool hinzugefügt
+
+## [4.7.0] - 2018-06-19
+### Added
+- BauteilAuswahlTool überarbeitet
+
+## [4.6.0] - 2018-06-15
+### Added
+- Verschieben von EditorElementen mit Pfeiltasten hinzugefügt
+
+## [4.5.2] - 2018-03-28
+### Fixed
+- Fix Größenberechnung wenn Skalierung gleich 0
+- Fix fehlender ScrollViewer im Vorlageeditor
+
+## [4.5.1] - 2018-03-26
+### Fixed
+- Den Variabletyp für die Auswahlliste in der Klasse EDC_AuswahlVorlagenParameter auf IList geändert
+
+## [4.5.0] - 2018-03-21
+### Added
+- AuswahlVorlagenParameter und die Commands ms_cmdAblaufschrittAktivierungGeaendert und ms_cmdAblaufschrittElementAuswahlWertGeaendert hinzugefügt
+
+## [4.4.0] - 2018-03-14
+### Added
+- Z-Index-Konstanten erweitert
+
+## [4.3.0] - 2018-03-08
+### Added
+- Am VorlagenEditor kann ContextMenu gesetzt werden
+### Fixed
+- BindableBase als Basisklasse zu EDC_Tool hinzugefügt
+- Unnötiges Erzeugen eines Rechtecks im Rechtecktool entfernt
+
+## [4.2.1] - 2018-03-01
+### Fixed
+- Reset der Hintergrunddaten des Bildeditors gefixt
+
+## [4.2.0] - 2018-02-27
+### Added
+- Werkzeuginitialisierungsmethoden zur Initialisierung alles Kontexte eingeführt
+### Deprecated
+- einzelne Werkzeuginitialisierungsmethoden als obsolet markiert (wandert in Maschinenprojekt)
+### Refactored
+- VorlagenEditor um Paramter und Templates erweitert
+- DragAndDrop-Handler von Vorlagen angepasst
+
+## [4.1.0] - 2018-02-13
+### Added
+- Vorlageneditor hinzugefügt
+### Fixed
+- EDC_GeometrieElement: Schenkel vom Fadenkreuz auf sehr lang gesetzt, damit sie bis zum Rand vom BildEditorControl angezeigt werden
+
+## [4.0.0] - 2018-01-03
+### Changed
+- Prism auf Version 6.3.0 aktualisiert
+### Refactored
+- Refactorings aus neuen Style-Guide
+- Verwendung BindableBase auf Global.Mvvm umgestellt
+
+## [3.3.1] - 2017-12-05
+### Refactored
+- Erste Refactorings aufgrund Stylecop-Rulesets
+
+## [3.3.0] - 2017-11-21
+### Added
+- EDC_LinienElement: ContentControl für jeden Punkt (SUB_SetzePunktContent)
+### Fixed
+- EDC_LinienTool: Werkzeug wird nicht mehr deaktiviert, wenn zu kurze Bahnen gezeichnet werden
+- EDC_LinienTool: Werkzeug fordert keine Deaktivierung mehr an, wenn es von außen deaktiviert wird
+
+## [3.2.0] - 2017-11-20
+### Added
+- EDC_LinienTool: Mindestanzahl von Punkten für Erstellung von Linie hinzugefügt
+
+## [3.1.2] - 2017-09-13
+### Fixed
+- EDC_MehrfachLinienElement: SUB_DuplikateZuruecksetzen und SUB_DuplikatHinzufuegen haben grafische Darstellung nicht korrekt aktualisiert
+
+## [3.1.1] - 2017-09-11
+### Fixed
+- SUB_AendereBildausschnitt in EDU_BildEditor zeigt nun den gesamten übergebenen Bildausschnitt an
+
+## [3.1.0] - 2017-09-05
+### Added
+- EDC_MehrfachLinienElement hinzugefügt
+### Deprecated
+- BauteilAuswahlTool als obsolet markiert (wandert in Maschinenprojekt)
+
+## [3.0.0] - 2017-08-30
+### Changed
+- Infoanzeige erneut überarbeitet, kann nun von außen als beliebiges Objekt übergeben werden
+### Added
+- EDC_Tool erweitert, so dass individueller Cursor angegeben werden kann
+- BildEditor verwendet RoutedCommand, um Änderungen der Mausposition zu signalisieren
+### Removed
+- Hilfsmethode am RechteckElement entfernt, die InfoAnzeige erzeugt hatte
+- Property InfoAnzeigen an BildEditor entfernt, ANzeige wird allein per übergebenem Tooltip gesteuert
+### Fixed
+- Darstellung Linienelement mit nur einem Punkt war leicht versetzt
+
+## [2.0.0] - 2017-08-28
+### Changed
+- Infoanzeige überarbeitet, muss nun von außen als EditorElement übergeben werden
+### Added
+- Neue Properties am Rechteckelement, um individuellen Inhalt zu setzen
+### Deprecated
+- RechteckElementMitText als obsolet markiert
+### Fixed
+- PositionsAuswahlTool hat nach Deaktivierung und erneuter Aktivierung Cursor nicht mehr angezeigt
+
+## [1.8.0] - 2017-08-14
+###Added
+- BauteilAuswahlTool 
+- Geometrie Element für BauteilAuswahlTool
+
+## [1.7.0] - 2017-07-13
+### Added
+- Tooltip für Objekte eingefügt
+- Möglichkeit Achsen zu spiegeln
+### Refactored
+- Mitskalieren der Anfasserpunkte im Bildeditor
+### Fixed
+- Fix für verlorene Mouseevents
+
+## [1.6.0] - 2017-07-06
+### Added
+- Verschiebung von Objekten validierbar gemacht
+- Veränderung von Objekten validierbar gemacht
+- EDC_LinienElement berücksichtigt bei FUN_blnIstInBereich auch die Breite der Linie
+- Prüfung, ob PRO_dblInnenBreite und PRO_dblAussenBreite in EDC_LinienElement gültig sind
+
+### Fixed
+- Aufruf von SUB_EntferneTemporaeresElement in EDC_Tool mit null als Parameter gab Exception
+
+## [1.5.0] - 2017-06-27
+### Added
+- Methode in INF_PositionsKontext, wenn vom Auswahltool ein Punkt angeklickt wird, an dem sich kein Element befindet
+
+## [1.4.0] - 2017-06-08
+### Added
+- Deaktivieren von Werkzeugen per Rechtsklick
+
+## [1.3.2] - 2017-06-08
+### Refactored
+- Fadenkreuz größer darstellen
+
+## [1.3.1] - 2017-05-24
+### Refactored
+- ZIndex-Mechanismus für Elemente verwendet, die innerhalb des Editors erzeugt werden
+
+## [1.3.0] - 2017-05-24
+### Added
+- Möglichkeit ZIndex an EditorElementen zu setzen
+
+## [1.2.0] - 2017-05-16
+### Added
+- Styles für Status Fehlerhaft
+### Refactored
+- Defaultfarben in Konstanten ausgelagert
+
+## [1.1.0] - 2017-05-10
+### Added
+- Projekt-Release mit BildEditor, Werkzeugen und EditorElementen

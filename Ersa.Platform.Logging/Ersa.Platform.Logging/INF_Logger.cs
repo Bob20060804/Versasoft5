@@ -5,7 +5,7 @@ namespace Ersa.Platform.Logging
 	public interface INF_Logger
 	{
         /// <summary>
-        /// active
+        /// Active
         /// </summary>
 		bool PRO_blnIstLoggerAktiv
 		{
