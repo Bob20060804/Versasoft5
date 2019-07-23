@@ -8,6 +8,12 @@ namespace Ersa.Platform.Plc
 {
 	public interface INF_Sps : IDisposable
 	{
+        /// <summary>
+        /// 异步建立链接
+        /// </summary>
+        /// <param name="i_blnOnline"></param>
+        /// <param name="i_strAdresse"></param>
+        /// <returns></returns>
 		Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse);
 
 		void SUB_VerbindungLoesen();

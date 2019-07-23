@@ -19,7 +19,8 @@ namespace Ersa.Platform.Plc
 	[Export(typeof(INF_Sps))]
 	public class EDC_BrSps : EDC_DisposableObject, INF_Sps, IDisposable
 	{
-		private const int mC_i32EventRefreshInterval = 100;
+        #region ==== Parameter ====
+        private const int mC_i32EventRefreshInterval = 100;
 
 		private const int mC_i32NormalrefreshInterval = 400;
 
@@ -73,8 +74,10 @@ namespace Ersa.Platform.Plc
 				return false;
 			}
 		}
+        #endregion ============
 
-		public System.Threading.Tasks.Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse)
+
+        public System.Threading.Tasks.Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse)
 		{
 			m_fdcVerbindungsCompletionSource = new TaskCompletionSource<bool>();
 			SUB_VerbindungLoesen();
