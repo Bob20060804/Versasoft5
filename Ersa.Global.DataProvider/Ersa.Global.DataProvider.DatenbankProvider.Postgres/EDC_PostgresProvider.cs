@@ -53,8 +53,12 @@ namespace Ersa.Global.DataProvider.DatenbankProvider.Postgres
 
 		public string PRO_strDatenbankDienstName => "postgresql-x64";
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="i_fdcAppSettings"></param>
 		public EDC_PostgresProvider(NameValueCollection i_fdcAppSettings)
-			: base(i_fdcAppSettings)
+            : base(i_fdcAppSettings)
 		{
 		}
 

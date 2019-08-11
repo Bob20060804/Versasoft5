@@ -7,6 +7,11 @@ namespace Ersa.Global.DataProvider.Helfer
 {
 	public static class EDC_DatenbankEinstellungenHelfer
 	{
+        /// <summary>
+        /// Get Database Name
+        /// </summary>
+        /// <param name="i_fdcEinstellungen"></param>
+        /// <returns></returns>
 		public static string FUN_strHoleDatenbankName(NameValueCollection i_fdcEinstellungen)
 		{
 			string text = i_fdcEinstellungen["Database"];
