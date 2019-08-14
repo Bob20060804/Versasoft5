@@ -3,13 +3,20 @@ using System;
 
 namespace Ersa.Platform.Mes.Modell
 {
+    /// <summary>
+    /// MES Type Setting
+    /// </summary>
 	[Serializable]
 	public abstract class EDC_MesTypEinstellung : BindableBase
 	{
-		private string m_strBibliothekProgrammTrennzeichen;
 
+        /// <summary>
+        /// Code separator
+        /// </summary>
 		private string m_strCodeTrennzeichen;
-
+        /// <summary>
+        /// Ping Interval
+        /// </summary>
 		private double m_dblPingIntervall;
 
 		public int PRO_i32Version
@@ -18,7 +25,11 @@ namespace Ersa.Platform.Mes.Modell
 			set;
 		}
 
-		public string PRO_strBibliothekProgrammTrennzeichen
+        private string m_strBibliothekProgrammTrennzeichen;
+        /// <summary>
+        /// Library program separator
+        /// </summary>
+        public string PRO_strBibliothekProgrammTrennzeichen
 		{
 			get
 			{

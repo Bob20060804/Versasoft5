@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{EF663EB4-284D-47AB-830C-F1B4683B8BB9}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Prism</AssemblyName>
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Runtime">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Runtime\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.ResourceManager">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Resources.ResourceManager\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Resources.ResourceManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tools">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Diagnostics.Tools\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Diagnostics.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Debug">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Diagnostics.Debug\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Diagnostics.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Globalization\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Globalization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ObjectModel\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Collections\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Reflection\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Threading\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Linq\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Threading.Tasks\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Extensions">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Reflection.Extensions\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Reflection.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Prism.Commands\CompositeCommand.cs" />
+    <Compile Include="Prism.Commands\DelegateCommand.cs" />
+    <Compile Include="Prism.Commands\DelegateCommandBase.cs" />
+    <Compile Include="Prism.Events\BackgroundEventSubscription.cs" />
+    <Compile Include="Prism.Events\DataEventArgs.cs" />
+    <Compile Include="Prism.Events\DelegateReference.cs" />
+    <Compile Include="Prism.Events\DispatcherEventSubscription.cs" />
+    <Compile Include="Prism.Events\EventAggregator.cs" />
+    <Compile Include="Prism.Events\EventBase.cs" />
+    <Compile Include="Prism.Events\EventSubscription.cs" />
+    <Compile Include="Prism.Events\IDelegateReference.cs" />
+    <Compile Include="Prism.Events\IEventAggregator.cs" />
+    <Compile Include="Prism.Events\IEventSubscription.cs" />
+    <Compile Include="Prism.Events\PubSubEvent.cs" />
+    <Compile Include="Prism.Events\SubscriptionToken.cs" />
+    <Compile Include="Prism.Events\ThreadOption.cs" />
+    <Compile Include="Prism.Logging\Category.cs" />
+    <Compile Include="Prism.Logging\DebugLogger.cs" />
+    <Compile Include="Prism.Logging\EmptyLogger.cs" />
+    <Compile Include="Prism.Logging\ILoggerFacade.cs" />
+    <Compile Include="Prism.Logging\Priority.cs" />
+    <Compile Include="Prism.Mvvm\BindableBase.cs" />
+    <Compile Include="Prism.Mvvm\ErrorsContainer.cs" />
+    <Compile Include="Prism.Mvvm\PropertySupport.cs" />
+    <Compile Include="Prism.Mvvm\ViewModelLocationProvider.cs" />
+    <Compile Include="Prism.Properties\Resources.cs" />
+    <Compile Include="Prism\IActiveAware.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Prism.Properties\Resources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+</Project>

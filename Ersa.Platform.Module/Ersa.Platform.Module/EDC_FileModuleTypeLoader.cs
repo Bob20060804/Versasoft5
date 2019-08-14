@@ -7,6 +7,9 @@ using System.IO;
 
 namespace Ersa.Platform.Module
 {
+    /// <summary>
+    /// 文件模块类型加载器
+    /// </summary>
 	[Export]
 	public sealed class EDC_FileModuleTypeLoader : IModuleTypeLoader
 	{

@@ -35,9 +35,6 @@
     <Reference Include="WPFLocalizeExtension">
       <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\WPFLocalizeExtension.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Platform.Logging">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
     </Reference>
@@ -58,6 +55,12 @@
     <Compile Include="Ersa.Platform.Lokalisierung\EDC_XmlLokalisierungsDienst.cs" />
     <Compile Include="Ersa.Platform.Lokalisierung\EDC_XmlLokalisierungsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ersa.Platform.Logging\Ersa.Platform.Logging.csproj">
+      <Project>{d2368bab-4826-4b8e-b67a-577958848676}</Project>
+      <Name>Ersa.Platform.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

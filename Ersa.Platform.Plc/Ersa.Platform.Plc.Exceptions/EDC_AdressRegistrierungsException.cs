@@ -4,6 +4,9 @@ using System.Runtime.Serialization;
 
 namespace Ersa.Platform.Plc.Exceptions
 {
+    /// <summary>
+    /// Address Registration Exception
+    /// </summary>
 	[Serializable]
 	public class EDC_AdressRegistrierungsException : Exception
 	{

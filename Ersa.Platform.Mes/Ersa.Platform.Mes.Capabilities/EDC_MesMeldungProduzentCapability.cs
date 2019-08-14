@@ -11,6 +11,9 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 
+/// <summary>
+/// MES ¹¦ÄÜ
+/// </summary>
 namespace Ersa.Platform.Mes.Capabilities
 {
 	[Export(typeof(INF_MeldungProduzentCapability))]

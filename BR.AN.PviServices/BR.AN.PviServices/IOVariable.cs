@@ -90,7 +90,7 @@ namespace BR.AN.PviServices
 				{
 				case DataType.Boolean:
 					ResizePviDataPtr(1);
-					if (value == value2: false || value.ToInt32(null) == 0)
+					if (value == false || value.ToInt32(null) == 0)
 					{
 						Marshal.WriteByte(propPviValue.pData, 0);
 					}

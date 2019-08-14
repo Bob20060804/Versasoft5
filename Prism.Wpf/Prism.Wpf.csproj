@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{CC56F24A-F8CD-4890-8072-7E369C4670D4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Prism.Wpf</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Xaml">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Microsoft.Practices.ServiceLocation\ServiceLocatorExtensions.cs" />
+    <Compile Include="Prism.Common\ListDictionary.cs" />
+    <Compile Include="Prism.Common\MvvmHelpers.cs" />
+    <Compile Include="Prism.Common\ObservableObject.cs" />
+    <Compile Include="Prism.Common\UriParsingHelper.cs" />
+    <Compile Include="Prism.Events\WeakDelegatesManager.cs" />
+    <Compile Include="Prism.Interactivity.DefaultPopupWindows\DefaultConfirmationWindow.cs" />
+    <Compile Include="Prism.Interactivity.DefaultPopupWindows\DefaultNotificationWindow.cs" />
+    <Compile Include="Prism.Interactivity.DefaultPopupWindows\DefaultWindow.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\Confirmation.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\IConfirmation.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\IInteractionRequest.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\IInteractionRequestAware.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\INotification.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\InteractionRequest.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\InteractionRequestedEventArgs.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\InteractionRequestTrigger.cs" />
+    <Compile Include="Prism.Interactivity.InteractionRequest\Notification.cs" />
+    <Compile Include="Prism.Interactivity\CommandBehaviorBase.cs" />
+    <Compile Include="Prism.Interactivity\InvokeCommandAction.cs" />
+    <Compile Include="Prism.Interactivity\PopupWindowAction.cs" />
+    <Compile Include="Prism.Logging\TextLogger.cs" />
+    <Compile Include="Prism.Logging\TraceLogger.cs" />
+    <Compile Include="Prism.Modularity\AssemblyResolver.cs" />
+    <Compile Include="Prism.Modularity\ConfigurationModuleCatalog.cs" />
+    <Compile Include="Prism.Modularity\ConfigurationStore.cs" />
+    <Compile Include="Prism.Modularity\CyclicDependencyFoundException.cs" />
+    <Compile Include="Prism.Modularity\DirectoryModuleCatalog.cs" />
+    <Compile Include="Prism.Modularity\DuplicateModuleException.cs" />
+    <Compile Include="Prism.Modularity\FileModuleTypeLoader.cs" />
+    <Compile Include="Prism.Modularity\IAssemblyResolver.cs" />
+    <Compile Include="Prism.Modularity\IConfigurationStore.cs" />
+    <Compile Include="Prism.Modularity\IModule.cs" />
+    <Compile Include="Prism.Modularity\IModuleCatalog.cs" />
+    <Compile Include="Prism.Modularity\IModuleCatalogItem.cs" />
+    <Compile Include="Prism.Modularity\IModuleInitializer.cs" />
+    <Compile Include="Prism.Modularity\IModuleManager.cs" />
+    <Compile Include="Prism.Modularity\IModuleTypeLoader.cs" />
+    <Compile Include="Prism.Modularity\InitializationMode.cs" />
+    <Compile Include="Prism.Modularity\LoadModuleCompletedEventArgs.cs" />
+    <Compile Include="Prism.Modularity\ModularityException.cs" />
+    <Compile Include="Prism.Modularity\ModuleAttribute.cs" />
+    <Compile Include="Prism.Modularity\ModuleCatalog.cs" />
+    <Compile Include="Prism.Modularity\ModuleConfigurationElement.cs" />
+    <Compile Include="Prism.Modularity\ModuleConfigurationElementCollection.cs" />
+    <Compile Include="Prism.Modularity\ModuleDependencyAttribute.cs" />
+    <Compile Include="Prism.Modularity\ModuleDependencyCollection.cs" />
+    <Compile Include="Prism.Modularity\ModuleDependencyConfigurationElement.cs" />
+    <Compile Include="Prism.Modularity\ModuleDependencySolver.cs" />
+    <Compile Include="Prism.Modularity\ModuleDownloadProgressChangedEventArgs.cs" />
+    <Compile Include="Prism.Modularity\ModuleInfo.cs" />
+    <Compile Include="Prism.Modularity\ModuleInfoGroup.cs" />
+    <Compile Include="Prism.Modularity\ModuleInfoGroupExtensions.cs" />
+    <Compile Include="Prism.Modularity\ModuleInitializeException.cs" />
+    <Compile Include="Prism.Modularity\ModuleInitializer.cs" />
+    <Compile Include="Prism.Modularity\ModuleManager.cs" />
+    <Compile Include="Prism.Modularity\ModuleNotFoundException.cs" />
+    <Compile Include="Prism.Modularity\ModulesConfigurationSection.cs" />
+    <Compile Include="Prism.Modularity\ModuleState.cs" />
+    <Compile Include="Prism.Modularity\ModuleTypeLoaderNotFoundException.cs" />
+    <Compile Include="Prism.Modularity\ModuleTypeLoadingException.cs" />
+    <Compile Include="Prism.Mvvm\ViewModelLocator.cs" />
+    <Compile Include="Prism.Properties\Resources.cs" />
+    <Compile Include="Prism.Properties\Settings.cs" />
+    <Compile Include="Prism.Regions.Behaviors\AutoPopulateRegionBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\BindRegionContextToDependencyObjectBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\ClearChildViewsRegionBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\DelayedRegionCreationBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\IHostAwareRegionBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\RegionActiveAwareBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\RegionCreationException.cs" />
+    <Compile Include="Prism.Regions.Behaviors\RegionManagerRegistrationBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\RegionMemberLifetimeBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\SelectorItemsSourceSyncBehavior.cs" />
+    <Compile Include="Prism.Regions.Behaviors\SyncRegionContextWithHostBehavior.cs" />
+    <Compile Include="Prism.Regions\AllActiveRegion.cs" />
+    <Compile Include="Prism.Regions\ContentControlRegionAdapter.cs" />
+    <Compile Include="Prism.Regions\DefaultRegionManagerAccessor.cs" />
+    <Compile Include="Prism.Regions\IConfirmNavigationRequest.cs" />
+    <Compile Include="Prism.Regions\INavigateAsync.cs" />
+    <Compile Include="Prism.Regions\INavigationAware.cs" />
+    <Compile Include="Prism.Regions\IRegion.cs" />
+    <Compile Include="Prism.Regions\IRegionAdapter.cs" />
+    <Compile Include="Prism.Regions\IRegionBehavior.cs" />
+    <Compile Include="Prism.Regions\IRegionBehaviorCollection.cs" />
+    <Compile Include="Prism.Regions\IRegionBehaviorFactory.cs" />
+    <Compile Include="Prism.Regions\IRegionCollection.cs" />
+    <Compile Include="Prism.Regions\IRegionManager.cs" />
+    <Compile Include="Prism.Regions\IRegionManagerAccessor.cs" />
+    <Compile Include="Prism.Regions\IRegionMemberLifetime.cs" />
+    <Compile Include="Prism.Regions\IRegionNavigationContentLoader.cs" />
+    <Compile Include="Prism.Regions\IRegionNavigationJournal.cs" />
+    <Compile Include="Prism.Regions\IRegionNavigationJournalEntry.cs" />
+    <Compile Include="Prism.Regions\IRegionNavigationService.cs" />
+    <Compile Include="Prism.Regions\IRegionViewRegistry.cs" />
+    <Compile Include="Prism.Regions\ItemMetadata.cs" />
+    <Compile Include="Prism.Regions\ItemsControlRegionAdapter.cs" />
+    <Compile Include="Prism.Regions\IViewsCollection.cs" />
+    <Compile Include="Prism.Regions\NavigationAsyncExtensions.cs" />
+    <Compile Include="Prism.Regions\NavigationContext.cs" />
+    <Compile Include="Prism.Regions\NavigationParameters.cs" />
+    <Compile Include="Prism.Regions\NavigationResult.cs" />
+    <Compile Include="Prism.Regions\Region.cs" />
+    <Compile Include="Prism.Regions\RegionAdapterBase.cs" />
+    <Compile Include="Prism.Regions\RegionAdapterMappings.cs" />
+    <Compile Include="Prism.Regions\RegionBehavior.cs" />
+    <Compile Include="Prism.Regions\RegionBehaviorCollection.cs" />
+    <Compile Include="Prism.Regions\RegionBehaviorFactory.cs" />
+    <Compile Include="Prism.Regions\RegionContext.cs" />
+    <Compile Include="Prism.Regions\RegionManager.cs" />
+    <Compile Include="Prism.Regions\RegionMemberLifetimeAttribute.cs" />
+    <Compile Include="Prism.Regions\RegionNavigationContentLoader.cs" />
+    <Compile Include="Prism.Regions\RegionNavigationEventArgs.cs" />
+    <Compile Include="Prism.Regions\RegionNavigationFailedEventArgs.cs" />
+    <Compile Include="Prism.Regions\RegionNavigationJournal.cs" />
+    <Compile Include="Prism.Regions\RegionNavigationJournalEntry.cs" />
+    <Compile Include="Prism.Regions\RegionNavigationService.cs" />
+    <Compile Include="Prism.Regions\RegionViewRegistry.cs" />
+    <Compile Include="Prism.Regions\SelectorRegionAdapter.cs" />
+    <Compile Include="Prism.Regions\SingleActiveRegion.cs" />
+    <Compile Include="Prism.Regions\SyncActiveStateAttribute.cs" />
+    <Compile Include="Prism.Regions\UpdateRegionsException.cs" />
+    <Compile Include="Prism.Regions\ViewRegisteredEventArgs.cs" />
+    <Compile Include="Prism.Regions\ViewRegistrationException.cs" />
+    <Compile Include="Prism.Regions\ViewsCollection.cs" />
+    <Compile Include="Prism.Regions\ViewSortHintAttribute.cs" />
+    <Compile Include="Prism\Bootstrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System.Collections.ObjectModel\CollectionExtensions.cs" />
+    <Compile Include="System\ExceptionExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Prism.Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="C:\Users\bobzhang\Desktop\Ersa\Code\Versasoft5\Prism.Wpf\interactivity\defaultpopupwindows\defaultconfirmationwindow.xaml" />
+    <Page Include="C:\Users\bobzhang\Desktop\Ersa\Code\Versasoft5\Prism.Wpf\interactivity\defaultpopupwindows\defaultnotificationwindow.xaml" />
+    <Page Include="C:\Users\bobzhang\Desktop\Ersa\Code\Versasoft5\Prism.Wpf\interactivity\defaultpopupwindows\defaultwindow.xaml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

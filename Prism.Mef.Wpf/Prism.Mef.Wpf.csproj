@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{5A9CCF91-BE96-4BAC-A6AA-A67A0D3285EC}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Prism.Mef.Wpf</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Prism.Mef.Events\MefEventAggregator.cs" />
+    <Compile Include="Prism.Mef.Modularity\DownloadedPartCatalogCollection.cs" />
+    <Compile Include="Prism.Mef.Modularity\IModuleExport.cs" />
+    <Compile Include="Prism.Mef.Modularity\MefFileModuleTypeLoader.cs" />
+    <Compile Include="Prism.Mef.Modularity\MefModuleInitializer.cs" />
+    <Compile Include="Prism.Mef.Modularity\MefModuleManager.cs" />
+    <Compile Include="Prism.Mef.Modularity\ModuleExportAttribute.cs" />
+    <Compile Include="Prism.Mef.Properties\Resources.cs" />
+    <Compile Include="Prism.Mef.Properties\Settings.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefAutoPopulateRegionBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefBindRegionContextToDependencyObjectBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefClearChildViewsRegionBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefDelayedRegionCreationBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefRegionActiveAwareBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefRegionManagerRegistrationBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefRegionMemberLifetimeBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefSelectorItemsSourceSyncBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions.Behaviors\MefSyncRegionContextWithHostBehavior.cs" />
+    <Compile Include="Prism.Mef.Regions\MefContentControlRegionAdapter.cs" />
+    <Compile Include="Prism.Mef.Regions\MefItemsControlRegionAdapter.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionAdapterMappings.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionBehaviorFactory.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionManager.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionNavigationContentLoader.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionNavigationJournal.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionNavigationJournalEntry.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionNavigationService.cs" />
+    <Compile Include="Prism.Mef.Regions\MefRegionViewRegistry.cs" />
+    <Compile Include="Prism.Mef.Regions\MefSelectorRegionAdapter.cs" />
+    <Compile Include="Prism.Mef\DefaultPrismServiceRegistrar.cs" />
+    <Compile Include="Prism.Mef\MefBootstrapper.cs" />
+    <Compile Include="Prism.Mef\MefServiceLocatorAdapter.cs" />
+    <Compile Include="Prism.Mef\PrismDefaultsCatalog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Prism.Mef.Properties\Resources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

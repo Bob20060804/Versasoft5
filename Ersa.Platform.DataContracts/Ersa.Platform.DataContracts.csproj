@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{B4094464-6C77-45B7-ABEB-41A6F502FB1F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.DataContracts</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Data">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.DataContracts.Aoi\INF_AoiDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Bauteile\INF_BauteilDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Benutzer\INF_AktiveBenutzerDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Benutzer\INF_BenutzerTrackingDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Benutzer\INF_BenutzerVerwaltungDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Betriebsfall\INF_BetriebsfallmportExportIDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Betriebsmittelverwaltung\INF_BetriebsmittelDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Betriebsmittelverwaltung\INF_RuestkomponentenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Betriebsmittelverwaltung\INF_RuestwerkzeugeDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Cad\INF_CadBildDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Cad\INF_CadDatenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Cad\INF_CadEinstellungenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.CodeCache\INF_CodeCacheDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Codetabelle\INF_CodetabellenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Datenbankdaten\INF_DatenbankdatenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.DatenbankVerwaltung\INF_DatenbankVerwaltungDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Duesentabelle\INF_DuesenbetriebDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Duesentabelle\INF_DuesentabelleDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.LeseSchreibgeraete\INF_CodePipelineDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\EDC_Ecp3Bilddaten.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\EDC_FiducialBilddaten.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\EDC_LoetprogrammStand.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammBibliothekDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammBildDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammEcp3DatenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammNutzenDatenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammParameterDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammProgrammDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammSatzDatenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammValideDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprogrammverwaltung\INF_LoetprogrammVersionDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprotokoll\INF_LoetParameterIstSollConverter.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Loetprotokoll\INF_LoetprotokollDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Maschinenkonfiguration\INF_MaschinenkonfigurationDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.MaschinenVerwaltung\INF_MaschinenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.MaschinenVerwaltung\INF_MaschinenEinstellungenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Meldungen\INF_MeldungenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Nutzen\INF_NutzenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Produktionssteuerung\INF_ProduktionssteuerungDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Prozessschreiber\INF_ProzessschreiberDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts.Sprache\INF_SprachenDataAccess.cs" />
+    <Compile Include="Ersa.Platform.DataContracts\INF_DataAccess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

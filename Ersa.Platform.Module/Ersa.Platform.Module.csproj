@@ -32,29 +32,14 @@
     <Reference Include="System.ComponentModel.Composition">
       <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
     </Reference>
-    <Reference Include="Prism.Wpf">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
     </Reference>
-    <Reference Include="Prism">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Logging">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Mef.Wpf">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.Mef.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Infrastructure">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +52,28 @@
     <Compile Include="Ersa.Platform.Module\INF_AsyncModule.cs" />
     <Compile Include="Ersa.Platform.Module\INF_RegionContentMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ersa.Platform.Infrastructure\Ersa.Platform.Infrastructure.csproj">
+      <Project>{16e4c6b9-86bd-4ce2-a093-2eef341454af}</Project>
+      <Name>Ersa.Platform.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Logging\Ersa.Platform.Logging.csproj">
+      <Project>{d2368bab-4826-4b8e-b67a-577958848676}</Project>
+      <Name>Ersa.Platform.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prism.Mef.Wpf\Prism.Mef.Wpf.csproj">
+      <Project>{5a9ccf91-be96-4bac-a6aa-a67a0d3285ec}</Project>
+      <Name>Prism.Mef.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prism.Wpf\Prism.Wpf.csproj">
+      <Project>{cc56f24a-f8cd-4890-8072-7e369c4670d4}</Project>
+      <Name>Prism.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prism\Prism.csproj">
+      <Project>{ef663eb4-284d-47ab-830c-f1b4683b8bb9}</Project>
+      <Name>Prism</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

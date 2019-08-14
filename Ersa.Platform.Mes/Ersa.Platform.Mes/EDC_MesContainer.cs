@@ -6,7 +6,7 @@ using System.ComponentModel.Composition;
 namespace Ersa.Platform.Mes
 {
     /// <summary>
-    /// MESÈÝÆ÷
+    /// MES ÈÝÆ÷
     /// </summary>
 	[Export(typeof(INF_MesContainer))]
 	public class EDC_MesContainer : INF_MesContainer

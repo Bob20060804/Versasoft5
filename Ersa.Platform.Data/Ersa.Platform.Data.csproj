@@ -29,29 +29,11 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ersa.Global.DataAdapter">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.DataAdapter.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.DataProvider">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.DataProvider.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data">
       <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Platform.Common">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Common">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.DataContracts">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataContracts.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Dienste">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Dienste.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
       <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</HintPath>
@@ -107,6 +89,28 @@
     <Compile Include="Ersa.Platform.Data.DatenModelle.Organisation\EDC_Parameter.cs" />
     <Compile Include="Ersa.Platform.Data.DatenModelle.Organisation\EDC_Sequence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ersa.Global.DataAdapter\Ersa.Global.DataAdapter.csproj">
+      <Project>{4588a764-f146-4124-8e82-011088dbe5e7}</Project>
+      <Name>Ersa.Global.DataAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.DataProvider\Ersa.Global.DataProvider.csproj">
+      <Project>{1dbc3350-358c-48af-a913-c5a63b84a3b5}</Project>
+      <Name>Ersa.Global.DataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Dienste\Ersa.Global.Dienste.csproj">
+      <Project>{fbca0d26-738a-412b-b7cb-31526e0bbba9}</Project>
+      <Name>Ersa.Global.Dienste</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Common\Ersa.Platform.Common.csproj">
+      <Project>{44adb178-8105-4ca2-8931-df01d7e94baf}</Project>
+      <Name>Ersa.Platform.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.DataContracts\Ersa.Platform.DataContracts.csproj">
+      <Project>{b4094464-6c77-45b7-abeb-41a6f502fb1f}</Project>
+      <Name>Ersa.Platform.DataContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

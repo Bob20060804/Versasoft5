@@ -8164,7 +8164,7 @@ namespace BR.AN.PviServices
 		private void InternalSetBoolValue(Value newValue)
 		{
 			ResizePviDataPtr(1);
-			if (newValue == value2: false || newValue.ToInt32(null) == 0)
+			if (newValue == false || newValue.ToInt32(null) == 0)
 			{
 				Marshal.WriteByte(propPviValue.pData, 0);
 			}

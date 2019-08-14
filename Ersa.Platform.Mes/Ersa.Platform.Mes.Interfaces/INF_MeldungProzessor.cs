@@ -10,6 +10,11 @@ namespace Ersa.Platform.Mes.Interfaces
 	{
 		Task<bool> FUN_fdcAcknowledgeMessageAsync(INF_Meldung i_edcMessage);
 
+        /// <summary>
+        /// ÖØÖÃÏûÏ¢
+        /// </summary>
+        /// <param name="i_edcMessage"></param>
+        /// <returns></returns>
 		Task<bool> FUN_fdcResetMessageAsync(INF_Meldung i_edcMessage);
 	}
 }
