@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Common.Mes
 {
+    /// <summary>
+    /// mes function extension
+    /// </summary>
 	public static class EDC_MesFunktionenErweiterung
 	{
 		public static string FUN_objHoleBezeichner(this ENUM_MesFunktionen i_enmWert)

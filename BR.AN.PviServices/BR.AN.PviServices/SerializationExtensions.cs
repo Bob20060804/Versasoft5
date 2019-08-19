@@ -9,6 +9,9 @@ using System.Xml.Serialization;
 
 namespace BR.AN.PviServices
 {
+    /// <summary>
+    /// –Ú¡–ªØ¿©’π
+    /// </summary>
 	public static class SerializationExtensions
 	{
 		private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy;

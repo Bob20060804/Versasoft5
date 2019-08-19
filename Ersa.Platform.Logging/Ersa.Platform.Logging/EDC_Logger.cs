@@ -103,6 +103,9 @@ namespace Ersa.Platform.Logging
 			}
 		}
 
+        /// <summary>
+        /// Update file
+        /// </summary>
 		public void SUB_DateiAktualisieren()
 		{
 			if (m_edcErsaLogger != null && PRO_blnIstInitialisiert)

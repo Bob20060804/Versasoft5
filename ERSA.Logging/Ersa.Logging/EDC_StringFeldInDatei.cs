@@ -123,6 +123,10 @@ namespace Ersa.Logging
 			}
 		}
 
+        /// <summary>
+        /// update file
+        /// </summary>
+        /// <returns></returns>
 		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
 		public bool FUN_blnDateiAktualisieren()
 		{

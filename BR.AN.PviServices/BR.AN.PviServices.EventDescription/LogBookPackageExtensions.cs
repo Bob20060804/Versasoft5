@@ -31,6 +31,7 @@ namespace BR.AN.PviServices.EventDescription
 			list.Add((Func<object>)xmlString.ToObject<TOC>);
 			list.Add((Func<object>)xmlString.ToObject<TechnologyPackages>);
 			List<Func<object>> source = list;
+
 			object value = (from action in source
 			select action()).FirstOrDefault((object result) => result != null);
 			if (value != null)

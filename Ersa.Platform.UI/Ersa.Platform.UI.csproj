@@ -36,7 +36,7 @@
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</HintPath>
     </Reference>
     <Reference Include="Ersa.Platform.Lokalisierung">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Lokalisierung.dll</HintPath>
+      <HintPath>..\Ersa.Platform.Lokalisierung\obj\Debug\Ersa.Platform.Lokalisierung.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.GridView">
       <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Telerik.Windows.Controls.GridView.dll</HintPath>
@@ -44,44 +44,20 @@
     <Reference Include="WindowsBase">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Platform.Common">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Controls">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Controls.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition">
       <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Global.Mvvm">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.CapabilityContracts">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.CapabilityContracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.DataDienste">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataDienste.dll</HintPath>
-    </Reference>
     <Reference Include="Ersa.Platform.Logging">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Common">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+      <HintPath>..\Ersa.Platform.Logging\obj\Debug\Ersa.Platform.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Ersa.Platform.Infrastructure">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
+      <HintPath>..\Ersa.Platform.Infrastructure\obj\Debug\Ersa.Platform.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Ersa.Platform.UI.Common">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.UI.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Dienste">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Dienste.dll</HintPath>
+      <HintPath>..\Ersa.Platform.UI.Common\obj\Debug\Ersa.Platform.UI.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Core">
       <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
@@ -94,15 +70,6 @@
     </Reference>
     <Reference Include="System.Windows.Forms">
       <HintPath>C:\WINDOWS\Microsoft.NET\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Dienste">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Dienste.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Common.Model">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Wpf">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity">
       <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\System.Windows.Interactivity.dll</HintPath>
@@ -246,6 +213,56 @@
     <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\styles\eds_zeiteingabe.xaml" />
     <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\themes\generic.xaml" />
     <Page Include="E:\Work\Project\上海库尔特\Code\Versasoft5\Ersa.Platform.UI\videoanzeige\edu_videoanzeige.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ersa.Global.Common\Ersa.Global.Common.csproj">
+      <Project>{6314c658-d02e-4b6b-8165-803a325b2d1b}</Project>
+      <Name>Ersa.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Controls\Ersa.Global.Controls.csproj">
+      <Project>{563156c5-bf95-4d71-8051-aaafb1414541}</Project>
+      <Name>Ersa.Global.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Dienste\Ersa.Global.Dienste.csproj">
+      <Project>{fbca0d26-738a-412b-b7cb-31526e0bbba9}</Project>
+      <Name>Ersa.Global.Dienste</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Mvvm\Ersa.Global.Mvvm.csproj">
+      <Project>{1c914e58-40b4-4742-b010-fb5d0e8924f4}</Project>
+      <Name>Ersa.Global.Mvvm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.CapabilityContracts\Ersa.Platform.CapabilityContracts.csproj">
+      <Project>{9c1a832f-73f8-4ae5-995b-25b252448a8a}</Project>
+      <Name>Ersa.Platform.CapabilityContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Common.Model\Ersa.Platform.Common.Model.csproj">
+      <Project>{d6fade21-dda2-45e5-9899-45d1c21abde9}</Project>
+      <Name>Ersa.Platform.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Common\Ersa.Platform.Common.csproj">
+      <Project>{44adb178-8105-4ca2-8931-df01d7e94baf}</Project>
+      <Name>Ersa.Platform.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.DataContracts\Ersa.Platform.DataContracts.csproj">
+      <Project>{b4094464-6c77-45b7-abeb-41a6f502fb1f}</Project>
+      <Name>Ersa.Platform.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.DataDienste\Ersa.Platform.DataDienste.csproj">
+      <Project>{6ef12d72-5ddc-477e-8140-981667a358e8}</Project>
+      <Name>Ersa.Platform.DataDienste</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Data\Ersa.Platform.Data.csproj">
+      <Project>{f5239c3c-e422-4ffb-ab5d-b6894682f503}</Project>
+      <Name>Ersa.Platform.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prism.Wpf\Prism.Wpf.csproj">
+      <Project>{cc56f24a-f8cd-4890-8072-7e369c4670d4}</Project>
+      <Name>Prism.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prism\Prism.csproj">
+      <Project>{ef663eb4-284d-47ab-830c-f1b4683b8bb9}</Project>
+      <Name>Prism</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

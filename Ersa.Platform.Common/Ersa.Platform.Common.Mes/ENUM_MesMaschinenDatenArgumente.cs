@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Common.Mes
 {
+    /// <summary>
+    /// Mes 机器数据参数
+    /// </summary>
 	[Serializable]
 	public enum ENUM_MesMaschinenDatenArgumente
 	{

@@ -164,6 +164,10 @@ namespace Ersa.Logging
 			m_blnLoggingEintraegeVorhanden = false;
 		}
 
+        /// <summary>
+        /// Update file
+        /// </summary>
+        /// <returns></returns>
 		public bool FUN_blnDateiAktualisieren()
 		{
 			bool result = default(bool);

@@ -1,5 +1,8 @@
 namespace Ersa.Platform.Common.Mes
 {
+    /// <summary>
+    /// Oee status
+    /// </summary>
 	public enum ENUM_OeeZustand
 	{
 		enmOeeZustandUndefiniert = 0,

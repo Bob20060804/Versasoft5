@@ -2,6 +2,9 @@ using System;
 
 namespace Ersa.Platform.Common.Mes
 {
+    /// <summary>
+    /// MES ∑Ω∑®  Ù–‘
+    /// </summary>
 	public class EDC_MesFunktionenAttribut : Attribute
 	{
         /// <summary>
