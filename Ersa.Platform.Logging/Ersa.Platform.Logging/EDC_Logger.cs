@@ -61,6 +61,9 @@ namespace Ersa.Platform.Logging
 			}
 		}
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
 		public EDC_Logger()
 		{
 			m_dicLogLevelDllEnums = new Dictionary<ENUM_LogLevel, ENUM_LoggingLevels>();

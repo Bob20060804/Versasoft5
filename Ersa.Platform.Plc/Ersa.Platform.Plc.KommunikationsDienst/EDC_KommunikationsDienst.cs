@@ -251,6 +251,12 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// sps envent handle register
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		public Task FUN_fdcSPSEventHandlerRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcToken)
 		{
 			EDC_PrimitivParameter edcParameter;

@@ -76,8 +76,13 @@ namespace Ersa.Platform.Plc
 		}
         #endregion ============
 
-
-        public System.Threading.Tasks.Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse)
+        /// <summary>
+        /// Build Connection
+        /// </summary>
+        /// <param name="i_blnOnline"></param>
+        /// <param name="i_strAdresse"></param>
+        /// <returns></returns>
+        public Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse)
 		{
 			m_fdcVerbindungsCompletionSource = new TaskCompletionSource<bool>();
 			SUB_VerbindungLoesen();
@@ -151,6 +156,12 @@ namespace Ersa.Platform.Plc
 			return System.Threading.Tasks.Task.FromResult(result: true);
 		}
 
+        /// <summary>
+        /// Event Handle register
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <param name="i_delHandler"></param>
+        /// <returns></returns>
 		public IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, System.Action i_delHandler)
 		{
 			if (!PRO_blnVerbunden)
