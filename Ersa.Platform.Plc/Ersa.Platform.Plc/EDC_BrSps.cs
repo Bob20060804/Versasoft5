@@ -54,6 +54,9 @@ namespace Ersa.Platform.Plc
 
 		private TaskCompletionSource<bool> m_fdcGruppeWriteCompletionSource;
 
+        /// <summary>
+        /// 错误的变量
+        /// </summary>
 		private List<string> m_lstFehlerhafteVariable;
 
 		[Import]
@@ -77,6 +80,12 @@ namespace Ersa.Platform.Plc
         #endregion ============
 
 
+        /// <summary>
+        /// 建立连接 异步
+        /// </summary>
+        /// <param name="i_blnOnline"></param>
+        /// <param name="i_strAdresse"></param>
+        /// <returns></returns>
         public System.Threading.Tasks.Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse)
 		{
 			m_fdcVerbindungsCompletionSource = new TaskCompletionSource<bool>();
@@ -829,6 +838,7 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        // 变量不正确
 		private void SUB_FehlerhafteVariableMerken(string i_strVarName)
 		{
 			if (m_lstFehlerhafteVariable == null)
