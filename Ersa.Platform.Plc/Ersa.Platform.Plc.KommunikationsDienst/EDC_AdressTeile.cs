@@ -1,7 +1,11 @@
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// ≤ø∑÷µÿ÷∑
+    /// </summary>
 	public static class EDC_AdressTeile
 	{
+
 		public enum ENUM_Level1Module
 		{
 			enmUndefiniert,
@@ -127,6 +131,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			enmA_SttUhr,
 			enmUrlaubStart,
 			enmUrlaubEnde,
+            /// <summary>
+            /// Working Time in Total
+            /// </summary>
 			enmSttBetriebProduktion,
 			enmSttBetriebEinrichten,
 			enmSttBetriebGesamt,
@@ -1862,6 +1869,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			enmEnmBetrArtBeiUhrAus,
 			enmSollZeit,
 			enmBlnUrlaubBenutzt,
+            /// <summary>
+            /// Good Produced Boards
+            /// </summary>
 			enmAnzahlLoetgutProduziert,
 			enmAnzahlLoetgutEingelaufen,
 			enmLngAnteil,
@@ -1887,6 +1897,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			enmBlnBedienerSperreAuto,
 			enmSngGeschwRangeMin,
 			enmSngGeschwRangeMax,
+            /// <summary>
+            /// Defective Boards
+            /// </summary>
 			enmAnzahlLoetgutFehlerhaft,
 			enmLoetgutTagesStueckzahl,
 			enmLoetgutChargenZaehler,
