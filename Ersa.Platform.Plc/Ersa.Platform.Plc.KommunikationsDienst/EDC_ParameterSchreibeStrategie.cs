@@ -54,6 +54,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			string strPhysischeAdresse = m_edcAdressenZusammensetzerCapability.Value.FUN_strErstellePhysischeAdresse(i_edcParameter);
 			ENUM_SpsTyp eNUM_SpsTyp = strPhysischeAdresse.FUN_enmErmittelParameterTyp();
 			m_blnAktionenFuerParameterTypen.PRO_dicSchreibeAktionen.TryGetValue(eNUM_SpsTyp, out Action<string, object> delM1Aktion);
+
 			if (delM1Aktion == null)
 			{
 				throw new InvalidOperationException($"Keine Schreibe-Methode fuer den Typ {eNUM_SpsTyp} konnte gefunden werden!");

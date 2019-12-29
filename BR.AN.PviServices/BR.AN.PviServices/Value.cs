@@ -1067,6 +1067,9 @@ namespace BR.AN.PviServices
 			return true;
 		}
 
+        /// <summary>
+        /// 初始化关联一个元素
+        /// </summary>
 		private void InitAssingOneElement()
 		{
 			if (DataType.Structure != DataType && (Parent == null || !(null != Parent.Value)) && (propByteField == null || propByteField.Length != propArrayLength * propTypeLength))
