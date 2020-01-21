@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Plc
 {
+    /// <summary>
+    /// B&R帮助类
+    /// </summary>
 	[EDC_SpsExportMetadaten(PRO_strSpsTyp = "PviServices")]
 	[Export(typeof(INF_Sps))]
 	public class EDC_BrSps : EDC_DisposableObject, INF_Sps, IDisposable
@@ -66,7 +69,10 @@ namespace Ersa.Platform.Plc
 			set;
 		}
 
-		private bool PRO_blnVerbunden
+        /// <summary>
+        /// m_fdcCpu 是否连接的
+        /// </summary>
+        private bool PRO_blnVerbunden
 		{
 			get
 			{
@@ -100,6 +106,12 @@ namespace Ersa.Platform.Plc
 			});
 		}
 
+        /// <summary>
+        /// 变量日志 异步
+        /// </summary>
+        /// <param name="i_lstVariablen">变量</param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		public System.Threading.Tasks.Task FUN_fdcVariablenAnmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
 		{
 			if (!PRO_blnVerbunden)
@@ -160,6 +172,12 @@ namespace Ersa.Platform.Plc
 			return System.Threading.Tasks.Task.FromResult(result: true);
 		}
 
+        /// <summary>
+        /// 注册事件
+        /// </summary>
+        /// <param name="i_strVarName">变量名</param>
+        /// <param name="i_delHandler"></param>
+        /// <returns></returns>
 		public IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, System.Action i_delHandler)
 		{
 			if (!PRO_blnVerbunden)
@@ -194,7 +212,7 @@ namespace Ersa.Platform.Plc
 				return string.Empty;
 			}
 			Variable variable = FUN_fdcItemAusCpuHolen(i_strVarName);
-			variable.ReadValue(synchronous: true);
+			variable.ReadValue(true);
 			return variable.Value.ToString(CultureInfo.InvariantCulture);
 		}
 
@@ -285,6 +303,9 @@ namespace Ersa.Platform.Plc
 			VariableCollection fdcEventGruppe = m_fdcEventGruppe;
 		}
 
+        /// <summary>
+        /// 关闭连接
+        /// </summary>
 		public void SUB_VerbindungLoesen()
 		{
 			if (PRO_blnVerbunden)
@@ -294,6 +315,13 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        /// <summary>
+        /// 创建Group变量
+        /// </summary>
+        /// <param name="i_enmVariablen">变量枚举</param>
+        /// <param name="i_strGruppenName">Group Name</param>
+        /// <param name="i_i32CycleTime">CT</param>
+        /// <returns></returns>
 		public async System.Threading.Tasks.Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<string> i_enmVariablen, string i_strGruppenName, int i_i32CycleTime = 100)
 		{
 			List<string> lstVariablen = i_enmVariablen.ToList();
@@ -367,6 +395,12 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        /// <summary>
+        /// Group 写 异步
+        /// </summary>
+        /// <param name="i_enmParameter"></param>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		public async System.Threading.Tasks.Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGruppenName)
 		{
 			if (PRO_blnVerbunden)
@@ -417,6 +451,11 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        /// <summary>
+        /// Group 读 异步
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		public async Task<IEnumerable<EDC_SpsListenElement>> FUN_fdcGruppeLesenAsync(string i_strGruppenName)
 		{
 			if (string.IsNullOrEmpty(i_strGruppenName))
@@ -507,6 +546,12 @@ namespace Ersa.Platform.Plc
 			SUB_Zerstoeren();
 		}
 
+        /// <summary>
+        /// Create Group
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_i32CycleTime"></param>
+        /// <returns></returns>
 		private VariableCollection FUN_fdcGruppeAnlegen(string i_strGruppenName, int i_i32CycleTime)
 		{
 			VariableCollection variableCollection = new VariableCollection(m_fdcCpu, i_strGruppenName);
@@ -516,6 +561,11 @@ namespace Ersa.Platform.Plc
 			return variableCollection;
 		}
 
+        /// <summary>
+        /// Get Group
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		private VariableCollection FUN_fdcGruppeHolen(string i_strGruppenName)
 		{
 			return m_lstCpuGruppen.FirstOrDefault((VariableCollection i_edcItem) => i_edcItem.Name.Equals(i_strGruppenName));
@@ -541,6 +591,9 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        /// <summary>
+        /// 注销
+        /// </summary>
 		private void SUB_Zerstoeren()
 		{
 			if (m_fdcEventGruppe != null)
@@ -591,6 +644,11 @@ namespace Ersa.Platform.Plc
 			i_fdcGruppe.Dispose();
 		}
 
+        /// <summary>
+        /// 正确的名字 去除字符前面的SELECTIV/.
+        /// </summary>
+        /// <param name="i_strVar"></param>
+        /// <returns></returns>
 		private string FUN_strNamenKorrigieren(string i_strVar)
 		{
 			if (i_strVar.StartsWith("SELECTIV/."))
@@ -614,6 +672,9 @@ namespace Ersa.Platform.Plc
 			return i_strWert.Replace(".", ",");
 		}
 
+        /// <summary>
+        /// 注册组
+        /// </summary>
 		private void SUB_InitGruppen()
 		{
 			m_lstCpuGruppen.Clear();
@@ -669,6 +730,11 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        /// <summary>
+        /// 已应用变量
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <returns></returns>
 		private bool FUN_blnVariableSchonAngelegt(string i_strVarName)
 		{
 			if (string.IsNullOrWhiteSpace(i_strVarName))
@@ -731,6 +797,11 @@ namespace Ersa.Platform.Plc
 			return result;
 		}
 
+        /// <summary>
+        /// 从cpu获取item
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <returns></returns>
 		private Variable FUN_fdcItemAusCpuHolen(string i_strVarName)
 		{
 			if (!PRO_blnVerbunden)
@@ -761,7 +832,13 @@ namespace Ersa.Platform.Plc
 			i_fdcVarCollection.Connect();
 		}
 
-		private Variable FUN_fdcErstelleNeueCpuVariable(string i_strVariable, int i_i32CycleTime)
+        /// <summary>
+        /// 创建新的cpu变量
+        /// </summary>
+        /// <param name="i_strVariable">变量</param>
+        /// <param name="i_i32CycleTime">CT</param>
+        /// <returns>Variable</returns>
+        private Variable FUN_fdcErstelleNeueCpuVariable(string i_strVariable, int i_i32CycleTime)
 		{
 			string name = FUN_strNamenKorrigieren(i_strVariable);
 			Variable obj = new Variable(m_fdcCpu, name)
@@ -774,6 +851,11 @@ namespace Ersa.Platform.Plc
 			return obj;
 		}
 
+        /// <summary>
+        /// Move old variables to new group
+        /// </summary>
+        /// <param name="i_fdcNeuGruppe"></param>
+        /// <param name="i_fdcAlteGruppe"></param>
 		private void SUB_AlteVariablenInNeueGruppeVerschieben(VariableCollection i_fdcNeuGruppe, VariableCollection i_fdcAlteGruppe)
 		{
 			foreach (object item in i_fdcNeuGruppe)
@@ -793,6 +875,10 @@ namespace Ersa.Platform.Plc
 			m_fdcCpu.Connected += SUB_CpuConnected;
 		}
 
+        /// <summary>
+        /// Group 事件注册
+        /// </summary>
+        /// <param name="i_fdcGruppe"></param>
 		private void SUB_GruppenEventsRegistrieren(VariableCollection i_fdcGruppe)
 		{
 			i_fdcGruppe.Error += SUB_PviCollectionError;
@@ -800,6 +886,10 @@ namespace Ersa.Platform.Plc
 			i_fdcGruppe.CollectionValuesRead += SUB_CollectionValuesRead;
 		}
 
+        /// <summary>
+        /// Group 事件注销
+        /// </summary>
+        /// <param name="i_fdcGruppe"></param>
 		private void SUB_GruppenEventsDeRegistrieren(VariableCollection i_fdcGruppe)
 		{
 			i_fdcGruppe.Error -= SUB_PviCollectionError;
