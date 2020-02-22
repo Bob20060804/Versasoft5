@@ -38,6 +38,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
 		private readonly INF_Logger m_edcLogger;
 
+        /// <summary>
+        /// 连接 锁
+        /// </summary>
 		private readonly object m_objVerbindungLock = new object();
 
 		private readonly object m_objLeseLock = new object();
@@ -47,7 +50,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		private readonly Dictionary<string, IEnumerable<EDC_PrimitivParameter>> m_dicGruppenParameter = new Dictionary<string, IEnumerable<EDC_PrimitivParameter>>();
 
 		private INF_Sps m_edcSpsService;
-
+        /// <summary>
+        /// 是否解决连接
+        /// </summary>
 		private bool m_blnIstVerbindungGeloest;
 
 		[Import("Ersa.Platform.Plc.KommunikationsDienst.EDC_PrimaerSekundaerModusSteuerungsDienst.FUN_blnIstVisuAlsPrimaerAngemeldet")]
@@ -91,6 +96,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// 注销 连接
+        /// </summary>
 		public void SUB_VerbindungLoesen()
 		{
 			try
@@ -188,6 +196,12 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}, i_fdcCancellationToken);
 		}
 
+        /// <summary>
+        /// 物理地址存储 异步
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcCancellationToken"></param>
+        /// <returns></returns>
 		public async Task FUN_fdcPhysischeAdressenRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
 		{
 			if (FUN_blnIstVerbindungAufgebaut())
@@ -217,6 +231,12 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// 物理地址注销 异步
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		public async Task FUN_fdcPhysischeAdressenDeRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcToken)
 		{
 			if (FUN_blnIstVerbindungAufgebaut())
@@ -523,6 +543,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			return list.Distinct();
 		}
 
+        /// <summary>
+        /// 注销事件
+        /// </summary>
 		private void SUB_EventHandlerDicValueDispose()
 		{
 			foreach (KeyValuePair<EDC_PrimitivParameter, IDisposable> dicEventHandlerSubscription in m_dicEventHandlerSubscriptions)
@@ -531,6 +554,10 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// 建立连接
+        /// </summary>
+        /// <returns></returns>
 		private bool FUN_blnIstVerbindungAufgebaut()
 		{
 			if (base.PRO_blnIstDisposed)
@@ -543,11 +570,22 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// 错误日志
+        /// </summary>
+        /// <param name="i_strEintrag"></param>
+        /// <param name="i_strMethode"></param>
+        /// <param name="i_fdcEx"></param>
 		private void SUB_FehlerLoggen(string i_strEintrag, string i_strMethode, Exception i_fdcEx)
 		{
 			m_edcLogger.SUB_LogEintragSchreiben(ENUM_LogLevel.Fehler, i_strEintrag, "Ersa.Selectiv.Kommunikation", "EDC_KommunikationsDienst", i_strMethode, i_fdcEx);
 		}
 
+        /// <summary>
+        /// 创建输出参数
+        /// </summary>
+        /// <param name="i_enuParameter"></param>
+        /// <returns></returns>
 		private string FUN_strParameterAusgabeErstellen(IEnumerable<EDC_PrimitivParameter> i_enuParameter)
 		{
 			return string.Join(", ", i_enuParameter.Select(delegate(EDC_PrimitivParameter i_edcParameter)

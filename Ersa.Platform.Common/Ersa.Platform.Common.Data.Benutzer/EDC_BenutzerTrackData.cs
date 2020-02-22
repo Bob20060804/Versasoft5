@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Common.Data.Benutzer
 {
-	[EDC_TabellenInformation("UserTrackings")]
+    [EDC_TabellenInformation("UserTrackings")]
 	public class EDC_BenutzerTrackData
 	{
 		public const string gC_strTabellenName = "UserTrackings";

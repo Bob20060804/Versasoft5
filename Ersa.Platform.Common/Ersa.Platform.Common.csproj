@@ -39,7 +39,7 @@
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
     </Reference>
     <Reference Include="Ersa.Global.Common">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+      <HintPath>..\Ersa.Global.Common\obj\Debug\Ersa.Global.Common.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>

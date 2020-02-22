@@ -4,6 +4,9 @@ using System.Windows;
 
 namespace Ersa.Platform.Infrastructure.Extensions
 {
+    /// <summary>
+    /// Task Extend
+    /// </summary>
 	public static class EDC_TaskExtensions
 	{
 		public static TaskScheduler PRO_fdcTaskScheduler
