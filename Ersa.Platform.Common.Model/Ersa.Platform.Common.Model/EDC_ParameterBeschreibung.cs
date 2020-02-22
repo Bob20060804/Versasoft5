@@ -1,19 +1,31 @@
 namespace Ersa.Platform.Common.Model
 {
+    /// <summary>
+    /// 参数描述
+    /// </summary>
 	public class EDC_ParameterBeschreibung
 	{
+        /// <summary>
+        /// 参数行为
+        /// </summary>
 		public ENUM_ParameterVerhalten PRO_enmParameterVerhalten
 		{
 			get;
 			set;
 		}
 
+        /// <summary>
+        /// 参数持久性
+        /// </summary>
 		public ENUM_ParameterPersistenz PRO_enmParameterPersistenz
 		{
 			get;
 			set;
 		}
 
+        /// <summary>
+        /// 参数描述
+        /// </summary>
 		public ENUM_Richtung PRO_enmRichtung
 		{
 			get;

@@ -6,8 +6,15 @@ using System.Linq;
 
 namespace Ersa.Platform.Plc.Model
 {
+    /// <summary>
+    /// Setup Parameters Helper
+    /// </summary>
 	public static class EDC_ParameterAufbauHelfer
 	{
+        /// <summary>
+        /// Should create parameter description
+        /// </summary>
+        /// <returns></returns>
 		public static EDC_ParameterBeschreibung FUN_edcSollParameterBeschreibungErstellen()
 		{
 			return new EDC_ParameterBeschreibung

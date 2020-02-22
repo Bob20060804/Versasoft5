@@ -272,6 +272,9 @@ namespace Ersa.Platform.Plc
 			variable.WriteValue(synchronous: true);
 		}
 
+        /// <summary>
+        /// ×¢²áGroup
+        /// </summary>
 		public void SUB_EventGruppeAktivieren()
 		{
 			if (m_fdcEventGruppe != null && !m_fdcEventGruppe.Active && m_fdcEventGruppe.Count > 0)
