@@ -107,7 +107,7 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
-        /// 变量日志 异步
+        /// 注册变量日志 异步
         /// </summary>
         /// <param name="i_lstVariablen">变量</param>
         /// <param name="i_fdcToken"></param>
@@ -120,6 +120,7 @@ namespace Ersa.Platform.Plc
 			}
 			m_fdcVariablenCompletionSource = new TaskCompletionSource<bool>();
 			IList<string> source = (i_lstVariablen as IList<string>) ?? i_lstVariablen.ToList();
+
 			List<string> lstNeueVars = (from i_strVar in source
 			where !FUN_blnVariableSchonAngelegt(i_strVar)
 			select i_strVar).ToList();
@@ -143,6 +144,12 @@ namespace Ersa.Platform.Plc
 			});
 		}
 
+        /// <summary>
+        /// 删除变量 Log out variables async
+        /// </summary>
+        /// <param name="i_lstVariablen"></param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		public System.Threading.Tasks.Task FUN_fdcVariablenAbmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
 		{
 			if (!PRO_blnVerbunden)
@@ -582,6 +589,11 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        /// <summary>
+        /// Remove variable from group
+        /// </summary>
+        /// <param name="i_fdcGruppe"></param>
+        /// <param name="i_strVariable"></param>
 		private void SUB_VariableAusGruppeEntfernen(VariableCollection i_fdcGruppe, string i_strVariable)
 		{
 			Variable variable = i_fdcGruppe.Contains(i_strVariable) ? m_fdcEventGruppe[i_strVariable] : null;
@@ -822,6 +834,12 @@ namespace Ersa.Platform.Plc
 			return m_fdcEventGruppe[text];
 		}
 
+        /// <summary>
+        /// Fill Group
+        /// </summary>
+        /// <param name="i_lstVariablen"></param>
+        /// <param name="i_fdcVarCollection"></param>
+        /// <param name="i_fdcToken"></param>
 		private void SUB_GruppeFuellen(IEnumerable<string> i_lstVariablen, VariableCollection i_fdcVarCollection, CancellationToken i_fdcToken)
 		{
 			foreach (string item in i_lstVariablen)
@@ -834,6 +852,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 创建新的cpu变量
+        /// Create new Cpu variable
         /// </summary>
         /// <param name="i_strVariable">变量</param>
         /// <param name="i_i32CycleTime">CT</param>
@@ -865,6 +884,9 @@ namespace Ersa.Platform.Plc
 			i_fdcAlteGruppe.Clear();
 		}
 
+        /// <summary>
+        /// Service
+        /// </summary>
 		private void SUB_InitPvi()
 		{
 			m_fdcService = new Service("Service_" + DateTime.Now.ToLongTimeString() + DateTime.Now.Millisecond);
