@@ -6,11 +6,30 @@ using System.Runtime.CompilerServices;
 
 namespace Ersa.Global.Mvvm
 {
+    /// <summary>
+    /// Base Bindable
+    /// </summary>
 	[Serializable]
 	public abstract class BindableBase : INotifyPropertyChanged
 	{
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            OnPropertyChanged(propertyName);
+        }
+
+        /// <summary>
+        /// 提供属性
+        /// </summary>
 		private static class PropertySupport
 		{
+            /// <summary>
+            /// 提取属性名
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            /// <param name="propertyExpression"></param>
+            /// <returns></returns>
 			public static string ExtractPropertyName<T>(Expression<Func<T>> propertyExpression)
 			{
 				if (propertyExpression == null)
@@ -20,6 +39,11 @@ namespace Ersa.Global.Mvvm
 				return ExtractPropertyNameFromLambda(propertyExpression);
 			}
 
+            /// <summary>
+            /// 从Lambda提取属性名称
+            /// </summary>
+            /// <param name="expression"></param>
+            /// <returns></returns>
 			private static string ExtractPropertyNameFromLambda(LambdaExpression expression)
 			{
 				if (expression == null)
@@ -44,10 +68,8 @@ namespace Ersa.Global.Mvvm
 			}
 		}
 
-		[field: NonSerialized]
-		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
 		{
 			if (object.Equals(storage, value))
 			{
@@ -70,11 +92,6 @@ namespace Ersa.Global.Mvvm
 			return true;
 		}
 
-		protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			OnPropertyChanged(propertyName);
-		}
-
 		[Obsolete("Please use the new RaisePropertyChanged method. This method will be removed to comply wth .NET coding standards. If you are overriding this method, you should overide the OnPropertyChanged(PropertyChangedEventArgs args) signature instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -87,10 +104,16 @@ namespace Ersa.Global.Mvvm
 			this.PropertyChanged?.Invoke(this, args);
 		}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="propertyExpression"></param>
 		[Obsolete("Please use RaisePropertyChanged(nameof(PropertyName)) instead. Expressions are slower, and the new nameof feature eliminates the magic strings.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		protected virtual void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
 		{
+            // 提取属性名
 			string propertyName = PropertySupport.ExtractPropertyName(propertyExpression);
 			OnPropertyChanged(propertyName);
 		}
