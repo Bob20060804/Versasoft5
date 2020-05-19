@@ -380,6 +380,13 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// Create Group Variable Async
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter">PLCµÿ÷∑</param>
+        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_i32CycleTime"></param>
+        /// <returns></returns>
 		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100)
 		{
 			if (!FUN_blnIstVerbindungAufgebaut())

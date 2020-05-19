@@ -326,7 +326,7 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
-        /// 创建Group变量
+        /// 创建Group变量 Create Group Variable Async
         /// </summary>
         /// <param name="i_enmVariablen">变量枚举</param>
         /// <param name="i_strGruppenName">Group Name</param>

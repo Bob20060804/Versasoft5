@@ -46,6 +46,13 @@ namespace Ersa.Platform.Plc
 
 		void SUB_EventGruppeDeaktivieren();
 
+        /// <summary>
+        /// 创建Group变量 Create Group Variable Async
+        /// </summary>
+        /// <param name="i_enmVariablen"></param>
+        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_i32CycleTime"></param>
+        /// <returns></returns>
 		Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<string> i_enmVariablen, string i_strGruppenName, int i_i32CycleTime = 100);
 
 		Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGruppenName);
