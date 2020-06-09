@@ -16,8 +16,16 @@ namespace Ersa.Platform.Plc
         /// <returns></returns>
 		Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse);
 
+        /// <summary>
+        /// DisConnect
+        /// </summary>
 		void SUB_VerbindungLoesen();
 
+        /// <summary>
+        /// Read Value
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <returns></returns>
 		string FUN_strWertLesen(string i_strVarName);
 
 		float FUN_sngWertLesen(string i_strVarName);

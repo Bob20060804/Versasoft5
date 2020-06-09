@@ -108,6 +108,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 注册变量日志 异步
+        /// variables log in async
         /// </summary>
         /// <param name="i_lstVariablen">变量</param>
         /// <param name="i_fdcToken"></param>
@@ -315,6 +316,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 关闭连接
+        /// disconnect
         /// </summary>
 		public void SUB_VerbindungLoesen()
 		{
@@ -814,6 +816,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 从cpu获取item
+        /// Get item from cpu
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <returns></returns>
