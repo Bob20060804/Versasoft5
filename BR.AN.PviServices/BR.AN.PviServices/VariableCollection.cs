@@ -414,6 +414,7 @@ namespace BR.AN.PviServices
 				propValidVariables = new VariableCollection(Parent, "Valid variables");
 				propValidVariables.propInternalCollection = true;
 			}
+
 			if (propErrorVariables != null)
 			{
 				propErrorVariables.Clear();
@@ -423,6 +424,7 @@ namespace BR.AN.PviServices
 				propErrorVariables = new VariableCollection(Parent, "Error variables");
 				propErrorVariables.propInternalCollection = true;
 			}
+
 			if (propDataValidVariables != null)
 			{
 				propDataValidVariables.Clear();
@@ -432,6 +434,7 @@ namespace BR.AN.PviServices
 				propDataValidVariables = new VariableCollection(Parent, "Valid variables");
 				propDataValidVariables.propInternalCollection = true;
 			}
+
 			if (Count == 0)
 			{
 				base.Requests &= ~Actions.Connect;

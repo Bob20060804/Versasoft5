@@ -389,20 +389,24 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// <returns></returns>
 		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100)
 		{
+            // 如果没有连接, 返回
 			if (!FUN_blnIstVerbindungAufgebaut())
 			{
 				return Task.CompletedTask;
 			}
+
 			List<EDC_PrimitivParameter> list = i_lstPrimitivParameter.ToList();
 			List<string> list2 = new List<string>();
 			foreach (EDC_PrimitivParameter item in list)
 			{
+                // 如果实际地址为空
 				if (string.IsNullOrEmpty(item.PRO_strPhysischeAdresse))
 				{
 					item.PRO_strPhysischeAdresse = FUN_objParameterBehandlung(item, m_edcEvenHandlerRegStrategie);
 				}
 				list2.Add(item.PRO_strPhysischeAdresse);
 			}
+
 			if (!m_dicGruppenParameter.ContainsKey(i_strGruppenName))
 			{
 				m_dicGruppenParameter.Add(i_strGruppenName, list);
@@ -518,6 +522,13 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="i_edcParameter"></param>
+        /// <param name="i_edcStrategie"></param>
+        /// <returns></returns>
 		private T FUN_objParameterBehandlung<T>(EDC_PrimitivParameter i_edcParameter, INF_ParameterBehandlungsStrategie<T> i_edcStrategie)
 		{
 			string a = (i_edcParameter.PROa_objAdresse.Length != 1) ? i_edcParameter.PROa_objAdresse[1].ToString() : i_edcParameter.PROa_objAdresse[0].ToString();

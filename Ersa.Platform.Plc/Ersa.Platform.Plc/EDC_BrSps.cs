@@ -108,7 +108,6 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 注册变量日志 异步
-        /// variables log in async
         /// </summary>
         /// <param name="i_lstVariablen">变量</param>
         /// <param name="i_fdcToken"></param>
@@ -182,6 +181,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 注册事件
+        /// EventHandler Register
         /// </summary>
         /// <param name="i_strVarName">变量名</param>
         /// <param name="i_delHandler"></param>
@@ -193,6 +193,7 @@ namespace Ersa.Platform.Plc
 				throw new EDC_AdressRegistrierungsException("Not Connected");
 			}
 			Variable objItem = FUN_fdcItemAusCpuHolen(i_strVarName);
+
 			VariableEventHandler delHandler = delegate(object i_objSender, VariableEventArgs i_fdcEventArgs)
 			{
 				if (i_fdcEventArgs.Action == BR.AN.PviServices.Action.VariableValueChangedEvent)
@@ -201,6 +202,7 @@ namespace Ersa.Platform.Plc
 				}
 			};
 			objItem.ValueChanged += delHandler;
+
 			if (!m_fdcEventGruppe.Contains(objItem))
 			{
 				objItem.RefreshTime = 100;
@@ -316,7 +318,6 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 关闭连接
-        /// disconnect
         /// </summary>
 		public void SUB_VerbindungLoesen()
 		{
@@ -569,6 +570,7 @@ namespace Ersa.Platform.Plc
 			VariableCollection variableCollection = new VariableCollection(m_fdcCpu, i_strGruppenName);
 			variableCollection.CollectionError += SUB_PviCollectionError;
 			variableCollection.RefreshTime = i_i32CycleTime;
+
 			m_lstCpuGruppen.Add(variableCollection);
 			return variableCollection;
 		}
@@ -816,7 +818,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 从cpu获取item
-        /// Get item from cpu
+        /// Get Item From Cpu
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <returns></returns>
