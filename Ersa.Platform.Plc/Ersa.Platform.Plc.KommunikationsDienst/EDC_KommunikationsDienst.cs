@@ -49,20 +49,23 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
 		private readonly Dictionary<string, IEnumerable<EDC_PrimitivParameter>> m_dicGruppenParameter = new Dictionary<string, IEnumerable<EDC_PrimitivParameter>>();
 
-		private INF_Sps m_edcSpsService;
+		
         /// <summary>
         /// 是否解决连接
         /// </summary>
 		private bool m_blnIstVerbindungGeloest;
 
-		[Import("Ersa.Platform.Plc.KommunikationsDienst.EDC_PrimaerSekundaerModusSteuerungsDienst.FUN_blnIstVisuAlsPrimaerAngemeldet")]
+        private INF_Sps m_edcSpsService;
+        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
+
+
+
+        [Import("Ersa.Platform.Plc.KommunikationsDienst.EDC_PrimaerSekundaerModusSteuerungsDienst.FUN_blnIstVisuAlsPrimaerAngemeldet")]
 		public Lazy<Func<bool>> PRO_delIstVisuAlsPrimaerAngemeldet
 		{
 			get;
 			set;
 		}
-
-		private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
 
 		[ImportingConstructor]
 		public EDC_KommunikationsDienst(EDC_ParameterLeseStrategie i_edcLeseStrategie, EDC_AdressRegistrierungsStrategie i_edcAdressRegistrierungsStrategie, EDC_EventHandlerRegistrierungsStrategie i_edcEvenHandlerRegStrategie, EDC_ParameterSchreibeStrategie i_edcSchreibeStrategie, INF_SpsProvider i_edcSpsProvider, INF_Logger i_edcLogger)
@@ -78,12 +81,18 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			m_dicEventHandlerSubscriptions = new Dictionary<EDC_PrimitivParameter, IDisposable>();
 		}
 
+        /// <summary>
+        /// 建立控制连接
+        /// Establish connection to control
+        /// </summary>
+        /// <param name="i_blnOnline"></param>
+        /// <returns></returns>
 		public async Task FUN_fdcVerbindungZurSteuerungAufbauen(bool i_blnOnline)
 		{
 			try
 			{
 				m_dicGruppenParameter.Clear();
-				await PRO_edcSpsService.FUN_fdcVerbindungAufbauenAsync(i_blnOnline, EDC_KommunikationsHelfer.PRO_strSpsIpAdresse).ConfigureAwait(continueOnCapturedContext: true);
+				await PRO_edcSpsService.FUN_fdcVerbindungAufbauenAsync(i_blnOnline, EDC_KommunikationsHelfer.PRO_strSpsIpAdresse).ConfigureAwait(true);
 				lock (m_objVerbindungLock)
 				{
 					m_blnIstVerbindungGeloest = false;
@@ -601,6 +610,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
         /// <summary>
         /// 创建输出参数
+        /// Create parameter output
         /// </summary>
         /// <param name="i_enuParameter"></param>
         /// <returns></returns>

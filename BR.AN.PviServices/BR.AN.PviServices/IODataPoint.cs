@@ -561,32 +561,32 @@ namespace BR.AN.PviServices
 			}
 		}
 
-		protected virtual void OnValueRead(Variable sender, PviEventArgs e, IOVariableTypes ioVType)
-		{
-			switch (ioVType)
-			{
-			case IOVariableTypes.PHYSICAL:
-				if (Direction == Direction.Input)
-				{
-					propPhysicalValue = sender.Value;
-				}
-				break;
-			case IOVariableTypes.VALUE:
-				propPviValue = sender.Value;
-				if (Direction.Output == Direction)
-				{
-					propPhysicalValue = sender.Value;
-				}
-				break;
-			default:
-				propForceValue = sender.Value;
-				break;
-			}
-			if (this.ValueRead != null)
-			{
-				this.ValueRead(this, new PviEventArgs(base.Name, base.Address, e.ErrorCode, Service.Language, e.Action, Service));
-			}
-		}
+        protected virtual void OnValueRead(Variable sender, PviEventArgs e, IOVariableTypes ioVType)
+        {
+            switch (ioVType)
+            {
+                case IOVariableTypes.PHYSICAL:
+                    if (Direction == Direction.Input)
+                    {
+                        propPhysicalValue = sender.Value;
+                    }
+                    break;
+                case IOVariableTypes.VALUE:
+                    propPviValue = sender.Value;
+                    if (Direction.Output == Direction)
+                    {
+                        propPhysicalValue = sender.Value;
+                    }
+                    break;
+                default:
+                    propForceValue = sender.Value;
+                    break;
+            }
+            if (this.ValueRead != null)
+            {
+                this.ValueRead(this, new PviEventArgs(base.Name, base.Address, e.ErrorCode, Service.Language, e.Action, Service));
+            }
+        }
 
 		private void SetActive(bool value)
 		{

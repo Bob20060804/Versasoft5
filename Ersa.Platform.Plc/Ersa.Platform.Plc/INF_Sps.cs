@@ -27,21 +27,13 @@ namespace Ersa.Platform.Plc
         /// <param name="i_strVarName"></param>
         /// <returns></returns>
 		string FUN_strWertLesen(string i_strVarName);
-
 		float FUN_sngWertLesen(string i_strVarName);
-
 		uint FUN_u32WertLesen(string i_strVarName);
-
 		int FUN_i32WertLesen(string i_strVarName);
-
 		short FUN_i16WertLesen(string i_strVarName);
-
 		ushort FUN_u16WertLesen(string i_strVarName);
-
 		byte FUN_bytWertLesen(string i_strVarName);
-
 		bool FUN_blnWertLesen(string i_strVarName);
-
 		void SUB_WertSchreiben(string i_strVarName, string i_strWert);
 
 		IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, Action i_delHandler);
@@ -55,7 +47,8 @@ namespace Ersa.Platform.Plc
 		void SUB_EventGruppeDeaktivieren();
 
         /// <summary>
-        /// 创建Group变量 Create Group Variable Async
+        /// 创建Group变量 
+        /// Create Group Variable Async
         /// </summary>
         /// <param name="i_enmVariablen"></param>
         /// <param name="i_strGruppenName"></param>

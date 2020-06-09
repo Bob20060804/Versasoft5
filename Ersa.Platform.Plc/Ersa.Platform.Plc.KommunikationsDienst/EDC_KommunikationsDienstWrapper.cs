@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// 通讯服务包装
+    /// Communication service wrapper
+    /// </summary>
 	[Export(typeof(INF_KommunikationsDienst))]
 	[Export(typeof(INF_KommunikationsDienstWrapper))]
 	public class EDC_KommunikationsDienstWrapper : EDC_DisposableObject, INF_KommunikationsDienst, IDisposable, INF_KommunikationsDienstWrapper

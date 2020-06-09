@@ -88,6 +88,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 建立连接 异步
+        /// Connect
         /// </summary>
         /// <param name="i_blnOnline"></param>
         /// <param name="i_strAdresse"></param>
@@ -107,7 +108,8 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
-        /// 注册变量日志 异步
+        /// 注册变量日志
+        /// Variables sign in
         /// </summary>
         /// <param name="i_lstVariablen">变量</param>
         /// <param name="i_fdcToken"></param>
@@ -215,6 +217,12 @@ namespace Ersa.Platform.Plc
 			});
 		}
 
+        /// <summary>
+        /// 读取值
+        /// Read Value
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <returns></returns>
 		public string FUN_strWertLesen(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -225,7 +233,11 @@ namespace Ersa.Platform.Plc
 			variable.ReadValue(true);
 			return variable.Value.ToString(CultureInfo.InvariantCulture);
 		}
-
+        /// <summary>
+        /// Read Value i32
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <returns></returns>
 		public int FUN_i32WertLesen(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -234,7 +246,11 @@ namespace Ersa.Platform.Plc
 			}
 			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToInt32(CultureInfo.InvariantCulture.NumberFormat);
 		}
-
+        /// <summary>
+        /// Read Value u32
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <returns></returns>
 		public uint FUN_u32WertLesen(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -261,7 +277,6 @@ namespace Ersa.Platform.Plc
 			}
 			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToInt16(CultureInfo.InvariantCulture.NumberFormat);
 		}
-
 		public ushort FUN_u16WertLesen(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -270,7 +285,6 @@ namespace Ersa.Platform.Plc
 			}
 			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToUInt16(CultureInfo.InvariantCulture.NumberFormat);
 		}
-
 		public byte FUN_bytWertLesen(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -279,7 +293,6 @@ namespace Ersa.Platform.Plc
 			}
 			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToByte(CultureInfo.InvariantCulture.NumberFormat);
 		}
-
 		public bool FUN_blnWertLesen(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -289,6 +302,12 @@ namespace Ersa.Platform.Plc
 			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToBoolean(CultureInfo.InvariantCulture.NumberFormat);
 		}
 
+        /// <summary>
+        /// Write Value
+        /// 写值
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <param name="i_strWert"></param>
 		public void SUB_WertSchreiben(string i_strVarName, string i_strWert)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -297,6 +316,7 @@ namespace Ersa.Platform.Plc
 			}
 			Variable variable = FUN_fdcItemAusCpuHolen(i_strVarName);
 			FUN_strWertTypGerechtSchreiben(i_strWert, variable);
+            // 同步 写值
 			variable.WriteValue(synchronous: true);
 		}
 
@@ -737,7 +757,7 @@ namespace Ersa.Platform.Plc
 			m_fdcCpu.Variables.RefreshTime = 400;
 			if (i_fdcPviEventArgs.ErrorCode == 0)
 			{
-				m_fdcVerbindungsCompletionSource.TrySetResult(result: true);
+				m_fdcVerbindungsCompletionSource.TrySetResult(true);
 			}
 		}
 
@@ -767,54 +787,60 @@ namespace Ersa.Platform.Plc
 			return true;
 		}
 
+        /// <summary>
+        /// Write Value Type 
+        /// </summary>
+        /// <param name="i_strWert">Value</param>
+        /// <param name="i_fdcVar">Variable</param>
+        /// <returns></returns>
 		private string FUN_strWertTypGerechtSchreiben(string i_strWert, Variable i_fdcVar)
-		{
-			TypeCode typeCode = i_fdcVar.Value.GetTypeCode();
-			string result = string.Empty;
-			switch (typeCode)
-			{
-			case TypeCode.Boolean:
-				i_fdcVar.Value.Assign(bool.Parse(i_strWert));
-				break;
-			case TypeCode.Int32:
-				i_fdcVar.Value.Assign(int.Parse(i_strWert));
-				break;
-			case TypeCode.Single:
-				i_fdcVar.Value.Assign(float.Parse(FUN_strNachkommaTest(i_strWert)));
-				break;
-			case TypeCode.SByte:
-				i_fdcVar.Value.Assign(sbyte.Parse(i_strWert));
-				break;
-			case TypeCode.Int16:
-				i_fdcVar.Value.Assign(short.Parse(i_strWert));
-				break;
-			case TypeCode.Byte:
-				i_fdcVar.Value.Assign(byte.Parse(i_strWert));
-				break;
-			case TypeCode.UInt16:
-				i_fdcVar.Value.Assign(ushort.Parse(i_strWert));
-				break;
-			case TypeCode.UInt32:
-				i_fdcVar.Value.Assign(uint.Parse(i_strWert));
-				break;
-			case TypeCode.String:
-				i_fdcVar.Value = i_strWert;
-				break;
-			case TypeCode.Double:
-				i_fdcVar.Value.Assign(double.Parse(FUN_strNachkommaTest(i_strWert)));
-				break;
-			case TypeCode.Int64:
-				i_fdcVar.Value.Assign(long.Parse(i_strWert));
-				break;
-			case TypeCode.UInt64:
-				i_fdcVar.Value.Assign((float)(double)ulong.Parse(i_strWert));
-				break;
-			default:
-				result = "missing datatype: " + typeCode.ToString();
-				break;
-			}
-			return result;
-		}
+        {
+            TypeCode typeCode = i_fdcVar.Value.GetTypeCode();
+            string result = string.Empty;
+            switch (typeCode)
+            {
+                case TypeCode.Boolean:
+                    i_fdcVar.Value.Assign(bool.Parse(i_strWert));
+                    break;
+                case TypeCode.Int32:
+                    i_fdcVar.Value.Assign(int.Parse(i_strWert));
+                    break;
+                case TypeCode.Single:
+                    i_fdcVar.Value.Assign(float.Parse(FUN_strNachkommaTest(i_strWert)));
+                    break;
+                case TypeCode.SByte:
+                    i_fdcVar.Value.Assign(sbyte.Parse(i_strWert));
+                    break;
+                case TypeCode.Int16:
+                    i_fdcVar.Value.Assign(short.Parse(i_strWert));
+                    break;
+                case TypeCode.Byte:
+                    i_fdcVar.Value.Assign(byte.Parse(i_strWert));
+                    break;
+                case TypeCode.UInt16:
+                    i_fdcVar.Value.Assign(ushort.Parse(i_strWert));
+                    break;
+                case TypeCode.UInt32:
+                    i_fdcVar.Value.Assign(uint.Parse(i_strWert));
+                    break;
+                case TypeCode.String:
+                    i_fdcVar.Value = i_strWert;
+                    break;
+                case TypeCode.Double:
+                    i_fdcVar.Value.Assign(double.Parse(FUN_strNachkommaTest(i_strWert)));
+                    break;
+                case TypeCode.Int64:
+                    i_fdcVar.Value.Assign(long.Parse(i_strWert));
+                    break;
+                case TypeCode.UInt64:
+                    i_fdcVar.Value.Assign((float)(double)ulong.Parse(i_strWert));
+                    break;
+                default:
+                    result = "missing datatype: " + typeCode.ToString();
+                    break;
+            }
+            return result;
+        }
 
         /// <summary>
         /// 从cpu获取item
@@ -879,6 +905,7 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
+        /// 移动Variable
         /// Move old variables to new group
         /// </summary>
         /// <param name="i_fdcNeuGruppe"></param>
