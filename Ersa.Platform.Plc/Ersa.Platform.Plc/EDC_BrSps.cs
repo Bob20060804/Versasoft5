@@ -108,7 +108,7 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
-        /// 注册变量日志
+        /// 变量登陆 异步
         /// Variables sign in
         /// </summary>
         /// <param name="i_lstVariablen">变量</param>
@@ -123,6 +123,7 @@ namespace Ersa.Platform.Plc
 			m_fdcVariablenCompletionSource = new TaskCompletionSource<bool>();
 			IList<string> source = (i_lstVariablen as IList<string>) ?? i_lstVariablen.ToList();
 
+            // 如果变量都已经应用了, 则结束线程
 			List<string> lstNeueVars = (from i_strVar in source
 			where !FUN_blnVariableSchonAngelegt(i_strVar)
 			select i_strVar).ToList();
@@ -130,11 +131,16 @@ namespace Ersa.Platform.Plc
 			{
 				return System.Threading.Tasks.Task.CompletedTask;
 			}
+
+            // 把变量移动到新的组
 			SUB_AlteVariablenInNeueGruppeVerschieben(m_fdcGruppe, m_fdcTempGruppe);
 			m_fdcTempGruppe.Disconnect();
+
+            // 把没有应用的变量添加到临时组
 			SUB_GruppeFuellen(lstNeueVars, m_fdcTempGruppe, i_fdcToken);
 			m_fdcTempGruppe.Connect();
 			SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, string.Empty, "FUN_fdcVariablenAnmeldenAsync() Count =" + lstNeueVars.Count());
+
 			return m_fdcVariablenCompletionSource.Task.FUN_fdcMitTimeout(100000, delegate
 			{
 				EDC_AdressRegistrierungsException obj = new EDC_AdressRegistrierungsException("Timeout registering variables: Incorrect variables " + string.Join(", ", m_lstFehlerhafteVariable) + " - New variables: " + string.Join(", ", lstNeueVars))
@@ -715,19 +721,17 @@ namespace Ersa.Platform.Plc
         /// 注册组
         /// </summary>
 		private void SUB_InitGruppen()
-		{
-			m_lstCpuGruppen.Clear();
-			m_fdcGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString())
-			{
-				RefreshTime = 400
-			};
-			m_fdcTempGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
-			SUB_GruppenEventsRegistrieren(m_fdcTempGruppe);
-			m_fdcEventGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
-			m_fdcEventGruppe.Error += SUB_EventGruppeError;
-			m_fdcEventGruppe.CollectionPropertyChanged += SUB_EventGruppePropertyChanged;
-			m_fdcEventGruppe.RefreshTime = 100;
-		}
+        {
+            m_lstCpuGruppen.Clear();
+            m_fdcGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString()) { RefreshTime = 400 };
+            m_fdcTempGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
+            SUB_GruppenEventsRegistrieren(m_fdcTempGruppe);
+
+            m_fdcEventGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
+            m_fdcEventGruppe.Error += SUB_EventGruppeError;
+            m_fdcEventGruppe.CollectionPropertyChanged += SUB_EventGruppePropertyChanged;
+            m_fdcEventGruppe.RefreshTime = 100;
+        }
 
 		private void SUB_EventGruppePropertyChanged(object i_objSender, CollectionEventArgs i_fdcEventArgse)
 		{
@@ -858,6 +862,12 @@ namespace Ersa.Platform.Plc
 			return m_fdcCpu.Variables[name];
 		}
 
+        /// <summary>
+        /// 
+        /// Get Item From Event Group
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <returns></returns>
 		private Variable FUN_fdcItemAusEventGruppeHolen(string i_strVarName)
 		{
 			string text = FUN_strNamenKorrigieren(i_strVarName);
@@ -934,6 +944,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// Group 事件注册
+        /// Register group events
         /// </summary>
         /// <param name="i_fdcGruppe"></param>
 		private void SUB_GruppenEventsRegistrieren(VariableCollection i_fdcGruppe)
@@ -964,6 +975,11 @@ namespace Ersa.Platform.Plc
 			m_fdcVariablenCompletionSource.SetResult(result: true);
 		}
 
+        /// <summary>
+        /// Collection Connected
+        /// </summary>
+        /// <param name="i_objSender"></param>
+        /// <param name="i_fdcCollectionEventArgs"></param>
 		private void SUB_CollectionConnected(object i_objSender, CollectionEventArgs i_fdcCollectionEventArgs)
 		{
 			VariableCollection variableCollection = i_objSender as VariableCollection;
@@ -975,6 +991,11 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
+        /// <summary>
+        /// Collection Error
+        /// </summary>
+        /// <param name="i_objSender"></param>
+        /// <param name="i_fdcPviEventArgs"></param>
 		private void SUB_PviCollectionError(object i_objSender, PviEventArgs i_fdcPviEventArgs)
 		{
 			string i_strEintrag = "Collection Error: " + i_fdcPviEventArgs.Address + " -->" + i_fdcPviEventArgs.ErrorText;
@@ -985,7 +1006,11 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
-        // 变量不正确
+        /// <summary>
+        /// 变量不正确
+        /// 
+        /// </summary>
+        /// <param name="i_strVarName"></param>
 		private void SUB_FehlerhafteVariableMerken(string i_strVarName)
 		{
 			if (m_lstFehlerhafteVariable == null)
