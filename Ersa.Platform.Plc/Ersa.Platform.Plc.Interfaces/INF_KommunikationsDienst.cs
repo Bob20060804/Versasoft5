@@ -8,8 +8,17 @@ namespace Ersa.Platform.Plc.Interfaces
 {
 	public interface INF_KommunikationsDienst : IDisposable
 	{
+        /// <summary>
+        /// 建立连接
+        /// Establish connection to control
+        /// </summary>
+        /// <param name="i_blnOnline"></param>
+        /// <returns></returns>
 		Task FUN_fdcVerbindungZurSteuerungAufbauen(bool i_blnOnline);
 
+        /// <summary>
+        /// Disconnect
+        /// </summary>
 		void SUB_VerbindungLoesen();
 
 		void SUB_WertLesen(EDC_PrimitivParameter i_edcParameter);

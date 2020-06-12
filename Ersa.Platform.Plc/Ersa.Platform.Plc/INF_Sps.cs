@@ -36,11 +36,18 @@ namespace Ersa.Platform.Plc
 		bool FUN_blnWertLesen(string i_strVarName);
 		void SUB_WertSchreiben(string i_strVarName, string i_strWert);
 
+        /// <summary>
+        /// 事件注册
+        /// EventHandler Register
+        /// </summary>
+        /// <param name="i_strVarName">变量名</param>
+        /// <param name="i_delHandler">事件</param>
+        /// <returns></returns>
 		IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, Action i_delHandler);
 
         /// <summary>
-        /// 登陆变量 异步
-        /// Variables login async
+        /// 注册变量 异步
+        /// Variables Register async
         /// </summary>
         /// <param name="i_lstVariablen"></param>
         /// <param name="i_fdcToken"></param>
@@ -49,15 +56,23 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// 登出变量 异步
-        /// Log out variables async
+        /// Variables Unregister async
         /// </summary>
         /// <param name="i_lstVariablen"></param>
         /// <param name="i_fdcToken"></param>
         /// <returns></returns>
 		Task FUN_fdcVariablenAbmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken);
 
+        /// <summary>
+        /// 
+        /// Activate event group
+        /// </summary>
 		void SUB_EventGruppeAktivieren();
 
+        /// <summary>
+        /// 
+        /// Deactivate event group
+        /// </summary>
 		void SUB_EventGruppeDeaktivieren();
 
         /// <summary>
@@ -70,12 +85,33 @@ namespace Ersa.Platform.Plc
         /// <returns></returns>
 		Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<string> i_enmVariablen, string i_strGruppenName, int i_i32CycleTime = 100);
 
+        /// <summary>
+        /// Group writing Async
+        /// </summary>
+        /// <param name="i_enmParameter"></param>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGruppenName);
 
+        /// <summary>
+        /// Reading group Async
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task<IEnumerable<EDC_SpsListenElement>> FUN_fdcGruppeLesenAsync(string i_strGruppenName);
 
+        /// <summary>
+        /// Activate group Async
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName);
 
+        /// <summary>
+        /// Disable group Async
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName);
 	}
 }

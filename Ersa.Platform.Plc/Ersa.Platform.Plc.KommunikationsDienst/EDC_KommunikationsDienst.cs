@@ -390,6 +390,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		}
 
         /// <summary>
+        /// 在组里创建变量
         /// Create Group Variable Async
         /// </summary>
         /// <param name="i_lstPrimitivParameter">PLC地址</param>
@@ -398,7 +399,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// <returns></returns>
 		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100)
 		{
-            // 如果没有连接, 返回
+            // 是否在释放资源
 			if (!FUN_blnIstVerbindungAufgebaut())
 			{
 				return Task.CompletedTask;
@@ -532,7 +533,8 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		}
 
         /// <summary>
-        /// 
+        /// 处理参数
+        /// Handling Parameters
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="i_edcParameter"></param>
@@ -587,10 +589,12 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// <returns></returns>
 		private bool FUN_blnIstVerbindungAufgebaut()
 		{
+            // 如果正在释放资源, 返回false
 			if (base.PRO_blnIstDisposed)
 			{
 				return false;
 			}
+
 			lock (m_objVerbindungLock)
 			{
 				return !m_blnIstVerbindungGeloest;
