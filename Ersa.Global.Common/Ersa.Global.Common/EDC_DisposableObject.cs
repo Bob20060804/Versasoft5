@@ -7,7 +7,9 @@ namespace Ersa.Global.Common
 		private readonly object m_objLock = new object();
 
 		private bool m_blnIstDisposed;
-
+		/// <summary>
+		/// 是否已经释放资源
+		/// </summary>
 		public bool PRO_blnIstDisposed
 		{
 			get
@@ -26,6 +28,7 @@ namespace Ersa.Global.Common
 			}
 		}
 
+
 		protected EDC_DisposableObject()
 		{
 			m_blnIstDisposed = false;
@@ -33,12 +36,12 @@ namespace Ersa.Global.Common
 
 		~EDC_DisposableObject()
 		{
-			SUB_Dispose(i_blnIsDisposing: false);
+			SUB_Dispose(false);
 		}
 
 		public void Dispose()
 		{
-			SUB_Dispose(i_blnIsDisposing: true);
+			SUB_Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -46,14 +49,19 @@ namespace Ersa.Global.Common
 
 		private void SUB_Dispose(bool i_blnIsDisposing)
 		{
-			if (!PRO_blnIstDisposed)
+			if (PRO_blnIstDisposed)
 			{
-				if (i_blnIsDisposing)
-				{
-					SUB_InternalDispose();
-				}
-				PRO_blnIstDisposed = true;
+				return;
 			}
+
+			// 清理托管资源
+			if (i_blnIsDisposing)
+			{
+				SUB_InternalDispose();
+			}
+
+			// 已经被释放
+			PRO_blnIstDisposed = true;
 		}
 	}
 }

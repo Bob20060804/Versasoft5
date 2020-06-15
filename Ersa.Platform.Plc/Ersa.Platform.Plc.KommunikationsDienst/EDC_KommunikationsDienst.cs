@@ -281,6 +281,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		}
 
         /// <summary>
+		/// BR plc ×¢²áÊÂ¼þ
         /// sps envent handle register
         /// </summary>
         /// <param name="i_lstPrimitivParameter"></param>
@@ -305,10 +306,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 								item.PRO_strPhysischeAdresse = FUN_objParameterBehandlung(item, m_edcEvenHandlerRegStrategie);
 							}
 							edcParameter = item;
-							IDisposable value = PRO_edcSpsService.FUN_fdcEventHandlerRegistrieren(item.PRO_strPhysischeAdresse, delegate
-							{
-								SUB_WertLesen(edcParameter);
-							});
+							IDisposable value = PRO_edcSpsService.FUN_fdcEventHandlerRegistrieren(item.PRO_strPhysischeAdresse, () => SUB_WertLesen(edcParameter));
 							m_dicEventHandlerSubscriptions.Add(edcParameter, value);
 						}
 						PRO_edcSpsService.SUB_EventGruppeAktivieren();

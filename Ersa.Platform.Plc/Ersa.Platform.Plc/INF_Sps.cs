@@ -46,7 +46,7 @@ namespace Ersa.Platform.Plc
 		IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, Action i_delHandler);
 
         /// <summary>
-        /// 注册变量 异步
+        /// 变量 注册
         /// Variables Register async
         /// </summary>
         /// <param name="i_lstVariablen"></param>
@@ -55,7 +55,7 @@ namespace Ersa.Platform.Plc
 		Task FUN_fdcVariablenAnmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken);
 
         /// <summary>
-        /// 登出变量 异步
+        /// 变量 登出
         /// Variables Unregister async
         /// </summary>
         /// <param name="i_lstVariablen"></param>
