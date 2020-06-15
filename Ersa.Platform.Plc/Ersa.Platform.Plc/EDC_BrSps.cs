@@ -493,6 +493,7 @@ namespace Ersa.Platform.Plc
 
         /// <summary>
         /// Group ∂¡ “Ï≤Ω
+        /// group Reading Async
         /// </summary>
         /// <param name="i_strGruppenName"></param>
         /// <returns></returns>
@@ -511,7 +512,7 @@ namespace Ersa.Platform.Plc
 			{
 				try
 				{
-					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: true);
+					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(true);
 					TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> taskCompletionSource = new TaskCompletionSource<IEnumerable<EDC_SpsListenElement>>();
 					m_dicGruppenReadCompletionSources[i_strGruppenName] = taskCompletionSource;
 					fdcGruppe.ReadValues();
