@@ -1,5 +1,8 @@
 namespace Ersa.Platform.Plc
 {
+    /// <summary>
+    /// sps Type
+    /// </summary>
 	public enum ENUM_SpsTyp
 	{
 		enmString,

@@ -21,12 +21,32 @@ namespace Ersa.Platform.Plc.Interfaces
         /// </summary>
 		void SUB_VerbindungLoesen();
 
+        /// <summary>
+        /// Read Value
+        /// </summary>
+        /// <param name="i_edcParameter"></param>
 		void SUB_WertLesen(EDC_PrimitivParameter i_edcParameter);
-
+        /// <summary>
+        /// Read Value Async
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcCancellationToken"></param>
+        /// <returns></returns>
 		Task FUN_fdcWerteLesenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken);
 
+        /// <summary>
+        /// Write value
+        /// </summary>
+        /// <param name="i_edcParameter"></param>
 		void SUB_WertSchreiben(EDC_PrimitivParameter i_edcParameter);
 
+        /// <summary>
+        /// Variable group create async
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_i32CycleTime"></param>
+        /// <returns></returns>
 		Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100);
 
 		Task FUN_fdcGruppeLesenAsync(string i_strGruppenName);

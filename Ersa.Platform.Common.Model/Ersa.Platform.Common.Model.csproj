@@ -28,24 +28,15 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
   </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Ersa.Platform.Common.Model</RootNamespace>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ersa.Platform.Infrastructure">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
     </Reference>
-    <Reference Include="Ersa.Global.Mvvm">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Platform.Common">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Ersa.Global.Common">
-      <HintPath>C:\Users\bobzhang\Desktop\Ersa\public\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase">
       <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
@@ -78,6 +69,24 @@
     <Compile Include="Ersa.Platform.Common.Model\ENUM_PcbZustand.cs" />
     <Compile Include="Ersa.Platform.Common.Model\ENUM_Richtung.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ersa.Global.Common\Ersa.Global.Common.csproj">
+      <Project>{6314c658-d02e-4b6b-8165-803a325b2d1b}</Project>
+      <Name>Ersa.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Mvvm\Ersa.Global.Mvvm.csproj">
+      <Project>{1c914e58-40b4-4742-b010-fb5d0e8924f4}</Project>
+      <Name>Ersa.Global.Mvvm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Common\Ersa.Platform.Common.csproj">
+      <Project>{44adb178-8105-4ca2-8931-df01d7e94baf}</Project>
+      <Name>Ersa.Platform.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.Infrastructure\Ersa.Platform.Infrastructure.csproj">
+      <Project>{16e4c6b9-86bd-4ce2-a093-2eef341454af}</Project>
+      <Name>Ersa.Platform.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

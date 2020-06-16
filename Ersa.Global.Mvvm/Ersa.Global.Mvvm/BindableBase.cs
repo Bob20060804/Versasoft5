@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 namespace Ersa.Global.Mvvm
 {
     /// <summary>
+    /// ¿É°ó¶¨µÄ
     /// Base Bindable
     /// </summary>
 	[Serializable]

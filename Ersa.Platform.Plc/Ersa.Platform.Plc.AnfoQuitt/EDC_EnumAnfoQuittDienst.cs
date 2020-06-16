@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Plc.AnfoQuitt
 {
+    /// <summary>
+    /// 
+    /// Request Quit Service
+    /// </summary>
 	[Export(typeof(INF_EnumAnfoQuittDienst))]
 	public class EDC_EnumAnfoQuittDienst : INF_EnumAnfoQuittDienst
 	{

@@ -2,6 +2,10 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Common.Model
 {
+    /// <summary>
+    /// 基本参数相等比较器
+    /// Primitive parameter equality comparer
+    /// </summary>
 	public class EDC_PrimitivParameterEqualityComparer : IEqualityComparer<EDC_PrimitivParameter>
 	{
 		public bool Equals(EDC_PrimitivParameter i_edcErsterParameter, EDC_PrimitivParameter i_edcZweiterParameter)

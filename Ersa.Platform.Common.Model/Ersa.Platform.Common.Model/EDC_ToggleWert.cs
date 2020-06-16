@@ -3,6 +3,10 @@ using System.ComponentModel;
 
 namespace Ersa.Platform.Common.Model
 {
+    /// <summary>
+    /// 切换值
+    /// Toggle value
+    /// </summary>
 	public class EDC_ToggleWert : BindableBase
 	{
 		private bool m_blnToggleQuittAenderung;
@@ -48,12 +52,18 @@ namespace Ersa.Platform.Common.Model
 			PRO_edcEin = i_edcEin;
 			PRO_edcToggle = i_edcToggle;
 			PRO_edcToggleQuitt = i_edcToggleQuitt;
+
 			if (PRO_edcToggleQuitt != null)
 			{
 				PropertyChangedEventManager.AddHandler(PRO_edcToggleQuitt, SUB_PropertyChanged, "PRO_blnWert");
 			}
 		}
 
+        /// <summary>
+        /// 属性改变
+        /// </summary>
+        /// <param name="i_objSender"></param>
+        /// <param name="i_fdcPropertyChangedEventArgs"></param>
 		private void SUB_PropertyChanged(object i_objSender, PropertyChangedEventArgs i_fdcPropertyChangedEventArgs)
 		{
 			if (i_fdcPropertyChangedEventArgs.PropertyName == "PRO_blnWert")

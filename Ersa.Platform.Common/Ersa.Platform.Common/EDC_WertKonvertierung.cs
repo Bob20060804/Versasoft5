@@ -4,6 +4,10 @@ using System.Globalization;
 
 namespace Ersa.Platform.Common
 {
+    /// <summary>
+    /// ×ª»»Öµ
+    /// Convert Value
+    /// </summary>
 	public static class EDC_WertKonvertierung
 	{
 		private static readonly IDictionary<Type, Func<object, float>> ms_dicSngKonvertierungen;

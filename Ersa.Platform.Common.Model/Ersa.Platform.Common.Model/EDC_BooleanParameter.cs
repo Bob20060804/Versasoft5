@@ -4,6 +4,10 @@ namespace Ersa.Platform.Common.Model
 {
 	public class EDC_BooleanParameter : EDC_PrimitivParameter
 	{
+        /// <summary>
+        /// Value
+        /// 实际值
+        /// </summary>
 		public override object PRO_objValue
 		{
 			get
@@ -21,6 +25,10 @@ namespace Ersa.Platform.Common.Model
 			}
 		}
 
+        /// <summary>
+        /// 显示值
+        /// Display Value
+        /// </summary>
 		public override object PRO_objAnzeigeWert
 		{
 			get
@@ -34,6 +42,10 @@ namespace Ersa.Platform.Common.Model
 			}
 		}
 
+        /// <summary>
+        /// 是否存在改变
+        /// Has Change
+        /// </summary>
 		public override bool PRO_blnHatAenderung => PRO_blnWert != PRO_blnAnzeigeWert;
 
 		public bool PRO_blnWert

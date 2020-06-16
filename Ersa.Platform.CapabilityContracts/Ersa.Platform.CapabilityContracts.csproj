@@ -30,7 +30,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ersa.Platform.Common.Model">
-      <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.Model.dll</HintPath>
+      <HintPath>..\Ersa.Platform.Common.Model\obj\Debug\Ersa.Platform.Common.Model.dll</HintPath>
     </Reference>
     <Reference Include="Ersa.Global.Mvvm">
       <HintPath>E:\Work\Project\上海库尔特\展厅软件备份\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Mvvm.dll</HintPath>

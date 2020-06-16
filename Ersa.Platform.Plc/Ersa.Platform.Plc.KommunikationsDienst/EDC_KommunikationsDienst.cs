@@ -20,10 +20,20 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
 		private static readonly SemaphoreSlim m_fdcSemaphore = new SemaphoreSlim(1);
 
-		private readonly IDictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>> m_dicLeseOperationen;
-
-		private readonly IDictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>> m_dicSchreibeOperationen;
-
+        /// <summary>
+        /// 读操作
+        /// Reading operations
+        /// </summary>
+		private readonly Dictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>> m_dicLeseOperationen;
+        /// <summary>
+        /// 写操作
+        /// Writing operations
+        /// </summary>
+		private readonly Dictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>> m_dicSchreibeOperationen;
+        /// <summary>
+        /// 事件描述
+        /// EventHandle Subscriptions
+        /// </summary>
 		private readonly IDictionary<EDC_PrimitivParameter, IDisposable> m_dicEventHandlerSubscriptions;
 
 		private readonly EDC_ParameterLeseStrategie m_edcLeseStrategie;
@@ -39,12 +49,16 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		private readonly INF_Logger m_edcLogger;
 
         /// <summary>
-        /// 连接 锁
+        /// Lock Connection 
         /// </summary>
 		private readonly object m_objVerbindungLock = new object();
-
+        /// <summary>
+        /// Lock Reading 
+        /// </summary>
 		private readonly object m_objLeseLock = new object();
-
+        /// <summary>
+        /// Lock Write 
+        /// </summary>
 		private readonly object m_objSchreibeLock = new object();
 
 		private readonly Dictionary<string, IEnumerable<EDC_PrimitivParameter>> m_dicGruppenParameter = new Dictionary<string, IEnumerable<EDC_PrimitivParameter>>();
@@ -76,6 +90,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			m_edcSchreibeStrategie = i_edcSchreibeStrategie;
 			m_edcSpsProvider = i_edcSpsProvider;
 			m_edcLogger = i_edcLogger;
+
 			m_dicLeseOperationen = new Dictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>>(new EDC_PrimitivParameterEqualityComparer());
 			m_dicSchreibeOperationen = new Dictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>>(new EDC_PrimitivParameterEqualityComparer());
 			m_dicEventHandlerSubscriptions = new Dictionary<EDC_PrimitivParameter, IDisposable>();
@@ -127,8 +142,13 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// Read Value
+        /// </summary>
+        /// <param name="i_edcParameter"></param>
 		public void SUB_WertLesen(EDC_PrimitivParameter i_edcParameter)
 		{
+            // 建立连接
 			if (FUN_blnIstVerbindungAufgebaut())
 			{
 				try
@@ -154,9 +174,15 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// Read Value Async
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcCancellationToken"></param>
+        /// <returns></returns>
 		public Task FUN_fdcWerteLesenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
 		{
-			return Task.Run(delegate
+			return Task.Run(()=>
 			{
 				foreach (EDC_PrimitivParameter item in i_lstPrimitivParameter)
 				{
@@ -166,6 +192,10 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}, i_fdcCancellationToken);
 		}
 
+        /// <summary>
+        /// Write Value
+        /// </summary>
+        /// <param name="i_edcParameter"></param>
 		public void SUB_WertSchreiben(EDC_PrimitivParameter i_edcParameter)
 		{
 			if (FUN_blnIstVerbindungAufgebaut() && PRO_delIstVisuAlsPrimaerAngemeldet.Value())
@@ -192,7 +222,12 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				}
 			}
 		}
-
+        /// <summary>
+        /// Write Value Async
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcCancellationToken"></param>
+        /// <returns></returns>
 		public Task FUN_fdcWerteSchreibenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
 		{
 			return Task.Run(delegate
@@ -321,6 +356,13 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}, i_fdcToken);
 		}
 
+        /// <summary>
+        /// BR PLC 注销事件
+        /// sps envent handle Deregister
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		public Task FUN_fdcSPSEventHandlerDeRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcToken)
 		{
 			return Task.Run(delegate
@@ -541,7 +583,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		private T FUN_objParameterBehandlung<T>(EDC_PrimitivParameter i_edcParameter, INF_ParameterBehandlungsStrategie<T> i_edcStrategie)
 		{
 			string a = (i_edcParameter.PROa_objAdresse.Length != 1) ? i_edcParameter.PROa_objAdresse[1].ToString() : i_edcParameter.PROa_objAdresse[0].ToString();
-			if (!(a == "enmAktuelleZeit"))
+			if (a != "enmAktuelleZeit")
 			{
 				if (a == "enmSollZeit")
 				{
@@ -583,6 +625,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
         /// <summary>
         /// 建立连接
+        /// Connection is established
         /// </summary>
         /// <returns></returns>
 		private bool FUN_blnIstVerbindungAufgebaut()
@@ -593,9 +636,11 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				return false;
 			}
 
+            // 连接锁
 			lock (m_objVerbindungLock)
 			{
-				return !m_blnIstVerbindungGeloest;
+                // 解决连接
+                return !m_blnIstVerbindungGeloest;
 			}
 		}
 

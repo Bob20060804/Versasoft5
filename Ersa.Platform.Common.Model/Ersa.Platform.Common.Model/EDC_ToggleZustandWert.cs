@@ -3,6 +3,10 @@ using System.ComponentModel;
 
 namespace Ersa.Platform.Common.Model
 {
+    /// <summary>
+    /// �л�״ֵ̬
+    /// Toggle state value
+    /// </summary>
 	public class EDC_ToggleZustandWert : BindableBase
 	{
 		private bool m_blnToggleQuittAenderung;

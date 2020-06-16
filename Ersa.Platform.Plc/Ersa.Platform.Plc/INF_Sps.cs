@@ -34,6 +34,12 @@ namespace Ersa.Platform.Plc
 		ushort FUN_u16WertLesen(string i_strVarName);
 		byte FUN_bytWertLesen(string i_strVarName);
 		bool FUN_blnWertLesen(string i_strVarName);
+
+        /// <summary>
+        /// Write value
+        /// </summary>
+        /// <param name="i_strVarName"></param>
+        /// <param name="i_strWert"></param>
 		void SUB_WertSchreiben(string i_strVarName, string i_strWert);
 
         /// <summary>
@@ -64,13 +70,13 @@ namespace Ersa.Platform.Plc
 		Task FUN_fdcVariablenAbmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken);
 
         /// <summary>
-        /// 
+        /// 组事件注册
         /// Activate event group
         /// </summary>
 		void SUB_EventGruppeAktivieren();
 
         /// <summary>
-        /// 
+        /// 组事件注销
         /// Deactivate event group
         /// </summary>
 		void SUB_EventGruppeDeaktivieren();
