@@ -14,7 +14,11 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 	[Export]
 	public class EDC_ParameterLeseStrategie : INF_ParameterBehandlungsStrategie<Action<EDC_PrimitivParameter>>
 	{
-		private readonly Lazy<INF_AdressenZusammenSetzenCapability> m_edcAdressenZusammensetzerCapability;
+        /// <summary>
+        /// 编辑地址接口
+        /// Addresses Composing Capability
+        /// </summary>
+        private readonly Lazy<INF_AdressenZusammenSetzenCapability> m_edcAdressenZusammensetzerCapability;
 
 		private readonly EDC_AktionenFuerParameterTypen m_blnAktionenFuerParameterTypen;
 
@@ -25,13 +29,22 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			m_blnAktionenFuerParameterTypen = i_blnAktionenFuerParameterTypen;
 		}
 
-		public Action<EDC_PrimitivParameter> FUN_objBehandleAktuelleZeit(EDC_PrimitivParameter i_edcParameter)
+        /// <summary>
+        /// 处理当前时间
+        /// Be handle current time
+        /// </summary>
+        /// <param name="i_edcParameter"></param>
+        /// <returns></returns>
+        public Action<EDC_PrimitivParameter> FUN_objBehandleAktuelleZeit(EDC_PrimitivParameter i_edcParameter)
 		{
 			m_blnAktionenFuerParameterTypen.PRO_dicLeseAktionen.TryGetValue(ENUM_SpsTyp.enmInt32, out Func<string, object> delM1Aktion);
+
 			if (delM1Aktion == null)
 			{
-				throw new InvalidOperationException($"Keine Lese-Methode fuer den Typ {ENUM_SpsTyp.enmInt32} konnte gefunden werden!");
+                // 找不到类型为{ENUM_SpsTyp.enmInt32}的读取方法
+                throw new InvalidOperationException($"Keine Lese-Methode fuer den Typ {ENUM_SpsTyp.enmInt32} konnte gefunden werden!");
 			}
+
 			List<string> lstAdressen = m_edcAdressenZusammensetzerCapability.Value.FUN_enuBehandleSollZeit(i_edcParameter).ToList();
 			return delegate(EDC_PrimitivParameter i_edcParam)
 			{
@@ -45,21 +58,36 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			};
 		}
 
+        /// <summary>
+        /// 处理目标时间
+        /// Be handle target time
+        /// </summary>
+        /// <param name="i_edcParameter"></param>
+        /// <returns></returns>
 		public Action<EDC_PrimitivParameter> FUN_objBehandleSollZeit(EDC_PrimitivParameter i_edcParameter)
 		{
-			return delegate
-			{
-			};
+            return delegate { };
 		}
 
+        /// <summary>
+        /// 处理默认
+        /// Be Handle default
+        /// </summary>
+        /// <param name="i_edcParameter"></param>
+        /// <returns></returns>
 		public Action<EDC_PrimitivParameter> FUN_objBehandleDefault(EDC_PrimitivParameter i_edcParameter)
 		{
+            // 获得PLC实际地址
 			string strPhysischeAdresse = m_edcAdressenZusammensetzerCapability.Value.FUN_strErstellePhysischeAdresse(i_edcParameter);
+
 			ENUM_SpsTyp eNUM_SpsTyp = strPhysischeAdresse.FUN_enmErmittelParameterTyp();
 			m_blnAktionenFuerParameterTypen.PRO_dicLeseAktionen.TryGetValue(eNUM_SpsTyp, out Func<string, object> delM1Aktion);
+
+            // 按照不同的数据类型, 获取值
 			if (delM1Aktion == null)
 			{
-				throw new InvalidOperationException($"Keine Lese-Methode fuer den Typ {eNUM_SpsTyp} konnte gefunden werden!");
+                // 找不到{eNUM_SpsTyp}类型的读取方法
+                throw new InvalidOperationException($"Keine Lese-Methode fuer den Typ {eNUM_SpsTyp} konnte gefunden werden!");
 			}
 			float sngFaktor = EDC_KommunikationsHelfer.FUN_sngErmittelFaktor(i_edcParameter);
 			if (i_edcParameter is EDC_IntegerParameter)

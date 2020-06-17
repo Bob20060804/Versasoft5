@@ -8,6 +8,10 @@ using System.ComponentModel.Composition;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// µØÖ·×¢²á²ßÂÔ
+    /// address registration strategy
+    /// </summary>
 	[Export]
 	public class EDC_AdressRegistrierungsStrategie : INF_ParameterBehandlungsStrategie<IEnumerable<string>>
 	{

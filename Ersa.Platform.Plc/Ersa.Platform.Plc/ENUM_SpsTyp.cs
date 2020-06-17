@@ -1,6 +1,7 @@
 namespace Ersa.Platform.Plc
 {
     /// <summary>
+    /// 数据格式
     /// sps Type
     /// </summary>
 	public enum ENUM_SpsTyp

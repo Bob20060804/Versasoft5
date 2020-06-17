@@ -6,6 +6,9 @@ namespace Ersa.Platform.Plc
 {
 	public class EDC_PlcHelper
 	{
+        /// <summary>
+        /// number
+        /// </summary>
 		private const int mC_i32Anzahl = 1000;
 
 		private int m_i32Eventcounter;

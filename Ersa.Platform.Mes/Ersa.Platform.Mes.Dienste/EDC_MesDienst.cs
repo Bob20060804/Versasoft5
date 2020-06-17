@@ -31,7 +31,7 @@ using System.Windows.Threading;
 namespace Ersa.Platform.Mes.Dienste
 {
     /// <summary>
-    /// MES service
+    /// MES Service
     /// </summary>
 	[Export(typeof(INF_MesDienst))]
 	internal class EDC_MesDienst : INF_MesDienst, INF_MeldungProzessor
@@ -239,6 +239,11 @@ namespace Ersa.Platform.Mes.Dienste
 			}
 		}
 
+        /// <summary>
+        /// 取消初始化 异步
+        /// deinitialize
+        /// </summary>
+        /// <returns></returns>
 		public async Task FUN_fdcDeinitialisiereAsync()
 		{
 			try
@@ -352,6 +357,13 @@ namespace Ersa.Platform.Mes.Dienste
 			}
 		}
 
+        /// <summary>
+        /// 调用方法
+        /// Call function
+        /// </summary>
+        /// <param name="i_enuFunktion"></param>
+        /// <param name="i_edcMaschinenDaten"></param>
+        /// <returns></returns>
 		public async Task<EDC_MesKommunikationsRueckgabe> FUN_fdcFunktionAufrufenAsync(ENUM_MesFunktionen i_enuFunktion, EDC_MesMaschinenDaten i_edcMaschinenDaten)
 		{
 			string strFunktionKey = EDC_EnumBasisHelfer.FUN_strEnumWertBeschreibungErmitteln(i_enuFunktion).Remove(0, 2);
@@ -369,19 +381,19 @@ namespace Ersa.Platform.Mes.Dienste
 					await FUN_fdcExterneMeldungHinzufuegenAsync(Convert.ToInt32(strFunktionKey), 12161, fdcArgumentException.ToString(), null, i_blnEinlaufSperreAktiv: true);
 					return new EDC_MesKommunikationsRueckgabe().FUN_edcRueckgabeFehlerhaft(12161, fdcArgumentException.Message, fdcArgumentException.StackTrace);
 				}
-				if (!(await m_edcKonfigurationsManager.FUN_fdcIstMesAktivAsync().ConfigureAwait(continueOnCapturedContext: false)))
+				if (!(await m_edcKonfigurationsManager.FUN_fdcIstMesAktivAsync().ConfigureAwait(false)))
 				{
 					SUB_LogEintragSchreiben("Function NOT called: ", edcRueckgabe, i_edcMaschinenDaten, "FUN_fdcFunktionAufrufenAsync");
 					await FUN_fdcExterneMeldungHinzufuegenAsync(Convert.ToInt32(strFunktionKey), 12155, string.Empty, null, i_blnEinlaufSperreAktiv: true);
 					return new EDC_MesKommunikationsRueckgabe().FUN_edcRueckgabe(ENUM_MesKommunikationsStatus.MesDeaktiviert, 12155);
 				}
-				if (!(await m_edcKonfigurationsManager.FUN_fdcIstMesKonfiguriertAsync().ConfigureAwait(continueOnCapturedContext: false)))
+				if (!(await m_edcKonfigurationsManager.FUN_fdcIstMesKonfiguriertAsync().ConfigureAwait(false)))
 				{
 					SUB_LogEintragSchreiben("Function NOT called: ", edcRueckgabe, i_edcMaschinenDaten, "FUN_fdcFunktionAufrufenAsync");
 					await FUN_fdcExterneMeldungHinzufuegenAsync(Convert.ToInt32(strFunktionKey), 12156, string.Empty, null, i_blnEinlaufSperreAktiv: true);
 					return new EDC_MesKommunikationsRueckgabe().FUN_edcRueckgabe(ENUM_MesKommunikationsStatus.MesNichtKonfiguriert, 12156);
 				}
-				if (!(await m_edcKonfigurationsManager.FUN_fdcHoleMesKonfigurationAsync().ConfigureAwait(continueOnCapturedContext: false))[i_enuFunktion].PRO_blnIstAktiv)
+				if (!(await m_edcKonfigurationsManager.FUN_fdcHoleMesKonfigurationAsync().ConfigureAwait(false))[i_enuFunktion].PRO_blnIstAktiv)
 				{
 					SUB_LogEintragSchreiben("Function NOT called: ", edcRueckgabe, i_edcMaschinenDaten, "FUN_fdcFunktionAufrufenAsync");
 					await FUN_fdcExterneMeldungHinzufuegenAsync(Convert.ToInt32(strFunktionKey), 12157, string.Empty, null, i_blnEinlaufSperreAktiv: true);

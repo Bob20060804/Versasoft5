@@ -20,6 +20,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		{
 			if (EDC_KommunikationsHelfer.PRO_strSpsTyp != "M1Com" && EDC_KommunikationsHelfer.PRO_strSpsTyp != "PviServices")
 			{
+                // ÎÞÐ§Öµ
 				throw new InvalidDataException("Invalid value: EDC_KommunikationsHelfer.PRO_strSpsTyp=#" + EDC_KommunikationsHelfer.PRO_strSpsTyp + "#" + "\n expect #M1Com#" + "\n or     #PviServices#");
 			}
 			return PRO_fdcSpsProvider.First((Lazy<INF_Sps, INF_SpsMetadaten> i_fdcProvider) => i_fdcProvider.Metadata.PRO_strSpsTyp == EDC_KommunikationsHelfer.PRO_strSpsTyp).Value;

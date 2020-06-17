@@ -13,10 +13,24 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// Communication Service
+    /// </summary>
 	[Export]
 	public class EDC_KommunikationsDienst : EDC_DisposableObject, INF_KommunikationsDienst, IDisposable
 	{
-		private const int mC_i32LockTimeout = 60000;
+        /// <summary>
+        /// SPS Provider
+        /// </summary>
+        private readonly INF_SpsProvider m_edcSpsProvider;
+
+        private INF_Sps m_edcSpsService;
+        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
+
+
+        private readonly INF_Logger m_edcLogger;
+
+        private const int mC_i32LockTimeout = 60000;
 
 		private static readonly SemaphoreSlim m_fdcSemaphore = new SemaphoreSlim(1);
 
@@ -36,6 +50,10 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// </summary>
 		private readonly IDictionary<EDC_PrimitivParameter, IDisposable> m_dicEventHandlerSubscriptions;
 
+        /// <summary>
+        /// 变量读取策略
+        /// parameter read strategy
+        /// </summary>
 		private readonly EDC_ParameterLeseStrategie m_edcLeseStrategie;
 
 		private readonly EDC_AdressRegistrierungsStrategie m_edcAdressRegistrierungsStrategie;
@@ -44,9 +62,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
 		private readonly EDC_ParameterSchreibeStrategie m_edcSchreibeStrategie;
 
-		private readonly INF_SpsProvider m_edcSpsProvider;
-
-		private readonly INF_Logger m_edcLogger;
+		
 
         /// <summary>
         /// Lock Connection 
@@ -68,9 +84,6 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// 是否解决连接
         /// </summary>
 		private bool m_blnIstVerbindungGeloest;
-
-        private INF_Sps m_edcSpsService;
-        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
 
 
 

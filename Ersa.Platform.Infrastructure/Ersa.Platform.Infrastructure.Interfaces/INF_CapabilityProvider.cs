@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Infrastructure.Interfaces
 {
+    /// <summary>
+    /// 能力提供者
+    /// Capability Provider
+    /// </summary>
 	public interface INF_CapabilityProvider
 	{
 		void SUB_CapabilityRegistrieren<T>(Func<object> i_delCapabilityErmittler);

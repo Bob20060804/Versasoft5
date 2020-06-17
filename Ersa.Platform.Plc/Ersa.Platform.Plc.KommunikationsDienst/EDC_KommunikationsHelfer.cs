@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// Comnunication Helper
+    /// </summary>
 	public static class EDC_KommunikationsHelfer
 	{
 		private static readonly IDictionary<ENUM_ParameterTypen, float> ms_dicFaktoren = new Dictionary<ENUM_ParameterTypen, float>
