@@ -10,6 +10,10 @@ using System.Linq;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// 参数写入策略
+    /// parameter Write strategy
+    /// </summary>
 	[Export]
 	public class EDC_ParameterSchreibeStrategie : INF_ParameterBehandlungsStrategie<Action<EDC_PrimitivParameter>>
 	{

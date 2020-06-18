@@ -51,15 +51,21 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		private readonly IDictionary<EDC_PrimitivParameter, IDisposable> m_dicEventHandlerSubscriptions;
 
         /// <summary>
-        /// 变量读取策略
+        /// 变量读策略
         /// parameter read strategy
         /// </summary>
 		private readonly EDC_ParameterLeseStrategie m_edcLeseStrategie;
-
+        /// <summary>
+        /// 注册地址策略
+        /// </summary>
 		private readonly EDC_AdressRegistrierungsStrategie m_edcAdressRegistrierungsStrategie;
-
+        /// <summary>
+        /// 注册事件策略
+        /// </summary>
 		private readonly EDC_EventHandlerRegistrierungsStrategie m_edcEvenHandlerRegStrategie;
-
+        /// <summary>
+        /// 参数写策略
+        /// </summary>
 		private readonly EDC_ParameterSchreibeStrategie m_edcSchreibeStrategie;
 
 		
@@ -273,7 +279,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 							throw new InvalidOperationException("Error registering variables. Another registration is in progress and the timeout expired.");
 						}
 						IEnumerable<string> i_lstVariablen = FUN_lstPhysischeAdressenHolen(lstPrimitivParameter, i_fdcCancellationToken);
-						await PRO_edcSpsService.FUN_fdcVariablenAnmeldenAsync(i_lstVariablen, i_fdcCancellationToken).ConfigureAwait(continueOnCapturedContext: true);
+						await PRO_edcSpsService.FUN_fdcVariablenAnmeldenAsync(i_lstVariablen, i_fdcCancellationToken).ConfigureAwait(true);
 					}
 					finally
 					{
@@ -422,14 +428,20 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+        /// <summary>
+        /// parameter image write
+        /// </summary>
+        /// <param name="i_dicAbbild"></param>
 		public void SUB_ParameterAbbildSchreiben(IEnumerable<KeyValuePair<string, object>> i_dicAbbild)
 		{
+            // 建立连接
 			if (FUN_blnIstVerbindungAufgebaut())
 			{
 				foreach (KeyValuePair<string, object> item in i_dicAbbild)
 				{
 					try
 					{
+                        // 写
 						PRO_edcSpsService.SUB_WertSchreiben(item.Key, item.Value.ToString());
 					}
 					catch (Exception i_fdcEx)

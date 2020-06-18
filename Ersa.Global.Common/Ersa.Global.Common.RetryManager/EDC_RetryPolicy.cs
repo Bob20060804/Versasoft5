@@ -95,7 +95,7 @@ namespace Ersa.Global.Common.RetryManager
 				{
 					sttDelay = TimeSpan.Zero;
 				}
-				SUB_OnRetrying(num, ex, sttDelay);
+				// SUB_OnRetrying(num, ex, sttDelay);
 				if (num > 1 || !PRO_edcRetryStrategy.PRO_blnSchnellerErsterRetry)
 				{
 					EDC_TaskHelfer.SUB_RunSync(() => Task.Delay(sttDelay));

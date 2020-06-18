@@ -255,14 +255,6 @@
       <Project>{f5239c3c-e422-4ffb-ab5d-b6894682f503}</Project>
       <Name>Ersa.Platform.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Prism.Wpf\Prism.Wpf.csproj">
-      <Project>{cc56f24a-f8cd-4890-8072-7e369c4670d4}</Project>
-      <Name>Prism.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Prism\Prism.csproj">
-      <Project>{ef663eb4-284d-47ab-830c-f1b4683b8bb9}</Project>
-      <Name>Prism</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,6 +11,10 @@ using System.Linq;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// 参数读取策略
+    /// parameter read strategy
+    /// </summary>
 	[Export]
 	public class EDC_ParameterLeseStrategie : INF_ParameterBehandlungsStrategie<Action<EDC_PrimitivParameter>>
 	{

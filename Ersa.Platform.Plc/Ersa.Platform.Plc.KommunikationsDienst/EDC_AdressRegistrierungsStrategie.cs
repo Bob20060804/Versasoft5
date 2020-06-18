@@ -9,7 +9,7 @@ using System.ComponentModel.Composition;
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
     /// <summary>
-    /// 地址注册策略
+    /// 注册地址 策略
     /// address registration strategy
     /// </summary>
 	[Export]

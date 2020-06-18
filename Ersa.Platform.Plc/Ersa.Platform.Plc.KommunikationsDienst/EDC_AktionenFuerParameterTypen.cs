@@ -4,14 +4,19 @@ using System.ComponentModel.Composition;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// 参数类型行为
+    /// Actions for parameter types
+    /// </summary>
 	[Export]
 	public class EDC_AktionenFuerParameterTypen
 	{
 		private readonly INF_SpsProvider m_edcSpsProvider;
 
 		private INF_Sps m_edcSpsService;
+        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
 
-		public IDictionary<ENUM_SpsTyp, Func<string, object>> PRO_dicLeseAktionen
+        public IDictionary<ENUM_SpsTyp, Func<string, object>> PRO_dicLeseAktionen
 		{
 			get;
 			set;
@@ -23,8 +28,6 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			set;
 		}
 
-		private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
-
 		[ImportingConstructor]
 		public EDC_AktionenFuerParameterTypen(INF_SpsProvider i_delSpsProvider)
 		{
@@ -33,6 +36,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			SUB_InitializiereSchreibeAktionen();
 		}
 
+        /// <summary>
+        /// Initialize Read actions
+        /// </summary>
 		private void SUB_InitializiereLeseAktionen()
 		{
 			PRO_dicLeseAktionen = new Dictionary<ENUM_SpsTyp, Func<string, object>>

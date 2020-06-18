@@ -6,7 +6,9 @@ using System.Linq;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
-	[Export(typeof(INF_SpsProvider))]
+    /// <summary>
+    /// SpsÃ·π©’ﬂ
+    /// </summary>
 	public class EDC_SpsProvider : INF_SpsProvider
 	{
 		[ImportMany]

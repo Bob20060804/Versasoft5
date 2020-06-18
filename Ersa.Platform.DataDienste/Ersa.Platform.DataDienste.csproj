@@ -149,10 +149,6 @@
       <Project>{d2368bab-4826-4b8e-b67a-577958848676}</Project>
       <Name>Ersa.Platform.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Prism\Prism.csproj">
-      <Project>{ef663eb4-284d-47ab-830c-f1b4683b8bb9}</Project>
-      <Name>Prism</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

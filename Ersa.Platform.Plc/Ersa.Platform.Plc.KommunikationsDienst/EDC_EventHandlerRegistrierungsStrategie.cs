@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
+    /// <summary>
+    /// ×¢²áÊÂ¼ş ²ßÂÔ
+    /// </summary>
 	[Export]
 	public class EDC_EventHandlerRegistrierungsStrategie : INF_ParameterBehandlungsStrategie<string>
 	{
