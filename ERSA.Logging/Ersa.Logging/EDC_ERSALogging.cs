@@ -1,4 +1,3 @@
-
 using Ersa.Logging.My;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -188,6 +187,11 @@ namespace Ersa.Logging
 			}
 		}
 
+		/// <summary>
+		/// 初始化
+		/// </summary>
+		/// <param name="i_blnProgrammStart"></param>
+		/// <returns></returns>
 		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
 		public bool FUN_blnInit(bool i_blnProgrammStart)
 		{
@@ -526,6 +530,7 @@ namespace Ersa.Logging
 		}
 
         /// <summary>
+		/// 备份
         /// backup
         /// </summary>
 		public void SUB_LoggingBeenden()
@@ -550,6 +555,7 @@ namespace Ersa.Logging
 		}
 
         /// <summary>
+		/// 检查日志等级
         /// Check log level
         /// </summary>
         /// <param name="i_enmLoggingLevelAngefragt"></param>
@@ -611,18 +617,18 @@ namespace Ersa.Logging
 			}
 		}
 
-        /// <summary>
-        /// error log
-        /// </summary>
-        /// <param name="r_objErrorProvider"></param>
-        /// <param name="r_ctlContolBeliebig"></param>
-        /// <param name="i_blnMessageBoxAnzeigen"></param>
-        /// <param name="i_strLoggingNachricht"></param>
-        /// <param name="r_objLogging"></param>
-        /// <param name="r_enmLoggingLevel"></param>
-        /// <param name="i_strNameNamespaceKlasse"></param>
-        /// <param name="i_strNameMethode"></param>
-		public static void SUB_LoggingMitErrorProvider(ref ErrorProvider r_objErrorProvider, ref Control r_ctlContolBeliebig, bool i_blnMessageBoxAnzeigen = false, string i_strLoggingNachricht = null, ref EDC_ERSALogging r_objLogging = default(ref EDC_ERSALogging), ref ENUM_LoggingLevels r_enmLoggingLevel = 0uL, string i_strNameNamespaceKlasse = null, string i_strNameMethode = null)
+		/// <summary>
+		/// error log
+		/// </summary>
+		/// <param name="r_objErrorProvider"></param>
+		/// <param name="r_ctlContolBeliebig"></param>
+		/// <param name="i_blnMessageBoxAnzeigen"></param>
+		/// <param name="i_strLoggingNachricht"></param>
+		/// <param name="r_objLogging"></param>
+		/// <param name="r_enmLoggingLevel"></param>
+		/// <param name="i_strNameNamespaceKlasse"></param>
+		/// <param name="i_strNameMethode"></param>
+		public static void SUB_LoggingMitErrorProvider(ref ErrorProvider r_objErrorProvider, ref Control r_ctlContolBeliebig, ref EDC_ERSALogging r_objLogging, ref ENUM_LoggingLevels r_enmLoggingLevel, bool i_blnMessageBoxAnzeigen = false, string i_strLoggingNachricht = null, string i_strNameNamespaceKlasse = null, string i_strNameMethode = null)
 		{
 			try
 			{
