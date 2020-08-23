@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 /// </summary>
 namespace Ersa.Platform.Mes.Capabilities
 {
+	/// <summary>
+	/// MES消息生成器功能
+	/// </summary>
 	[Export(typeof(INF_MeldungProduzentCapability))]
 	[Export(typeof(INF_MeldungHinzufuegen))]
 	public class EDC_MesMeldungProduzentCapability : INF_MeldungProduzentCapability, INF_MeldungHinzufuegen

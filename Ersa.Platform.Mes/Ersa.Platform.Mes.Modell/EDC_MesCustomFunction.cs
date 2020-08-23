@@ -24,6 +24,12 @@ namespace Ersa.Platform.Mes.Modell
 			set;
 		}
 
+		/// <summary>
+		/// Mesº¯Êý²ÎÊý
+		/// Mes Function Argument
+		/// </summary>
+		/// <param name="i_strArgumentId"></param>
+		/// <returns></returns>
 		public EDC_MesFunctionArgument this[string i_strArgumentId]
 		{
 			get

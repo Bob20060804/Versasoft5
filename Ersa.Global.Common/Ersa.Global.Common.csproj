@@ -61,10 +61,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_AbfrageInformation.cs" />
-    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_FilterInformationen.cs" />
-    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_SpaltenInformation.cs" />
-    <Compile Include="Ersa.Global.Common.Data.Attributes\EDC_TabellenInformation.cs" />
+    <Compile Include="Data.Attributes\EDC_AbfrageInformation.cs" />
+    <Compile Include="Data.Attributes\EDC_FilterInformationen.cs" />
+    <Compile Include="Data.Attributes\EDC_SpaltenInformation.cs" />
+    <Compile Include="Data.Attributes\EDC_TabellenInformation.cs" />
     <Compile Include="Ersa.Global.Common.Data.Cad\ENUM_Blickrichtung.cs" />
     <Compile Include="Ersa.Global.Common.Data.Filter\EDC_FilterErstellungsHelfer.cs" />
     <Compile Include="Ersa.Global.Common.Data.Filter\ENUM_FilterOperatoren.cs" />
@@ -110,16 +110,16 @@
     <Compile Include="Ersa.Global.Common.RetryManager\EDC_TransientErrorCatchAllStrategy.cs" />
     <Compile Include="Ersa.Global.Common.RetryManager\EDC_TransientErrorIgnoreStrategy.cs" />
     <Compile Include="Ersa.Global.Common.RetryManager\INF_TransientErrorDetectionStrategy.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_BerechnungsKonstanten.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_BindableBase.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_Disposable.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_DisposableObject.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_Grouping.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_ListSequence.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_SmartObservableCollection.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_Utility.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_ViewModelBasis.cs" />
-    <Compile Include="Ersa.Global.Common\EDC_ZeitMessung.cs" />
+    <Compile Include="EDC_BerechnungsKonstanten.cs" />
+    <Compile Include="EDC_BindableBase.cs" />
+    <Compile Include="EDC_Disposable.cs" />
+    <Compile Include="EDC_DisposableObject.cs" />
+    <Compile Include="EDC_Grouping.cs" />
+    <Compile Include="EDC_ListSequence.cs" />
+    <Compile Include="EDC_SmartObservableCollection.cs" />
+    <Compile Include="EDC_Utility.cs" />
+    <Compile Include="EDC_ViewModelBasis.cs" />
+    <Compile Include="EDC_ZeitMessung.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

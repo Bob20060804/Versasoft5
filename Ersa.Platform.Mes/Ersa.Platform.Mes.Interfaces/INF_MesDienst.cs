@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Mes.Interfaces
 {
+    /// <summary>
+    /// MES Service ½Ó¿Ú
+    /// </summary>
 	public interface INF_MesDienst : INF_MeldungProzessor
 	{
         /// <summary>

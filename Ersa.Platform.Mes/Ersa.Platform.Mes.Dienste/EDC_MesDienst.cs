@@ -31,6 +31,7 @@ using System.Windows.Threading;
 namespace Ersa.Platform.Mes.Dienste
 {
     /// <summary>
+	/// MES 服务
     /// MES Service
     /// </summary>
 	[Export(typeof(INF_MesDienst))]
@@ -121,6 +122,11 @@ namespace Ersa.Platform.Mes.Dienste
 			});
 		}
 
+		/// <summary>
+		/// 确认消息 异步
+		/// </summary>
+		/// <param name="i_edcMessage"></param>
+		/// <returns></returns>
 		public async Task<bool> FUN_fdcAcknowledgeMessageAsync(INF_Meldung i_edcMessage)
 		{
 			EDC_EnumMember eDC_EnumMember = EDC_EnumHelfer.FUN_enmBeschreibungenErmitteln(typeof(ENUM_MesFunktionen)).Single((EDC_EnumMember i_edcEnumMember) => i_edcEnumMember.PRO_i32Value == 14);
@@ -166,6 +172,10 @@ namespace Ersa.Platform.Mes.Dienste
 			return Task.FromResult(result: true);
 		}
 
+		/// <summary>
+		/// Initialize
+		/// </summary>
+		/// <returns></returns>
 		public async Task<EDC_MesInitialisierungsRueckgabe> FUN_fdcInitialisiereAsync()
 		{
 			try

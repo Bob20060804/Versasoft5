@@ -100,6 +100,7 @@ namespace Ersa.Platform.Plc
 		Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGruppenName);
 
         /// <summary>
+        /// Õû¸öGroup¶ÁÈ¡
         /// Reading group Async
         /// </summary>
         /// <param name="i_strGruppenName"></param>

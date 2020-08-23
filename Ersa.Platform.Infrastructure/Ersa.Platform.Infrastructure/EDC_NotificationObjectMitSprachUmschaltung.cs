@@ -1,5 +1,3 @@
-using Ersa.Global.Common;
-using Ersa.Global.Common.Extensions;
 using Ersa.Global.Mvvm;
 using Ersa.Platform.Infrastructure.Events;
 using Ersa.Platform.Infrastructure.Prism;
@@ -10,7 +8,7 @@ using System.Linq;
 
 namespace Ersa.Platform.Infrastructure
 {
-	public abstract class EDC_NotificationObjectMitSprachUmschaltung : BindableBase
+    public abstract class EDC_NotificationObjectMitSprachUmschaltung : BindableBase
 	{
 		private const int mC_i32AnzahlBuckets = 100;
 

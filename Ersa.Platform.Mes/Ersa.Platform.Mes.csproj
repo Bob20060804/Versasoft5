@@ -107,6 +107,10 @@
       <Project>{6314c658-d02e-4b6b-8165-803a325b2d1b}</Project>
       <Name>Ersa.Global.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ersa.Global.Controls\Ersa.Global.Controls.csproj">
+      <Project>{563156c5-bf95-4d71-8051-aaafb1414541}</Project>
+      <Name>Ersa.Global.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ersa.Global.Dienste\Ersa.Global.Dienste.csproj">
       <Project>{fbca0d26-738a-412b-b7cb-31526e0bbba9}</Project>
       <Name>Ersa.Global.Dienste</Name>
@@ -142,6 +146,10 @@
     <ProjectReference Include="..\Ersa.Platform.Module\Ersa.Platform.Module.csproj">
       <Project>{537ac273-49a0-4850-8a1a-edd181220a31}</Project>
       <Name>Ersa.Platform.Module</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ersa.Platform.UI.Common\Ersa.Platform.UI.Common.csproj">
+      <Project>{008E28BC-0F58-4CB3-890E-EFD48C21D5C8}</Project>
+      <Name>Ersa.Platform.UI.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

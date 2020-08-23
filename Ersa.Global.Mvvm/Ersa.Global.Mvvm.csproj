@@ -41,7 +41,7 @@
     <Compile Include="Ersa.Global.Mvvm.Commands\AsyncCommandBase.cs" />
     <Compile Include="Ersa.Global.Mvvm.Commands\IAsyncCommand.cs" />
     <Compile Include="Ersa.Global.Mvvm.Commands\NotifyTaskCompletion.cs" />
-    <Compile Include="Ersa.Global.Mvvm\BindableBase.cs" />
+    <Compile Include="BindableBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,11 +2,29 @@ namespace Ersa.Platform.Plc.Model
 {
 	public enum ENUM_MeldeOrt1
 	{
+		/// <summary>
+		/// 未定义
+		/// </summary>
 		enmMo1Undefiniert = 0,
+		/// <summary>
+		/// 服务
+		/// </summary>
 		enmMo1Bedienung = 1,
+		/// <summary>
+		/// 机器
+		/// </summary>
 		enmMo1Maschine = 2,
+		/// <summary>
+		/// 开关柜
+		/// </summary>
 		enmMo1Schaltschrank = 3,
+		/// <summary>
+		/// 外部系统
+		/// </summary>
 		enmMo1ExternesSystem = 4,
+		/// <summary>
+		/// 备用5
+		/// </summary>
 		enmMo1Reserve5 = 5,
 		enmMo1Reserve6 = 6,
 		enmMo1Reserve7 = 7,
