@@ -14,9 +14,10 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Mes.Dienste
 {
-    /// <summary>
-    /// Abstract base communication service 
-    /// </summary>
+	/// <summary>
+	/// Mes基础通讯服务
+	/// Mes communication service basis
+	/// </summary>
 	public abstract class EDC_MesKommunikationsDienstBasis
 	{
         #region parameter
@@ -104,6 +105,13 @@ namespace Ersa.Platform.Mes.Dienste
 			PRO_enmMesTyp = i_enmMesTyp;
 		}
 
+		/// <summary>
+		/// 异步获取服务设置
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="i_enmMesTyp"></param>
+		/// <param name="i_edcDefaultEinstellungen"></param>
+		/// <returns></returns>
 		public async Task<EDC_MesTypEinstellung> FUN_fdcHoleDienstEinstellungenAsync<T>(ENUM_MesTyp i_enmMesTyp, EDC_MesTypEinstellung i_edcDefaultEinstellungen)
 		{
 			if (PRO_edcEinstellungen != null)
@@ -120,6 +128,13 @@ namespace Ersa.Platform.Mes.Dienste
 			return PRO_edcEinstellungen;
 		}
 
+		/// <summary>
+		/// 设置服务设置异步
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="i_enmMesTyp"></param>
+		/// <param name="i_edcEinstellungen"></param>
+		/// <returns></returns>
 		public async Task FUN_fdcSetzeDienstEinstellungenAsync<T>(ENUM_MesTyp i_enmMesTyp, EDC_MesTypEinstellung i_edcEinstellungen)
 		{
 			if (i_edcEinstellungen is T)
@@ -130,13 +145,21 @@ namespace Ersa.Platform.Mes.Dienste
 			}
 		}
 
+		/// <summary>
+		/// 发消息
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="i_enuFunktion"></param>
+		/// <param name="i_edcMaschinenDaten"></param>
+		/// <param name="i_edcDefaultEinstellungen"></param>
+		/// <returns></returns>
 		protected virtual async Task<EDC_MesKommunikationsRueckgabe> FUN_fdcNachrichtSendenAsync<T>(ENUM_MesFunktionen i_enuFunktion, EDC_MesMaschinenDaten i_edcMaschinenDaten, EDC_MesTypEinstellung i_edcDefaultEinstellungen)
 		{
 			EDC_MesTypEinstellung i_edcEinstellung = await FUN_fdcHoleDienstEinstellungenAsync<T>(ENUM_MesTyp.Zvei, i_edcDefaultEinstellungen).ConfigureAwait(continueOnCapturedContext: false);
 			return await PRO_enuFunktionen.FirstOrDefault((INF_MesFunktion i_edcFunktion) => i_edcFunktion.PRO_enuMesFunktion.Equals(i_enuFunktion)).FUN_fdcAusfuehrenAsync(i_edcEinstellung, i_edcMaschinenDaten).ConfigureAwait(continueOnCapturedContext: false);
 		}
 
-        // 写入日志
+		///写入日志 
 		protected void SUB_LogEintragSchreiben(string i_strEintrag, [CallerMemberName] string i_strMethodenName = "")
 		{
 			if ((m_edcLogger.PRO_enmLoggingLevel & ENUM_LogLevel.Traceability) != ENUM_LogLevel.Kein)

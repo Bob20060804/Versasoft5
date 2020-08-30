@@ -8,6 +8,10 @@ using System.IO;
 
 namespace Ersa.Platform.Mes.Dienste
 {
+	/// <summary>
+	/// Mes设置导入导出服务
+	/// Mes Settings import export service
+	/// </summary>
 	[Export(typeof(INF_MesEinstellungenImportExportDienst))]
 	public class EDC_MesEinstellungenImportExportDienst : INF_MesEinstellungenImportExportDienst
 	{

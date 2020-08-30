@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.CapabilityContracts.Meldungen
 {
+	/// <summary>
+	/// 消息生成器功能接口
+	/// </summary>
 	public interface INF_MeldungProduzentCapability
 	{
 		/// <summary>

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{ADA117A4-F3AA-4DBC-AB76-5F3E39CA09A3}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>Ersa.Platform.Dienste</AssemblyName>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Dienste">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Dienste.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Infrastructure">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Logging">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.DataContracts">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.CapabilityContracts">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.CapabilityContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Global.Common">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Global.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.Common.Model">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.Common.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.DataDienste">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.DataDienste.dll</HintPath>
+    </Reference>
+    <Reference Include="Ersa.Platform.IoT">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Ersa.Platform.IoT.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel">
+      <HintPath>E:\Work\Project\上海库尔特\Public\Visu_5_选择焊\ERSAsoft5_Selectiv_5.10.41.0\Microsoft.IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung.Interfaces\INF_AuthentifizierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung.Interfaces\INF_AuthentifizierungsProvider.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung.Interfaces\INF_AutorisierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung.Interfaces\INF_BenutzerInfoProvider.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_AuthentifizierungProviderTypen.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_AuthentifizierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_AuthentifizierungsKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_AuthentifizierungsProviderExportMetadaten.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_AuthentifizierungsProviderHelfer.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_AutorisierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_ClaimKonstanten.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_DefaultAuthentifizierungsProvider.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_LegacyAuthentifizierungsProvider.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_RechtBeschreibung.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\EDC_RechteGruppe.cs" />
+    <Compile Include="Ersa.Platform.Dienste.AuthentifizierungUndAutorisierung\INF_AuthentifizierungsProviderMetadaten.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Betriebsfall\EDC_BetriebsfallImportExportDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_AppSettingsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_BetriebsfallImportExportDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_HilfeDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_IntelloDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_IoTDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_MeldungsHilfeDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_TelemetrieDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Interfaces\INF_VisuSettingsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.IoT.Edge\EDC_IntelloDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.IoT.Edge\EDC_IoTDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.IoT.Edge\EDC_TelemetrieDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Helfer\EDC_SerialisierungsVersionsHelfer.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\EDC_LoetprogrammAnforderungsErgebnis.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\ENUM_LpAnforderungsErgebnis.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\ENUM_LpTransferModus.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\ENUM_LpTransferStrategie.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\INF_BaAenderungStrategie.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\INF_LoetprogrammAnpassungsStartegie.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\INF_LoetprogrammTransferDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\INF_LoetprogrammUebertragungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\INF_LpAnfoStrategie.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\INF_ProgrammInfoInterpreter.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Interfaces\INF_ProgrammInfoSerialisierer.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm.Transfer\EDC_LoetprogrammTransferDienstBasis.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm\EDC_ProgrammInfoInterpreter.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprogramm\EDC_ProgrammInfoSerialisierer.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll.Interfaces\INF_LoetprotokollSerialisierer.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll.Interfaces\INF_LoetprotokollSerialisierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\actionsType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\actionType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\additionalDataRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\additionalDataType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\additionalIdRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\additionalIdType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\additionalResultCodesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\channelDefinitionType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\channelType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\diagnosisPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_Konstanten.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_LoetprotokollJsonSerialisierer.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_LoetprotokollSerialisierungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_LoetprotokollZveiSerialisierer.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_LoetprotokollZveiUnitData.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_LoetprotokollZveiUnitDataMapper.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_ProtokollParameterNamenMapper.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\EDC_ProtokollParameterNamenMapperItem.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\equipmentPropertiesRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\equipmentPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\expressionType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\failedType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\handlingUnitType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\labelPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\labelPropertiesTypeLabelProperty.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\limitType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\materialAttributesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\materialLotType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\materialPropertiesRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\materialPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\materialType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\measuringDefinitionType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\measuringType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\nominalType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\operationPropertiesRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\operationPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\orderPropertiesRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\orderPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\packedMaterialType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\parameterRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\parameterType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\processingParametersRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\processingParametersType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\productionResourcesRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\productionResourcesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\propertiesRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\propertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\propertyRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\propertyType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\repairHintsType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\repairPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\resourceRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\resourceType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\sampleType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\subDiagnosisType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\subPositionsType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\subPositionType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\subRepairType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\subTestResultType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\subTestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\subUnitDataType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\testPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\unitDiagnosisType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\unitPropertiesRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\unitPropertiesType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\unitRepairType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\unitTestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\unitType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\usersType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\userType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\valueRequestType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Loetprotokoll\valueType.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Meldungen.Interfaces\INF_MeldungVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.Meldungen\EDC_MeldungVerwaltungsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste.ZyklischeMeldungen\EDC_ZyklischeMeldungVorlageCache.cs" />
+    <Compile Include="Ersa.Platform.Dienste.ZyklischeMeldungen\EDC_ZyklischeMeldungVorlageGruppe.cs" />
+    <Compile Include="Ersa.Platform.Dienste\EDC_AppSettingsDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste\EDC_HilfeDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste\EDC_MeldungsHilfeDienst.cs" />
+    <Compile Include="Ersa.Platform.Dienste\EDC_VisuSettingsDienst.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

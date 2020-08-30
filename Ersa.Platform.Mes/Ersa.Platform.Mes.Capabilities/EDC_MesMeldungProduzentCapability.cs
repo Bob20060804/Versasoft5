@@ -29,6 +29,9 @@ namespace Ersa.Platform.Mes.Capabilities
 
 		private readonly INF_LokalisierungsDienst m_edcLokalisierungsDienst;
 
+		/// <summary>
+		/// MES Service
+		/// </summary>
 		[Import(typeof(INF_MesDienst))]
 		public INF_MesDienst PRO_edcMesDienst
 		{
@@ -36,6 +39,9 @@ namespace Ersa.Platform.Mes.Capabilities
 			set;
 		}
 
+		/// <summary>
+		/// message administration service
+		/// </summary>
 		[Import(typeof(INF_MeldungVerwaltungsDienst))]
 		public INF_MeldungVerwaltungsDienst PRO_edcMeldungVerwaltungsDienst
 		{
@@ -43,8 +49,16 @@ namespace Ersa.Platform.Mes.Capabilities
 			set;
 		}
 
+		/// <summary>
+		/// 消息产生者
+		/// </summary>
 		public ENUM_MeldungProduzent PRO_enmMeldungProduzent => ENUM_MeldungProduzent.Mes;
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="i_edcJsonSerialisierungsDienst"></param>
+		/// <param name="i_edcLokalisierungsDienst"></param>
 		[ImportingConstructor]
 		public EDC_MesMeldungProduzentCapability(INF_JsonSerialisierungsDienst i_edcJsonSerialisierungsDienst, INF_LokalisierungsDienst i_edcLokalisierungsDienst)
 		{
@@ -52,6 +66,19 @@ namespace Ersa.Platform.Mes.Capabilities
 			m_edcLokalisierungsDienst = i_edcLokalisierungsDienst;
 		}
 
+		/// <summary>
+		/// 创建消息
+		/// </summary>
+		/// <param name="i_i32Meldungsnummer"></param>
+		/// <param name="i_strLokalisierungsKeyMesTyp"></param>
+		/// <param name="i_i32MeldungOrt3"></param>
+		/// <param name="i_edcPossibleactions"></param>
+		/// <param name="i_edcProcessactionsns"></param>
+		/// <param name="i_strDetails"></param>
+		/// <param name="i_strContext"></param>
+		/// <param name="i_blnDuplicateAllowed">是否允许重复</param>
+		/// <param name="i_enuAktion"></param>
+		/// <returns></returns>
 		public async Task SUB_CreateMessageAsync(int i_i32Meldungsnummer, string i_strLokalisierungsKeyMesTyp, int i_i32MeldungOrt3, IEnumerable<ENUM_MeldungAktionen> i_edcPossibleactions, IEnumerable<ENUM_ProzessAktionen> i_edcProcessactionsns, string i_strDetails, string i_strContext, bool i_blnDuplicateAllowed, ENUM_MeldungAktionen i_enuAktion)
 		{
 			EDC_Meldung eDC_Meldung = new EDC_Meldung
@@ -85,35 +112,47 @@ namespace Ersa.Platform.Mes.Capabilities
 			}
 		}
 
+		/// <summary>
+		/// 是否配置
+		/// </summary>
+		/// <returns></returns>
 		public bool FUN_blnIstKonfiguriert()
 		{
 			return true;
 		}
 
+		/// <summary>
+		/// 请求处理消息异步
+		/// </summary>
+		/// <param name="i_edcMeldung">Report</param>
+		/// <param name="i_enmAktion">可采取的行动(创造|确认...)</param>
+		/// <returns></returns>
 		public async Task FUN_fdcMeldungBehandelnAnfordernAsync(INF_Meldung i_edcMeldung, ENUM_MeldungAktionen i_enmAktion)
 		{
 			switch (i_enmAktion)
 			{
-			case ENUM_MeldungAktionen.Quittieren:
-				if (await PRO_edcMesDienst.FUN_fdcAcknowledgeMessageAsync(i_edcMeldung).ConfigureAwait(continueOnCapturedContext: true))
-				{
-					await PRO_edcMeldungVerwaltungsDienst.FUN_fdcMeldungenBehandelnAsync(new List<INF_Meldung>
+				case ENUM_MeldungAktionen.Quittieren:
+					// 需要确认
+					if (await PRO_edcMesDienst.FUN_fdcAcknowledgeMessageAsync(i_edcMeldung).ConfigureAwait(true))
+					{
+						await PRO_edcMeldungVerwaltungsDienst.FUN_fdcMeldungenBehandelnAsync(new List<INF_Meldung>
 					{
 						i_edcMeldung
-					}, ENUM_MeldungAktionen.Quittieren).ConfigureAwait(continueOnCapturedContext: true);
-				}
-				break;
-			case ENUM_MeldungAktionen.Zurueckstellen:
-				if (await PRO_edcMesDienst.FUN_fdcResetMessageAsync(i_edcMeldung).ConfigureAwait(continueOnCapturedContext: true))
-				{
-					await PRO_edcMeldungVerwaltungsDienst.FUN_fdcMeldungenBehandelnAsync(new List<INF_Meldung>
+					}, ENUM_MeldungAktionen.Quittieren).ConfigureAwait(true);
+					}
+					break;
+				case ENUM_MeldungAktionen.Zurueckstellen:
+					// 需要返回
+					if (await PRO_edcMesDienst.FUN_fdcResetMessageAsync(i_edcMeldung).ConfigureAwait(true))
+					{
+						await PRO_edcMeldungVerwaltungsDienst.FUN_fdcMeldungenBehandelnAsync(new List<INF_Meldung>
 					{
 						i_edcMeldung
-					}, ENUM_MeldungAktionen.Zurueckstellen).ConfigureAwait(continueOnCapturedContext: true);
-				}
-				break;
-			default:
-				throw new ArgumentOutOfRangeException("i_enmAktion", i_enmAktion, null);
+					}, ENUM_MeldungAktionen.Zurueckstellen).ConfigureAwait(true);
+					}
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("i_enmAktion", i_enmAktion, null);
 			}
 		}
 

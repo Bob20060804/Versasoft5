@@ -3,6 +3,10 @@ using System;
 
 namespace Ersa.Platform.Mes.Modell
 {
+	/// <summary>
+	/// MES Ù–‘
+	/// Mes Property
+	/// </summary>
 	[Serializable]
 	public class EDC_MesProperty : BindableBase
 	{

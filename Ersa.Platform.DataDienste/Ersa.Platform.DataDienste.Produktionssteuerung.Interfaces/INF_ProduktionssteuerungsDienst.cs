@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.DataDienste.Produktionssteuerung.Interfaces
 {
+	/// <summary>
+	/// 生产控制服务
+	/// </summary>
 	public interface INF_ProduktionssteuerungsDienst
 	{
 		Task<IEnumerable<EDC_Produktionssteuerungsdaten>> FUN_edcProduktionssteuerungsDatenLadenAsync();

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Mes.Modell
 {
+	/// <summary>
+	/// Mes定制方法
+	/// Mes Custom Function
+	/// </summary>
 	[Serializable]
 	public class EDC_MesCustomFunction
 	{
@@ -18,6 +22,10 @@ namespace Ersa.Platform.Mes.Modell
 			set;
 		}
 
+		/// <summary>
+		/// 论据
+		/// Argument
+		/// </summary>
 		public List<EDC_MesFunctionArgument> PRO_lstArguments
 		{
 			get;
@@ -37,7 +45,11 @@ namespace Ersa.Platform.Mes.Modell
 				return PRO_lstArguments.Find((EDC_MesFunctionArgument i_edcArgument) => i_edcArgument.PRO_strId == i_strArgumentId);
 			}
 		}
+		
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
 		public EDC_MesCustomFunction()
 		{
 			PRO_lstArguments = new List<EDC_MesFunctionArgument>();
