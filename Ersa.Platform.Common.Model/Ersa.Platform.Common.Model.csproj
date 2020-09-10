@@ -76,7 +76,7 @@
       <Name>Ersa.Global.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ersa.Global.Mvvm\Ersa.Global.Mvvm.csproj">
-      <Project>{1c914e58-40b4-4742-b010-fb5d0e8924f4}</Project>
+      <Project>{1C914E58-40B4-4742-B010-FB5D0E8924F4}</Project>
       <Name>Ersa.Global.Mvvm</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ersa.Platform.Common\Ersa.Platform.Common.csproj">

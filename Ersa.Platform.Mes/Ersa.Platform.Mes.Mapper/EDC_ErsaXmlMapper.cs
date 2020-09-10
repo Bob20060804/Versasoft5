@@ -28,7 +28,7 @@ namespace Ersa.Platform.Mes.Mapper
 			{
 				using (StreamWriter textWriter = new StreamWriter(memoryStream, Encoding.UTF8))
 				{
-					xDocument.Save((TextWriter)textWriter);
+					xDocument.Save(textWriter);
 					return Encoding.UTF8.GetString(memoryStream.ToArray());
 				}
 			}

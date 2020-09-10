@@ -1,6 +1,7 @@
 using Ersa.Global.Common.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using Ersa.Global.Mvvm;
 
 namespace Ersa.Platform.Common.Model
 {

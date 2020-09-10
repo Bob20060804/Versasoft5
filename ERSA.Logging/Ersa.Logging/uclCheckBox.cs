@@ -336,9 +336,9 @@ namespace Ersa.Logging
 				}
 				end_IL_0000:;
 			}
-			catch (object obj) when ((obj is Exception && num != 0) & (num3 == 0))
+			catch (Exception obj) /* when ((obj is Exception && num != 0) & (num3 == 0))*/
 			{
-				ProjectData.SetProjectError((Exception)obj);
+				ProjectData.SetProjectError(obj);
 				/*Error near IL_00a9: Could not find block for branch target IL_0079*/;
 			}
 			if (num3 != 0)

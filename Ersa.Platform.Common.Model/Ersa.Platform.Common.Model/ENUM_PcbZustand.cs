@@ -1,5 +1,8 @@
 namespace Ersa.Platform.Common.Model
 {
+	/// <summary>
+	/// PCB State
+	/// </summary>
 	public enum ENUM_PcbZustand
 	{
 		enmAusgelaufenPcbOkFertigGeloetet = 0,

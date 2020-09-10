@@ -82,7 +82,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// Lock Write 
         /// </summary>
 		private readonly object m_objSchreibeLock = new object();
-
+		/// <summary>
+		/// Group
+		/// </summary>
 		private readonly Dictionary<string, IEnumerable<EDC_PrimitivParameter>> m_dicGruppenParameter = new Dictionary<string, IEnumerable<EDC_PrimitivParameter>>();
 
 		
@@ -522,15 +524,25 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			return m_edcSpsService.FUN_fdcGruppeSchreibenAsync(list, i_strGruppenName);
 		}
 
+		/// <summary>
+		/// Group读取异步
+		/// </summary>
+		/// <param name="i_strGruppenName"></param>
+		/// <returns></returns>
 		public async Task FUN_fdcGruppeLesenAsync(string i_strGruppenName)
 		{
+			// 建立连接
 			if (FUN_blnIstVerbindungAufgebaut())
 			{
+				// Group集合中不存在
 				if (!m_dicGruppenParameter.ContainsKey(i_strGruppenName))
 				{
 					throw new EDC_GruppeZugriffException("unknown group " + i_strGruppenName);
 				}
-				List<EDC_SpsListenElement> list = (await m_edcSpsService.FUN_fdcGruppeLesenAsync(i_strGruppenName).ConfigureAwait(continueOnCapturedContext: true)).ToList();
+
+				// 等待获取Group中的所有地址
+				List<EDC_SpsListenElement> list = (await m_edcSpsService.FUN_fdcGruppeLesenAsync(i_strGruppenName).ConfigureAwait(true)).ToList();
+
 				if (list.Any() && m_dicGruppenParameter.TryGetValue(i_strGruppenName, out IEnumerable<EDC_PrimitivParameter> value))
 				{
 					List<EDC_PrimitivParameter> source = value.ToList();

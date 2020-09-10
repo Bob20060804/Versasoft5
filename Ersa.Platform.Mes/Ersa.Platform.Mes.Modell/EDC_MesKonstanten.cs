@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Ersa.Platform.Mes.Modell
 {
+	/// <summary>
+	/// MES ³£Êý
+	/// Mes constants
+	/// </summary>
 	public static class EDC_MesKonstanten
 	{
 		public const string gC_strMefContractNameItac = "Itac";
@@ -22,6 +26,9 @@ namespace Ersa.Platform.Mes.Modell
 
 		public const int gC_i32PingIntervall = 10;
 
+		/// <summary>
+		/// Mes Default configuration
+		/// </summary>
 		public static readonly EDC_MesKonfiguration gs_edcMesDefaultKonfiguration = new EDC_MesKonfiguration
 		{
 			PRO_enuMesTyp = ENUM_MesTyp.KeinMes,

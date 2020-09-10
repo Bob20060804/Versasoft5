@@ -3,6 +3,10 @@ using System;
 
 namespace Ersa.Platform.Mes.Modell
 {
+	/// <summary>
+	/// MES״̬
+	/// Mes Session
+	/// </summary>
 	[Serializable]
 	public class EDC_MesSession : BindableBase
 	{

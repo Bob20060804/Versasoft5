@@ -8,6 +8,9 @@ using System.ComponentModel.Composition;
 
 namespace Ersa.Platform.Mes.Dienste
 {
+	/// <summary>
+	/// MES参数验证助手
+	/// </summary>
 	[Export(typeof(INF_MesArgumenteValidierungsHelfer))]
 	public class EDC_MesArgumenteValidierungsHelfer : INF_MesArgumenteValidierungsHelfer
 	{

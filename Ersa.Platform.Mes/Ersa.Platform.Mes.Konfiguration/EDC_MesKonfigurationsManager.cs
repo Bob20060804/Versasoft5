@@ -13,15 +13,30 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Mes.Konfiguration
 {
+	/// <summary>
+	/// MES配置管理者
+	/// </summary>
 	[Export(typeof(INF_MesKonfigurationsManager))]
 	public class EDC_MesKonfigurationsManager : INF_MesKonfigurationsManager
 	{
+		/// <summary>
+		/// 机器配置服务
+		/// </summary>
 		private readonly INF_MaschinenEinstellungenDienst m_edcMaschinenEinstellungenDienst;
 
+		/// <summary>
+		/// 生产控制服务
+		/// </summary>
 		private readonly INF_ProduktionssteuerungsDienst m_edcProduktionssteuerungsDienst;
 
+		/// <summary>
+		/// Json序列化服务
+		/// </summary>
 		private readonly INF_JsonSerialisierungsDienst m_edcJsonSerialisierungsDienst;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		private EDC_Produktionssteuerungsdaten m_edcProduktionssteuerungsdaten;
 
 		private EDC_MesKonfiguration m_edcMesKonfiguration;

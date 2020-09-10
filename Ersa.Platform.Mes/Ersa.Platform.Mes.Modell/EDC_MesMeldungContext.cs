@@ -3,6 +3,10 @@ using System;
 
 namespace Ersa.Platform.Mes.Modell
 {
+	/// <summary>
+	/// MESÏûÏ¢ÄÚÈİ
+	/// Mes message context
+	/// </summary>
 	[Serializable]
 	public class EDC_MesMeldungContext
 	{

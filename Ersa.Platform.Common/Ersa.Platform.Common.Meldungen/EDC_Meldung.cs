@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Ersa.Platform.Common.Meldungen
 {
+	/// <summary>
+	/// Message
+	/// </summary>
 	public class EDC_Meldung : INF_Meldung, IEquatable<INF_Meldung>
 	{
 		public string PRO_strMeldungGuid

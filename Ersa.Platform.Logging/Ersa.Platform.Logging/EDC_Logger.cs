@@ -16,6 +16,9 @@ namespace Ersa.Platform.Logging
 
 		private readonly IDictionary<ENUM_LoggingLevels, ENUM_LogLevel> m_dicLogLevelLokaleEnums;
 
+		/// <summary>
+		/// ERSA.Logging.EDC_ERSALogging
+		/// </summary>
 		private EDC_ERSALogging m_edcErsaLogger;
 
 		private bool m_blnIstLoggerInitialisiert;
@@ -71,6 +74,16 @@ namespace Ersa.Platform.Logging
 			SUB_LogLevelEntsprechungenInitialisieren();
 		}
 
+		/// <summary>
+		/// 日志初始化
+		/// Initialize logger
+		/// </summary>
+		/// <param name="i_strLogDateiPfad"></param>
+		/// <param name="i_blnStartetApplikation"></param>
+		/// <param name="i_strFirmenName"></param>
+		/// <param name="i_strAssemblyName"></param>
+		/// <param name="i_strVersion"></param>
+		/// <param name="i_blnErweitertesLoggingVerwenden"></param>
 		public void SUB_LoggerInitialisieren(string i_strLogDateiPfad, bool i_blnStartetApplikation, string i_strFirmenName, string i_strAssemblyName, string i_strVersion, bool i_blnErweitertesLoggingVerwenden)
 		{
 			m_blnIstLoggerInitialisiert = false;
@@ -164,6 +177,10 @@ namespace Ersa.Platform.Logging
 			return value;
 		}
 
+		/// <summary>
+		/// 日志等级等价转换
+		/// LogLevel Equivalents Initialize
+		/// </summary>
 		private void SUB_LogLevelEntsprechungenInitialisieren()
 		{
 			m_dicLogLevelDllEnums.Clear();

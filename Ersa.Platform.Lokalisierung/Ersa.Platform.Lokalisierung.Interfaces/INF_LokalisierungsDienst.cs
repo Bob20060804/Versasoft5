@@ -3,9 +3,10 @@ using System.Globalization;
 
 namespace Ersa.Platform.Lokalisierung.Interfaces
 {
-    /// <summary>
-    /// Localization service
-    /// </summary>
+	/// <summary>
+	/// 本地化服务
+	/// Localization service
+	/// </summary>
 	public interface INF_LokalisierungsDienst
 	{
 		string FUN_strText(string i_strKey, CultureInfo i_fdcCulture);

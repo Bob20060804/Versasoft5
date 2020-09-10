@@ -31,6 +31,7 @@ using System.Windows.Threading;
 namespace Ersa.Platform.Mes.Dienste
 {
     /// <summary>
+	/// MES 服务
     /// MES Service
     /// </summary>
 	[Export(typeof(INF_MesDienst))]
@@ -99,6 +100,15 @@ namespace Ersa.Platform.Mes.Dienste
 			set;
 		}
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="i_edcLogger">日期</param>
+		/// <param name="i_edcKonfigurationsManager">Configuration manager</param>
+		/// <param name="i_fdcEventAggregator">prism 事件聚合器</param>
+		/// <param name="i_edcLokalisierungsDienst">本地化服务</param>
+		/// <param name="i_edcMesArgumenteValidierungsHelfer">MES参数验证帮助</param>
+		/// <param name="i_edcJsonSerialisierungsDienst">Json序列化服务</param>
 		[ImportingConstructor]
 		public EDC_MesDienst(INF_Logger i_edcLogger, INF_MesKonfigurationsManager i_edcKonfigurationsManager, IEventAggregator i_fdcEventAggregator, INF_LokalisierungsDienst i_edcLokalisierungsDienst, INF_MesArgumenteValidierungsHelfer i_edcMesArgumenteValidierungsHelfer, INF_JsonSerialisierungsDienst i_edcJsonSerialisierungsDienst)
 		{
@@ -121,6 +131,11 @@ namespace Ersa.Platform.Mes.Dienste
 			});
 		}
 
+		/// <summary>
+		/// 确认消息 异步
+		/// </summary>
+		/// <param name="i_edcMessage">Message</param>
+		/// <returns></returns>
 		public async Task<bool> FUN_fdcAcknowledgeMessageAsync(INF_Meldung i_edcMessage)
 		{
 			EDC_EnumMember eDC_EnumMember = EDC_EnumHelfer.FUN_enmBeschreibungenErmitteln(typeof(ENUM_MesFunktionen)).Single((EDC_EnumMember i_edcEnumMember) => i_edcEnumMember.PRO_i32Value == 14);
@@ -166,14 +181,18 @@ namespace Ersa.Platform.Mes.Dienste
 			return Task.FromResult(result: true);
 		}
 
+		/// <summary>
+		/// Initialize
+		/// </summary>
+		/// <returns></returns>
 		public async Task<EDC_MesInitialisierungsRueckgabe> FUN_fdcInitialisiereAsync()
 		{
 			try
 			{
-				await FUN_fdcDeinitialisiereAsync().ConfigureAwait(continueOnCapturedContext: false);
-				await ms_fdcDienstzugriffSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: false);
-				await m_edcKonfigurationsManager.FUN_fdcInitialisierenAsync().ConfigureAwait(continueOnCapturedContext: false);
-				if (!(await m_edcKonfigurationsManager.FUN_fdcIstMesAktivAsync().ConfigureAwait(continueOnCapturedContext: false)))
+				await FUN_fdcDeinitialisiereAsync().ConfigureAwait(false);
+				await ms_fdcDienstzugriffSemaphore.WaitAsync().ConfigureAwait(false);
+				await m_edcKonfigurationsManager.FUN_fdcInitialisierenAsync().ConfigureAwait(false);
+				if (!(await m_edcKonfigurationsManager.FUN_fdcIstMesAktivAsync().ConfigureAwait(false)))
 				{
 					EDC_MesInitialisierungsRueckgabe eDC_MesInitialisierungsRueckgabe = new EDC_MesInitialisierungsRueckgabe().FUN_edcRueckgabe(ENUM_MesInitialisierungsStatus.MesDeaktiviert, 12122);
 					SUB_LogEintragSchreiben("Initialization returned: ", eDC_MesInitialisierungsRueckgabe, null, "FUN_fdcInitialisiereAsync");
@@ -509,6 +528,18 @@ namespace Ersa.Platform.Mes.Dienste
 			}
 		}
 
+		/// <summary>
+		/// 添加外部消息 异步
+		/// Add external message Async
+		/// </summary>
+		/// <param name="i_i32MeldungOrt3"></param>
+		/// <param name="i_i32Meldungsnummer">Message number</param>
+		/// <param name="i_strMeldungsDetails"></param>
+		/// <param name="i_edcMesMeldungContext"></param>
+		/// <param name="i_blnEinlaufSperreAktiv">入口锁</param>
+		/// <param name="i_blnDuplicateAllowed">是否允许重复</param>
+		/// <param name="i_enuAktion"></param>
+		/// <returns></returns>
 		private async Task FUN_fdcExterneMeldungHinzufuegenAsync(int i_i32MeldungOrt3, int i_i32Meldungsnummer, string i_strMeldungsDetails = "", EDC_MesMeldungContext i_edcMesMeldungContext = null, bool i_blnEinlaufSperreAktiv = false, bool i_blnDuplicateAllowed = true, ENUM_MeldungAktionen i_enuAktion = ENUM_MeldungAktionen.Erstellen)
 		{
 			List<ENUM_ProzessAktionen> list = new List<ENUM_ProzessAktionen>();
@@ -520,7 +551,7 @@ namespace Ersa.Platform.Mes.Dienste
 			{
 				list.Add(ENUM_ProzessAktionen.Einlausperre);
 			}
-			await PRO_edcMeldungHinzufuegen.SUB_CreateMessageAsync(i_i32Meldungsnummer, m_strLokalisierungsKeyMesTyp, i_i32MeldungOrt3, possibleactions, list, i_strMeldungsDetails, m_edcJsonSerialisierungsDienst.FUN_strSerialisieren(i_edcMesMeldungContext), i_blnDuplicateAllowed, i_enuAktion).ConfigureAwait(continueOnCapturedContext: false);
+			await PRO_edcMeldungHinzufuegen.SUB_CreateMessageAsync(i_i32Meldungsnummer, m_strLokalisierungsKeyMesTyp, i_i32MeldungOrt3, possibleactions, list, i_strMeldungsDetails, m_edcJsonSerialisierungsDienst.FUN_strSerialisieren(i_edcMesMeldungContext), i_blnDuplicateAllowed, i_enuAktion).ConfigureAwait(false);
 		}
 
 		private void SUB_StatusGeaendertVeroeffentlichen(ENUM_VerbindungsStatus i_enuStatus)
