@@ -16,7 +16,7 @@ namespace Ersa.Platform.Mes.Dienste
 {
 	/// <summary>
 	/// Mes基础通讯服务
-	/// Mes communication service basis
+	/// Base Mes communication service 
 	/// </summary>
 	public abstract class EDC_MesKommunikationsDienstBasis
 	{
@@ -46,40 +46,52 @@ namespace Ersa.Platform.Mes.Dienste
         /// </summary>
 		private readonly INF_JsonSerialisierungsDienst m_edcJsonSerialisierungsDienst;
         /// <summary>
-        /// 
+        /// MES Function
         /// </summary>
 		public IEnumerable<INF_MesFunktion> PRO_enuFunktionen
 		{
 			get;
 		}
-
+		/// <summary>
+		/// MES Type
+		/// </summary>
 		public ENUM_MesTyp PRO_enmMesTyp
 		{
 			get;
 		}
-
+		/// <summary>
+		/// 是否连接
+		/// Is Connected
+		/// </summary>
 		public bool PRO_blnIstVerbunden
 		{
 			get;
 			protected set;
 		}
-
+		/// <summary>
+		/// MesContainer
+		/// </summary>
 		protected INF_MesContainer PRO_edcMesContainer
 		{
 			get;
 		}
-
+		/// <summary>
+		/// prism Event Aggregator
+		/// </summary>
 		protected IEventAggregator PRO_fdcEventAggregator
 		{
 			get;
 		}
-
+		/// <summary>
+		/// Mes type setting
+		/// </summary>
 		protected EDC_MesTypEinstellung PRO_edcEinstellungen
 		{
 			get;
 			private set;
 		}
         #endregion 
+
 
         /// <summary>
         /// Constractor

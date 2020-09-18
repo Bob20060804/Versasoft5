@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace Ersa.Platform.Common.Mes
 {
 	/// <summary>
-	/// MES类型
+	/// MES类型(No MES,Itac,Zvei)
 	/// </summary>
 	public enum ENUM_MesTyp
 	{

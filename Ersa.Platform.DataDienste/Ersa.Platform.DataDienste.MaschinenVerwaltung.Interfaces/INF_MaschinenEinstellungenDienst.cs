@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.DataDienste.MaschinenVerwaltung.Interfaces
 {
+	/// <summary>
+	/// 设备设置服务器
+	/// machine settings service
+	/// </summary>
 	public interface INF_MaschinenEinstellungenDienst
 	{
 		Task<Dictionary<ENUM_SelektivTiegel, byte[]>> FUN_fdcHoleAlleKamerakalibrierwerteFuerMaschineAsync();
