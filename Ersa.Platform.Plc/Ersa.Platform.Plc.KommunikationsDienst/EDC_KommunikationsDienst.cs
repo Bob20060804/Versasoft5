@@ -578,6 +578,11 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
+		/// <summary>
+		/// 激活Group 异步
+		/// </summary>
+		/// <param name="i_strGruppenName"></param>
+		/// <returns></returns>
 		public Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName)
 		{
 			if (!FUN_blnIstVerbindungAufgebaut())
@@ -587,6 +592,11 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			return m_edcSpsService.FUN_fdcGruppeAktivierenAsync(i_strGruppenName);
 		}
 
+		/// <summary>
+		/// 禁用组 异步
+		/// </summary>
+		/// <param name="i_strGruppenName"></param>
+		/// <returns></returns>
 		public Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName)
 		{
 			if (!FUN_blnIstVerbindungAufgebaut())

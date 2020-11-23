@@ -20,7 +20,7 @@ namespace Ersa.Platform.Mes.Funktionen
         /// </summary>
 		private readonly string m_strKlassenName;
         /// <summary>
-        /// log
+        /// »’÷æ
         /// </summary>
 		private readonly INF_Logger m_edcLogger;
 
@@ -34,7 +34,7 @@ namespace Ersa.Platform.Mes.Funktionen
 		}
 
         /// <summary>
-        /// localization service
+        /// Localization Service
         /// </summary>
 		protected INF_LokalisierungsDienst PRO_edcLokalisierungsDienst
 		{

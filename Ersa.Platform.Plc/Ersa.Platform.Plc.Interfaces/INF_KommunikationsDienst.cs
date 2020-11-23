@@ -49,26 +49,86 @@ namespace Ersa.Platform.Plc.Interfaces
         /// <returns></returns>
 		Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100);
 
+        /// <summary>
+        /// 读取Group 异步
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task FUN_fdcGruppeLesenAsync(string i_strGruppenName);
 
+        /// <summary>
+        /// 激活Group 异步
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName);
 
+        /// <summary>
+        /// 禁用组 异步
+        /// </summary>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName);
 
+        /// <summary>
+        /// Write Value
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcCancellationToken"></param>
+        /// <returns></returns>
 		Task FUN_fdcWerteSchreibenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken);
 
+        /// <summary>
+        /// Group Write Value Async
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_strGruppenName"></param>
+        /// <returns></returns>
 		Task FUN_fdcGruppenWerteSchreibenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName);
 
+        /// <summary>
+        /// 物理地址存储 异步
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcCancellationToken"></param>
+        /// <returns></returns>
 		Task FUN_fdcPhysischeAdressenRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken);
 
+        /// <summary>
+        /// 物理地址注销 异步
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		Task FUN_fdcPhysischeAdressenDeRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcToken);
 
+        /// <summary>
+        ///  BR plc 注册事件
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		Task FUN_fdcSPSEventHandlerRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcToken);
 
+        /// <summary>
+        /// BR PLC 注销事件
+        /// </summary>
+        /// <param name="i_lstPrimitivParameter"></param>
+        /// <param name="i_fdcToken"></param>
+        /// <returns></returns>
 		Task FUN_fdcSPSEventHandlerDeRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcToken);
 
+        /// <summary>
+        /// 注册参数图像地址
+        /// </summary>
+        /// <param name="i_enuAdressen"></param>
+        /// <returns></returns>
 		Task FUN_fdcParameterAbbildAdressenRegistrierenAsync(IEnumerable<string> i_enuAdressen);
 
+        /// <summary>
+        /// 写参数图
+        /// </summary>
+        /// <param name="i_dicAbbild"></param>
 		void SUB_ParameterAbbildSchreiben(IEnumerable<KeyValuePair<string, object>> i_dicAbbild);
 	}
 }
