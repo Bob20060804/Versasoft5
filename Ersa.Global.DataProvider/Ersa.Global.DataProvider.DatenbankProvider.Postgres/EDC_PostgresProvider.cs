@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Ersa.Global.DataProvider.DatenbankProvider.Postgres
 {
+	/// <summary>
+	/// Postgres Ã·π©’ﬂ
+	/// </summary>
 	public class EDC_PostgresProvider : EDC_BasisProvider, INF_DatenbankProvider
 	{
 		private DbConnectionStringBuilder m_fdcConnectionStringBuilder;
@@ -53,6 +56,7 @@ namespace Ersa.Global.DataProvider.DatenbankProvider.Postgres
 
 		public string PRO_strDatenbankDienstName => "postgresql-x64";
 
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -61,6 +65,7 @@ namespace Ersa.Global.DataProvider.DatenbankProvider.Postgres
             : base(i_fdcAppSettings)
 		{
 		}
+
 
 		public string FUN_strHoleVorhandeneTabellenAbfrage()
 		{

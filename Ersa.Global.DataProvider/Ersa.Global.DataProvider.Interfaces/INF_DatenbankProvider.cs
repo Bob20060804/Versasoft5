@@ -9,31 +9,49 @@ namespace Ersa.Global.DataProvider.Interfaces
 {
 	public interface INF_DatenbankProvider
 	{
+		/// <summary>
+		/// File-based database
+		/// </summary>
 		bool PRO_blnIstDateibasierendeDatenbank
 		{
 			get;
 		}
 
+		/// <summary>
+		/// Can drop multi-table columns at once
+		/// </summary>
 		bool PRO_blnKannMehrerTabellenSpaltenAufEinmalDroppen
 		{
 			get;
 		}
 
+		/// <summary>
+		/// Connection string
+		/// </summary>
 		string PRO_strConnectionString
 		{
 			get;
 		}
 
+		/// <summary>
+		/// Database service name
+		/// </summary>
 		string PRO_strDatenbankDienstName
 		{
 			get;
 		}
 
+		/// <summary>
+		/// Data backup extension
+		/// </summary>
 		string PRO_strDatensicherungErweiterung
 		{
 			get;
 		}
 
+		/// <summary>
+		/// Database Identifier
+		/// </summary>
 		string PRO_strDatenbankIdentifier
 		{
 			get;
@@ -44,18 +62,46 @@ namespace Ersa.Global.DataProvider.Interfaces
 			get;
 		}
 
+		/// <summary>
+		/// Get Database Name
+		/// </summary>
+		/// <returns></returns>
 		string FUN_strHoleDatenbankName();
 
+		/// <summary>
+		/// Get Database User Name
+		/// </summary>
+		/// <returns></returns>
 		string FUN_strHoleDatenbankBenutzerName();
 
+		/// <summary>
+		/// Get Database Password
+		/// </summary>
+		/// <returns></returns>
 		string FUN_strHoleDatenbankKennwort();
 
+		/// <summary>
+		/// Get Server Name
+		/// </summary>
+		/// <returns></returns>
 		string FUN_strHoleServerName();
 
+		/// <summary>
+		/// Get Existing Tables Query
+		/// </summary>
+		/// <returns></returns>
 		string FUN_strHoleVorhandeneTabellenAbfrage();
 
+		/// <summary>
+		/// Get Provider Settings
+		/// </summary>
+		/// <returns></returns>
 		NameValueCollection FUN_fdcHoleProviderEinstellungen();
 
+		/// <summary>
+		/// Get Connection
+		/// </summary>
+		/// <returns></returns>
 		DbConnection FUN_fdcGetConnection();
 
 		DbCommand FUN_fdcGetCommand();

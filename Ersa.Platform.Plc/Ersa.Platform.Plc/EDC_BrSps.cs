@@ -932,7 +932,7 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
-        /// Service
+        /// Service+CPU
         /// </summary>
 		private void SUB_InitPvi()
 		{

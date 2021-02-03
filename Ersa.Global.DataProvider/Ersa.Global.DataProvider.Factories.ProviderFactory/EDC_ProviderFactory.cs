@@ -11,10 +11,19 @@ namespace Ersa.Global.DataProvider.Factories.ProviderFactory
 {
 	public static class EDC_ProviderFactory
 	{
+		/// <summary>
+		/// 创建数据提供者
+		/// Create database provider
+		/// </summary>
+		/// <param name="i_fdcDatenbankEinstellungen"></param>
+		/// <returns></returns>
 		public static INF_DatenbankProvider FUN_fdcErstelleDatenbankProvider(NameValueCollection i_fdcDatenbankEinstellungen)
 		{
+			// 获得数据库相关列表
 			NameValueCollection nameValueCollection = FUN_fdcErstelleDbRelevanteListe(i_fdcDatenbankEinstellungen);
+			// 获得数据库类型
 			ENUM_DatenbankTyp eNUM_DatenbankTyp = EDC_ProviderConverterHelfer.FUN_enmDatenbankTypErmitteln(nameValueCollection["ProviderName"]);
+			// 根据数据库类型创建提供者
 			switch (eNUM_DatenbankTyp)
 			{
 			case ENUM_DatenbankTyp.SqlServer:
@@ -30,6 +39,11 @@ namespace Ersa.Global.DataProvider.Factories.ProviderFactory
 			}
 		}
 
+		/// <summary>
+		/// 创造数据库相关列表
+		/// </summary>
+		/// <param name="i_fdcDatenbankEinstellungen"></param>
+		/// <returns></returns>
 		private static NameValueCollection FUN_fdcErstelleDbRelevanteListe(NameValueCollection i_fdcDatenbankEinstellungen)
 		{
 			NameValueCollection nameValueCollection = new NameValueCollection();
