@@ -276,7 +276,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				{
 					try
 					{
-						if (!(await m_fdcSemaphore.WaitAsync(60000, i_fdcCancellationToken).ConfigureAwait(continueOnCapturedContext: true)))
+						if (!await m_fdcSemaphore.WaitAsync(60000, i_fdcCancellationToken).ConfigureAwait(true))
 						{
 							throw new InvalidOperationException("Error registering variables. Another registration is in progress and the timeout expired.");
 						}
@@ -456,14 +456,14 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 		}
 
-        /// <summary>
-        /// 在组里创建变量
-        /// Create Group Variable Async
-        /// </summary>
-        /// <param name="i_lstPrimitivParameter">PLC地址</param>
-        /// <param name="i_strGruppenName"></param>
-        /// <param name="i_i32CycleTime"></param>
-        /// <returns></returns>
+		/// <summary>
+		/// 在组里创建变量
+		/// Create Variable In Group Async
+		/// </summary>
+		/// <param name="i_lstPrimitivParameter">PLC地址</param>
+		/// <param name="i_strGruppenName"></param>
+		/// <param name="i_i32CycleTime"></param>
+		/// <returns></returns>
 		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100)
 		{
             // 是否在释放资源

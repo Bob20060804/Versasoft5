@@ -36,18 +36,18 @@ namespace Ersa.Platform.Infrastructure.Extensions
 		public static async Task FUN_fdcMitTimeout(this Task i_fdcTask, int i_i32Timeout, Action i_delOnTimeoutElapsed)
 		{
 			Task fdcDelayTask = Task.Delay(i_i32Timeout);
-			if (await Task.WhenAny(i_fdcTask, fdcDelayTask).ConfigureAwait(continueOnCapturedContext: true) == fdcDelayTask)
+			if (await Task.WhenAny(i_fdcTask, fdcDelayTask).ConfigureAwait(true) == fdcDelayTask)
 			{
 				i_delOnTimeoutElapsed();
 			}
-			await i_fdcTask.ConfigureAwait(continueOnCapturedContext: true);
+			await i_fdcTask.ConfigureAwait(true);
 		}
 
 		public static async Task<T> FUN_fdcTimeoutAfterAsync<T>(this Task<T> i_fdcTask, int i_i32TimeoutMilliseconds)
 		{
-			if (i_fdcTask == await Task.WhenAny(i_fdcTask, Task.Delay(i_i32TimeoutMilliseconds)).ConfigureAwait(continueOnCapturedContext: true))
+			if (i_fdcTask == await Task.WhenAny(i_fdcTask, Task.Delay(i_i32TimeoutMilliseconds)).ConfigureAwait(true))
 			{
-				return await i_fdcTask.ConfigureAwait(continueOnCapturedContext: true);
+				return await i_fdcTask.ConfigureAwait(true);
 			}
 			throw new TimeoutException();
 		}

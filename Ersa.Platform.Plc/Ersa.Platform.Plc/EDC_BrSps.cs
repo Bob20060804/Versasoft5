@@ -48,13 +48,21 @@ namespace Ersa.Platform.Plc
 		private VariableCollection m_fdcTempGruppe;
 
 		private string m_strIpAdresse;
-
+		/// <summary>
+		/// 连接是否完成
+		/// </summary>
 		private TaskCompletionSource<bool> m_fdcVerbindungsCompletionSource;
-
+		/// <summary>
+		/// 变量登记是否完成
+		/// </summary>
 		private TaskCompletionSource<bool> m_fdcVariablenCompletionSource;
-
+		/// <summary>
+		/// 组连接是否完成
+		/// </summary>
 		private TaskCompletionSource<bool> m_fdcGruppeConnectedCompletionSource;
-
+		/// <summary>
+		/// 组写入是否完成
+		/// </summary>
 		private TaskCompletionSource<bool> m_fdcGruppeWriteCompletionSource;
 
         /// <summary>
@@ -224,7 +232,7 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
-        /// 读取值
+        /// 读取string值
         /// Read Value
         /// </summary>
         /// <param name="i_strVarName"></param>
@@ -239,11 +247,11 @@ namespace Ersa.Platform.Plc
 			variable.ReadValue(true);
 			return variable.Value.ToString(CultureInfo.InvariantCulture);
 		}
-        /// <summary>
-        /// Read Value i32
-        /// </summary>
-        /// <param name="i_strVarName"></param>
-        /// <returns></returns>
+		/// <summary>
+		/// 读取i32值
+		/// </summary>
+		/// <param name="i_strVarName"></param>
+		/// <returns></returns>
 		public int FUN_i32WertLesen(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
@@ -426,7 +434,7 @@ namespace Ersa.Platform.Plc
 					m_fdcGruppeConnectedCompletionSource = new TaskCompletionSource<bool>();
 					variableCollection.Active = true;
 					variableCollection.Connect();
-					await m_fdcGruppeConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(continueOnCapturedContext: true);
+					await m_fdcGruppeConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(true);
 				}
 				finally
 				{
@@ -613,6 +621,11 @@ namespace Ersa.Platform.Plc
 			return m_lstCpuGruppen.FirstOrDefault((VariableCollection i_edcItem) => i_edcItem.Name.Equals(i_strGruppenName));
 		}
 
+		/// <summary>
+		/// Group 连接状态改变
+		/// </summary>
+		/// <param name="i_objSender"></param>
+		/// <param name="i_fdcCollectionEventArgs"></param>
 		private void SUB_GruppeConnectionChanged(object i_objSender, CollectionEventArgs i_fdcCollectionEventArgs)
 		{
 			VariableCollection variableCollection = i_objSender as VariableCollection;
@@ -740,6 +753,11 @@ namespace Ersa.Platform.Plc
 			SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, "e.Objects.Count =" + i_fdcEventArgse.Objects.Count, "SUB_EventGruppePropertyChanged");
 		}
 
+		/// <summary>
+		/// 组事件错误
+		/// </summary>
+		/// <param name="i_objSender"></param>
+		/// <param name="i_fdcEventArgs"></param>
 		private void SUB_EventGruppeError(object i_objSender, PviEventArgs i_fdcEventArgs)
 		{
 			string text = i_fdcEventArgs.ErrorText;
@@ -864,12 +882,12 @@ namespace Ersa.Platform.Plc
 			return m_fdcCpu.Variables[name];
 		}
 
-        /// <summary>
-        /// 
-        /// Get Item From Event Group
-        /// </summary>
-        /// <param name="i_strVarName"></param>
-        /// <returns></returns>
+		/// <summary>
+		/// 获得组
+		/// Get Item From Group Event
+		/// </summary>
+		/// <param name="i_strVarName"></param>
+		/// <returns></returns>
 		private Variable FUN_fdcItemAusEventGruppeHolen(string i_strVarName)
 		{
 			string text = FUN_strNamenKorrigieren(i_strVarName);
@@ -906,14 +924,14 @@ namespace Ersa.Platform.Plc
         private Variable FUN_fdcErstelleNeueCpuVariable(string i_strVariable, int i_i32CycleTime)
 		{
 			string name = FUN_strNamenKorrigieren(i_strVariable);
-			Variable obj = new Variable(m_fdcCpu, name)
+			Variable variable = new Variable(m_fdcCpu, name)
 			{
 				Polling = false
 			};
-			obj.Access |= (Access.Read | Access.Write | Access.FASTECHO);
-			obj.RefreshTime = i_i32CycleTime;
-			obj.RuntimeObjectIndex = Variable.ROIoptions.NonZeroBasedArrayIndex;
-			return obj;
+			variable.Access |= (Access.Read | Access.Write | Access.FASTECHO);
+			variable.RefreshTime = i_i32CycleTime;
+			variable.RuntimeObjectIndex = Variable.ROIoptions.NonZeroBasedArrayIndex;
+			return variable;
 		}
 
         /// <summary>
@@ -967,6 +985,11 @@ namespace Ersa.Platform.Plc
 			i_fdcGruppe.CollectionValuesRead -= SUB_CollectionValuesRead;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="i_objSender"></param>
+		/// <param name="i_fdcCollectionEventArgs"></param>
 		private void SUB_CollectionValuesRead(object i_objSender, CollectionEventArgs i_fdcCollectionEventArgs)
 		{
 			VariableCollection variableCollection = i_objSender as VariableCollection;
@@ -1009,8 +1032,7 @@ namespace Ersa.Platform.Plc
 		}
 
         /// <summary>
-        /// 变量不正确
-        /// 
+        /// 添加不正确的变量
         /// </summary>
         /// <param name="i_strVarName"></param>
 		private void SUB_FehlerhafteVariableMerken(string i_strVarName)

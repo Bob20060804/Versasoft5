@@ -29,6 +29,13 @@ namespace Ersa.Global.Controls.BildEditor.Control
 
 		private double m_dblControlBreite;
 
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		protected void SUB_OnPropertyChanged(string i_strInfo)
+		{
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(i_strInfo));
+		}
+
 		public EDC_BildEditorCanvas PRO_edcEditorCanvas
 		{
 			get
@@ -160,8 +167,6 @@ namespace Ersa.Global.Controls.BildEditor.Control
 			}
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
-
 		public EDC_BildEditorControlViewModel()
 		{
 			PRO_dblMaximaleVergroeserung = 12.0;
@@ -229,14 +234,6 @@ namespace Ersa.Global.Controls.BildEditor.Control
 		{
 			PRO_dblSkalierung = PRO_dblMinimaleSkalierung;
 			PRO_edcEditorCanvas.SUB_VerschiebeViewPort(new Rect(new Point(0.0, 0.0), new Size(50.0, 50.0)));
-		}
-
-		protected void SUB_OnPropertyChanged(string i_strInfo)
-		{
-			if (this.PropertyChanged != null)
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(i_strInfo));
-			}
 		}
 
 		private void SUB_RechteckZoomAction(EDC_GrafikBasisObjekt i_edcGrafik)
