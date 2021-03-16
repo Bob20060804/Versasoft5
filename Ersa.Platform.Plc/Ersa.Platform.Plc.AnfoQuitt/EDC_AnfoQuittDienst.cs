@@ -26,14 +26,14 @@ namespace Ersa.Platform.Plc.AnfoQuitt
         /// <summary>
         /// 通讯服务器接口
         /// </summary>
-		private readonly INF_KommunikationsDienst m_edcKommunikationsDienst;
+		private readonly Inf_CommunicationService m_edcKommunikationsDienst;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="i_edcKommunikationsDienst"></param>
 		[ImportingConstructor]
-		public EDC_AnfoQuittDienst(INF_KommunikationsDienst i_edcKommunikationsDienst)
+		public EDC_AnfoQuittDienst(Inf_CommunicationService i_edcKommunikationsDienst)
 		{
 			m_edcKommunikationsDienst = i_edcKommunikationsDienst;
 		}
@@ -58,8 +58,8 @@ namespace Ersa.Platform.Plc.AnfoQuitt
 			}, DispatcherPriority.Send);
 			return Task.Run(async delegate
 			{
-				await FUN_fdcTestUndInitAnfoWertAsync(i_edcToggle, i_fdcCancellationToken).ConfigureAwait(continueOnCapturedContext: true);
-				SUB_BooleanParameterWertSchreiben(i_edcToggle.PRO_edcToggle, i_blnWert: true);
+				await FUN_fdcTestUndInitAnfoWertAsync(i_edcToggle, i_fdcCancellationToken).ConfigureAwait(true);
+				SUB_BooleanParameterWertSchreiben(i_edcToggle.PRO_edcToggle,true);
 			}, i_fdcCancellationToken);
 		}
 
@@ -141,17 +141,22 @@ namespace Ersa.Platform.Plc.AnfoQuitt
 		private async Task FUN_fdcTestUndInitAnfoWertAsync(EDC_ToggleWert i_edcToggleWert, CancellationToken i_fdcCancellationToken)
 		{
             // 读
-			m_edcKommunikationsDienst.SUB_WertLesen(i_edcToggleWert.PRO_edcToggle);
+			m_edcKommunikationsDienst.Sub_ReadValue(i_edcToggleWert.PRO_edcToggle);
 			if (i_edcToggleWert.PRO_edcToggle.PRO_blnWert && !(await FUN_fdcAnfoWertZurueckSetzenAsync(i_edcToggleWert.PRO_edcToggle, i_fdcCancellationToken)))
 			{
 				i_edcToggleWert.PRO_blnToggleQuittVorgangAktiv = false;
 				throw new EDC_AnfoQuittException($"Anfo-Parameter cannot be set to false. Parameter: {i_edcToggleWert.PRO_edcToggle.PRO_strAdresse}");
 			}
 		}
-        // 测试并初始化Request
-        private async Task FUN_fdcTestUndInitAnfoWertAsync(EDC_ToggleZustandWert i_edcToggleWert, CancellationToken i_fdcCancellationToken)
+		/// <summary>
+		/// 测试并初始化Request
+		/// </summary>
+		/// <param name="i_edcToggleWert"></param>
+		/// <param name="i_fdcCancellationToken"></param>
+		/// <returns></returns>
+		private async Task FUN_fdcTestUndInitAnfoWertAsync(EDC_ToggleZustandWert i_edcToggleWert, CancellationToken i_fdcCancellationToken)
 		{
-			m_edcKommunikationsDienst.SUB_WertLesen(i_edcToggleWert.PRO_edcToggle);
+			m_edcKommunikationsDienst.Sub_ReadValue(i_edcToggleWert.PRO_edcToggle);
 			if (i_edcToggleWert.PRO_edcToggle.PRO_blnWert && !(await FUN_fdcAnfoWertZurueckSetzenAsync(i_edcToggleWert.PRO_edcToggle, i_fdcCancellationToken)))
 			{
 				i_edcToggleWert.PRO_blnToggleQuittVorgangAktiv = false;
@@ -172,7 +177,7 @@ namespace Ersa.Platform.Plc.AnfoQuitt
 			do
 			{
 				await Task.Delay(TimeSpan.FromMilliseconds(200.0), i_fdcCancellationToken);
-				m_edcKommunikationsDienst.SUB_WertLesen(i_edcAnfoParameter);
+				m_edcKommunikationsDienst.Sub_ReadValue(i_edcAnfoParameter);
 				i32AnzahlVersuche++;
 			}
 			while (i_edcAnfoParameter.PRO_blnWert && i32AnzahlVersuche <= 5);

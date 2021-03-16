@@ -6,6 +6,6 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// Active Sps
         /// </summary>
         /// <returns></returns>
-		INF_Sps FUN_edcAktiveSps();
+		INF_Sps Fun_edcActiveSps();
 	}
 }

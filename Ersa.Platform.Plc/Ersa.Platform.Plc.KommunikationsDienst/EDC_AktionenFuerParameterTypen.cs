@@ -14,7 +14,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		private readonly INF_SpsProvider m_edcSpsProvider;
 
 		private INF_Sps m_edcSpsService;
-        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
+        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.Fun_edcActiveSps());
 
         public IDictionary<ENUM_SpsTyp, Func<string, object>> PRO_dicLeseAktionen
 		{
@@ -45,35 +45,35 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			{
 				{
 					ENUM_SpsTyp.enmUInt32,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_u32WertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_u32ReadValue(i_strAdresse)
 				},
 				{
 					ENUM_SpsTyp.enmInt32,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_i32WertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_i32ReadValue(i_strAdresse)
 				},
 				{
 					ENUM_SpsTyp.enmUInt16,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_u16WertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_u16ReadValue(i_strAdresse)
 				},
 				{
 					ENUM_SpsTyp.enmInt16,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_i16WertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_i16ReadValue(i_strAdresse)
 				},
 				{
 					ENUM_SpsTyp.enmByte,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_bytWertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_bytReadValue(i_strAdresse)
 				},
 				{
 					ENUM_SpsTyp.enmBool,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_blnWertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_blnReadValue(i_strAdresse)
 				},
 				{
 					ENUM_SpsTyp.enmString,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_strWertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_strReadValue(i_strAdresse)
 				},
 				{
 					ENUM_SpsTyp.enmSingle,
-					(string i_strAdresse) => PRO_edcSpsService.FUN_sngWertLesen(i_strAdresse)
+					(string i_strAdresse) => PRO_edcSpsService.Fun_sngReadValue(i_strAdresse)
 				}
 			};
 		}
@@ -86,7 +86,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			{
 				PRO_dicSchreibeAktionen.Add(item, delegate(string i_strAdresse, object i_objValue)
 				{
-					PRO_edcSpsService.SUB_WertSchreiben(i_strAdresse, i_objValue.ToString());
+					PRO_edcSpsService.Sub_WriteValue(i_strAdresse, i_objValue.ToString());
 				});
 			}
 		}

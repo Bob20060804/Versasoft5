@@ -14,11 +14,45 @@ namespace Ersa.Platform.Common.Model
         /// 值
         /// </summary>
 		private object m_objValue;
+        public virtual object PRO_objValue
+        {
+            get
+            {
+                return m_objValue;
+            }
+            set
+            {
+                if (m_objValue != value)
+                {
+                    m_objValue = value;
+                    EDC_Dispatch.SUB_AktionStarten(delegate
+                    {
+                        RaisePropertyChanged("PRO_objValue");
+                        RaisePropertyChanged("PRO_objAnzeigeWert");
+                    });
+                }
+            }
+        }
 
         /// <summary>
         /// 显示值
+        /// Display Value
         /// </summary>
 		private object m_objAnzeigeWert;
+        /// <summary>
+        /// 显示值
+        /// </summary>
+        public virtual object PRO_objAnzeigeWert
+        {
+            get
+            {
+                return m_objAnzeigeWert ?? m_objValue;
+            }
+            set
+            {
+                SetProperty(ref m_objAnzeigeWert, value, "PRO_objAnzeigeWert");
+            }
+        }
 
         /// <summary>
         /// 参数说明
@@ -40,37 +74,8 @@ namespace Ersa.Platform.Common.Model
         /// </summary>
         public string PRO_strPhysischeAdresse { get; set; }
 
-        public virtual object PRO_objValue
-        {
-            get
-            {
-                return m_objValue;
-            }
-            set
-            {
-                if (m_objValue != value)
-                {
-                    m_objValue = value;
-                    EDC_Dispatch.SUB_AktionStarten(delegate
-                    {
-                        RaisePropertyChanged("PRO_objValue");
-                        RaisePropertyChanged("PRO_objAnzeigeWert");
-                    });
-                }
-            }
-        }
 
-        public virtual object PRO_objAnzeigeWert
-        {
-            get
-            {
-                return m_objAnzeigeWert ?? m_objValue;
-            }
-            set
-            {
-                SetProperty(ref m_objAnzeigeWert, value, "PRO_objAnzeigeWert");
-            }
-        }
+    
 
         public virtual bool PRO_blnHatAenderung => !object.Equals(PRO_objValue, PRO_objAnzeigeWert);
 
@@ -82,6 +87,10 @@ namespace Ersa.Platform.Common.Model
             };
         }
 
+        /// <summary>
+        /// 采用显示值
+        /// Adopt the display value
+        /// </summary>
         public void SUB_AnzeigeWertUebernehmen()
         {
             PRO_objValue = PRO_objAnzeigeWert;

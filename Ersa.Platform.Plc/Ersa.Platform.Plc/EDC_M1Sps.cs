@@ -90,13 +90,13 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
-		public void SUB_EventGruppeDeaktivieren()
+		public void Sub_GroupEventDisactivate()
 		{
 		}
 
-		public Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse)
+		public Task Fun_ConnectAsync(bool i_blnOnline, string i_strAdresse)
 		{
-			SUB_VerbindungLoesen();
+			Sub_DisConnect();
 			PRO_blnOnline = i_blnOnline;
 			if (i_blnOnline)
 			{
@@ -135,7 +135,7 @@ namespace Ersa.Platform.Plc
 			return Task.FromResult(result: true);
 		}
 
-		public void SUB_VerbindungLoesen()
+		public void Sub_DisConnect()
 		{
 			if (!PRO_blnVerbunden)
 			{
@@ -173,7 +173,7 @@ namespace Ersa.Platform.Plc
 			return FUN_itmItemHolen(i_strVarName) != null;
 		}
 
-		public Task FUN_fdcVariablenAnmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
+		public Task Sub_VariablesRegisterAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
 		{
 			if (!PRO_blnVerbunden)
 			{
@@ -224,7 +224,7 @@ namespace Ersa.Platform.Plc
 			return Task.FromResult(result: true);
 		}
 
-		public Task FUN_fdcVariablenAbmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
+		public Task Sub_VariablesUnregister(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
 		{
 			if (!PRO_blnVerbunden)
 			{
@@ -272,7 +272,7 @@ namespace Ersa.Platform.Plc
 			return Task.FromResult(result: true);
 		}
 
-		void INF_Sps.SUB_EventGruppeAktivieren()
+		void INF_Sps.Sub_GroupEventActive()
 		{
 			SUB_EventGruppeAktivieren();
 		}
@@ -298,12 +298,12 @@ namespace Ersa.Platform.Plc
 			return result;
 		}
 
-		public string FUN_strWertLesen(string i_strVarName)
+		public string Fun_strReadValue(string i_strVarName)
 		{
 			return FUN_itmItemHolen(i_strVarName).ReadAsObject().ToString();
 		}
 
-		public int FUN_i32WertLesen(string i_strVarName)
+		public int Fun_i32ReadValue(string i_strVarName)
 		{
 			Item item = FUN_itmItemHolen(i_strVarName);
 			if (PRO_blnOnline)
@@ -313,7 +313,7 @@ namespace Ersa.Platform.Plc
 			return int.Parse((item as Item<string>).Read());
 		}
 
-		public uint FUN_u32WertLesen(string i_strVarName)
+		public uint Fun_u32ReadValue(string i_strVarName)
 		{
 			Item item = FUN_itmItemHolen(i_strVarName);
 			if (PRO_blnOnline)
@@ -323,7 +323,7 @@ namespace Ersa.Platform.Plc
 			return uint.Parse((item as Item<string>).Read());
 		}
 
-		public float FUN_sngWertLesen(string i_strVarName)
+		public float Fun_sngReadValue(string i_strVarName)
 		{
 			Item item = FUN_itmItemHolen(i_strVarName);
 			if (PRO_blnOnline)
@@ -333,7 +333,7 @@ namespace Ersa.Platform.Plc
 			return float.Parse((item as Item<string>).Read());
 		}
 
-		public short FUN_i16WertLesen(string i_strVarName)
+		public short Fun_i16ReadValue(string i_strVarName)
 		{
 			Item item = FUN_itmItemHolen(i_strVarName);
 			if (PRO_blnOnline)
@@ -343,7 +343,7 @@ namespace Ersa.Platform.Plc
 			return short.Parse((item as Item<string>).Read());
 		}
 
-		public ushort FUN_u16WertLesen(string i_strVarName)
+		public ushort Fun_u16ReadValue(string i_strVarName)
 		{
 			Item item = FUN_itmItemHolen(i_strVarName);
 			if (PRO_blnOnline)
@@ -353,7 +353,7 @@ namespace Ersa.Platform.Plc
 			return ushort.Parse((item as Item<string>).Read());
 		}
 
-		public byte FUN_bytWertLesen(string i_strVarName)
+		public byte Fun_bytReadValue(string i_strVarName)
 		{
 			Item item = FUN_itmItemHolen(i_strVarName);
 			if (PRO_blnOnline)
@@ -363,7 +363,7 @@ namespace Ersa.Platform.Plc
 			return byte.Parse((item as Item<string>).Read());
 		}
 
-		public bool FUN_blnWertLesen(string i_strVarName)
+		public bool Fun_blnReadValue(string i_strVarName)
 		{
 			Item item = FUN_itmItemHolen(i_strVarName);
 			if (PRO_blnOnline)
@@ -374,7 +374,7 @@ namespace Ersa.Platform.Plc
 			return bool.TryParse((item as Item<string>).Read(), out result) && result;
 		}
 
-		public void SUB_WertSchreiben(string i_strVarName, string i_strWert)
+		public void Sub_WriteValue(string i_strVarName, string i_strWert)
 		{
 			if (!PRO_blnVerbunden)
 			{
@@ -391,7 +391,7 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
-		public IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, Action i_delHandler)
+		public IDisposable Fun_fdcRegisterEventHandler(string i_strVarName, Action i_delHandler)
 		{
 			if (string.IsNullOrEmpty(i_strVarName))
 			{
@@ -460,53 +460,53 @@ namespace Ersa.Platform.Plc
 			return m_objOfflineDevice.Items.Count();
 		}
 
-		public async Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<string> i_enmVariablen, string i_strGruppenName, int i_i32CycleTime = 100)
+		public async Task Fun_fdcGroupCreateVariableAsync(IEnumerable<string> i_enmVariablen, string i_strGroupName, int i_i32CycleTime = 100)
 		{
 			List<string> lstVariablen = i_enmVariablen.ToList();
-			if (string.IsNullOrEmpty(i_strGruppenName) || !lstVariablen.Any())
+			if (string.IsNullOrEmpty(i_strGroupName) || !lstVariablen.Any())
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (PRO_blnVerbunden)
 			{
 				Action<object, GroupUpdatedEventArgs> delUpdatedAction = delegate(object sender, GroupUpdatedEventArgs arg)
 				{
 					Group group3 = (Group)sender;
-					if (i_strGruppenName.Equals(group3.Name))
+					if (i_strGroupName.Equals(group3.Name))
 					{
 						List<EDC_SpsListenElement> list = new List<EDC_SpsListenElement>();
 						foreach (Item changedItem in arg.ChangedItems)
 						{
 							EDC_SpsListenElement item = new EDC_SpsListenElement
 							{
-								PRO_strGruppenName = i_strGruppenName,
+								PRO_strGruppenName = i_strGroupName,
 								PRO_strVariable = changedItem.Name,
 								PRO_objWert = changedItem.ValueAsObject
 							};
 							list.Add(item);
 						}
-						m_dicGruppenReadCompletionSources.TryGetValue(i_strGruppenName, out TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> value2);
+						m_dicGruppenReadCompletionSources.TryGetValue(i_strGroupName, out TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> value2);
 						value2?.TrySetResult(list);
 					}
 				};
 				Action<object, ErrorEventArgs> delErrorHandler = delegate(object sender, ErrorEventArgs arg)
 				{
 					Group group2 = (Group)sender;
-					if (i_strGruppenName.Equals(group2.Name))
+					if (i_strGroupName.Equals(group2.Name))
 					{
 						Type reflectedType = MethodBase.GetCurrentMethod().ReflectedType;
 						PRO_edcLogger.SUB_LogEintragSchreiben(ENUM_LogLevel.Fehler, "M1 read error", reflectedType?.Namespace, reflectedType?.Name, MethodBase.GetCurrentMethod().Name, arg.Exception);
-						m_dicGruppenReadCompletionSources.TryGetValue(i_strGruppenName, out TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> value);
+						m_dicGruppenReadCompletionSources.TryGetValue(i_strGroupName, out TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> value);
 						value?.TrySetResult(Enumerable.Empty<EDC_SpsListenElement>());
 					}
 				};
 				try
 				{
 					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: true);
-					Group group = FUN_fdcGruppeHolen(i_strGruppenName);
+					Group group = FUN_fdcGruppeHolen(i_strGroupName);
 					if (group == null)
 					{
-						group = FUN_fdcGruppeAnlegen(i_strGruppenName, i_i32CycleTime);
+						group = FUN_fdcGruppeAnlegen(i_strGroupName, i_i32CycleTime);
 						group.GroupUpdated += delegate(object sender, GroupUpdatedEventArgs arg)
 						{
 							delUpdatedAction(sender, arg);
@@ -533,14 +533,14 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
-		public async Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGruppenName)
+		public async Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGroupName)
 		{
 			if (PRO_blnVerbunden)
 			{
-				Group group = FUN_fdcGruppeHolen(i_strGruppenName);
+				Group group = FUN_fdcGruppeHolen(i_strGroupName);
 				if (group == null)
 				{
-					throw new EDC_GruppeZugriffException("M1 sps group " + i_strGruppenName + " does not exist");
+					throw new EDC_GruppeZugriffException("M1 sps group " + i_strGroupName + " does not exist");
 				}
 				List<KeyValuePair<string, string>> lstFehler = new List<KeyValuePair<string, string>>();
 				ItemValueList lstItems = new ItemValueList();
@@ -603,7 +603,7 @@ namespace Ersa.Platform.Plc
 							Type reflectedType = MethodBase.GetCurrentMethod().ReflectedType;
 							PRO_edcLogger.SUB_LogEintragSchreiben(ENUM_LogLevel.Fehler, i_strEintrag, reflectedType?.Namespace, reflectedType?.Name, MethodBase.GetCurrentMethod().Name);
 						}
-						throw new EDC_GruppeZugriffException("M1-COM error writing group: " + i_strGruppenName);
+						throw new EDC_GruppeZugriffException("M1-COM error writing group: " + i_strGroupName);
 					}
 				}
 				finally
@@ -613,24 +613,24 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
-		public async Task<IEnumerable<EDC_SpsListenElement>> FUN_fdcGruppeLesenAsync(string i_strGruppenName)
+		public async Task<IEnumerable<EDC_SpsListenElement>> Fun_fdcGroupReadAsync(string i_strGroupName)
 		{
-			if (string.IsNullOrEmpty(i_strGruppenName))
+			if (string.IsNullOrEmpty(i_strGroupName))
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (PRO_blnVerbunden)
 			{
 				try
 				{
 					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: true);
-					Group group = FUN_fdcGruppeHolen(i_strGruppenName);
+					Group group = FUN_fdcGruppeHolen(i_strGroupName);
 					if (group == null)
 					{
-						throw new EDC_GruppeZugriffException("M1 sps group " + i_strGruppenName + " does not exist");
+						throw new EDC_GruppeZugriffException("M1 sps group " + i_strGroupName + " does not exist");
 					}
 					TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> taskCompletionSource = new TaskCompletionSource<IEnumerable<EDC_SpsListenElement>>();
-					m_dicGruppenReadCompletionSources[i_strGruppenName] = taskCompletionSource;
+					m_dicGruppenReadCompletionSources[i_strGroupName] = taskCompletionSource;
 					group.Reset();
 					group.Update();
 					return await taskCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(continueOnCapturedContext: true);
@@ -643,21 +643,21 @@ namespace Ersa.Platform.Plc
 			return Enumerable.Empty<EDC_SpsListenElement>();
 		}
 
-		public async Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName)
+		public async Task Fun_fdcGroupActiveAsync(string i_strGroupName)
 		{
-			if (string.IsNullOrEmpty(i_strGruppenName))
+			if (string.IsNullOrEmpty(i_strGroupName))
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (PRO_blnVerbunden)
 			{
 				try
 				{
 					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: false);
-					Group group = FUN_fdcGruppeHolen(i_strGruppenName);
+					Group group = FUN_fdcGruppeHolen(i_strGroupName);
 					if (group == null)
 					{
-						throw new EDC_GruppeZugriffException("M1 sps group " + i_strGruppenName + " does not exist");
+						throw new EDC_GruppeZugriffException("M1 sps group " + i_strGroupName + " does not exist");
 					}
 					if (group.IsRunning)
 					{
@@ -675,21 +675,21 @@ namespace Ersa.Platform.Plc
 			}
 		}
 
-		public async Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName)
+		public async Task FUN_fdcGroupDisableAsync(string i_strGroupName)
 		{
-			if (string.IsNullOrEmpty(i_strGruppenName))
+			if (string.IsNullOrEmpty(i_strGroupName))
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (PRO_blnVerbunden)
 			{
 				try
 				{
 					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: false);
-					Group group = FUN_fdcGruppeHolen(i_strGruppenName);
+					Group group = FUN_fdcGruppeHolen(i_strGroupName);
 					if (group == null)
 					{
-						throw new EDC_GruppeZugriffException("M1 sps group " + i_strGruppenName + " does not exist");
+						throw new EDC_GruppeZugriffException("M1 sps group " + i_strGroupName + " does not exist");
 					}
 					if (group.IsRunning)
 					{
@@ -708,17 +708,17 @@ namespace Ersa.Platform.Plc
 			SUB_Zerstoeren();
 		}
 
-		private Group FUN_fdcGruppeAnlegen(string i_strGruppenName, int i_i32CycleTime)
+		private Group FUN_fdcGruppeAnlegen(string i_strGroupName, int i_i32CycleTime)
 		{
-			Group group = m_objDevice.CreateGroup(i_strGruppenName);
+			Group group = m_objDevice.CreateGroup(i_strGroupName);
 			group.CycleTime = i_i32CycleTime;
 			group.ObservationMode = ObservationMode.PollingChanges;
 			return group;
 		}
 
-		private Group FUN_fdcGruppeHolen(string i_strGruppenName)
+		private Group FUN_fdcGruppeHolen(string i_strGroupName)
 		{
-			return m_objDevice?.GetGroup(i_strGruppenName);
+			return m_objDevice?.GetGroup(i_strGroupName);
 		}
 
 		private void SUB_VariableAusGruppeEntfernen(Group i_fdcGruppe, string i_strVariable)

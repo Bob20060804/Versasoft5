@@ -14,42 +14,43 @@ namespace Ersa.Platform.Plc
         /// <param name="i_blnOnline"></param>
         /// <param name="i_strAdresse"></param>
         /// <returns></returns>
-		Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse);
+		Task Fun_ConnectAsync(bool i_blnOnline, string i_strAdresse);
 
         /// <summary>
+        /// 断开连接
         /// DisConnect
         /// </summary>
-		void SUB_VerbindungLoesen();
+		void Sub_DisConnect();
 
         /// <summary>
         /// Read Value
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <returns></returns>
-		string FUN_strWertLesen(string i_strVarName);
-		float FUN_sngWertLesen(string i_strVarName);
-		uint FUN_u32WertLesen(string i_strVarName);
-		int FUN_i32WertLesen(string i_strVarName);
-		short FUN_i16WertLesen(string i_strVarName);
-		ushort FUN_u16WertLesen(string i_strVarName);
-		byte FUN_bytWertLesen(string i_strVarName);
-		bool FUN_blnWertLesen(string i_strVarName);
+		string Fun_strReadValue(string i_strVarName);
+		float Fun_sngReadValue(string i_strVarName);
+		uint Fun_u32ReadValue(string i_strVarName);
+		int Fun_i32ReadValue(string i_strVarName);
+		short Fun_i16ReadValue(string i_strVarName);
+		ushort Fun_u16ReadValue(string i_strVarName);
+		byte Fun_bytReadValue(string i_strVarName);
+		bool Fun_blnReadValue(string i_strVarName);
 
         /// <summary>
         /// Write value
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <param name="i_strWert"></param>
-		void SUB_WertSchreiben(string i_strVarName, string i_strWert);
+		void Sub_WriteValue(string i_strVarName, string i_strWert);
 
         /// <summary>
-        /// 事件注册
+        /// 事件 注册
         /// EventHandler Register
         /// </summary>
         /// <param name="i_strVarName">变量名</param>
         /// <param name="i_delHandler">事件</param>
         /// <returns></returns>
-		IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, Action i_delHandler);
+		IDisposable Fun_fdcRegisterEventHandler(string i_strVarName, Action i_delHandler);
 
         /// <summary>
         /// 变量 注册
@@ -58,67 +59,67 @@ namespace Ersa.Platform.Plc
         /// <param name="i_lstVariablen"></param>
         /// <param name="i_fdcToken"></param>
         /// <returns></returns>
-		Task FUN_fdcVariablenAnmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken);
+		Task Sub_VariablesRegisterAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken);
 
         /// <summary>
-        /// 变量 登出
+        /// 变量 注销
         /// Variables Unregister async
         /// </summary>
         /// <param name="i_lstVariablen"></param>
         /// <param name="i_fdcToken"></param>
         /// <returns></returns>
-		Task FUN_fdcVariablenAbmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken);
+		Task Sub_VariablesUnregister(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken);
 
         /// <summary>
-        /// 组事件注册
+        /// 组 事件注册
         /// Activate event group
         /// </summary>
-		void SUB_EventGruppeAktivieren();
+		void Sub_GroupEventActive();
 
         /// <summary>
-        /// 组事件注销
+        /// 组 事件注销
         /// Deactivate event group
         /// </summary>
-		void SUB_EventGruppeDeaktivieren();
+		void Sub_GroupEventDisactivate();
 
         /// <summary>
         /// 创建Group变量 
         /// Create Group Variable Async
         /// </summary>
         /// <param name="i_enmVariablen"></param>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <param name="i_i32CycleTime"></param>
         /// <returns></returns>
-		Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<string> i_enmVariablen, string i_strGruppenName, int i_i32CycleTime = 100);
+		Task Fun_fdcGroupCreateVariableAsync(IEnumerable<string> i_enmVariablen, string i_strGroupName, int i_i32CycleTime = 100);
 
         /// <summary>
         /// Group writing Async
         /// </summary>
         /// <param name="i_enmParameter"></param>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGruppenName);
+		Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGroupName);
 
         /// <summary>
         /// 整个Group读取
         /// Reading group Async
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task<IEnumerable<EDC_SpsListenElement>> FUN_fdcGruppeLesenAsync(string i_strGruppenName);
+		Task<IEnumerable<EDC_SpsListenElement>> Fun_fdcGroupReadAsync(string i_strGroupName);
 
         /// <summary>
         /// Activate group Async
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName);
+		Task Fun_fdcGroupActiveAsync(string i_strGroupName);
 
         /// <summary>
         /// Disable group Async
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName);
+		Task FUN_fdcGroupDisableAsync(string i_strGroupName);
 	}
 }

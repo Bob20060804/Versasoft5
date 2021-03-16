@@ -11,10 +11,10 @@ using System.Linq;
 
 namespace Ersa.Platform.Plc.KommunikationsDienst
 {
-    /// <summary>
-    /// 参数读取策略
-    /// parameter read strategy
-    /// </summary>
+	/// <summary>
+	/// 读取参数策略
+	/// read parameter strategy
+	/// </summary>
 	[Export]
 	public class EDC_ParameterLeseStrategie : INF_ParameterBehandlungsStrategie<Action<EDC_PrimitivParameter>>
 	{
@@ -26,12 +26,14 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
 		private readonly EDC_AktionenFuerParameterTypen m_blnAktionenFuerParameterTypen;
 
+
 		[ImportingConstructor]
 		public EDC_ParameterLeseStrategie(INF_CapabilityProvider i_edcCapabilityProvider, EDC_AktionenFuerParameterTypen i_blnAktionenFuerParameterTypen)
 		{
 			m_edcAdressenZusammensetzerCapability = new Lazy<INF_AdressenZusammenSetzenCapability>(i_edcCapabilityProvider.FUN_edcCapabilityHolen<INF_AdressenZusammenSetzenCapability>);
 			m_blnAktionenFuerParameterTypen = i_blnAktionenFuerParameterTypen;
 		}
+
 
         /// <summary>
         /// 处理当前时间
@@ -94,6 +96,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
                 throw new InvalidOperationException($"Keine Lese-Methode fuer den Typ {eNUM_SpsTyp} konnte gefunden werden!");
 			}
 			float sngFaktor = EDC_KommunikationsHelfer.FUN_sngErmittelFaktor(i_edcParameter);
+
 			if (i_edcParameter is EDC_IntegerParameter)
 			{
 				return delegate(EDC_PrimitivParameter i_edcParam)
@@ -101,6 +104,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 					((EDC_IntegerParameter)i_edcParam).PRO_intWert = EDC_WertKonvertierung.FUN_intWertUmwandeln(delM1Aktion(strPhysischeAdresse), sngFaktor);
 				};
 			}
+
 			if (i_edcParameter is EDC_UIntegerParameter)
 			{
 				return delegate(EDC_PrimitivParameter i_edcParam)
@@ -108,6 +112,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 					((EDC_UIntegerParameter)i_edcParam).PRO_intWert = EDC_WertKonvertierung.FUN_u32WertUmwandeln(delM1Aktion(strPhysischeAdresse), sngFaktor);
 				};
 			}
+
 			if (i_edcParameter is EDC_NumerischerParameter)
 			{
 				return delegate(EDC_PrimitivParameter i_edcParam)

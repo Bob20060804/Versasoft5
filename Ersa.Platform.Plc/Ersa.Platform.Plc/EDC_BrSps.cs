@@ -31,35 +31,37 @@ namespace Ersa.Platform.Plc
 
 		private const int Cm_i32Timeout = 5000;
 
-		private readonly List<VariableCollection> m_lstCpuGruppen = new List<VariableCollection>();
+		private readonly SemaphoreSlim m_fdcGroupSemaphore = new SemaphoreSlim(1);
 
-		private readonly SemaphoreSlim m_fdcGruppenSemaphore = new SemaphoreSlim(1);
-
+		private readonly List<VariableCollection> m_lstGroup = new List<VariableCollection>();
+		/// <summary>
+		/// 
+		/// </summary>
 		private readonly Dictionary<string, TaskCompletionSource<IEnumerable<EDC_SpsListenElement>>> m_dicGruppenReadCompletionSources = new Dictionary<string, TaskCompletionSource<IEnumerable<EDC_SpsListenElement>>>();
 
 		private Service m_fdcService;
 
 		private Cpu m_fdcCpu;
 
-		private VariableCollection m_fdcGruppe;
+		private VariableCollection m_fdcGroup;
 
-		private VariableCollection m_fdcEventGruppe;
+		private VariableCollection m_fdcGroupEvent;
 
-		private VariableCollection m_fdcTempGruppe;
+		private VariableCollection m_fdcGroupTemp;
 
 		private string m_strIpAdresse;
 		/// <summary>
 		/// 连接是否完成
 		/// </summary>
-		private TaskCompletionSource<bool> m_fdcVerbindungsCompletionSource;
+		private TaskCompletionSource<bool> m_fdcConnectionCompletionSource;
 		/// <summary>
 		/// 变量登记是否完成
 		/// </summary>
-		private TaskCompletionSource<bool> m_fdcVariablenCompletionSource;
+		private TaskCompletionSource<bool> m_fdcVariableCompletionSource;
 		/// <summary>
 		/// 组连接是否完成
 		/// </summary>
-		private TaskCompletionSource<bool> m_fdcGruppeConnectedCompletionSource;
+		private TaskCompletionSource<bool> m_fdcGroupConnectedCompletionSource;
 		/// <summary>
 		/// 组写入是否完成
 		/// </summary>
@@ -101,15 +103,15 @@ namespace Ersa.Platform.Plc
         /// <param name="i_blnOnline"></param>
         /// <param name="i_strAdresse"></param>
         /// <returns></returns>
-        public System.Threading.Tasks.Task FUN_fdcVerbindungAufbauenAsync(bool i_blnOnline, string i_strAdresse)
+        public System.Threading.Tasks.Task Fun_ConnectAsync(bool i_blnOnline, string i_strAdresse)
 		{
-			m_fdcVerbindungsCompletionSource = new TaskCompletionSource<bool>();
-			SUB_VerbindungLoesen();
+			m_fdcConnectionCompletionSource = new TaskCompletionSource<bool>();
+			Sub_DisConnect();
 			SUB_InitPvi();
-			SUB_InitGruppen();
+			Sub_InitializeGroup();
 			m_strIpAdresse = (i_blnOnline ? i_strAdresse : "127.0.0.1");
 			m_fdcService.Connect();
-			return m_fdcVerbindungsCompletionSource.Task.FUN_fdcMitTimeout(5000, delegate
+			return m_fdcConnectionCompletionSource.Task.FUN_fdcMitTimeout(5000, delegate
 			{
 				throw new EDC_SpsVerbindungsAufbauFehlgeschlagenException("Timeout");
 			});
@@ -122,34 +124,36 @@ namespace Ersa.Platform.Plc
         /// <param name="i_lstVariablen">变量</param>
         /// <param name="i_fdcToken"></param>
         /// <returns></returns>
-		public System.Threading.Tasks.Task FUN_fdcVariablenAnmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
+		public System.Threading.Tasks.Task Sub_VariablesRegisterAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
 		{
 			if (!PRO_blnVerbunden)
 			{
 				throw new EDC_AdressRegistrierungsException("Not connected");
 			}
-			m_fdcVariablenCompletionSource = new TaskCompletionSource<bool>();
+
+			// 开始添加变量标记
+			m_fdcVariableCompletionSource = new TaskCompletionSource<bool>();
 			IList<string> source = (i_lstVariablen as IList<string>) ?? i_lstVariablen.ToList();
 
             // 如果变量都已经应用了, 则结束线程
 			List<string> lstNeueVars = (from i_strVar in source
-			where !FUN_blnVariableSchonAngelegt(i_strVar)
-			select i_strVar).ToList();
+										where !FUN_blnVariableSchonAngelegt(i_strVar)
+										select i_strVar).ToList();
 			if (!lstNeueVars.Any())
 			{
 				return System.Threading.Tasks.Task.CompletedTask;
 			}
 
-            // 把变量移动到新的组
-			SUB_AlteVariablenInNeueGruppeVerschieben(m_fdcGruppe, m_fdcTempGruppe);
-			m_fdcTempGruppe.Disconnect();
+			// 把变量移动到新的组  // m_fdcGroupTemp .item -> m_fdcGroup
+			SUB_AlteVariablenInNeueGruppeVerschieben(m_fdcGroup, m_fdcGroupTemp);
+			m_fdcGroupTemp.Disconnect();
 
             // 把没有应用的变量添加到临时组
-			SUB_GruppeFuellen(lstNeueVars, m_fdcTempGruppe, i_fdcToken);
-			m_fdcTempGruppe.Connect();
+			Sub_GroupFill(lstNeueVars, m_fdcGroupTemp, i_fdcToken);
+			m_fdcGroupTemp.Connect();
 			SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, string.Empty, "FUN_fdcVariablenAnmeldenAsync() Count =" + lstNeueVars.Count());
 
-			return m_fdcVariablenCompletionSource.Task.FUN_fdcMitTimeout(100000, delegate
+			return m_fdcVariableCompletionSource.Task.FUN_fdcMitTimeout(100000, delegate
 			{
 				EDC_AdressRegistrierungsException obj = new EDC_AdressRegistrierungsException("Timeout registering variables: Incorrect variables " + string.Join(", ", m_lstFehlerhafteVariable) + " - New variables: " + string.Join(", ", lstNeueVars))
 				{
@@ -166,7 +170,7 @@ namespace Ersa.Platform.Plc
         /// <param name="i_lstVariablen"></param>
         /// <param name="i_fdcToken"></param>
         /// <returns></returns>
-		public System.Threading.Tasks.Task FUN_fdcVariablenAbmeldenAsync(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
+		public System.Threading.Tasks.Task Sub_VariablesUnregister(IEnumerable<string> i_lstVariablen, CancellationToken i_fdcToken)
 		{
 			if (!PRO_blnVerbunden)
 			{
@@ -181,10 +185,10 @@ namespace Ersa.Platform.Plc
 			{
 				i_fdcToken.ThrowIfCancellationRequested();
 				string text = FUN_strNamenKorrigieren(item);
-				SUB_VariableAusGruppeEntfernen(m_fdcEventGruppe, text);
-				SUB_VariableAusGruppeEntfernen(m_fdcGruppe, text);
-				SUB_VariableAusGruppeEntfernen(m_fdcTempGruppe, text);
-				foreach (VariableCollection item2 in m_lstCpuGruppen)
+				SUB_VariableAusGruppeEntfernen(m_fdcGroupEvent, text);
+				SUB_VariableAusGruppeEntfernen(m_fdcGroup, text);
+				SUB_VariableAusGruppeEntfernen(m_fdcGroupTemp, text);
+				foreach (VariableCollection item2 in m_lstGroup)
 				{
 					SUB_VariableAusGruppeEntfernen(item2, text);
 				}
@@ -199,16 +203,16 @@ namespace Ersa.Platform.Plc
         /// 注册事件
         /// EventHandler Register
         /// </summary>
-        /// <param name="i_strVarName">变量名</param>
+        /// <param name="i_strVariableName">变量名</param>
         /// <param name="i_delHandler"></param>
         /// <returns></returns>
-		public IDisposable FUN_fdcEventHandlerRegistrieren(string i_strVarName, System.Action i_delHandler)
+		public IDisposable Fun_fdcRegisterEventHandler(string i_strVariableName, System.Action i_delHandler)
 		{
 			if (!PRO_blnVerbunden)
 			{
 				throw new EDC_AdressRegistrierungsException("Not Connected");
 			}
-			Variable objItem = FUN_fdcItemAusCpuHolen(i_strVarName);
+			Variable a_Variable = Fun_edcGetVariableFromCpu(i_strVariableName);
 
 			VariableEventHandler delHandler = delegate(object i_objSender, VariableEventArgs i_fdcEventArgs)
 			{
@@ -217,17 +221,17 @@ namespace Ersa.Platform.Plc
 					i_delHandler();
 				}
 			};
-			objItem.ValueChanged += delHandler;
+			a_Variable.ValueChanged += delHandler;
 
-			if (!m_fdcEventGruppe.Contains(objItem))
+			if (!m_fdcGroupEvent.Contains(a_Variable))
 			{
-				objItem.RefreshTime = 100;
-				m_fdcEventGruppe.Add(objItem);
-				objItem.Active = true;
+				a_Variable.RefreshTime = 100;
+				m_fdcGroupEvent.Add(a_Variable);
+				a_Variable.Active = true;
 			}
 			return EDC_Disposable.FUN_fdcCreate(delegate
 			{
-				objItem.ValueChanged -= delHandler;
+				a_Variable.ValueChanged -= delHandler;
 			});
 		}
 
@@ -237,13 +241,13 @@ namespace Ersa.Platform.Plc
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <returns></returns>
-		public string FUN_strWertLesen(string i_strVarName)
+		public string Fun_strReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return string.Empty;
 			}
-			Variable variable = FUN_fdcItemAusCpuHolen(i_strVarName);
+			Variable variable = Fun_edcGetVariableFromCpu(i_strVarName);
 			variable.ReadValue(true);
 			return variable.Value.ToString(CultureInfo.InvariantCulture);
 		}
@@ -252,68 +256,68 @@ namespace Ersa.Platform.Plc
 		/// </summary>
 		/// <param name="i_strVarName"></param>
 		/// <returns></returns>
-		public int FUN_i32WertLesen(string i_strVarName)
+		public int Fun_i32ReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return 0;
 			}
-			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToInt32(CultureInfo.InvariantCulture.NumberFormat);
+			return Fun_edcGetVariableFromCpu(i_strVarName).Value.ToInt32(CultureInfo.InvariantCulture.NumberFormat);
 		}
         /// <summary>
         /// Read Value u32
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <returns></returns>
-		public uint FUN_u32WertLesen(string i_strVarName)
+		public uint Fun_u32ReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return 0u;
 			}
-			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToUInt32(CultureInfo.InvariantCulture.NumberFormat);
+			return Fun_edcGetVariableFromCpu(i_strVarName).Value.ToUInt32(CultureInfo.InvariantCulture.NumberFormat);
 		}
 
-		public float FUN_sngWertLesen(string i_strVarName)
+		public float Fun_sngReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return 0f;
 			}
-			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToSingle(CultureInfo.InvariantCulture.NumberFormat);
+			return Fun_edcGetVariableFromCpu(i_strVarName).Value.ToSingle(CultureInfo.InvariantCulture.NumberFormat);
 		}
 
-		public short FUN_i16WertLesen(string i_strVarName)
+		public short Fun_i16ReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return 0;
 			}
-			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToInt16(CultureInfo.InvariantCulture.NumberFormat);
+			return Fun_edcGetVariableFromCpu(i_strVarName).Value.ToInt16(CultureInfo.InvariantCulture.NumberFormat);
 		}
-		public ushort FUN_u16WertLesen(string i_strVarName)
+		public ushort Fun_u16ReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return 0;
 			}
-			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToUInt16(CultureInfo.InvariantCulture.NumberFormat);
+			return Fun_edcGetVariableFromCpu(i_strVarName).Value.ToUInt16(CultureInfo.InvariantCulture.NumberFormat);
 		}
-		public byte FUN_bytWertLesen(string i_strVarName)
+		public byte Fun_bytReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return 0;
 			}
-			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToByte(CultureInfo.InvariantCulture.NumberFormat);
+			return Fun_edcGetVariableFromCpu(i_strVarName).Value.ToByte(CultureInfo.InvariantCulture.NumberFormat);
 		}
-		public bool FUN_blnWertLesen(string i_strVarName)
+		public bool Fun_blnReadValue(string i_strVarName)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				return false;
 			}
-			return FUN_fdcItemAusCpuHolen(i_strVarName).Value.ToBoolean(CultureInfo.InvariantCulture.NumberFormat);
+			return Fun_edcGetVariableFromCpu(i_strVarName).Value.ToBoolean(CultureInfo.InvariantCulture.NumberFormat);
 		}
 
         /// <summary>
@@ -322,38 +326,38 @@ namespace Ersa.Platform.Plc
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <param name="i_strWert"></param>
-		public void SUB_WertSchreiben(string i_strVarName, string i_strWert)
+		public void Sub_WriteValue(string i_strVarName, string i_strWert)
 		{
 			if (base.PRO_blnIstDisposed || !PRO_blnVerbunden)
 			{
 				throw new InvalidOperationException("Cannot write if not connected");
 			}
-			Variable variable = FUN_fdcItemAusCpuHolen(i_strVarName);
+			Variable variable = Fun_edcGetVariableFromCpu(i_strVarName);
 			FUN_strWertTypGerechtSchreiben(i_strWert, variable);
             // 同步 写值
-			variable.WriteValue(synchronous: true);
+			variable.WriteValue(true);
 		}
 
         /// <summary>
         /// 注册Group
         /// </summary>
-		public void SUB_EventGruppeAktivieren()
+		public void Sub_GroupEventActive()
 		{
-			if (m_fdcEventGruppe != null && !m_fdcEventGruppe.Active && m_fdcEventGruppe.Count > 0)
+			if (m_fdcGroupEvent != null && !m_fdcGroupEvent.Active && m_fdcGroupEvent.Count > 0)
 			{
-				m_fdcEventGruppe.Active = true;
+				m_fdcGroupEvent.Active = true;
 			}
 		}
 
-		public void SUB_EventGruppeDeaktivieren()
+		public void Sub_GroupEventDisactivate()
 		{
-			VariableCollection fdcEventGruppe = m_fdcEventGruppe;
+			VariableCollection fdcEventGruppe = m_fdcGroupEvent;
 		}
 
         /// <summary>
         /// 关闭连接
         /// </summary>
-		public void SUB_VerbindungLoesen()
+		public void Sub_DisConnect()
 		{
 			if (PRO_blnVerbunden)
 			{
@@ -367,78 +371,75 @@ namespace Ersa.Platform.Plc
         /// Create Group Variable Async
         /// </summary>
         /// <param name="i_enmVariablen">变量枚举</param>
-        /// <param name="i_strGruppenName">Group Name</param>
+        /// <param name="i_strGroupName">Group Name</param>
         /// <param name="i_i32CycleTime">CT</param>
         /// <returns></returns>
-		public async System.Threading.Tasks.Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<string> i_enmVariablen, string i_strGruppenName, int i_i32CycleTime = 100)
+		public async System.Threading.Tasks.Task Fun_fdcGroupCreateVariableAsync(IEnumerable<string> i_enmVariablen, string i_strGroupName, int i_i32CycleTime = 100)
 		{
 			List<string> lstVariablen = i_enmVariablen.ToList();
-			if (string.IsNullOrEmpty(i_strGruppenName) || !lstVariablen.Any())
+			if (string.IsNullOrEmpty(i_strGroupName) || !lstVariablen.Any())
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (PRO_blnVerbunden)
 			{
-				Action<object, CollectionEventArgs> delReadAction = delegate(object sender, CollectionEventArgs arg)
-				{
-					VariableCollection variableCollection3 = sender as VariableCollection;
-					if (variableCollection3 != null && variableCollection3.Name.Equals(i_strGruppenName))
-					{
-						List<EDC_SpsListenElement> list = new List<EDC_SpsListenElement>();
-						foreach (Variable value2 in arg.Objects.Values)
-						{
-							EDC_SpsListenElement item = new EDC_SpsListenElement
-							{
-								PRO_strGruppenName = i_strGruppenName,
-								PRO_strVariable = value2.Address,
-								PRO_objWert = value2.Value
-							};
-							list.Add(item);
-						}
-						m_dicGruppenReadCompletionSources.TryGetValue(i_strGruppenName, out TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> value);
-						value?.TrySetResult(list);
-					}
-				};
-				Action<object, CollectionEventArgs> delWrittenAction = delegate(object sender, CollectionEventArgs arg)
-				{
-					VariableCollection variableCollection2 = sender as VariableCollection;
-					if (variableCollection2 != null && variableCollection2.Name.Equals(i_strGruppenName))
-					{
-						m_fdcGruppeWriteCompletionSource.SetResult(result: true);
-					}
-				};
 				try
 				{
-					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: true);
-					VariableCollection variableCollection = FUN_fdcGruppeHolen(i_strGruppenName);
+					// 获得组 或 创建组
+					await m_fdcGroupSemaphore.WaitAsync().ConfigureAwait(true);
+					VariableCollection variableCollection = Fun_fdcGetGroup(i_strGroupName);
 					if (variableCollection == null)
 					{
-						variableCollection = FUN_fdcGruppeAnlegen(i_strGruppenName, i_i32CycleTime);
-						variableCollection.CollectionValuesRead += delegate(object sender, CollectionEventArgs arg)
+						variableCollection = FUN_fdcGruppeAnlegen(i_strGroupName, i_i32CycleTime);
+						variableCollection.CollectionValuesRead += (sender, arg) =>
 						{
-							delReadAction(sender, arg);
+							VariableCollection variableCollection3 = sender as VariableCollection;
+							if (variableCollection3 != null && variableCollection3.Name.Equals(i_strGroupName))
+							{
+								List<EDC_SpsListenElement> list = new List<EDC_SpsListenElement>();
+								foreach (Variable value2 in arg.Objects.Values)
+								{
+									EDC_SpsListenElement item = new EDC_SpsListenElement
+									{
+										PRO_strGruppenName = i_strGroupName,
+										PRO_strVariable = value2.Address,
+										PRO_objWert = value2.Value
+									};
+									list.Add(item);
+								}
+								m_dicGruppenReadCompletionSources.TryGetValue(i_strGroupName, out TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> value);
+								value?.TrySetResult(list);
+							}
 						};
-						variableCollection.CollectionValuesWritten += delegate(object sender, CollectionEventArgs arg)
+						variableCollection.CollectionValuesWritten += (sender, arg) =>
 						{
-							delWrittenAction(sender, arg);
+							VariableCollection variableCollection2 = sender as VariableCollection;
+							if (variableCollection2 != null && variableCollection2.Name.Equals(i_strGroupName))
+							{
+								m_fdcGruppeWriteCompletionSource.SetResult(true);
+							}
 						};
 						variableCollection.CollectionConnected += SUB_GruppeConnectionChanged;
 						variableCollection.CollectionDisconnected += SUB_GruppeConnectionChanged;
 					}
 					variableCollection.Disconnect();
+
+					// 添加变量
 					foreach (string item2 in lstVariablen)
 					{
 						string text = FUN_strNamenKorrigieren(item2);
-						variableCollection.Add(m_fdcCpu.Variables[text] ?? FUN_fdcErstelleNeueCpuVariable(text, i_i32CycleTime));
+						variableCollection.Add(m_fdcCpu.Variables[text] ?? Fun_fdcCreateNewCpuVariable(text, i_i32CycleTime));
 					}
-					m_fdcGruppeConnectedCompletionSource = new TaskCompletionSource<bool>();
+
+					// 激活
+					m_fdcGroupConnectedCompletionSource = new TaskCompletionSource<bool>();
 					variableCollection.Active = true;
 					variableCollection.Connect();
-					await m_fdcGruppeConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(true);
+					await m_fdcGroupConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(true);
 				}
 				finally
 				{
-					m_fdcGruppenSemaphore.Release();
+					m_fdcGroupSemaphore.Release();
 				}
 			}
 		}
@@ -447,24 +448,27 @@ namespace Ersa.Platform.Plc
         /// Group 写 异步
         /// </summary>
         /// <param name="i_enmParameter"></param>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		public async System.Threading.Tasks.Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGruppenName)
+		public async System.Threading.Tasks.Task FUN_fdcGruppeSchreibenAsync(IEnumerable<KeyValuePair<string, string>> i_enmParameter, string i_strGroupName)
 		{
+			// cpu连接
 			if (PRO_blnVerbunden)
 			{
-				VariableCollection fdcGruppe = FUN_fdcGruppeHolen(i_strGruppenName);
+				// 获得组
+				VariableCollection fdcGruppe = Fun_fdcGetGroup(i_strGroupName);
 				if (fdcGruppe == null)
 				{
-					throw new EDC_GruppeZugriffException("B&R sps group " + i_strGruppenName + " does not exist");
+					throw new EDC_GruppeZugriffException("B&R sps group " + i_strGroupName + " does not exist");
 				}
+
 				List<KeyValuePair<string, string>> lstFehler = new List<KeyValuePair<string, string>>();
 				foreach (KeyValuePair<string, string> item in i_enmParameter.ToList())
 				{
-					Variable variable = FUN_fdcItemAusCpuHolen(item.Key);
+					Variable variable = Fun_edcGetVariableFromCpu(item.Key);
 					if (variable == null)
 					{
-						lstFehler.Add(new KeyValuePair<string, string>(item.Key, "not registered or not in B&R sps group " + i_strGruppenName));
+						lstFehler.Add(new KeyValuePair<string, string>(item.Key, "not registered or not in B&R sps group " + i_strGroupName));
 					}
 					else
 					{
@@ -477,10 +481,10 @@ namespace Ersa.Platform.Plc
 				}
 				try
 				{
-					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: true);
+					await m_fdcGroupSemaphore.WaitAsync().ConfigureAwait(true);
 					m_fdcGruppeWriteCompletionSource = new TaskCompletionSource<bool>();
 					fdcGruppe.WriteValues();
-					await m_fdcGruppeWriteCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(continueOnCapturedContext: false);
+					await m_fdcGruppeWriteCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(false);
 					if (lstFehler.Any())
 					{
 						foreach (KeyValuePair<string, string> item2 in lstFehler)
@@ -489,12 +493,12 @@ namespace Ersa.Platform.Plc
 							Type reflectedType = MethodBase.GetCurrentMethod().ReflectedType;
 							PRO_edcLogger?.SUB_LogEintragSchreiben(ENUM_LogLevel.Fehler, i_strEintrag, reflectedType?.Namespace, reflectedType?.Name, MethodBase.GetCurrentMethod().Name);
 						}
-						throw new EDC_GruppeZugriffException("B&R PVI error writing group: " + i_strGruppenName);
+						throw new EDC_GruppeZugriffException("B&R PVI error writing group: " + i_strGroupName);
 					}
 				}
 				finally
 				{
-					m_fdcGruppenSemaphore.Release();
+					m_fdcGroupSemaphore.Release();
 				}
 			}
 		}
@@ -503,89 +507,105 @@ namespace Ersa.Platform.Plc
         /// Group 读 异步
         /// group Reading Async
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		public async Task<IEnumerable<EDC_SpsListenElement>> FUN_fdcGruppeLesenAsync(string i_strGruppenName)
+		public async Task<IEnumerable<EDC_SpsListenElement>> Fun_fdcGroupReadAsync(string i_strGroupName)
 		{
-			if (string.IsNullOrEmpty(i_strGruppenName))
+			if (string.IsNullOrEmpty(i_strGroupName))
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (!PRO_blnVerbunden)
 			{
 				return Enumerable.Empty<EDC_SpsListenElement>();
 			}
-			VariableCollection fdcGruppe = FUN_fdcGruppeHolen(i_strGruppenName);
+			VariableCollection fdcGruppe = Fun_fdcGetGroup(i_strGroupName);
 			if (fdcGruppe != null)
 			{
 				try
 				{
-					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(true);
+					await m_fdcGroupSemaphore.WaitAsync().ConfigureAwait(true);
+
+					// 每个组都建立一个TaskCompletionSource
 					TaskCompletionSource<IEnumerable<EDC_SpsListenElement>> taskCompletionSource = new TaskCompletionSource<IEnumerable<EDC_SpsListenElement>>();
-					m_dicGruppenReadCompletionSources[i_strGruppenName] = taskCompletionSource;
+					// 赋值全局变量
+					m_dicGruppenReadCompletionSources[i_strGroupName] = taskCompletionSource;
+					
 					fdcGruppe.ReadValues();
-					return await taskCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(continueOnCapturedContext: true);
+					
+					return await taskCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(true);
 				}
 				finally
 				{
-					m_fdcGruppenSemaphore.Release();
+					m_fdcGroupSemaphore.Release();
 				}
 			}
-			throw new EDC_GruppeZugriffException("B&R sps group " + i_strGruppenName + " does not exist");
+			throw new EDC_GruppeZugriffException("B&R sps group " + i_strGroupName + " does not exist");
 		}
 
-		public async System.Threading.Tasks.Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName)
+		/// <summary>
+		/// Group 激活
+		/// </summary>
+		/// <param name="i_strGroupName"></param>
+		/// <returns></returns>
+		public async System.Threading.Tasks.Task Fun_fdcGroupActiveAsync(string i_strGroupName)
 		{
-			if (string.IsNullOrEmpty(i_strGruppenName))
+			if (string.IsNullOrEmpty(i_strGroupName))
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (PRO_blnVerbunden)
 			{
 				try
 				{
-					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: false);
-					VariableCollection variableCollection = FUN_fdcGruppeHolen(i_strGruppenName);
+					// 只能由一个线程访问plc , 可以更换线程
+					await m_fdcGroupSemaphore.WaitAsync().ConfigureAwait(false);
+
+					// 获得组
+					VariableCollection variableCollection = Fun_fdcGetGroup(i_strGroupName);
 					if (variableCollection == null)
 					{
-						throw new EDC_GruppeZugriffException("B&R sps group " + i_strGruppenName + " does not exist");
+						throw new EDC_GruppeZugriffException("B&R sps group " + i_strGroupName + " does not exist");
 					}
-					m_fdcGruppeConnectedCompletionSource = new TaskCompletionSource<bool>();
+
+					m_fdcGroupConnectedCompletionSource = new TaskCompletionSource<bool>();
 					variableCollection.Active = true;
 					variableCollection.Connect();
-					await m_fdcGruppeConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(continueOnCapturedContext: true);
+
+					// 等待5秒后继续之前的线程
+					await m_fdcGroupConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(true);
 				}
 				finally
 				{
-					m_fdcGruppenSemaphore.Release();
+					m_fdcGroupSemaphore.Release();
 				}
 			}
 		}
 
-		public async System.Threading.Tasks.Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName)
+		public async System.Threading.Tasks.Task FUN_fdcGroupDisableAsync(string i_strGroupName)
 		{
-			if (string.IsNullOrEmpty(i_strGruppenName))
+			if (string.IsNullOrEmpty(i_strGroupName))
 			{
-				throw new ArgumentNullException("i_strGruppenName");
+				throw new ArgumentNullException("i_strGroupName");
 			}
 			if (PRO_blnVerbunden)
 			{
 				try
 				{
-					await m_fdcGruppenSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: false);
-					VariableCollection variableCollection = FUN_fdcGruppeHolen(i_strGruppenName);
+					await m_fdcGroupSemaphore.WaitAsync().ConfigureAwait(continueOnCapturedContext: false);
+					VariableCollection variableCollection = Fun_fdcGetGroup(i_strGroupName);
 					if (variableCollection == null)
 					{
-						throw new EDC_GruppeZugriffException("B&R sps group " + i_strGruppenName + " does not exist");
+						throw new EDC_GruppeZugriffException("B&R sps group " + i_strGroupName + " does not exist");
 					}
-					m_fdcGruppeConnectedCompletionSource = new TaskCompletionSource<bool>();
+					m_fdcGroupConnectedCompletionSource = new TaskCompletionSource<bool>();
 					variableCollection.Active = false;
 					variableCollection.Disconnect();
-					await m_fdcGruppeConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(continueOnCapturedContext: true);
+					await m_fdcGroupConnectedCompletionSource.Task.FUN_fdcTimeoutAfterAsync(5000).ConfigureAwait(continueOnCapturedContext: true);
 				}
 				finally
 				{
-					m_fdcGruppenSemaphore.Release();
+					m_fdcGroupSemaphore.Release();
 				}
 			}
 		}
@@ -598,27 +618,27 @@ namespace Ersa.Platform.Plc
         /// <summary>
         /// Create Group
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <param name="i_i32CycleTime"></param>
         /// <returns></returns>
-		private VariableCollection FUN_fdcGruppeAnlegen(string i_strGruppenName, int i_i32CycleTime)
+		private VariableCollection FUN_fdcGruppeAnlegen(string i_strGroupName, int i_i32CycleTime)
 		{
-			VariableCollection variableCollection = new VariableCollection(m_fdcCpu, i_strGruppenName);
+			VariableCollection variableCollection = new VariableCollection(m_fdcCpu, i_strGroupName);
 			variableCollection.CollectionError += SUB_PviCollectionError;
 			variableCollection.RefreshTime = i_i32CycleTime;
 
-			m_lstCpuGruppen.Add(variableCollection);
+			m_lstGroup.Add(variableCollection);
 			return variableCollection;
 		}
 
         /// <summary>
         /// Get Group
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		private VariableCollection FUN_fdcGruppeHolen(string i_strGruppenName)
+		private VariableCollection Fun_fdcGetGroup(string i_strGroupName)
 		{
-			return m_lstCpuGruppen.FirstOrDefault((VariableCollection i_edcItem) => i_edcItem.Name.Equals(i_strGruppenName));
+			return m_lstGroup.FirstOrDefault(s => s.Name.Equals(i_strGroupName));
 		}
 
 		/// <summary>
@@ -633,7 +653,7 @@ namespace Ersa.Platform.Plc
 			{
 				string arg = variableCollection.Active ? "activated" : "deactivated";
 				SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, $"{variableCollection.Name} was {arg}. Collection-count: {variableCollection.Count}", "SUB_GruppeConnectionChanged");
-				m_fdcGruppeConnectedCompletionSource?.TrySetResult(result: true);
+				m_fdcGroupConnectedCompletionSource?.TrySetResult(result: true);
 			}
 		}
 
@@ -644,7 +664,7 @@ namespace Ersa.Platform.Plc
         /// <param name="i_strVariable"></param>
 		private void SUB_VariableAusGruppeEntfernen(VariableCollection i_fdcGruppe, string i_strVariable)
 		{
-			Variable variable = i_fdcGruppe.Contains(i_strVariable) ? m_fdcEventGruppe[i_strVariable] : null;
+			Variable variable = i_fdcGruppe.Contains(i_strVariable) ? m_fdcGroupEvent[i_strVariable] : null;
 			if (variable != null)
 			{
 				i_fdcGruppe.Remove(variable);
@@ -656,27 +676,27 @@ namespace Ersa.Platform.Plc
         /// </summary>
 		private void SUB_Zerstoeren()
 		{
-			if (m_fdcEventGruppe != null)
+			if (m_fdcGroupEvent != null)
 			{
-				m_fdcEventGruppe.Error -= SUB_EventGruppeError;
-				SUB_GruppeDispose(m_fdcEventGruppe);
+				m_fdcGroupEvent.Error -= SUB_EventGruppeError;
+				SUB_GruppeDispose(m_fdcGroupEvent);
 			}
-			if (m_fdcGruppe != null)
+			if (m_fdcGroup != null)
 			{
-				SUB_GruppeDispose(m_fdcGruppe);
+				SUB_GruppeDispose(m_fdcGroup);
 			}
-			if (m_fdcTempGruppe != null)
+			if (m_fdcGroupTemp != null)
 			{
-				SUB_GruppenEventsDeRegistrieren(m_fdcTempGruppe);
-				SUB_GruppeDispose(m_fdcTempGruppe);
+				Sub_GroupEventsDeRegister(m_fdcGroupTemp);
+				SUB_GruppeDispose(m_fdcGroupTemp);
 			}
-			foreach (VariableCollection item in m_lstCpuGruppen)
+			foreach (VariableCollection item in m_lstGroup)
 			{
 				item.CollectionConnected -= SUB_GruppeConnectionChanged;
 				item.CollectionDisconnected -= SUB_GruppeConnectionChanged;
 				SUB_GruppeDispose(item);
 			}
-			m_lstCpuGruppen.Clear();
+			m_lstGroup.Clear();
 			if (m_fdcCpu != null)
 			{
 				SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, "m_fdcCpu.Connection.TcpIp.SourceStation=" + m_fdcCpu.Connection.TcpIp.SourceStation, "SUB_VerbindungLoesen()");
@@ -735,20 +755,23 @@ namespace Ersa.Platform.Plc
         /// <summary>
         /// 注册组
         /// </summary>
-		private void SUB_InitGruppen()
+		private void Sub_InitializeGroup()
         {
-            m_lstCpuGruppen.Clear();
-            m_fdcGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString()) { RefreshTime = 400 };
-            m_fdcTempGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
-            SUB_GruppenEventsRegistrieren(m_fdcTempGruppe);
+            m_lstGroup.Clear();
 
-            m_fdcEventGruppe = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
-            m_fdcEventGruppe.Error += SUB_EventGruppeError;
-            m_fdcEventGruppe.CollectionPropertyChanged += SUB_EventGruppePropertyChanged;
-            m_fdcEventGruppe.RefreshTime = 100;
+            m_fdcGroup = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString()) { RefreshTime = 400 };
+
+            m_fdcGroupTemp = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
+			// Group Temp注册事件
+			Sub_GroupEventsRegister(m_fdcGroupTemp);
+
+            m_fdcGroupEvent = new VariableCollection(m_fdcCpu, Guid.NewGuid().ToString());
+            m_fdcGroupEvent.Error += SUB_EventGruppeError;
+            m_fdcGroupEvent.CollectionPropertyChanged += Sub_EventGroupPropertyChanged;
+            m_fdcGroupEvent.RefreshTime = 100;
         }
 
-		private void SUB_EventGruppePropertyChanged(object i_objSender, CollectionEventArgs i_fdcEventArgse)
+		private void Sub_EventGroupPropertyChanged(object i_objSender, CollectionEventArgs i_fdcEventArgse)
 		{
 			SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, "e.Objects.Count =" + i_fdcEventArgse.Objects.Count, "SUB_EventGruppePropertyChanged");
 		}
@@ -781,7 +804,7 @@ namespace Ersa.Platform.Plc
 			m_fdcCpu.Variables.RefreshTime = 400;
 			if (i_fdcPviEventArgs.ErrorCode == 0)
 			{
-				m_fdcVerbindungsCompletionSource.TrySetResult(true);
+				m_fdcConnectionCompletionSource.TrySetResult(true);
 			}
 		}
 
@@ -804,7 +827,7 @@ namespace Ersa.Platform.Plc
 			{
 				return false;
 			}
-			if (FUN_fdcItemAusCpuHolen(i_strVarName) == null)
+			if (Fun_edcGetVariableFromCpu(i_strVarName) == null)
 			{
 				return false;
 			}
@@ -872,7 +895,7 @@ namespace Ersa.Platform.Plc
         /// </summary>
         /// <param name="i_strVarName"></param>
         /// <returns></returns>
-		private Variable FUN_fdcItemAusCpuHolen(string i_strVarName)
+		private Variable Fun_edcGetVariableFromCpu(string i_strVarName)
 		{
 			if (!PRO_blnVerbunden)
 			{
@@ -891,11 +914,11 @@ namespace Ersa.Platform.Plc
 		private Variable FUN_fdcItemAusEventGruppeHolen(string i_strVarName)
 		{
 			string text = FUN_strNamenKorrigieren(i_strVarName);
-			if (!m_fdcEventGruppe.Contains(text))
+			if (!m_fdcGroupEvent.Contains(text))
 			{
 				return null;
 			}
-			return m_fdcEventGruppe[text];
+			return m_fdcGroupEvent[text];
 		}
 
         /// <summary>
@@ -904,12 +927,14 @@ namespace Ersa.Platform.Plc
         /// <param name="i_lstVariablen"></param>
         /// <param name="i_fdcVarCollection"></param>
         /// <param name="i_fdcToken"></param>
-		private void SUB_GruppeFuellen(IEnumerable<string> i_lstVariablen, VariableCollection i_fdcVarCollection, CancellationToken i_fdcToken)
+		private void Sub_GroupFill(IEnumerable<string> i_lstVariablen, VariableCollection i_fdcVarCollection, CancellationToken i_fdcToken)
 		{
 			foreach (string item in i_lstVariablen)
 			{
 				i_fdcToken.ThrowIfCancellationRequested();
-				i_fdcVarCollection.Add(FUN_fdcErstelleNeueCpuVariable(item, 400));
+
+				Variable variable = Fun_fdcCreateNewCpuVariable(item, 400);
+				i_fdcVarCollection.Add(variable);
 			}
 			i_fdcVarCollection.Connect();
 		}
@@ -921,7 +946,7 @@ namespace Ersa.Platform.Plc
         /// <param name="i_strVariable">变量</param>
         /// <param name="i_i32CycleTime">CT</param>
         /// <returns>Variable</returns>
-        private Variable FUN_fdcErstelleNeueCpuVariable(string i_strVariable, int i_i32CycleTime)
+        private Variable Fun_fdcCreateNewCpuVariable(string i_strVariable, int i_i32CycleTime)
 		{
 			string name = FUN_strNamenKorrigieren(i_strVariable);
 			Variable variable = new Variable(m_fdcCpu, name)
@@ -967,22 +992,22 @@ namespace Ersa.Platform.Plc
         /// Register group events
         /// </summary>
         /// <param name="i_fdcGruppe"></param>
-		private void SUB_GruppenEventsRegistrieren(VariableCollection i_fdcGruppe)
+		private void Sub_GroupEventsRegister(VariableCollection i_fdcGruppe)
 		{
 			i_fdcGruppe.Error += SUB_PviCollectionError;
 			i_fdcGruppe.CollectionConnected += SUB_CollectionConnected;
-			i_fdcGruppe.CollectionValuesRead += SUB_CollectionValuesRead;
+			i_fdcGruppe.CollectionValuesRead += Sub_GroupValuesRead;
 		}
 
         /// <summary>
         /// Group 事件注销
         /// </summary>
         /// <param name="i_fdcGruppe"></param>
-		private void SUB_GruppenEventsDeRegistrieren(VariableCollection i_fdcGruppe)
+		private void Sub_GroupEventsDeRegister(VariableCollection i_fdcGruppe)
 		{
 			i_fdcGruppe.Error -= SUB_PviCollectionError;
 			i_fdcGruppe.CollectionConnected -= SUB_CollectionConnected;
-			i_fdcGruppe.CollectionValuesRead -= SUB_CollectionValuesRead;
+			i_fdcGruppe.CollectionValuesRead -= Sub_GroupValuesRead;
 		}
 
 		/// <summary>
@@ -990,14 +1015,14 @@ namespace Ersa.Platform.Plc
 		/// </summary>
 		/// <param name="i_objSender"></param>
 		/// <param name="i_fdcCollectionEventArgs"></param>
-		private void SUB_CollectionValuesRead(object i_objSender, CollectionEventArgs i_fdcCollectionEventArgs)
+		private void Sub_GroupValuesRead(object i_objSender, CollectionEventArgs i_fdcCollectionEventArgs)
 		{
 			VariableCollection variableCollection = i_objSender as VariableCollection;
 			if (variableCollection != null)
 			{
 				SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, $"{variableCollection.Name} read: {variableCollection.Count} variables", "SUB_CollectionValuesRead");
 			}
-			m_fdcVariablenCompletionSource.SetResult(result: true);
+			m_fdcVariableCompletionSource.SetResult(true);
 		}
 
         /// <summary>
@@ -1053,7 +1078,7 @@ namespace Ersa.Platform.Plc
 			SUB_LogEintragSchreiben(ENUM_LogLevel.enmSpsKommunkation, text, "SUB_PviError");
 			if (i_fdcPviEventArgs.Action != BR.AN.PviServices.Action.VariableDisconnect)
 			{
-				m_fdcVerbindungsCompletionSource.TrySetException(new EDC_SpsVerbindungsAufbauFehlgeschlagenException(text));
+				m_fdcConnectionCompletionSource.TrySetException(new EDC_SpsVerbindungsAufbauFehlgeschlagenException(text));
 			}
 		}
 	}

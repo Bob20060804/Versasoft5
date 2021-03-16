@@ -18,7 +18,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			set;
 		}
 
-		public INF_Sps FUN_edcAktiveSps()
+		public INF_Sps Fun_edcActiveSps()
 		{
 			if (EDC_KommunikationsHelfer.PRO_strSpsTyp != "M1Com" && EDC_KommunikationsHelfer.PRO_strSpsTyp != "PviServices")
 			{

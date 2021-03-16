@@ -13,11 +13,11 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
     /// 通讯服务包装
     /// Communication service wrapper
     /// </summary>
-	[Export(typeof(INF_KommunikationsDienst))]
+	[Export(typeof(Inf_CommunicationService))]
 	[Export(typeof(INF_KommunikationsDienstWrapper))]
-	public class EDC_KommunikationsDienstWrapper : EDC_DisposableObject, INF_KommunikationsDienst, IDisposable, INF_KommunikationsDienstWrapper
+	public class EDC_KommunikationsDienstWrapper : EDC_DisposableObject, Inf_CommunicationService, IDisposable, INF_KommunikationsDienstWrapper
 	{
-		private INF_KommunikationsDienst m_edcInstanz;
+		private Inf_CommunicationService m_edcInstanz;
 
 		[ImportingConstructor]
 		public EDC_KommunikationsDienstWrapper(EDC_KommunikationsDienst i_edcKommunikationsDienst)
@@ -25,9 +25,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			m_edcInstanz = i_edcKommunikationsDienst;
 		}
 
-		public Task FUN_fdcVerbindungZurSteuerungAufbauen(bool i_blnOnline)
+		public Task Fun_fdcConnect(bool i_blnOnline)
 		{
-			return m_edcInstanz.FUN_fdcVerbindungZurSteuerungAufbauen(i_blnOnline);
+			return m_edcInstanz.Fun_fdcConnect(i_blnOnline);
 		}
 
 		public void SUB_VerbindungLoesen()
@@ -35,34 +35,34 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			m_edcInstanz.SUB_VerbindungLoesen();
 		}
 
-		public void SUB_WertLesen(EDC_PrimitivParameter i_edcParameter)
+		public void Sub_ReadValue(EDC_PrimitivParameter i_edcParameter)
 		{
-			m_edcInstanz.SUB_WertLesen(i_edcParameter);
+			m_edcInstanz.Sub_ReadValue(i_edcParameter);
 		}
 
-		public Task FUN_fdcWerteLesenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
+		public Task Fun_fdcReadValueAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
 		{
-			return m_edcInstanz.FUN_fdcWerteLesenAsync(i_lstPrimitivParameter, i_fdcCancellationToken);
+			return m_edcInstanz.Fun_fdcReadValueAsync(i_lstPrimitivParameter, i_fdcCancellationToken);
 		}
 
-		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100)
+		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGroupName, int i_i32CycleTime = 100)
 		{
-			return m_edcInstanz.FUN_fdcVariablenGruppeErstellenAsync(i_lstPrimitivParameter, i_strGruppenName, i_i32CycleTime);
+			return m_edcInstanz.FUN_fdcVariablenGruppeErstellenAsync(i_lstPrimitivParameter, i_strGroupName, i_i32CycleTime);
 		}
 
-		public Task FUN_fdcGruppeLesenAsync(string i_strGruppenName)
+		public Task FUN_fdcGruppeLesenAsync(string i_strGroupName)
 		{
-			return m_edcInstanz.FUN_fdcGruppeLesenAsync(i_strGruppenName);
+			return m_edcInstanz.FUN_fdcGruppeLesenAsync(i_strGroupName);
 		}
 
-		public Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName)
+		public Task FUN_fdcGruppeAktivierenAsync(string i_strGroupName)
 		{
-			return m_edcInstanz.FUN_fdcGruppeAktivierenAsync(i_strGruppenName);
+			return m_edcInstanz.FUN_fdcGruppeAktivierenAsync(i_strGroupName);
 		}
 
-		public Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName)
+		public Task FUN_fdcGruppeDeaktivierenAsync(string i_strGroupName)
 		{
-			return m_edcInstanz.FUN_fdcGruppeDeaktivierenAsync(i_strGruppenName);
+			return m_edcInstanz.FUN_fdcGruppeDeaktivierenAsync(i_strGroupName);
 		}
 
 		public void SUB_WertSchreiben(EDC_PrimitivParameter i_edcParameter)
@@ -75,9 +75,9 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			return m_edcInstanz.FUN_fdcWerteSchreibenAsync(i_lstPrimitivParameter, i_fdcCancellationToken);
 		}
 
-		public Task FUN_fdcGruppenWerteSchreibenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName)
+		public Task FUN_fdcGroupValueWriteAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGroupName)
 		{
-			return m_edcInstanz.FUN_fdcGruppenWerteSchreibenAsync(i_lstPrimitivParameter, i_strGruppenName);
+			return m_edcInstanz.FUN_fdcGroupValueWriteAsync(i_lstPrimitivParameter, i_strGroupName);
 		}
 
 		public Task FUN_fdcPhysischeAdressenRegistrierenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
@@ -110,7 +110,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			m_edcInstanz.SUB_ParameterAbbildSchreiben(i_dicAbbild);
 		}
 
-		public void SUB_KommunikationsDienstInstanzSetzen(INF_KommunikationsDienst i_edcKommunikationsDienst)
+		public void SUB_KommunikationsDienstInstanzSetzen(Inf_CommunicationService i_edcKommunikationsDienst)
 		{
 			m_edcInstanz = i_edcKommunikationsDienst;
 		}

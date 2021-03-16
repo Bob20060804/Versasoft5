@@ -18,10 +18,10 @@ namespace Ersa.Platform.Plc.AnfoQuitt
 	{
 		private const int mC_i32MaximaleVersucheAnfoRuecksetzung = 5;
 
-		private readonly INF_KommunikationsDienst m_edcKommunikationsDienst;
+		private readonly Inf_CommunicationService m_edcKommunikationsDienst;
 
 		[ImportingConstructor]
-		public EDC_EnumAnfoQuittDienst(INF_KommunikationsDienst i_edcKommunikationsDienst)
+		public EDC_EnumAnfoQuittDienst(Inf_CommunicationService i_edcKommunikationsDienst)
 		{
 			m_edcKommunikationsDienst = i_edcKommunikationsDienst;
 		}
@@ -53,7 +53,7 @@ namespace Ersa.Platform.Plc.AnfoQuitt
 
 		private async Task FUN_fdcTestUndInitAnfoWertAsync<TEnum>(EDC_ToggleEnumWert<TEnum> i_edcToggle, CancellationToken i_fdcCancellationToken) where TEnum : struct, IConvertible, IComparable, IFormattable
 		{
-			m_edcKommunikationsDienst.SUB_WertLesen(i_edcToggle.PRO_edcAnfoParameter);
+			m_edcKommunikationsDienst.Sub_ReadValue(i_edcToggle.PRO_edcAnfoParameter);
 			if (i_edcToggle.PRO_edcAnfoParameter.PRO_enmWert.Equals(i_edcToggle.PRO_enmAnfoSetzenWert) && !(await FUN_fdcAnfoWertZurueckSetzenAsync(i_edcToggle, i_fdcCancellationToken)))
 			{
 				throw new EDC_AnfoQuittException($"Anfo-Parameter cannot be set to false. Parameter: {i_edcToggle.PRO_edcAnfoParameter.PRO_strAdresse}");
@@ -67,7 +67,7 @@ namespace Ersa.Platform.Plc.AnfoQuitt
 			do
 			{
 				await Task.Delay(TimeSpan.FromMilliseconds(200.0), i_fdcCancellationToken);
-				m_edcKommunikationsDienst.SUB_WertLesen(i_edcToggle.PRO_edcAnfoParameter);
+				m_edcKommunikationsDienst.Sub_ReadValue(i_edcToggle.PRO_edcAnfoParameter);
 				i32AnzahlVersuche++;
 			}
 			while (i_edcToggle.PRO_edcAnfoParameter.PRO_enmWert.Equals(i_edcToggle.PRO_enmAnfoSetzenWert) && i32AnzahlVersuche <= 5);

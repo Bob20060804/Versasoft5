@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ersa.Platform.Plc.Interfaces
 {
-	public interface INF_KommunikationsDienst : IDisposable
+	public interface Inf_CommunicationService : IDisposable
 	{
         /// <summary>
         /// 建立连接
@@ -14,7 +14,7 @@ namespace Ersa.Platform.Plc.Interfaces
         /// </summary>
         /// <param name="i_blnOnline"></param>
         /// <returns></returns>
-		Task FUN_fdcVerbindungZurSteuerungAufbauen(bool i_blnOnline);
+		Task Fun_fdcConnect(bool i_blnOnline);
 
         /// <summary>
         /// Disconnect
@@ -25,14 +25,15 @@ namespace Ersa.Platform.Plc.Interfaces
         /// Read Value
         /// </summary>
         /// <param name="i_edcParameter"></param>
-		void SUB_WertLesen(EDC_PrimitivParameter i_edcParameter);
+		void Sub_ReadValue(EDC_PrimitivParameter i_edcParameter);
+
         /// <summary>
         /// Read Value Async
         /// </summary>
         /// <param name="i_lstPrimitivParameter"></param>
         /// <param name="i_fdcCancellationToken"></param>
         /// <returns></returns>
-		Task FUN_fdcWerteLesenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken);
+		Task Fun_fdcReadValueAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken);
 
         /// <summary>
         /// Write value
@@ -44,31 +45,31 @@ namespace Ersa.Platform.Plc.Interfaces
         /// Variable group create async
         /// </summary>
         /// <param name="i_lstPrimitivParameter"></param>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <param name="i_i32CycleTime"></param>
         /// <returns></returns>
-		Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100);
+		Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGroupName, int i_i32CycleTime = 100);
 
         /// <summary>
         /// 读取Group 异步
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task FUN_fdcGruppeLesenAsync(string i_strGruppenName);
+		Task FUN_fdcGruppeLesenAsync(string i_strGroupName);
 
         /// <summary>
         /// 激活Group 异步
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName);
+		Task FUN_fdcGruppeAktivierenAsync(string i_strGroupName);
 
         /// <summary>
         /// 禁用组 异步
         /// </summary>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName);
+		Task FUN_fdcGruppeDeaktivierenAsync(string i_strGroupName);
 
         /// <summary>
         /// Write Value
@@ -82,9 +83,9 @@ namespace Ersa.Platform.Plc.Interfaces
         /// Group Write Value Async
         /// </summary>
         /// <param name="i_lstPrimitivParameter"></param>
-        /// <param name="i_strGruppenName"></param>
+        /// <param name="i_strGroupName"></param>
         /// <returns></returns>
-		Task FUN_fdcGruppenWerteSchreibenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName);
+		Task FUN_fdcGroupValueWriteAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGroupName);
 
         /// <summary>
         /// 物理地址存储 异步

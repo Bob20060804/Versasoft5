@@ -17,15 +17,16 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
     /// Communication Service
     /// </summary>
 	[Export]
-	public class EDC_KommunikationsDienst : EDC_DisposableObject, INF_KommunikationsDienst, IDisposable
+	public class EDC_KommunikationsDienst : EDC_DisposableObject, Inf_CommunicationService, IDisposable
 	{
+        #region ==== Parameter ====
         /// <summary>
-        /// SPS Provider
+        /// 
         /// </summary>
         private readonly INF_SpsProvider m_edcSpsProvider;
 
         private INF_Sps m_edcSpsService;
-        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.FUN_edcAktiveSps());
+        private INF_Sps PRO_edcSpsService => m_edcSpsService ?? (m_edcSpsService = m_edcSpsProvider.Fun_edcActiveSps());
 
 
         private readonly INF_Logger m_edcLogger;
@@ -50,10 +51,10 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// </summary>
 		private readonly IDictionary<EDC_PrimitivParameter, IDisposable> m_dicEventHandlerSubscriptions;
 
-        /// <summary>
-        /// 变量读策略
-        /// parameter read strategy
-        /// </summary>
+		/// <summary>
+		/// 读 变量 策略
+		/// parameter read strategy
+		/// </summary>
 		private readonly EDC_ParameterLeseStrategie m_edcLeseStrategie;
         /// <summary>
         /// 注册地址策略
@@ -73,19 +74,19 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// <summary>
         /// Lock Connection 
         /// </summary>
-		private readonly object m_objVerbindungLock = new object();
+		private readonly object m_objLockConnection = new object();
         /// <summary>
         /// Lock Reading 
         /// </summary>
-		private readonly object m_objLeseLock = new object();
+		private readonly object m_objLockReading = new object();
         /// <summary>
         /// Lock Write 
         /// </summary>
-		private readonly object m_objSchreibeLock = new object();
+		private readonly object m_objLockWrite = new object();
 		/// <summary>
 		/// Group
 		/// </summary>
-		private readonly Dictionary<string, IEnumerable<EDC_PrimitivParameter>> m_dicGruppenParameter = new Dictionary<string, IEnumerable<EDC_PrimitivParameter>>();
+		private readonly Dictionary<string, IEnumerable<EDC_PrimitivParameter>> m_dicGroupParameter = new Dictionary<string, IEnumerable<EDC_PrimitivParameter>>();
 
 		
         /// <summary>
@@ -101,7 +102,18 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			get;
 			set;
 		}
+		#endregion ============
 
+
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="i_edcLeseStrategie">读取参数策略</param>
+		/// <param name="i_edcAdressRegistrierungsStrategie">注册地址策略</param>
+		/// <param name="i_edcEvenHandlerRegStrategie">注册事件策略</param>
+		/// <param name="i_edcSchreibeStrategie">参数写入策略</param>
+		/// <param name="i_edcSpsProvider"></param>
+		/// <param name="i_edcLogger"></param>
 		[ImportingConstructor]
 		public EDC_KommunikationsDienst(EDC_ParameterLeseStrategie i_edcLeseStrategie, EDC_AdressRegistrierungsStrategie i_edcAdressRegistrierungsStrategie, EDC_EventHandlerRegistrierungsStrategie i_edcEvenHandlerRegStrategie, EDC_ParameterSchreibeStrategie i_edcSchreibeStrategie, INF_SpsProvider i_edcSpsProvider, INF_Logger i_edcLogger)
 		{
@@ -112,10 +124,14 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			m_edcSpsProvider = i_edcSpsProvider;
 			m_edcLogger = i_edcLogger;
 
+			// 读取参数策略
 			m_dicLeseOperationen = new Dictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>>(new EDC_PrimitivParameterEqualityComparer());
+			// 写策略
 			m_dicSchreibeOperationen = new Dictionary<EDC_PrimitivParameter, Action<EDC_PrimitivParameter>>(new EDC_PrimitivParameterEqualityComparer());
+			// 事件描述
 			m_dicEventHandlerSubscriptions = new Dictionary<EDC_PrimitivParameter, IDisposable>();
 		}
+
 
         /// <summary>
         /// 建立控制连接
@@ -123,13 +139,13 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// </summary>
         /// <param name="i_blnOnline"></param>
         /// <returns></returns>
-		public async Task FUN_fdcVerbindungZurSteuerungAufbauen(bool i_blnOnline)
+		public async Task Fun_fdcConnect(bool i_blnOnline)
 		{
 			try
 			{
-				m_dicGruppenParameter.Clear();
-				await PRO_edcSpsService.FUN_fdcVerbindungAufbauenAsync(i_blnOnline, EDC_KommunikationsHelfer.PRO_strSpsIpAdresse).ConfigureAwait(true);
-				lock (m_objVerbindungLock)
+				m_dicGroupParameter.Clear();
+				await PRO_edcSpsService.Fun_ConnectAsync(i_blnOnline, EDC_KommunikationsHelfer.PRO_strSpsIpAdresse).ConfigureAwait(true);
+				lock (m_objLockConnection)
 				{
 					m_blnIstVerbindungGeloest = false;
 				}
@@ -148,13 +164,13 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		{
 			try
 			{
-				lock (m_objVerbindungLock)
+				lock (m_objLockConnection)
 				{
 					m_blnIstVerbindungGeloest = true;
 				}
 				SUB_EventHandlerDicValueDispose();
-				PRO_edcSpsService.SUB_VerbindungLoesen();
-				m_dicGruppenParameter.Clear();
+				PRO_edcSpsService.Sub_DisConnect();
+				m_dicGroupParameter.Clear();
 			}
 			catch (Exception i_fdcEx)
 			{
@@ -167,7 +183,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// Read Value
         /// </summary>
         /// <param name="i_edcParameter"></param>
-		public void SUB_WertLesen(EDC_PrimitivParameter i_edcParameter)
+		public void Sub_ReadValue(EDC_PrimitivParameter i_edcParameter)
 		{
             // 建立连接
 			if (FUN_blnIstVerbindungAufgebaut())
@@ -175,11 +191,12 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				try
 				{
 					Action<EDC_PrimitivParameter> value;
-					lock (m_objLeseLock)
+					lock (m_objLockReading)
 					{
 						if (!m_dicLeseOperationen.TryGetValue(i_edcParameter, out value))
 						{
 							Action<EDC_PrimitivParameter> action = FUN_objParameterBehandlung(i_edcParameter, m_edcLeseStrategie);
+							// 添加方法
 							m_dicLeseOperationen.Add(i_edcParameter, action);
 							value = action;
 						}
@@ -201,14 +218,14 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
         /// <param name="i_lstPrimitivParameter"></param>
         /// <param name="i_fdcCancellationToken"></param>
         /// <returns></returns>
-		public Task FUN_fdcWerteLesenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
+		public Task Fun_fdcReadValueAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, CancellationToken i_fdcCancellationToken)
 		{
 			return Task.Run(()=>
 			{
 				foreach (EDC_PrimitivParameter item in i_lstPrimitivParameter)
 				{
 					i_fdcCancellationToken.ThrowIfCancellationRequested();
-					SUB_WertLesen(item);
+					Sub_ReadValue(item);
 				}
 			}, i_fdcCancellationToken);
 		}
@@ -224,7 +241,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				try
 				{
 					Action<EDC_PrimitivParameter> value;
-					lock (m_objSchreibeLock)
+					lock (m_objLockWrite)
 					{
 						if (!m_dicSchreibeOperationen.TryGetValue(i_edcParameter, out value))
 						{
@@ -281,7 +298,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 							throw new InvalidOperationException("Error registering variables. Another registration is in progress and the timeout expired.");
 						}
 						IEnumerable<string> i_lstVariablen = FUN_lstPhysischeAdressenHolen(lstPrimitivParameter, i_fdcCancellationToken);
-						await PRO_edcSpsService.FUN_fdcVariablenAnmeldenAsync(i_lstVariablen, i_fdcCancellationToken).ConfigureAwait(true);
+						await PRO_edcSpsService.Sub_VariablesRegisterAsync(i_lstVariablen, i_fdcCancellationToken).ConfigureAwait(true);
 					}
 					finally
 					{
@@ -309,17 +326,17 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				IList<EDC_PrimitivParameter> lstPrimitivParameter = (i_lstPrimitivParameter as IList<EDC_PrimitivParameter>) ?? i_lstPrimitivParameter.ToList();
 				try
 				{
-					await PRO_edcSpsService.FUN_fdcVariablenAbmeldenAsync(FUN_lstPhysischeAdressenHolen(lstPrimitivParameter), i_fdcToken).ConfigureAwait(continueOnCapturedContext: true);
+					await PRO_edcSpsService.Sub_VariablesUnregister(FUN_lstPhysischeAdressenHolen(lstPrimitivParameter), i_fdcToken).ConfigureAwait(continueOnCapturedContext: true);
 					foreach (EDC_PrimitivParameter item in lstPrimitivParameter)
 					{
-						lock (m_objLeseLock)
+						lock (m_objLockReading)
 						{
 							if (m_dicLeseOperationen.ContainsKey(item))
 							{
 								m_dicLeseOperationen.Remove(item);
 							}
 						}
-						lock (m_objSchreibeLock)
+						lock (m_objLockWrite)
 						{
 							if (m_dicSchreibeOperationen.ContainsKey(item))
 							{
@@ -353,19 +370,21 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 					IList<EDC_PrimitivParameter> list = (i_lstPrimitivParameter as IList<EDC_PrimitivParameter>) ?? i_lstPrimitivParameter.ToList();
 					try
 					{
-						PRO_edcSpsService.SUB_EventGruppeDeaktivieren();
+						PRO_edcSpsService.Sub_GroupEventDisactivate();
 						foreach (EDC_PrimitivParameter item in list)
 						{
 							i_fdcToken.ThrowIfCancellationRequested();
 							if (string.IsNullOrEmpty(item.PRO_strPhysischeAdresse))
 							{
+								// 处理item 
 								item.PRO_strPhysischeAdresse = FUN_objParameterBehandlung(item, m_edcEvenHandlerRegStrategie);
 							}
 							edcParameter = item;
-							IDisposable value = PRO_edcSpsService.FUN_fdcEventHandlerRegistrieren(item.PRO_strPhysischeAdresse, () => SUB_WertLesen(edcParameter));
+
+							IDisposable value = PRO_edcSpsService.Fun_fdcRegisterEventHandler(item.PRO_strPhysischeAdresse, () => Sub_ReadValue(edcParameter));
 							m_dicEventHandlerSubscriptions.Add(edcParameter, value);
 						}
-						PRO_edcSpsService.SUB_EventGruppeAktivieren();
+						PRO_edcSpsService.Sub_GroupEventActive();
 					}
 					catch (Exception i_fdcEx)
 					{
@@ -420,7 +439,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				IList<string> lstAdressen = (i_enuAdressen as IList<string>) ?? i_enuAdressen.ToList();
 				try
 				{
-					await PRO_edcSpsService.FUN_fdcVariablenAnmeldenAsync(lstAdressen, CancellationToken.None).ConfigureAwait(continueOnCapturedContext: true);
+					await PRO_edcSpsService.Sub_VariablesRegisterAsync(lstAdressen, CancellationToken.None).ConfigureAwait(continueOnCapturedContext: true);
 				}
 				catch (Exception i_fdcEx)
 				{
@@ -444,7 +463,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 					try
 					{
                         // 写
-						PRO_edcSpsService.SUB_WertSchreiben(item.Key, item.Value.ToString());
+						PRO_edcSpsService.Sub_WriteValue(item.Key, item.Value.ToString());
 					}
 					catch (Exception i_fdcEx)
 					{
@@ -461,10 +480,10 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		/// Create Variable In Group Async
 		/// </summary>
 		/// <param name="i_lstPrimitivParameter">PLC地址</param>
-		/// <param name="i_strGruppenName"></param>
+		/// <param name="i_strGroupName"></param>
 		/// <param name="i_i32CycleTime"></param>
 		/// <returns></returns>
-		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName, int i_i32CycleTime = 100)
+		public Task FUN_fdcVariablenGruppeErstellenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGroupName, int i_i32CycleTime = 100)
 		{
             // 是否在释放资源
 			if (!FUN_blnIstVerbindungAufgebaut())
@@ -484,13 +503,13 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				list2.Add(item.PRO_strPhysischeAdresse);
 			}
 
-			if (!m_dicGruppenParameter.ContainsKey(i_strGruppenName))
+			if (!m_dicGroupParameter.ContainsKey(i_strGroupName))
 			{
-				m_dicGruppenParameter.Add(i_strGruppenName, list);
+				m_dicGroupParameter.Add(i_strGroupName, list);
 			}
 			else
 			{
-				List<EDC_PrimitivParameter> list3 = m_dicGruppenParameter[i_strGruppenName].ToList();
+				List<EDC_PrimitivParameter> list3 = m_dicGroupParameter[i_strGroupName].ToList();
 				foreach (EDC_PrimitivParameter item2 in list)
 				{
 					if (!list3.Contains(item2))
@@ -499,19 +518,28 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 					}
 				}
 			}
-			return m_edcSpsService.FUN_fdcVariablenGruppeErstellenAsync(list2, i_strGruppenName, i_i32CycleTime);
+			return m_edcSpsService.Fun_fdcGroupCreateVariableAsync(list2, i_strGroupName, i_i32CycleTime);
 		}
 
-		public Task FUN_fdcGruppenWerteSchreibenAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGruppenName)
+		/// <summary>
+		/// 组 写值
+		/// </summary>
+		/// <param name="i_lstPrimitivParameter"></param>
+		/// <param name="i_strGroupName"></param>
+		/// <returns></returns>
+		public Task FUN_fdcGroupValueWriteAsync(IEnumerable<EDC_PrimitivParameter> i_lstPrimitivParameter, string i_strGroupName)
 		{
+			// 没有连接, 结束线程
 			if (!FUN_blnIstVerbindungAufgebaut())
 			{
 				return Task.CompletedTask;
 			}
-			if (!m_dicGruppenParameter.ContainsKey(i_strGruppenName))
+			// 没有这个组
+			if (!m_dicGroupParameter.ContainsKey(i_strGroupName))
 			{
-				throw new EDC_GruppeZugriffException("unknown group " + i_strGruppenName);
+				throw new EDC_GruppeZugriffException("unknown group " + i_strGroupName);
 			}
+
 			List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
 			foreach (EDC_PrimitivParameter item in i_lstPrimitivParameter.ToList())
 			{
@@ -521,29 +549,29 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 				}
 				list.Add(new KeyValuePair<string, string>(item.PRO_strPhysischeAdresse, item.PRO_objValue.ToString()));
 			}
-			return m_edcSpsService.FUN_fdcGruppeSchreibenAsync(list, i_strGruppenName);
+			return m_edcSpsService.FUN_fdcGruppeSchreibenAsync(list, i_strGroupName);
 		}
 
 		/// <summary>
 		/// Group读取异步
 		/// </summary>
-		/// <param name="i_strGruppenName"></param>
+		/// <param name="i_strGroupName"></param>
 		/// <returns></returns>
-		public async Task FUN_fdcGruppeLesenAsync(string i_strGruppenName)
+		public async Task FUN_fdcGruppeLesenAsync(string i_strGroupName)
 		{
 			// 建立连接
 			if (FUN_blnIstVerbindungAufgebaut())
 			{
 				// Group集合中不存在
-				if (!m_dicGruppenParameter.ContainsKey(i_strGruppenName))
+				if (!m_dicGroupParameter.ContainsKey(i_strGroupName))
 				{
-					throw new EDC_GruppeZugriffException("unknown group " + i_strGruppenName);
+					throw new EDC_GruppeZugriffException("unknown group " + i_strGroupName);
 				}
 
 				// 等待获取Group中的所有地址
-				List<EDC_SpsListenElement> list = (await m_edcSpsService.FUN_fdcGruppeLesenAsync(i_strGruppenName).ConfigureAwait(true)).ToList();
+				List<EDC_SpsListenElement> list = (await m_edcSpsService.Fun_fdcGroupReadAsync(i_strGroupName).ConfigureAwait(true)).ToList();
 
-				if (list.Any() && m_dicGruppenParameter.TryGetValue(i_strGruppenName, out IEnumerable<EDC_PrimitivParameter> value))
+				if (list.Any() && m_dicGroupParameter.TryGetValue(i_strGroupName, out IEnumerable<EDC_PrimitivParameter> value))
 				{
 					List<EDC_PrimitivParameter> source = value.ToList();
 					foreach (EDC_SpsListenElement edcGelesen in list)
@@ -581,29 +609,29 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 		/// <summary>
 		/// 激活Group 异步
 		/// </summary>
-		/// <param name="i_strGruppenName"></param>
+		/// <param name="i_strGroupName"></param>
 		/// <returns></returns>
-		public Task FUN_fdcGruppeAktivierenAsync(string i_strGruppenName)
+		public Task FUN_fdcGruppeAktivierenAsync(string i_strGroupName)
 		{
 			if (!FUN_blnIstVerbindungAufgebaut())
 			{
 				return Task.CompletedTask;
 			}
-			return m_edcSpsService.FUN_fdcGruppeAktivierenAsync(i_strGruppenName);
+			return m_edcSpsService.Fun_fdcGroupActiveAsync(i_strGroupName);
 		}
 
 		/// <summary>
 		/// 禁用组 异步
 		/// </summary>
-		/// <param name="i_strGruppenName"></param>
+		/// <param name="i_strGroupName"></param>
 		/// <returns></returns>
-		public Task FUN_fdcGruppeDeaktivierenAsync(string i_strGruppenName)
+		public Task FUN_fdcGruppeDeaktivierenAsync(string i_strGroupName)
 		{
 			if (!FUN_blnIstVerbindungAufgebaut())
 			{
 				return Task.CompletedTask;
 			}
-			return m_edcSpsService.FUN_fdcGruppeDeaktivierenAsync(i_strGruppenName);
+			return m_edcSpsService.FUN_fdcGroupDisableAsync(i_strGroupName);
 		}
 
 		protected override void SUB_InternalDispose()
@@ -684,7 +712,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 			}
 
             // 连接锁
-			lock (m_objVerbindungLock)
+			lock (m_objLockConnection)
 			{
                 // 解决连接
                 return !m_blnIstVerbindungGeloest;
