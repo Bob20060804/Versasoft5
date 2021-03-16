@@ -5,6 +5,10 @@ using System.IO;
 
 namespace Ersa.Global.DataProvider.Helfer
 {
+	/// <summary>
+	/// 数据库设置帮助类
+	/// Database settings helper
+	/// </summary>
 	public static class EDC_DatenbankEinstellungenHelfer
 	{
         /// <summary>
@@ -30,6 +34,11 @@ namespace Ersa.Global.DataProvider.Helfer
 			return string.Empty;
 		}
 
+		/// <summary>
+		/// 取消服务器名
+		/// </summary>
+		/// <param name="i_fdcEinstellungen"></param>
+		/// <returns></returns>
 		public static string FUN_strHoleServerName(NameValueCollection i_fdcEinstellungen)
 		{
 			string text = i_fdcEinstellungen["Server"];

@@ -90,7 +90,7 @@ namespace Ersa.Platform.Plc.KommunikationsDienst
 
 		
         /// <summary>
-        /// 是否解决连接
+        /// 是否可以连接
         /// </summary>
 		private bool m_blnIstVerbindungGeloest;
 
